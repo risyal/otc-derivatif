@@ -1,1 +1,37 @@
 @import '~antd/dist/antd.less';
+
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.logo {
+  height: 80px;
+  background: rgba(255, 255, 255);
+  background-image: url("img/site-logo.png");
+  background-size: 100px 65px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 768px){
+/*Unless you changed the collapse point, this is the default*/
+    .logo{
+        background-image: url("logo.svg");
+    }
+}
+.test {
+  background: rgba(236, 9, 9, 0.2);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
