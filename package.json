@@ -2,7 +2,7 @@
   "name": "otc-derivatif",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://risyal.github.io/otc-derivatif-project/",
+  "homepage": "https://risyal.github.io/otc-derivatif/",
   "dependencies": {
     "@craco/craco": "^5.6.4",
     "@testing-library/jest-dom": "^4.2.4",
