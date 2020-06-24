@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/otc-derivatif-project/static/css/main.17174352.chunk.css",
-    "main.js": "/otc-derivatif-project/static/js/main.33be7b48.chunk.js",
-    "main.js.map": "/otc-derivatif-project/static/js/main.33be7b48.chunk.js.map",
-    "runtime-main.js": "/otc-derivatif-project/static/js/runtime-main.95ff7a36.js",
-    "runtime-main.js.map": "/otc-derivatif-project/static/js/runtime-main.95ff7a36.js.map",
-    "static/js/2.7285d021.chunk.js": "/otc-derivatif-project/static/js/2.7285d021.chunk.js",
-    "static/js/2.7285d021.chunk.js.map": "/otc-derivatif-project/static/js/2.7285d021.chunk.js.map",
-    "index.html": "/otc-derivatif-project/index.html",
-    "precache-manifest.e94a6d1dabbe21474a1965a0db280fc9.js": "/otc-derivatif-project/precache-manifest.e94a6d1dabbe21474a1965a0db280fc9.js",
-    "service-worker.js": "/otc-derivatif-project/service-worker.js",
-    "static/css/main.17174352.chunk.css.map": "/otc-derivatif-project/static/css/main.17174352.chunk.css.map",
-    "static/js/2.7285d021.chunk.js.LICENSE.txt": "/otc-derivatif-project/static/js/2.7285d021.chunk.js.LICENSE.txt",
-    "static/media/App.less": "/otc-derivatif-project/static/media/site-logo.26d6e5e8.png"
+    "main.css": "/otc-derivatif/static/css/main.b1682722.chunk.css",
+    "main.js": "/otc-derivatif/static/js/main.9470d17f.chunk.js",
+    "main.js.map": "/otc-derivatif/static/js/main.9470d17f.chunk.js.map",
+    "runtime-main.js": "/otc-derivatif/static/js/runtime-main.0011e410.js",
+    "runtime-main.js.map": "/otc-derivatif/static/js/runtime-main.0011e410.js.map",
+    "static/js/2.a8e1b7ce.chunk.js": "/otc-derivatif/static/js/2.a8e1b7ce.chunk.js",
+    "static/js/2.a8e1b7ce.chunk.js.map": "/otc-derivatif/static/js/2.a8e1b7ce.chunk.js.map",
+    "index.html": "/otc-derivatif/index.html",
+    "precache-manifest.9c3a06eebef08020f1d5f8b286dc0fa6.js": "/otc-derivatif/precache-manifest.9c3a06eebef08020f1d5f8b286dc0fa6.js",
+    "service-worker.js": "/otc-derivatif/service-worker.js",
+    "static/css/main.b1682722.chunk.css.map": "/otc-derivatif/static/css/main.b1682722.chunk.css.map",
+    "static/js/2.a8e1b7ce.chunk.js.LICENSE.txt": "/otc-derivatif/static/js/2.a8e1b7ce.chunk.js.LICENSE.txt",
+    "static/media/App.less": "/otc-derivatif/static/media/site-logo.26d6e5e8.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.95ff7a36.js",
-    "static/js/2.7285d021.chunk.js",
-    "static/css/main.17174352.chunk.css",
-    "static/js/main.33be7b48.chunk.js"
+    "static/js/runtime-main.0011e410.js",
+    "static/js/2.a8e1b7ce.chunk.js",
+    "static/css/main.b1682722.chunk.css",
+    "static/js/main.9470d17f.chunk.js"
   ]
 }
