@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Layout from 'antd/lib/layout/';
 import Navigation from './common/Navigation';
 import HeaderHalaman from './common/TopHeader';
+import RoutePage from './config/RoutePage';
+import { BackTop } from 'antd';
 
 const { Footer, Content } = Layout;
 
@@ -10,11 +12,21 @@ function ViewEngine() {
     const siderClick = () => {
         SetCollapsed(!collapsed);
     };
+    const style = {
+        height: 40,
+        width: 40,
+        lineHeight: '40px',
+        borderRadius: 4,
+        backgroundColor: '#1088e9',
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 14,
+    };
     return (
-        <Layout>
+        <Layout className="site-layout">
             <Navigation collapsed={collapsed}>
             </Navigation>
-            <Layout >
+            <Layout className="site-layout">
                 <HeaderHalaman
                     collapsed={collapsed}
                     siderClick={siderClick}
@@ -22,15 +34,18 @@ function ViewEngine() {
                 >
                 </HeaderHalaman>
                 <Content
-                    className="site-layout-background"
+                    className="content"
                     style={{
                         margin: '24px 16px',
                         padding: 24,
                         minHeight: 500,
                     }}
                 >
-                    Content
-                    </Content>
+                    <RoutePage />
+                </Content>
+                <BackTop>
+                    <div style={style}>UP</div>
+                </BackTop>
                 <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
             </Layout>
 
