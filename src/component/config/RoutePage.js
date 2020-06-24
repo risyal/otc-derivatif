@@ -14,7 +14,7 @@ import InquiryPosition from '../views/clearing/InquiryPosition';
 import SettlementPosition from '../views/clearing/SettlementPosition';
 function RoutePage() {
     return (
-        <Switch>
+        <div>
             <Route path="/inquerytrade">
                 <InquiryTradePage />
             </Route>
@@ -39,11 +39,11 @@ function RoutePage() {
             <Route path="/clearingManagement/settlementPostion">
                 <SettlementPosition />
             </Route>
-            <Route path="/">
+            <Route path="/login">
                 <LoginPage />
             </Route>
 
-        </Switch>
+        </div>
     )
 }
 export default RoutePage;

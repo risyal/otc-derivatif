@@ -23,6 +23,7 @@ function ViewEngine() {
         fontSize: 14,
     };
     return (
+
         <Layout className="site-layout">
             <Navigation collapsed={collapsed}>
             </Navigation>
