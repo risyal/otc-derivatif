@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/otc-derivatif-project/static/css/main.17174352.chunk.css",
+    "main.js": "/otc-derivatif-project/static/js/main.33be7b48.chunk.js",
+    "main.js.map": "/otc-derivatif-project/static/js/main.33be7b48.chunk.js.map",
+    "runtime-main.js": "/otc-derivatif-project/static/js/runtime-main.95ff7a36.js",
+    "runtime-main.js.map": "/otc-derivatif-project/static/js/runtime-main.95ff7a36.js.map",
+    "static/js/2.7285d021.chunk.js": "/otc-derivatif-project/static/js/2.7285d021.chunk.js",
+    "static/js/2.7285d021.chunk.js.map": "/otc-derivatif-project/static/js/2.7285d021.chunk.js.map",
+    "index.html": "/otc-derivatif-project/index.html",
+    "precache-manifest.e94a6d1dabbe21474a1965a0db280fc9.js": "/otc-derivatif-project/precache-manifest.e94a6d1dabbe21474a1965a0db280fc9.js",
+    "service-worker.js": "/otc-derivatif-project/service-worker.js",
+    "static/css/main.17174352.chunk.css.map": "/otc-derivatif-project/static/css/main.17174352.chunk.css.map",
+    "static/js/2.7285d021.chunk.js.LICENSE.txt": "/otc-derivatif-project/static/js/2.7285d021.chunk.js.LICENSE.txt",
+    "static/media/App.less": "/otc-derivatif-project/static/media/site-logo.26d6e5e8.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.95ff7a36.js",
+    "static/js/2.7285d021.chunk.js",
+    "static/css/main.17174352.chunk.css",
+    "static/js/main.33be7b48.chunk.js"
+  ]
+}
