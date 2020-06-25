@@ -157,6 +157,60 @@ const Menu = [
         }]
     },
     {
+        name: 'Administration',
+        key: 'administration',
+        icon: <SolutionOutlined />,
+        subMenus: [{
+            name: 'Register Contract',
+            key: 'registerContract',
+            linkTo: '/registerContract'
+        }, {
+            name: 'Edit Account',
+            key: 'editAccount',
+            linkTo: '/editAccount'
+        }, {
+            name: 'Securities Coll Mgt',
+            key: 'securitiesCollMgt',
+            linkTo: '/securitiesCollMgt'
+        }, {
+            name: 'Cash Coll Mgt',
+            key: 'cashCollMgt',
+            linkTo: '/cashCollMgt'
+        }, {
+            name: 'Edit Reference Rate',
+            key: 'editReferenceRate',
+            linkTo: '/editReferenceRate'
+        }, {
+            name: 'Edit Parameter',
+            key: 'editParameter',
+            linkTo: '/editParameter'
+        }, {
+            name: 'Audit Trail',
+            key: 'auditTrail',
+            linkTo: '/auditTrail'
+        }, {
+            name: 'User Management',
+            key: 'userManagement',
+            linkTo: '/userManagement'
+        }, {
+            name: 'System Parameter',
+            key: 'systemParameter',
+            linkTo: '/systemParameter'
+        },{
+            name: 'Calendar',
+            key: 'calendar',
+            linkTo: '/calendar'
+        }, {
+            name: 'Approval',
+            key: 'approval',
+            linkTo: '/approval'
+        }, {
+            name: 'Register ATS',
+            key: 'registerAts',
+            linkTo: '/registerAts'
+        }]
+    },
+    {
         name: 'Reporting',
         key: 'reporting',
         icon: <FlagOutlined />,
@@ -190,8 +244,8 @@ const Menu = [
             linkTo: '/reportbankid'
         }, {
             name: 'Fee Report',
-            key: 'freereport',
-            linkTo: '/freereport'
+            key: 'feereport',
+            linkTo: '/feereport'
         }]
     },
     {

@@ -72,7 +72,7 @@ function RoutePage() {
             <Route path="/reportbankid">
                 <ReportBI />
             </Route>
-            <Route path="/freereport">
+            <Route path="/feereport">
                 <FeeReport />
             </Route>
             <Route path="/dhkmemberclient">
