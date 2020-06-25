@@ -147,29 +147,13 @@ const Menu = [
         key: 'memberandclientmanagement',
         icon: <SolutionOutlined />,
         subMenus: [{
-            name: 'Register client',
+            name: 'Register Client',
             key: 'registerclient',
             linkTo: '/registerclient'
-        }, {
-            name: 'Inquiry Client',
-            key: 'inquiryclient',
-            linkTo: '/inquiryclient'
-        }, {
-            name: 'Edit Client',
-            key: 'editclient',
-            linkTo: '/editclient'
         }, {
             name: 'Register Member',
             key: 'registermember',
             linkTo: '/registermember'
-        }, {
-            name: 'Inquiry Member',
-            key: 'inquirymember',
-            linkTo: '/inquirymember'
-        }, {
-            name: 'Edit Member',
-            key: 'editmember',
-            linkTo: '/editmember'
         }]
     },
     {
