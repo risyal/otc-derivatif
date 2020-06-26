@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Table } from 'antd';
-import CashFlowIrs from '../clearing/CashFlowIrs';
 
 function CashCollMgt(){
     const columns = [
@@ -76,7 +75,7 @@ function CashCollMgt(){
 
     return(
         <div>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary">
                 Add New
             </Button>
 

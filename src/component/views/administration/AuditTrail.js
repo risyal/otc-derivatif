@@ -1,8 +1,27 @@
 import React from 'react';
-import { Form, DatePicker, Button, Table } from 'antd';
+import { 
+    Form, 
+    DatePicker, 
+    Button, 
+    Select,
+    Input,
+    Table 
+} from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 
 function AuditTrail(){
+    const componentSize = 'middle';
+    const formItemLayout = {
+        labelCol: {
+            xs: { span: 24 },
+            sm: { span: 6 },
+        },
+        wrapperCol: {
+            xs: { span: 24 },
+            sm: { span: 16 },
+        },
+    };
+
     const columns = [
         {
             title: 'Date',
@@ -34,7 +53,7 @@ function AuditTrail(){
                     value: 'User3',
                 },
             ],
-            onFilter: (value, record) => record.code.indexOf(value) === 0,
+            onFilter: (value, record) => record.user.indexOf(value) === 0,
         },
         {
             title: 'Module/Service',
@@ -65,12 +84,33 @@ function AuditTrail(){
     ];
 
     return (
-        <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-            <Form layout="horizontal">
+        <div style={{ margin: '15px 20px' }}>
+            <Form
+                {...formItemLayout}
+                size={componentSize}
+                layout="horizontal"
+                initialValues={{ size: componentSize }}
+                labelAlign="left"
+            >
+                <Form.Item label="User">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="Activity">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="Time">
+                    <Input />
+                </Form.Item>
                 <Form.Item label="Date">
-                    <DatePicker /> <Button type="primary" htmlType="submit">Go</Button>
+                    <DatePicker />
+                </Form.Item>
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                    <Button type="primary">
+                        Search
+                    </Button>
                 </Form.Item>
             </Form>
+
             <Table
                 columns={columns}
                 dataSource={data}

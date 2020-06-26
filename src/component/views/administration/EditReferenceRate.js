@@ -1,7 +1,6 @@
 import React from 'react';
 import { 
   Form,
-  Input,
   Button,
   Select, 
   Table 
@@ -120,37 +119,44 @@ function EditReferenceRate(){
 
   return(
       <div style={{ margin: '15px 20px' }}>
-            <Form
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-            >
-                <Form.Item label="Search">
-                    <Input.Group compact>
-                        <Form.Item>
-                            <Select placeholder="Select filter">
-                                <Option value="refType">Ref. Type</Option>
-                                <Option value="value">Value</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item>
-                            <Input style={{ width: '100%' }} />
-                        </Form.Item>
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit">
-                                Go
-                            </Button>
-                        </Form.Item>
-                    </Input.Group>
-                </Form.Item>
-            </Form>
+          <Form
+              {...formItemLayout}
+              size={componentSize}
+              layout="horizontal"
+              initialValues={{ size: componentSize }}
+              labelAlign="left"
+          >
+              <Form.Item label="Type">
+                  <Select
+                      placeholder="Select a Type"
+                  >
+                      <Option value="jibor">JIBOR</Option>
+                      <Option value="jisdor">JISDOR</Option>
+                      <Option value="libor">LIBOR</Option>
+                      <Option value="indonia">INDONIA</Option>
+                  </Select>
+              </Form.Item>
+              <Form.Item label="Value">
+                  <Select
+                      placeholder="Select a Value"
+                  >
+                      <Option value="value1">Value1</Option>
+                      <Option value="value2">Value2</Option>
+                      <Option value="value3">Value3</Option>
+                  </Select>
+              </Form.Item>
+              <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                  <Button type="primary">
+                      Search
+                  </Button>
+              </Form.Item>
+          </Form>
         
             <Table
               columns={columns}
               dataSource={data}
               bordered
               size="middle"
-              // scroll={{ x: 'calc(700px + 50%)' }}
               onChange={onChange}
           />
       </div>
