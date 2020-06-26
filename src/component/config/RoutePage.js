@@ -22,6 +22,7 @@ import ReportBI from '../views/reporting/ReportBI';
 import FeeReport from '../views/reporting/FeeReport';
 import RegisterClient from '../views/member-client/RegisterClient';
 import RegisterMember from '../views/member-client/RegisterMember';
+import AccountDetail from '../views/account/AccountDetail';
 
 
 function RoutePage() {
@@ -53,6 +54,9 @@ function RoutePage() {
             </Route>
             <Route path="/clearingManagement/cashFlowIrs">
                 <CashFlowIrs />
+            </Route>
+            <Route path="/accountManagement/detailinformation">
+                <AccountDetail />
             </Route>
             <Route path="/login">
                 <LoginPage />

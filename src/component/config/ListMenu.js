@@ -69,7 +69,7 @@ const Menu = [
         subMenus: [{
             name: 'Account Detail Information',
             key: 'detailinformation',
-            linkTo: '/detailinformation'
+            linkTo: '/accountManagement/detailinformation'
         }, {
             name: 'Detail Blocked Collateral - Member',
             key: 'detailmember',
@@ -196,7 +196,7 @@ const Menu = [
             name: 'System Parameter',
             key: 'systemParameter',
             linkTo: '/systemParameter'
-        },{
+        }, {
             name: 'Calendar',
             key: 'calendar',
             linkTo: '/calendar'
