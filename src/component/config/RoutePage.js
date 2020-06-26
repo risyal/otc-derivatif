@@ -27,6 +27,7 @@ import BlockCollateralMember from '../views/account/BlockCollateralMember';
 import BlockCollateralClient from '../views/account/BlockCollateralClient';
 import DefaultFund from '../views/account/DefaultFund';
 import RegisterBeneficiaries from '../views/account/RegisterBeneficiaries';
+import InquiryBeneficiaries from '../views/account/InquiryBeneficiaries';
 
 
 function RoutePage() {
@@ -73,6 +74,9 @@ function RoutePage() {
             </Route>
             <Route path="/accountManagement/registerBeneficiaries">
                 <RegisterBeneficiaries />
+            </Route>
+            <Route path="/accountManagement/inquiryBeneficiaries">
+                <InquiryBeneficiaries />
             </Route>
             <Route path="/login">
                 <LoginPage />

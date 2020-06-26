@@ -88,8 +88,8 @@ const Menu = [
             linkTo: '/accountManagement/registerBeneficiaries'
         }, {
             name: 'Inquiry Beneficiaries',
-            key: 'inquirybeneficiaries',
-            linkTo: '/inquirybeneficiaries'
+            key: 'inquiryBeneficiaries',
+            linkTo: '/accountManagement/inquiryBeneficiaries'
         }]
     },
     {

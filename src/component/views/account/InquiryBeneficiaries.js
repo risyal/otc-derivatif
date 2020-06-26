@@ -3,9 +3,10 @@ import {
     Form,
     Input,
     Button,
+    Table
 } from 'antd';
 
-function RegisterBeneficiaries() {
+function InquiryBeneficiaries() {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -17,6 +18,34 @@ function RegisterBeneficiaries() {
             sm: { span: 16 },
         },
     };
+
+
+    const columns = [
+        {
+            title: 'Participant ID',
+            dataIndex: 'participantId',
+            key: 'participantId',
+            width: 50,
+        }, {
+            title: 'RTGS Acc Number',
+            dataIndex: 'rtgsAccNumber',
+            key: 'rtgsAccNumber',
+            width: 50,
+        }, {
+            title: 'SSSS Acc Number',
+            dataIndex: 'ssssAccNumber',
+            key: 'ssssAccNumber',
+            width: 50,
+        },
+    ];
+    const data = [
+        {
+        },
+        {
+        },
+        {
+        },
+    ];
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -44,14 +73,20 @@ function RegisterBeneficiaries() {
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button type="primary" htmlType="submit">
-                        Input
+                        Search
                     </Button>
                 </Form.Item>
             </Form>
+            <Table
+                columns={columns}
+                dataSource={data}
+                bordered
+                size="middle"
+            />
         </div>
 
     )
 
 }
 
-export default RegisterBeneficiaries
+export default InquiryBeneficiaries
