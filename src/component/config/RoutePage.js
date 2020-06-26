@@ -40,6 +40,7 @@ import SystemParameter from '../views/administration/SystemParameter';
 import Calendar from '../views/administration/Calendar';
 import Approval from '../views/administration/Approval';
 import RegisterAts from '../views/administration/RegisterAts';
+import SettlementInstruction from '../views/settlement/SettlementInstruction';
 
 function RoutePage() {
     return (
@@ -87,6 +88,15 @@ function RoutePage() {
                 <RegisterBeneficiaries />
             </Route>
             <Route path="/accountManagement/inquiryBeneficiaries">
+                <InquiryBeneficiaries />
+            </Route>
+            <Route path="/settlement/inquirySettlement">
+                <SettlementInstruction />
+            </Route>
+            <Route path="/settlement/settlementExecution">
+                <InquiryBeneficiaries />
+            </Route>
+            <Route path="/settlement/monitoringClearing">
                 <InquiryBeneficiaries />
             </Route>
             <Route path="/login">

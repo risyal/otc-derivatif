@@ -98,16 +98,16 @@ const Menu = [
         icon: <FormOutlined />,
         subMenus: [{
             name: 'Inquiry Settlement Instruction',
-            key: 'inquirysettlement',
-            linkTo: '/inquirysettlement'
+            key: 'inquirySettlement',
+            linkTo: '/settlement/inquirySettlement'
         }, {
             name: 'Settlement Job Execution',
-            key: 'settlementexecution',
-            linkTo: '/settlementexecution'
+            key: 'settlementExecution',
+            linkTo: '/settlement/settlementExecution'
         }, {
             name: 'Monitoring Clearing Pos vs Balance',
-            key: 'monitoringclearing',
-            linkTo: '/monitoringclearing'
+            key: 'monitoringClearing',
+            linkTo: '/settlement/monitoringClearing'
         }]
     },
     {
