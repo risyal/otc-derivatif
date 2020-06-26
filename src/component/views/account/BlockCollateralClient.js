@@ -8,7 +8,7 @@ import {
     InputNumber
 } from 'antd';
 
-function BlockCollateralMember() {
+function BlockCollateralClient() {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -21,7 +21,6 @@ function BlockCollateralMember() {
         },
     };
 
-    const { Option } = Select;
 
     const columns = [
         {
@@ -137,7 +136,7 @@ function BlockCollateralMember() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="Member ID" >
+                <Form.Item label="Client ID" >
                     <Input.Group compact >
                         <Input style={{ width: '45%', textAlign: 'center' }} placeholder="Code" />
                         <Input
@@ -253,4 +252,4 @@ function BlockCollateralMember() {
 }
 
 
-export default BlockCollateralMember
+export default BlockCollateralClient

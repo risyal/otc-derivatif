@@ -24,6 +24,7 @@ import RegisterClient from '../views/member-client/RegisterClient';
 import RegisterMember from '../views/member-client/RegisterMember';
 import AccountDetail from '../views/account/AccountDetail';
 import BlockCollateralMember from '../views/account/BlockCollateralMember';
+import BlockCollateralClient from '../views/account/BlockCollateralClient';
 
 
 function RoutePage() {
@@ -61,6 +62,9 @@ function RoutePage() {
             </Route>
             <Route path="/accountManagement/collateralMember">
                 <BlockCollateralMember />
+            </Route>
+            <Route path="/accountManagement/collateralClient">
+                <BlockCollateralClient />
             </Route>
             <Route path="/login">
                 <LoginPage />
