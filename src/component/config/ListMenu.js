@@ -69,27 +69,27 @@ const Menu = [
         subMenus: [{
             name: 'Account Detail Information',
             key: 'detailinformation',
-            linkTo: '/detailinformation'
+            linkTo: '/accountManagement/detailinformation'
         }, {
             name: 'Detail Blocked Collateral - Member',
-            key: 'detailmember',
-            linkTo: '/detailmember'
+            key: 'detailMember',
+            linkTo: '/accountManagement/collateralMember'
         }, {
             name: 'Detail Blocked Collateral - Client',
-            key: 'detailclient',
-            linkTo: '/detailclient'
+            key: 'detailClient',
+            linkTo: '/accountManagement/collateralClient'
         }, {
             name: 'Detail Default Fund',
-            key: 'detailfund',
-            linkTo: '/detailfund'
+            key: 'detailFund',
+            linkTo: '/accountManagement/detailFund'
         }, {
             name: 'Register Beneficiaries',
-            key: 'registerbeneficiaries',
-            linkTo: '/registerbeneficiaries'
+            key: 'registerBeneficiaries',
+            linkTo: '/accountManagement/registerBeneficiaries'
         }, {
             name: 'Inquiry Beneficiaries',
-            key: 'inquirybeneficiaries',
-            linkTo: '/inquirybeneficiaries'
+            key: 'inquiryBeneficiaries',
+            linkTo: '/accountManagement/inquiryBeneficiaries'
         }]
     },
     {
@@ -196,7 +196,7 @@ const Menu = [
             name: 'System Parameter',
             key: 'systemParameter',
             linkTo: '/systemparameter'
-        },{
+        }, {
             name: 'Calendar',
             key: 'calendar',
             linkTo: '/calendar'

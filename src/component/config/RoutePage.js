@@ -22,6 +22,12 @@ import ReportBI from '../views/reporting/ReportBI';
 import FeeReport from '../views/reporting/FeeReport';
 import RegisterClient from '../views/member-client/RegisterClient';
 import RegisterMember from '../views/member-client/RegisterMember';
+import AccountDetail from '../views/account/AccountDetail';
+import BlockCollateralMember from '../views/account/BlockCollateralMember';
+import BlockCollateralClient from '../views/account/BlockCollateralClient';
+import DefaultFund from '../views/account/DefaultFund';
+import RegisterBeneficiaries from '../views/account/RegisterBeneficiaries';
+import InquiryBeneficiaries from '../views/account/InquiryBeneficiaries';
 import RegisterContract from '../views/administration/RegisterContract';
 import EditAccount from '../views/administration/EditAccount';
 import SecuritiesCollMgt from '../views/administration/SecuritiesCollMgt';
@@ -64,6 +70,24 @@ function RoutePage() {
             </Route>
             <Route path="/clearingManagement/cashFlowIrs">
                 <CashFlowIrs />
+            </Route>
+            <Route path="/accountManagement/detailinformation">
+                <AccountDetail />
+            </Route>
+            <Route path="/accountManagement/collateralMember">
+                <BlockCollateralMember />
+            </Route>
+            <Route path="/accountManagement/collateralClient">
+                <BlockCollateralClient />
+            </Route>
+            <Route path="/accountManagement/detailFund">
+                <DefaultFund />
+            </Route>
+            <Route path="/accountManagement/registerBeneficiaries">
+                <RegisterBeneficiaries />
+            </Route>
+            <Route path="/accountManagement/inquiryBeneficiaries">
+                <InquiryBeneficiaries />
             </Route>
             <Route path="/login">
                 <LoginPage />
