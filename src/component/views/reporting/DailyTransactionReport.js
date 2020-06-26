@@ -47,7 +47,7 @@ function DailyTransactionReport(){
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form layout="horizontal">
                 <Form.Item label="Date">
-                    <DatePicker /> <Button>Go</Button>
+                    <DatePicker /> <Button type="primary" htmlType="submit">Go</Button>
                 </Form.Item>
             </Form>
             <Table
