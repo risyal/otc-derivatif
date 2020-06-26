@@ -73,7 +73,7 @@ const Menu = [
         }, {
             name: 'Detail Blocked Collateral - Member',
             key: 'detailmember',
-            linkTo: '/detailmember'
+            linkTo: '/accountManagement/collateralMember'
         }, {
             name: 'Detail Blocked Collateral - Client',
             key: 'detailclient',

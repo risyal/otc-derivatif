@@ -23,6 +23,7 @@ import FeeReport from '../views/reporting/FeeReport';
 import RegisterClient from '../views/member-client/RegisterClient';
 import RegisterMember from '../views/member-client/RegisterMember';
 import AccountDetail from '../views/account/AccountDetail';
+import BlockCollateralMember from '../views/account/BlockCollateralMember';
 
 
 function RoutePage() {
@@ -57,6 +58,9 @@ function RoutePage() {
             </Route>
             <Route path="/accountManagement/detailinformation">
                 <AccountDetail />
+            </Route>
+            <Route path="/accountManagement/collateralMember">
+                <BlockCollateralMember />
             </Route>
             <Route path="/login">
                 <LoginPage />
