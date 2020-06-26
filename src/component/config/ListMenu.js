@@ -163,39 +163,39 @@ const Menu = [
         subMenus: [{
             name: 'Register Contract',
             key: 'registerContract',
-            linkTo: '/registerContract'
+            linkTo: '/registercontract'
         }, {
             name: 'Edit Account',
             key: 'editAccount',
-            linkTo: '/editAccount'
+            linkTo: '/editaccount'
         }, {
             name: 'Securities Coll Mgt',
             key: 'securitiesCollMgt',
-            linkTo: '/securitiesCollMgt'
+            linkTo: '/securitiescollmgt'
         }, {
             name: 'Cash Coll Mgt',
             key: 'cashCollMgt',
-            linkTo: '/cashCollMgt'
+            linkTo: '/cashcollmgt'
         }, {
             name: 'Edit Reference Rate',
             key: 'editReferenceRate',
-            linkTo: '/editReferenceRate'
+            linkTo: '/editreferencerate'
         }, {
             name: 'Edit Parameter',
             key: 'editParameter',
-            linkTo: '/editParameter'
+            linkTo: '/editparameter'
         }, {
             name: 'Audit Trail',
             key: 'auditTrail',
-            linkTo: '/auditTrail'
+            linkTo: '/audittrail'
         }, {
             name: 'User Management',
             key: 'userManagement',
-            linkTo: '/userManagement'
+            linkTo: '/usermanagement'
         }, {
             name: 'System Parameter',
             key: 'systemParameter',
-            linkTo: '/systemParameter'
+            linkTo: '/systemparameter'
         },{
             name: 'Calendar',
             key: 'calendar',
@@ -207,7 +207,7 @@ const Menu = [
         }, {
             name: 'Register ATS',
             key: 'registerAts',
-            linkTo: '/registerAts'
+            linkTo: '/registerats'
         }]
     },
     {

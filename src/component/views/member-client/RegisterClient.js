@@ -111,9 +111,7 @@ function RegisterClient(){
                 >
                     <Form.Item label="Search">
                         <Input.Group compact>
-                            <Form.Item
-                                name={['address', 'province']}
-                            >
+                            <Form.Item>
                                 <Select placeholder="Select filter">
                                     <Option value="memberID">Member ID</Option>
                                     <Option value="sid/lei">SID/LEI</Option>
@@ -121,9 +119,7 @@ function RegisterClient(){
                                     <Option value="ssssAccount">SSSS Account</Option>
                                 </Select>
                             </Form.Item>
-                            <Form.Item
-                                name={['address', 'street']}
-                            >
+                            <Form.Item>
                                 <Input style={{ width: '100%' }} />
                             </Form.Item>
                             <Form.Item>

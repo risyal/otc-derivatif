@@ -22,7 +22,18 @@ import ReportBI from '../views/reporting/ReportBI';
 import FeeReport from '../views/reporting/FeeReport';
 import RegisterClient from '../views/member-client/RegisterClient';
 import RegisterMember from '../views/member-client/RegisterMember';
-
+import RegisterContract from '../views/administration/RegisterContract';
+import EditAccount from '../views/administration/EditAccount';
+import SecuritiesCollMgt from '../views/administration/SecuritiesCollMgt';
+import CashCollMgt from '../views/administration/CashCollMgt';
+import EditReferenceRate from '../views/administration/EditReferenceRate';
+import EditParameter from '../views/administration/EditParameter';
+import AuditTrail from '../views/administration/AuditTrail';
+import UserManagement from '../views/administration/UserManagement';
+import SystemParameter from '../views/administration/SystemParameter';
+import Calendar from '../views/administration/Calendar';
+import Approval from '../views/administration/Approval';
+import RegisterAts from '../views/administration/RegisterAts';
 
 function RoutePage() {
     return (
@@ -86,6 +97,42 @@ function RoutePage() {
             </Route>
             <Route path="/registermember">
                 <RegisterMember />
+            </Route>
+            <Route path="/registercontract">
+                <RegisterContract />
+            </Route>
+            <Route path="/editaccount">
+                <EditAccount />
+            </Route>
+            <Route path="/securitiescollmgt">
+                <SecuritiesCollMgt />
+            </Route>
+            <Route path="/cashcollmgt">
+                <CashCollMgt />
+            </Route>
+            <Route path="/editreferencerate">
+                <EditReferenceRate />
+            </Route>
+            <Route path="/editparameter">
+                <EditParameter />
+            </Route>
+            <Route path="/audittrail">
+                <AuditTrail />
+            </Route>
+            <Route path="/usermanagement">
+                <UserManagement />
+            </Route>
+            <Route path="/systemparameter">
+                <SystemParameter />
+            </Route>
+            <Route path="/calendar">
+                <Calendar />
+            </Route>
+            <Route path="/approval">
+                <Approval />
+            </Route>
+            <Route path="/registerats">
+                <RegisterAts />
             </Route>
 
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Form, DatePicker, Button, Table } from 'antd';
 
 function DefaultFundReport(){
     const columns = [
@@ -45,12 +45,17 @@ function DefaultFundReport(){
    
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-            <Table
-                columns={columns}
-                dataSource={data}
-                bordered
-                size="middle"
-            />
+          <Form layout="horizontal">
+              <Form.Item label="Date">
+                  <DatePicker /> <Button type="primary" htmlType="submit">Go</Button>
+              </Form.Item>
+          </Form>
+          <Table
+              columns={columns}
+              dataSource={data}
+              bordered
+              size="middle"
+          />
         </div>
     )
 }
