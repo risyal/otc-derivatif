@@ -42,6 +42,7 @@ import Approval from '../views/administration/Approval';
 import RegisterAts from '../views/administration/RegisterAts';
 import SettlementInstruction from '../views/settlement/SettlementInstruction';
 import SettlementJobExecution from '../views/settlement/SettlementJobExecution';
+import SettlementMonitoring from '../views/settlement/SettlementMonitoring';
 
 function RoutePage() {
     return (
@@ -98,7 +99,7 @@ function RoutePage() {
                 <SettlementJobExecution />
             </Route>
             <Route path="/settlement/monitoringClearing">
-                <InquiryBeneficiaries />
+                <SettlementMonitoring />
             </Route>
             <Route path="/login">
                 <LoginPage />
