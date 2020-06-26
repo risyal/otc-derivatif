@@ -58,8 +58,8 @@ const Menu = [
             linkTo: '/statussettlement'
         }, {
             name: 'Cash Flow IRS Calculation',
-            key: 'cashflowirs',
-            linkTo: '/cashflowirs'
+            key: 'cashFlowIrs',
+            linkTo: '/clearingManagement/cashFlowIrs'
         }]
     },
     {

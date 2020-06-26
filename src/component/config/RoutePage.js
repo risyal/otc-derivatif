@@ -12,6 +12,7 @@ import TradeSummary from '../views/trade/TradeSummary';
 import ClearingPostition from '../views/clearing/ClearingPostition';
 import InquiryPosition from '../views/clearing/InquiryPosition';
 import SettlementPosition from '../views/clearing/SettlementPosition';
+import CashFlowIrs from '../views/clearing/CashFlowIrs';
 function RoutePage() {
     return (
         <div>
@@ -38,6 +39,9 @@ function RoutePage() {
             </Route>
             <Route path="/clearingManagement/settlementPostion">
                 <SettlementPosition />
+            </Route>
+            <Route path="/clearingManagement/cashFlowIrs">
+                <CashFlowIrs />
             </Route>
             <Route path="/login">
                 <LoginPage />
