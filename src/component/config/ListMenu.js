@@ -80,8 +80,8 @@ const Menu = [
             linkTo: '/accountManagement/collateralClient'
         }, {
             name: 'Detail Default Fund',
-            key: 'detailfund',
-            linkTo: '/detailfund'
+            key: 'detailFund',
+            linkTo: '/accountManagement/detailFund'
         }, {
             name: 'Register Beneficiaries',
             key: 'registerbeneficiaries',
