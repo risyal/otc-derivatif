@@ -3,9 +3,7 @@ import {
     Form,
     Input,
     Button,
-    Select,
     Table,
-    InputNumber
 } from 'antd';
 
 function DefaultFund() {

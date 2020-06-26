@@ -84,8 +84,8 @@ const Menu = [
             linkTo: '/accountManagement/detailFund'
         }, {
             name: 'Register Beneficiaries',
-            key: 'registerbeneficiaries',
-            linkTo: '/registerbeneficiaries'
+            key: 'registerBeneficiaries',
+            linkTo: '/accountManagement/registerBeneficiaries'
         }, {
             name: 'Inquiry Beneficiaries',
             key: 'inquirybeneficiaries',
