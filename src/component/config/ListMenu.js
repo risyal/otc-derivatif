@@ -147,29 +147,67 @@ const Menu = [
         key: 'memberandclientmanagement',
         icon: <SolutionOutlined />,
         subMenus: [{
-            name: 'Register client',
+            name: 'Register Client',
             key: 'registerclient',
             linkTo: '/registerclient'
-        }, {
-            name: 'Inquiry Client',
-            key: 'inquiryclient',
-            linkTo: '/inquiryclient'
-        }, {
-            name: 'Edit Client',
-            key: 'editclient',
-            linkTo: '/editclient'
         }, {
             name: 'Register Member',
             key: 'registermember',
             linkTo: '/registermember'
+        }]
+    },
+    {
+        name: 'Administration',
+        key: 'administration',
+        icon: <SolutionOutlined />,
+        subMenus: [{
+            name: 'Register Contract',
+            key: 'registerContract',
+            linkTo: '/registerContract'
         }, {
-            name: 'Inquiry Member',
-            key: 'inquirymember',
-            linkTo: '/inquirymember'
+            name: 'Edit Account',
+            key: 'editAccount',
+            linkTo: '/editAccount'
         }, {
-            name: 'Edit Member',
-            key: 'editmember',
-            linkTo: '/editmember'
+            name: 'Securities Coll Mgt',
+            key: 'securitiesCollMgt',
+            linkTo: '/securitiesCollMgt'
+        }, {
+            name: 'Cash Coll Mgt',
+            key: 'cashCollMgt',
+            linkTo: '/cashCollMgt'
+        }, {
+            name: 'Edit Reference Rate',
+            key: 'editReferenceRate',
+            linkTo: '/editReferenceRate'
+        }, {
+            name: 'Edit Parameter',
+            key: 'editParameter',
+            linkTo: '/editParameter'
+        }, {
+            name: 'Audit Trail',
+            key: 'auditTrail',
+            linkTo: '/auditTrail'
+        }, {
+            name: 'User Management',
+            key: 'userManagement',
+            linkTo: '/userManagement'
+        }, {
+            name: 'System Parameter',
+            key: 'systemParameter',
+            linkTo: '/systemParameter'
+        },{
+            name: 'Calendar',
+            key: 'calendar',
+            linkTo: '/calendar'
+        }, {
+            name: 'Approval',
+            key: 'approval',
+            linkTo: '/approval'
+        }, {
+            name: 'Register ATS',
+            key: 'registerAts',
+            linkTo: '/registerAts'
         }]
     },
     {
@@ -206,8 +244,8 @@ const Menu = [
             linkTo: '/reportbankid'
         }, {
             name: 'Fee Report',
-            key: 'freereport',
-            linkTo: '/freereport'
+            key: 'feereport',
+            linkTo: '/feereport'
         }]
     },
     {
