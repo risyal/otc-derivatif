@@ -45,6 +45,7 @@ import SettlementJobExecution from '../views/settlement/SettlementJobExecution';
 import SettlementMonitoring from '../views/settlement/SettlementMonitoring';
 import SecurityManagement from '../views/instruction/SecurityManagement';
 import InquirySecManagement from '../views/instruction/InquirySecManagement';
+import CashInquiryManagement from '../views/instruction/CashInquiryManagement';
 
 function RoutePage() {
     return (
@@ -111,6 +112,12 @@ function RoutePage() {
                 <SecurityManagement />
             </Route>
             <Route path="/instructionManagement/inquirySecManagement">
+                <InquirySecManagement />
+            </Route>
+            <Route path="/instructionManagement/cashManagement">
+                <CashInquiryManagement />
+            </Route>
+            <Route path="/instructionManagement/inquiryCashManagement">
                 <InquirySecManagement />
             </Route>
             <Route path="/login">

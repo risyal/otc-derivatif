@@ -124,8 +124,8 @@ const Menu = [
             linkTo: '/instructionManagement/inquirySecManagement'
         }, {
             name: 'Cash Management',
-            key: 'cashmanagement',
-            linkTo: '/instructionManagement/cashmanagement'
+            key: 'cashManagement',
+            linkTo: '/instructionManagement/cashManagement'
         }, {
             name: 'Inquiry Cash Management',
             key: 'inquiryCashManagement',

@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import moment from 'moment';
 
-function SecurityManagement() {
+function CashInquiryManagement() {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -24,11 +24,6 @@ function SecurityManagement() {
 
     const columns = [
         {
-            title: 'Instruction Type',
-            dataIndex: 'instructionType',
-            key: 'instructionType',
-            width: 100,
-        }, {
             title: 'Participant Code',
             dataIndex: 'participantCode',
             key: 'participantCode',
@@ -44,9 +39,9 @@ function SecurityManagement() {
             key: 'destAccount',
             width: 100,
         }, {
-            title: 'Security Code',
-            dataIndex: 'securityCode',
-            key: 'securityCode',
+            title: 'Currency Code',
+            dataIndex: 'currencyCode',
+            key: 'currencyCode',
             width: 100,
         }, {
             title: 'Value',
@@ -89,7 +84,7 @@ function SecurityManagement() {
                 <Form.Item label="Dest Account" >
                     <Input />
                 </Form.Item>
-                <Form.Item label="Security Code" >
+                <Form.Item label="Currency Code" >
                     <Input />
                 </Form.Item>
                 <Form.Item label="Settlement Date" >
@@ -114,4 +109,4 @@ function SecurityManagement() {
 
 }
 
-export default SecurityManagement
+export default CashInquiryManagement
