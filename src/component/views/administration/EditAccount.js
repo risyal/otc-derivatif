@@ -84,6 +84,12 @@ function EditAccount(){
                 }
             ]
         },
+        {
+            title: 'Action',
+            key: 'action',
+            fixed: 'right',
+            render: () => <a>Edit</a>,
+        },
     ];
     const data = [
         {

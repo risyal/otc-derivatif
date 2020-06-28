@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Table } from 'antd';
-import CashFlowIrs from '../clearing/CashFlowIrs';
 
 function CashCollMgt(){
     const columns = [
@@ -9,6 +8,16 @@ function CashCollMgt(){
             dataIndex: 'code',
             filters: [
                 {
+                    text: 'CC123',
+                    value: 'CC123',
+                },
+                {
+                    text: 'CC456',
+                    value: 'CC456',
+                },
+                {
+                    text: 'CC789',
+                    value: 'CC789',
                 },
             ],
             onFilter: (value, record) => record.code.indexOf(value) === 0,
@@ -18,6 +27,16 @@ function CashCollMgt(){
             dataIndex: 'name',
             filters: [
                 {
+                    text: 'User1',
+                    value: 'User1',
+                },
+                {
+                    text: 'User2',
+                    value: 'User2',
+                },
+                {
+                    text: 'User3',
+                    value: 'User3',
                 },
             ],
             onFilter: (value, record) => record.name.indexOf(value) === 0,
@@ -56,7 +75,7 @@ function CashCollMgt(){
 
     return(
         <div>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary">
                 Add New
             </Button>
 
