@@ -134,20 +134,20 @@ const Menu = [
     },
     {
         name: 'Collateral Management',
-        key: 'collateralmanagement',
+        key: 'collateralManagement',
         icon: <FlagOutlined />,
         subMenus: [{
             name: 'Inquiry',
             key: 'inquiry',
-            linkTo: '/inquiry'
+            linkTo: '/collateralManagement/inquiry'
         }, {
             name: 'Instruction - COLDP',
-            key: 'instructioncoldp',
-            linkTo: '/instructioncoldp'
+            key: 'instructionColdp',
+            linkTo: '/collateralManagement/instructionColdp'
         }, {
             name: 'Instruction - COLW',
-            key: 'instructioncolw',
-            linkTo: '/instructioncolw'
+            key: 'instructionColw',
+            linkTo: '/collateralManagement/instructionColw'
         }]
     },
     {
