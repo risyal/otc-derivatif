@@ -4,9 +4,7 @@ import {
     Input,
     Button,
     Table,
-    DatePicker
 } from 'antd';
-import moment from 'moment';
 
 function SettlementMonitoring() {
     const componentSize = 'middle';
@@ -54,7 +52,6 @@ function SettlementMonitoring() {
         {
         },
     ];
-    const dateFormat = 'YYYY/MM/DD';
 
     return (
         <div style={{ margin: '15px 20px' }}>

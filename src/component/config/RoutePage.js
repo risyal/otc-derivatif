@@ -43,10 +43,15 @@ import RegisterAts from '../views/administration/RegisterAts';
 import SettlementInstruction from '../views/settlement/SettlementInstruction';
 import SettlementJobExecution from '../views/settlement/SettlementJobExecution';
 import SettlementMonitoring from '../views/settlement/SettlementMonitoring';
+import SecurityManagement from '../views/instruction/SecurityManagement';
 
 function RoutePage() {
     return (
         <div>
+
+            <div className="demo-nav">
+                <h1>Header Content</h1>
+            </div>
             <Route path="/inquerytrade">
                 <InquiryTradePage />
             </Route>
@@ -100,6 +105,9 @@ function RoutePage() {
             </Route>
             <Route path="/settlement/monitoringClearing">
                 <SettlementMonitoring />
+            </Route>
+            <Route path="/instructionManagement/securityManagement">
+                <SecurityManagement />
             </Route>
             <Route path="/login">
                 <LoginPage />

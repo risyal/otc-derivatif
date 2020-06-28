@@ -116,12 +116,12 @@ const Menu = [
         icon: <FlagOutlined />,
         subMenus: [{
             name: 'Security Management',
-            key: 'securitymanagement',
-            linkTo: '/securitymanagement'
+            key: 'securityManagement',
+            linkTo: '/instructionManagement/securityManagement'
         }, {
             name: 'Cash Management',
             key: 'cashmanagement',
-            linkTo: '/cashmanagement'
+            linkTo: '/instructionManagement/cashmanagement'
         }]
     },
     {
