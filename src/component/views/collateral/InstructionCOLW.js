@@ -6,7 +6,8 @@ import {
     Table,
 } from 'antd';
 
-function InstructionCOLDP() {
+
+function InstructionCOLW() {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -113,4 +114,4 @@ function InstructionCOLDP() {
 
 }
 
-export default InstructionCOLDP
+export default InstructionCOLW

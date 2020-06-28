@@ -49,6 +49,7 @@ import CashInquiryManagement from '../views/instruction/CashInquiryManagement';
 import InquiryCashManagement from '../views/instruction/InquiryCashManagement';
 import Inquiry from '../views/collateral/Inquiry';
 import InstructionCOLDP from '../views/collateral/InstructionCOLDP';
+import InstructionCOLW from '../views/collateral/InstructionCOLW';
 
 function RoutePage() {
     return (
@@ -130,7 +131,7 @@ function RoutePage() {
                 <InstructionCOLDP />
             </Route>
             <Route path="/collateralManagement/instructionColw">
-                <InquiryCashManagement />
+                <InstructionCOLW />
             </Route>
             <Route path="/login">
                 <LoginPage />
