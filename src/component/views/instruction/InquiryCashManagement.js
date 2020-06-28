@@ -8,8 +8,7 @@ import {
 } from 'antd';
 import moment from 'moment';
 
-
-function InquirySecManagement() {
+function InquiryCashManagement() {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -25,11 +24,6 @@ function InquirySecManagement() {
 
     const columns = [
         {
-            title: 'Instruction Type',
-            dataIndex: 'instructionType',
-            key: 'instructionType',
-            width: 100,
-        }, {
             title: 'Participant Code',
             dataIndex: 'participantCode',
             key: 'participantCode',
@@ -52,9 +46,9 @@ function InquirySecManagement() {
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.destAccount - b.destAccount,
         }, {
-            title: 'Security Code',
-            dataIndex: 'securityCode',
-            key: 'securityCode',
+            title: 'Currency Code',
+            dataIndex: 'currencyCode',
+            key: 'currencyCode',
             width: 100,
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.securityCode - b.securityCode,
@@ -113,7 +107,7 @@ function InquirySecManagement() {
                 <Form.Item label="Dest Account" >
                     <Input />
                 </Form.Item>
-                <Form.Item label="Security Code" >
+                <Form.Item label="Currency Code" >
                     <Input />
                 </Form.Item>
                 <Form.Item label="Settlement Date" >
@@ -138,4 +132,4 @@ function InquirySecManagement() {
 
 }
 
-export default InquirySecManagement
+export default InquiryCashManagement
