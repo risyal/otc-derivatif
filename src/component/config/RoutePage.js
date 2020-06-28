@@ -48,6 +48,7 @@ import InquirySecManagement from '../views/instruction/InquirySecManagement';
 import CashInquiryManagement from '../views/instruction/CashInquiryManagement';
 import InquiryCashManagement from '../views/instruction/InquiryCashManagement';
 import Inquiry from '../views/collateral/Inquiry';
+import InstructionCOLDP from '../views/collateral/InstructionCOLDP';
 
 function RoutePage() {
     return (
@@ -126,7 +127,7 @@ function RoutePage() {
                 <Inquiry />
             </Route>
             <Route path="/collateralManagement/instructionColdp">
-                <InquiryCashManagement />
+                <InstructionCOLDP />
             </Route>
             <Route path="/collateralManagement/instructionColw">
                 <InquiryCashManagement />
