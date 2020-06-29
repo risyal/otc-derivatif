@@ -52,10 +52,35 @@
 }
 
 .head-content {
-  height: 40px;
-  line-height: 40px;
-  margin-bottom: 16px;
-  background: #f8f8f8;
-  font-size: larger;
+  // height: 40px;
+  // line-height: 40px;
+  margin-bottom: 30px;
+  background: #ffffff;
+  // font-size: larger;
   text-align: center;
+}
+
+/* Table border color*/
+.ant-table.ant-table-bordered thead > tr > th,
+.ant-table.ant-table-bordered tbody > tr > td,
+.ant-table.ant-table-bordered tfoot > tr > th,
+.ant-table.ant-table-bordered tfoot > tr > td {
+  border-right: 1px solid #D3D3D3;
+}
+.ant-table.ant-table-bordered .ant-table-cell-fix-right-first::after {
+  border-right: 1px solid #D3D3D3;
+}
+.ant-table.ant-table-bordered table thead > tr:not(:last-child) > th {
+  border-bottom: 1px solid #D3D3D3;
+}
+.ant-table.ant-table-bordered .ant-table-container {
+  border: 1px solid #D3D3D3;
+  border-right: 0;
+  border-bottom: 0;
+}
+.ant-table-thead > tr > th {
+  border-bottom: 1px solid #D3D3D3;
+}
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #D3D3D3;
 }
