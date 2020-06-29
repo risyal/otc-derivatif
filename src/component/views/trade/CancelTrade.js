@@ -6,7 +6,6 @@ import {
     Table,
     Select,
     DatePicker,
-    Progress
 } from 'antd';
 import moment from 'moment';
 
