@@ -49,7 +49,7 @@ function ViewEngine() {
                 </BackTop>
                 <Footer style={{ 
                     textAlign: 'center',
-                    backgroundColor: '#a0d911',
+                    backgroundColor: '#7cb305',
                     color: '#fff',
                     fontSize: '14px',
                 }}>
