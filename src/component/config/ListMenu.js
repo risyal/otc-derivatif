@@ -6,7 +6,9 @@ import {
     FormOutlined,
     FlagOutlined,
     FileDoneOutlined,
-    SolutionOutlined
+    SolutionOutlined,
+    UsergroupAddOutlined,
+    FundProjectionScreenOutlined
 } from '@ant-design/icons';
 
 const Menu = [
@@ -153,7 +155,7 @@ const Menu = [
     {
         name: 'Member and Client Management',
         key: 'memberandclientmanagement',
-        icon: <SolutionOutlined />,
+        icon: <UsergroupAddOutlined />,
         subMenus: [{
             name: 'Register Client',
             key: 'registerclient',
@@ -221,7 +223,7 @@ const Menu = [
     {
         name: 'Reporting',
         key: 'reporting',
-        icon: <FlagOutlined />,
+        icon: <FundProjectionScreenOutlined />,
         subMenus: [{
             name: 'DHK Member and Client',
             key: 'dhkmemberclient',
