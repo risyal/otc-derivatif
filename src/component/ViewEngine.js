@@ -47,7 +47,13 @@ function ViewEngine() {
                 <BackTop>
                     <div style={style}>UP</div>
                 </BackTop>
-                <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer style={{ 
+                    textAlign: 'center',
+                    backgroundColor: '#7cb305',
+                    color: '#fff',
+                    fontSize: '14px',
+                }}>
+                 PT Kliring Penjaminan Efek Indonesia</Footer>
             </Layout>
 
         </Layout>
