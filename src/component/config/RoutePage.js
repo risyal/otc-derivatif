@@ -52,6 +52,7 @@ import Inquiry from '../views/collateral/Inquiry';
 import InstructionCOLDP from '../views/collateral/InstructionCOLDP';
 import InstructionCOLW from '../views/collateral/InstructionCOLW';
 import TradeConfirmation from '../views/trade/TradeConfirmation';
+import SettlementStatus from '../views/settlement/SettlementStatus';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -105,6 +106,12 @@ function RoutePage() {
                     <Title level={4}>Inquiry Position</Title>
                 </div>
                 <InquiryPosition />
+            </Route>
+            <Route path="/clearingManagement/statusSettlement">
+                <div className="head-content">
+                    <Title level={4}>Status Settlement</Title>
+                </div>
+                <SettlementStatus />
             </Route>
             <Route path="/clearingManagement/settlementPostion">
                 <div className="head-content">

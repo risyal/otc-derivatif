@@ -60,8 +60,8 @@ const Menu = [
             linkTo: '/clearingManagement/settlementPostion'
         }, {
             name: 'Status Settlement',
-            key: 'statussettlement',
-            linkTo: '/statussettlement'
+            key: 'statusSettlement',
+            linkTo: '/clearingManagement/statusSettlement'
         }, {
             name: 'Cash Flow IRS Calculation',
             key: 'cashFlowIrs',
