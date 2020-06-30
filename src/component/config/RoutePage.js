@@ -51,10 +51,11 @@ import InquiryCashManagement from '../views/instruction/InquiryCashManagement';
 import Inquiry from '../views/collateral/Inquiry';
 import InstructionCOLDP from '../views/collateral/InstructionCOLDP';
 import InstructionCOLW from '../views/collateral/InstructionCOLW';
+import TradeConfirmation from '../views/trade/TradeConfirmation';
 
 function RoutePage() {
     const { Title } = Typography;
-    
+
     return (
         <div>
             <Route path="/inquerytrade">
@@ -83,9 +84,15 @@ function RoutePage() {
             </Route>
             <Route path="/tradesummary">
                 <div className="head-content">
-                    <Title level={4}>Trade summary</Title>
+                    <Title level={4}>Trade Summary</Title>
                 </div>
                 <TradeSummary />
+            </Route>
+            <Route path="/tradeConfirmation">
+                <div className="head-content">
+                    <Title level={4}>Trade Confirmation</Title>
+                </div>
+                <TradeConfirmation />
             </Route>
             <Route path="/clearingManagement/clearingPosition">
                 <div className="head-content">

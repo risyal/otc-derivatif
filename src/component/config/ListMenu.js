@@ -33,9 +33,13 @@ const Menu = [
             key: 'monitoringtrade',
             linkTo: '/monitoringtrade'
         }, {
-            name: 'Trade summary',
+            name: 'Trade Summary',
             key: 'tradesummary',
             linkTo: '/tradesummary'
+        }, {
+            name: 'Trade Confirmation',
+            key: 'tradeConfirmation',
+            linkTo: '/tradeConfirmation'
         }]
     },
     {
