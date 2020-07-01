@@ -5,8 +5,9 @@ import {
     Button,
     Select,
     Table,
-    Space
+    Popconfirm
 } from 'antd';
+import { Link } from "react-router-dom";
 
 function RegisterMember() {
     const componentSize = 'middle';
@@ -72,13 +73,31 @@ function RegisterMember() {
             key: 'actions',
             dataIndex: 'actions',
             fixed: 'right',
-            width: 200,
-            render: () => (
-                <Space size="middle">
-                    <a style={{ marginRight: 16 }}>View</a>
-                    <a style={{ marginRight: 16 }}>Edit</a>
-                    <a>Delete</a>
-                </Space>
+            width: 150,
+            render: (text, record) => (
+                <span>
+                    <Link to={{
+                        pathname: `/viewMember`,
+                        state: {
+                            id: record.key,
+                            action: "View",
+                            disable: true,
+                        }
+                    }}>View
+                    </Link> <span>{"  "}</span>
+                    <Link to={{
+                        pathname: `/viewMember`,
+                        state: {
+                            id: record.key,
+                            action: "Edit",
+                            disable: false,
+                        }
+                    }}>Edit
+                    </Link><span>{"  "}</span>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                        <a>Delete</a>
+                    </Popconfirm>
+                </span>
             )
         },
     ];
@@ -190,9 +209,17 @@ function RegisterMember() {
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                    Add New Data
+                <Link to={{
+                    pathname: `/viewMember`,
+                    state: {
+                        id: '0',
+                        action: "Add New Member",
+                        disable: false,
+                    }
+                }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                        Add New Data
                 </Button>
+                </Link>
                 <Table
                     columns={columns}
                     dataSource={data}

@@ -53,6 +53,7 @@ import InstructionCOLDP from '../views/collateral/InstructionCOLDP';
 import InstructionCOLW from '../views/collateral/InstructionCOLW';
 import TradeConfirmation from '../views/trade/TradeConfirmation';
 import SettlementStatus from '../views/settlement/SettlementStatus';
+import ViewEditMember from '../views/member-client/ViewEditMember';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -358,6 +359,8 @@ function RoutePage() {
                     <Title level={4}>Register ATS</Title>
                 </div>
                 <RegisterAts />
+            </Route>
+            <Route exact path="/viewMember/" component={ViewEditMember}>
             </Route>
 
         </div>
