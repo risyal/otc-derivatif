@@ -52,7 +52,7 @@ function RegisterMember(){
             title: 'No Telp',
             dataIndex: 'noTelp',
             key: 'noTelp',
-            width: 100,
+            width: 150,
           },
           {
             title: 'Email',
@@ -67,30 +67,92 @@ function RegisterMember(){
             width: 100,
           },
           {
-            title: 'Action',
-            key: 'operation',
+            title: 'Actions',
+            key: 'actions',
+            dataIndex: 'actions',
             fixed: 'right',
-            width: 100,
-            render: () => <a>Edit</a>,
+            width: 150,
+            render: () => (
+                <span>
+                    <a style={{ marginRight: 16 }}>View</a>
+                    <a style={{ marginRight: 16 }}>Edit</a>
+                    <a>Delete</a>
+                </span>
+            )
         },
     ];
     const data = [
         {
+            key: '1',
+            memberID: 'Member123',
+            namaPerusahaan: 'PT Jaya Abadi',
+            alamat: 'New York No. 1 Lake Park',
+            pic: 'John Brown',
+            noTelp: '085112345227',
+            email: 'john@gmail.com',    
+            status: 'status1', 
         },
         {
+            key: '2',
+            memberID: 'Member345',
+            namaPerusahaan: 'PT Citra Utama',
+            alamat: 'New York No. 1 Lake Park',
+            pic: 'Jim Green',
+            noTelp: '085112345227',
+            email: 'jim@gmail.com',    
+            status: 'status3',
         },
         {
+            key: '3',
+            memberID: 'Member567',
+            namaPerusahaan: 'PT Abadi Makmur',
+            alamat: 'New York No. 1 Lake Park',
+            pic: 'John Black',
+            noTelp: '085112345227',
+            email: 'black@gmail.com',    
+            status: 'status2',
         },
     ];
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            {/* <Form
+                size={componentSize}
+                layout="horizontal"
+                initialValues={{ size: componentSize }}
+            >
+                <Form.Item label="Search">
+                    <Input.Group compact>
+                        <Form.Item
+                            name={['address', 'province']}
+                        >
+                            <Select placeholder="Select filter">
+                                <Option value="memberID">Member ID</Option>
+                                <Option value="namaPerusahaan">Nama Perusahaan</Option>
+                                <Option value="sid/lei">SID/LEI</Option>
+                                <Option value="rtgsAccount">RTGS Account</Option>
+                                <Option value="ssssAccount">SSSS Account</Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item
+                            name={['address', 'street']}
+                        >
+                            <Input style={{ width: '100%' }} />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">Search</Button>
+                        </Form.Item>
+                    </Input.Group>
+                </Form.Item>
+            </Form> */}
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
+                style={{ marginBottom: '80px'}}
             >
                 <Form.Item label="Member ID">
                     <Input />
@@ -117,46 +179,19 @@ function RegisterMember(){
                     <Input />
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '15px'}}>
+                        Search
+                    </Button>
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        Clear
                     </Button>
                 </Form.Item>
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Form
-                    size={componentSize}
-                    layout="horizontal"
-                    initialValues={{ size: componentSize }}
-                    style={{ marginTop: '80px'}}
-                >
-                    <Form.Item label="Search">
-                        <Input.Group compact>
-                            <Form.Item
-                                name={['address', 'province']}
-                            >
-                                <Select placeholder="Select filter">
-                                    <Option value="memberID">Member ID</Option>
-                                    <Option value="namaPerusahaan">Nama Perusahaan</Option>
-                                    <Option value="sid/lei">SID/LEI</Option>
-                                    <Option value="rtgsAccount">RTGS Account</Option>
-                                    <Option value="ssssAccount">SSSS Account</Option>
-                                </Select>
-                            </Form.Item>
-                            <Form.Item
-                                name={['address', 'street']}
-                            >
-                                <Input style={{ width: '100%' }} />
-                            </Form.Item>
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit">
-                                    Go
-                                </Button>
-                            </Form.Item>
-                        </Input.Group>
-                    </Form.Item>
-                </Form>
-
+                <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                    Add New Data
+                </Button>
                 <Table
                     columns={columns}
                     dataSource={data}
