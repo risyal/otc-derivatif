@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Form,
     Input,
@@ -8,8 +8,11 @@ import {
     Popconfirm
 } from 'antd';
 import { Link } from "react-router-dom";
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
 function RegisterMember() {
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -129,7 +132,7 @@ function RegisterMember() {
                             action: "View",
                             disable: true,
                         }
-                    }} style={{ marginRight: '20px'}}>View
+                    }} style={{ marginRight: '20px' }}>View
                     </Link>
                     <Link to={{
                         pathname: `/viewMember`,
@@ -138,7 +141,7 @@ function RegisterMember() {
                             action: "Edit",
                             disable: false,
                         }
-                    }} style={{ marginRight: '20px'}}>Edit
+                    }} style={{ marginRight: '20px' }}>Edit
                     </Link>
                     <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
                         <a>Delete</a>
@@ -205,38 +208,65 @@ function RegisterMember() {
         <div style={{ margin: '15px 20px' }}>
             <Form
                 {...formItemLayout}
+                form={form}
                 size={componentSize}
+                name="advanced_search"
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Form.Item label="Member ID">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="SID/LEI">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Nama Perusahaan">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Kode BIC">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="RTGS Account">
-                    <Input placeholder="Collateral" style={{ marginBottom: '15px'}}/>
-                    <Input placeholder="Settlement" style={{ marginBottom: '15px'}}/>
-                    <Input placeholder="Default Fund"/>
-                </Form.Item>
-                <Form.Item label="SSSS Account">
-                    <Input />
-                </Form.Item>
+
+                {expand ? (<div>
+                    <Form.Item label="Keyword">
+                        <Input />
+                    </Form.Item>
+                </div>
+                ) : (
+                        <div>
+                            <Form.Item label="Member ID">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="SID/LEI">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Nama Perusahaan">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Kode BIC">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="RTGS Account">
+                                <Input placeholder="Collateral" style={{ marginBottom: '15px' }} />
+                                <Input placeholder="Settlement" style={{ marginBottom: '15px' }} />
+                                <Input placeholder="Default Fund" />
+                            </Form.Item>
+                            <Form.Item label="SSSS Account">
+                                <Input />
+                            </Form.Item>
+                        </div>
+                    )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
+                    <Button
+                        type="primary"
+                        htmlType="submit" s
+                        tyle={{ marginRight: '15px' }}>
                         Search
-                    </Button>
-                    <Button type="primary" htmlType="submit">
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
                         Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined />Advance Search</div>) :
+                            (<div><UpOutlined />Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
