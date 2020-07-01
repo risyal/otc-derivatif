@@ -3,11 +3,12 @@ import {
     Form,
     Input,
     Button,
-    Select, 
-    Table
+    Select,
+    Table,
+    Space
 } from 'antd';
 
-function RegisterMember(){
+function RegisterMember() {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -29,55 +30,55 @@ function RegisterMember(){
             key: 'memberID',
             width: 100,
             fixed: 'left',
-          },
-          {
+        },
+        {
             title: 'Nama Perusahaan',
             dataIndex: 'namaPerusahaan',
             key: 'namaPerusahaan',
             width: 200,
-          },
-          {
+        },
+        {
             title: 'Alamat',
             dataIndex: 'alamat',
             key: 'alamat',
             width: 200,
-          },
-          {
+        },
+        {
             title: 'PIC',
             dataIndex: 'pic',
             key: 'pic',
             width: 100,
-          },
-          {
+        },
+        {
             title: 'No Telp',
             dataIndex: 'noTelp',
             key: 'noTelp',
             width: 150,
-          },
-          {
+        },
+        {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',
             width: 200,
-          },
-          {
+        },
+        {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
             width: 100,
-          },
-          {
+        },
+        {
             title: 'Actions',
             key: 'actions',
             dataIndex: 'actions',
             fixed: 'right',
-            width: 150,
+            width: 200,
             render: () => (
-                <span>
+                <Space size="middle">
                     <a style={{ marginRight: 16 }}>View</a>
                     <a style={{ marginRight: 16 }}>Edit</a>
                     <a>Delete</a>
-                </span>
+                </Space>
             )
         },
     ];
@@ -89,8 +90,8 @@ function RegisterMember(){
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Brown',
             noTelp: '085112345227',
-            email: 'john@gmail.com',    
-            status: 'status1', 
+            email: 'john@gmail.com',
+            status: 'status1',
         },
         {
             key: '2',
@@ -99,7 +100,7 @@ function RegisterMember(){
             alamat: 'New York No. 1 Lake Park',
             pic: 'Jim Green',
             noTelp: '085112345227',
-            email: 'jim@gmail.com',    
+            email: 'jim@gmail.com',
             status: 'status3',
         },
         {
@@ -109,7 +110,7 @@ function RegisterMember(){
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Black',
             noTelp: '085112345227',
-            email: 'black@gmail.com',    
+            email: 'black@gmail.com',
             status: 'status2',
         },
     ];
@@ -152,7 +153,7 @@ function RegisterMember(){
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-                style={{ marginBottom: '80px'}}
+                style={{ marginBottom: '80px' }}
             >
                 <Form.Item label="Member ID">
                     <Input />
@@ -179,7 +180,7 @@ function RegisterMember(){
                     <Input />
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit" style={{ marginRight: '15px'}}>
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                         Search
                     </Button>
                     <Button type="primary" htmlType="submit">
@@ -201,7 +202,7 @@ function RegisterMember(){
                 />
             </div>
         </div>
-        
+
     )
 
 }
