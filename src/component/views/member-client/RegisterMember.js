@@ -26,11 +26,24 @@ function RegisterMember() {
 
     const columns = [
         {
+            title: 'No',
+            dataIndex: 'no',
+            key: 'no',
+            width: 50,
+            fixed: 'left',
+        },
+        {
             title: 'Member ID',
             dataIndex: 'memberID',
             key: 'memberID',
             width: 100,
             fixed: 'left',
+        },
+        {
+            title: 'SID/LEI',
+            dataIndex: 'sidLei',
+            key: 'sidLei',
+            width: 100,
         },
         {
             title: 'Nama Perusahaan',
@@ -61,6 +74,39 @@ function RegisterMember() {
             dataIndex: 'email',
             key: 'email',
             width: 200,
+        },
+        {
+            title: 'Kode BIC',
+            dataIndex: 'bic',
+            key: 'bic',
+            width: 100,
+        },
+        {
+            title: 'RTGS Account',
+            children: [
+                {
+                    title: 'Collateral',
+                    width: 100,
+                    dataIndex: 'collateral',
+                    key: 'collateral',
+                }, {
+                    title: 'Settlement',
+                    width: 100,
+                    dataIndex: 'settlement',
+                    key: 'settlement',
+                }, {
+                    title: 'Default Fund',
+                    width: 100,
+                    dataIndex: 'dFund',
+                    key: 'dFund',
+                }
+            ]
+        },
+        {
+            title: 'SSSS Account (Collateral)',
+            dataIndex: 'ssss',
+            key: 'ssss',
+            width: 100,
         },
         {
             title: 'Status',
@@ -104,68 +150,59 @@ function RegisterMember() {
     const data = [
         {
             key: '1',
+            no: '1',
             memberID: 'Member123',
+            sidLei: 'ID12',
             namaPerusahaan: 'PT Jaya Abadi',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Brown',
             noTelp: '085112345227',
             email: 'john@gmail.com',
+            bic: 'BIC01',
+            collateral: 'Collateral1',
+            settlement: 'Settlement1',
+            dFund: 'Def-Fund1',
+            ssss: 'SSSS1',
             status: 'status1',
         },
         {
             key: '2',
+            no: '2',
             memberID: 'Member345',
+            sidLei: 'ID23',
             namaPerusahaan: 'PT Citra Utama',
             alamat: 'New York No. 1 Lake Park',
             pic: 'Jim Green',
             noTelp: '085112345227',
             email: 'jim@gmail.com',
+            bic: 'BIC02',
+            collateral: 'Collateral2',
+            settlement: 'Settlement2',
+            dFund: 'Def-Fund2',
+            ssss: 'SSSS2',
             status: 'status3',
         },
         {
             key: '3',
+            no: '3',
             memberID: 'Member567',
+            sidLei: 'ID34',
             namaPerusahaan: 'PT Abadi Makmur',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Black',
             noTelp: '085112345227',
             email: 'black@gmail.com',
+            bic: 'BIC03',
+            collateral: 'Collateral3',
+            settlement: 'Settlement3',
+            dFund: 'Def-Fund3',
+            ssss: 'SSSS3',
             status: 'status2',
         },
     ];
 
     return (
         <div style={{ margin: '15px 20px' }}>
-            {/* <Form
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-            >
-                <Form.Item label="Search">
-                    <Input.Group compact>
-                        <Form.Item
-                            name={['address', 'province']}
-                        >
-                            <Select placeholder="Select filter">
-                                <Option value="memberID">Member ID</Option>
-                                <Option value="namaPerusahaan">Nama Perusahaan</Option>
-                                <Option value="sid/lei">SID/LEI</Option>
-                                <Option value="rtgsAccount">RTGS Account</Option>
-                                <Option value="ssssAccount">SSSS Account</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item
-                            name={['address', 'street']}
-                        >
-                            <Input style={{ width: '100%' }} />
-                        </Form.Item>
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit">Search</Button>
-                        </Form.Item>
-                    </Input.Group>
-                </Form.Item>
-            </Form> */}
-
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -187,13 +224,9 @@ function RegisterMember() {
                     <Input />
                 </Form.Item>
                 <Form.Item label="RTGS Account">
-                    <Select
-                        placeholder="Select an option RTGS Account"
-                    >
-                        <Option value="male">Collateral</Option>
-                        <Option value="female">Settlement</Option>
-                        <Option value="other">Default Fund</Option>
-                    </Select>
+                    <Input placeholder="Collateral" style={{ marginBottom: '15px'}}/>
+                    <Input placeholder="Settlement" style={{ marginBottom: '15px'}}/>
+                    <Input placeholder="Default Fund"/>
                 </Form.Item>
                 <Form.Item label="SSSS Account">
                     <Input />
