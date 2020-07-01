@@ -137,11 +137,13 @@ const ViewEditMember = (props) => {
                     <Input
                         addonBefore="Collateral"
                         value={dataMemberById.collateral}
-                        disabled={disable} />
+                        disabled={disable} 
+                        style={{ marginBottom: '15px'}}/>
                     <Input
                         addonBefore="Settlement"
                         value={dataMemberById.settlement}
-                        disabled={disable} />
+                        disabled={disable} 
+                        style={{ marginBottom: '15px'}}/>
                     <Input
                         addonBefore="Default Fund"
                         value={dataMemberById.dFund}
