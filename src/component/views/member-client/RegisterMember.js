@@ -83,7 +83,7 @@ function RegisterMember() {
                             action: "View",
                             disable: true,
                         }
-                    }}>View
+                    }} style={{ marginRight: '15px'}}>View
                     </Link> <span>{"  "}</span>
                     <Link to={{
                         pathname: `/viewMember`,
@@ -92,7 +92,7 @@ function RegisterMember() {
                             action: "Edit",
                             disable: false,
                         }
-                    }}>Edit
+                    }} style={{ marginRight: '15px'}}>Edit
                     </Link><span>{"  "}</span>
                     <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
                         <a>Delete</a>
