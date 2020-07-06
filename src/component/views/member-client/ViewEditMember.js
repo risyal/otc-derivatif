@@ -98,7 +98,7 @@ const ViewEditMember = (props) => {
     })
 
     const statusSelect = ['Active', 'Suspend', 'Closed'];
-    const [selectedStatus, setSelectedStatus] = useState(dataMemberById.status);
+    const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
     const statusClick = (e) => {
         setSelectedStatus(e);
     };
@@ -160,10 +160,9 @@ const ViewEditMember = (props) => {
                 <Form.Item label="Status">
                     <Select
                         value={selectedStatus}
-                        onChange={statusClick}
-                        disabled={disable}>
+                        onChange={statusClick}>
                         {statusSelect.map(status => (
-                            <Option value={status} key={status}>{status}</Option>
+                            <Option value={status}>{status}</Option>
                         ))}
                     </Select>
                 </Form.Item>
