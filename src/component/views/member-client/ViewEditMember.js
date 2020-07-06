@@ -33,9 +33,9 @@ const ViewEditMember = (props) => {
             noTelp: ' ',
             email: ' ',
             bic: ' ',
-            collateral: ' ',
-            settlement: ' ',
-            dFund: ' ',
+            collateral: 'Auto Generate',
+            settlement: 'Auto Generate',
+            dFund: 'Auto Generate',
             ssss: ' ',
             status: ' ',
         },
@@ -110,51 +110,48 @@ const ViewEditMember = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             > <Form.Item label="Member ID">
-                    <Input disabled={disable} value={dataMemberById.memberID} />
+                    <Input disabled={disable} defaultValue={dataMemberById.memberID} />
                 </Form.Item>
                 <Form.Item label="SID/LEI">
-                    <Input disabled={disable} value={dataMemberById.sidLei} />
+                    <Input disabled={disable} defaultValue={dataMemberById.sidLei} />
                 </Form.Item>
                 <Form.Item label="Nama Perusahaan">
-                    <Input disabled={disable} value={dataMemberById.namaPerusahaan} />
+                    <Input disabled={disable} defaultValue={dataMemberById.namaPerusahaan} />
                 </Form.Item>
                 <Form.Item label="Alamat">
-                    <Input disabled={disable} value={dataMemberById.alamat} />
+                    <Input disabled={disable} defaultValue={dataMemberById.alamat} />
                 </Form.Item>
                 <Form.Item label="PIC">
-                    <Input disabled={disable} value={dataMemberById.pic} />
+                    <Input disabled={disable} defaultValue={dataMemberById.pic} />
                 </Form.Item>
                 <Form.Item label="No Telepon">
-                    <Input disabled={disable} value={dataMemberById.noTelp} />
+                    <Input disabled={disable} defaultValue={dataMemberById.noTelp} />
                 </Form.Item>
                 <Form.Item label="Email">
-                    <Input disabled={disable} value={dataMemberById.email} />
-                </Form.Item>
-                <Form.Item label="Kode BIC">
-                    <Input disabled={disable} value={dataMemberById.bic} />
+                    <Input disabled={disable} defaultValue={dataMemberById.email} />
                 </Form.Item>
                 <Form.Item label="RTGS Account">
                     <Input
                         addonBefore="Collateral"
-                        value={dataMemberById.collateral}
-                        disabled={disable} 
-                        style={{ marginBottom: '15px'}}/>
+                        defaultValue={dataMemberById.collateral}
+                        disabled='true'
+                        style={{ marginBottom: '15px' }} />
                     <Input
                         addonBefore="Settlement"
-                        value={dataMemberById.settlement}
-                        disabled={disable} 
-                        style={{ marginBottom: '15px'}}/>
+                        defaultValue={dataMemberById.settlement}
+                        disabled='true'
+                        style={{ marginBottom: '15px' }} />
                     <Input
                         addonBefore="Default Fund"
-                        value={dataMemberById.dFund}
-                        disabled={disable}
+                        defaultValue={dataMemberById.dFund}
+                        disabled='true'
                     />
                 </Form.Item>
                 <Form.Item label="SSSS Account">
-                    <Input disabled={disable} value={dataMemberById.ssss} />
+                    <Input disabled={disable} defaultValue={dataMemberById.ssss} />
                 </Form.Item>
                 <Form.Item label="Status">
-                    <Input disabled={disable} value={dataMemberById.status} />
+                    <Input disabled={disable} defaultValue={dataMemberById.status} />
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/registermember">

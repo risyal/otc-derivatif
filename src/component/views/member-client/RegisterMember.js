@@ -5,12 +5,14 @@ import {
     Button,
     Select,
     Table,
-    Popconfirm
+    Popconfirm,
+    Dropdown,
+    Menu
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
-function RegisterMember() {
+const RegisterMember = () => {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -26,6 +28,13 @@ function RegisterMember() {
     };
 
     const { Option } = Select;
+    const menu = (
+        <Menu >
+            <Menu.Item key="1">1st item</Menu.Item>
+            <Menu.Item key="2">2nd item</Menu.Item>
+            <Menu.Item key="3">3rd item</Menu.Item>
+        </Menu>
+    );
 
     const columns = [
         {
@@ -79,12 +88,6 @@ function RegisterMember() {
             width: 200,
         },
         {
-            title: 'Kode BIC',
-            dataIndex: 'bic',
-            key: 'bic',
-            width: 100,
-        },
-        {
             title: 'RTGS Account',
             children: [
                 {
@@ -124,31 +127,44 @@ function RegisterMember() {
             fixed: 'right',
             width: 150,
             render: (text, record) => (
-                <span>
-                    <Link to={{
-                        pathname: `/viewMember`,
-                        state: {
-                            id: record.key,
-                            action: "View",
-                            disable: true,
-                        }
-                    }} style={{ marginRight: '20px' }}>View
+                <Dropdown
+                    overlay={
+                        <Menu>
+                            <Menu.Item>
+                                <Link to={{
+                                    pathname: `/viewMember`,
+                                    state: {
+                                        id: record.key,
+                                        action: "View",
+                                        disable: true,
+                                    }
+                                }} style={{ marginRight: '20px' }}>View
                     </Link>
-                    <Link to={{
-                        pathname: `/viewMember`,
-                        state: {
-                            id: record.key,
-                            action: "Edit",
-                            disable: false,
-                        }
-                    }} style={{ marginRight: '20px' }}>Edit
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Link to={{
+                                    pathname: `/viewMember`,
+                                    state: {
+                                        id: record.key,
+                                        action: "Edit",
+                                        disable: false,
+                                    }
+                                }} style={{ marginRight: '20px' }}>Edit
                     </Link>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-                        <a>Delete</a>
-                    </Popconfirm>
-                </span>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+                                    <a>Delete</a>
+                                </Popconfirm>
+                            </Menu.Item>
+                        </Menu>
+                    }
+                    placement="bottomLeft"
+                    trigger={['click']}>
+                    <Button>Action</Button>
+                </Dropdown>
             )
-        },
+        }
     ];
     const data = [
         {
@@ -249,7 +265,7 @@ function RegisterMember() {
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button
                         type="primary"
-                        htmlType="submit" s
+                        htmlType="submit"
                         tyle={{ marginRight: '15px' }}>
                         Search
                                 </Button>
