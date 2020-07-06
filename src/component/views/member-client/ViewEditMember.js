@@ -23,11 +23,6 @@ const ViewEditMember = (props) => {
             sm: { span: 16 },
         },
     };
-    const statusSelect = ['Active', 'Suspend', 'Closed'];
-    const setSelectedStatus = useState(statusSelect[0]);
-    const statusClick = (e) => {
-        setSelectedStatus(e);
-    };
     const data = [
         {
             key: '0',
@@ -43,7 +38,7 @@ const ViewEditMember = (props) => {
             settlement: 'Auto Generate',
             dFund: 'Auto Generate',
             ssss: ' ',
-            status: ' ',
+            status: 'Active',
         },
         {
             key: '1',
@@ -99,7 +94,14 @@ const ViewEditMember = (props) => {
     ];
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
+
     })
+
+    const statusSelect = ['Active', 'Suspend', 'Closed'];
+    const [selectedStatus, setSelectedStatus] = useState(dataMemberById.status);
+    const statusClick = (e) => {
+        setSelectedStatus(e);
+    };
     const action = props.location.state.action
     const disable = props.location.state.disable
     return (
@@ -157,11 +159,11 @@ const ViewEditMember = (props) => {
                 </Form.Item>
                 <Form.Item label="Status">
                     <Select
-                        value={dataMemberById.status}
+                        value={selectedStatus}
                         onChange={statusClick}
                         disabled={disable}>
                         {statusSelect.map(status => (
-                            <Option value={status}>{status}</Option>
+                            <Option value={status} key={status}>{status}</Option>
                         ))}
                     </Select>
                 </Form.Item>
