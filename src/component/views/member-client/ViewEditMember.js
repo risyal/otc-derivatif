@@ -9,6 +9,7 @@ import { Typography } from 'antd';
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
+const { Option } = Select;
 
 const ViewEditMember = (props) => {
     const componentSize = 'middle';
@@ -21,6 +22,11 @@ const ViewEditMember = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
+    };
+    const statusSelect = ['Active', 'Suspend', 'Closed'];
+    const setSelectedStatus = useState(statusSelect[0]);
+    const statusClick = (e) => {
+        setSelectedStatus(e);
     };
     const data = [
         {
@@ -54,7 +60,7 @@ const ViewEditMember = (props) => {
             settlement: 'Settlement1',
             dFund: 'Def-Fund1',
             ssss: 'SSSS1',
-            status: 'status1',
+            status: 'Active',
         },
         {
             key: '2',
@@ -71,7 +77,7 @@ const ViewEditMember = (props) => {
             settlement: 'Settlement2',
             dFund: 'Def-Fund2',
             ssss: 'SSSS2',
-            status: 'status3',
+            status: 'Closed',
         },
         {
             key: '3',
@@ -88,10 +94,9 @@ const ViewEditMember = (props) => {
             settlement: 'Settlement3',
             dFund: 'Def-Fund3',
             ssss: 'SSSS3',
-            status: 'status2',
+            status: 'Active',
         },
     ];
-    console.log(props.location.state)
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
     })
@@ -151,10 +156,17 @@ const ViewEditMember = (props) => {
                     <Input disabled={disable} defaultValue={dataMemberById.ssss} />
                 </Form.Item>
                 <Form.Item label="Status">
-                    <Input disabled={disable} defaultValue={dataMemberById.status} />
+                    <Select
+                        value={dataMemberById.status}
+                        onChange={statusClick}
+                        disabled={disable}>
+                        {statusSelect.map(status => (
+                            <Option value={status}>{status}</Option>
+                        ))}
+                    </Select>
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/registermember">
+                    {!disable ? (<Link to="/memberandclientmanagement/registermember">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             {action}
                         </Button>
@@ -162,7 +174,7 @@ const ViewEditMember = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/registermember">
+                    <Link to="/memberandclientmanagement/registermember">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>

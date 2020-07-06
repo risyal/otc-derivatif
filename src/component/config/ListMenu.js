@@ -161,13 +161,17 @@ const Menu = [
         key: 'memberandclientmanagement',
         icon: <UsergroupAddOutlined />,
         subMenus: [{
-            name: 'Register Client',
-            key: 'registerclient',
-            linkTo: '/registerclient'
-        }, {
             name: 'Register Member',
             key: 'registermember',
-            linkTo: '/registermember'
+            linkTo: '/memberandclientmanagement/registermember'
+        }, {
+            name: 'Register Client',
+            key: 'registerclient',
+            linkTo: '/memberandclientmanagement/registerclient'
+        }, {
+            name: 'Approval',
+            key: 'approval',
+            linkTo: '/memberandclientmanagement/approval'
         }]
     },
     {

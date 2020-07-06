@@ -5,7 +5,6 @@ import {
     Button,
     Select,
     Table,
-    Popconfirm,
     Dropdown,
     Menu
 } from 'antd';
@@ -15,6 +14,11 @@ import { DownOutlined, UpOutlined } from '@ant-design/icons';
 const RegisterMember = () => {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
+    const statusSelect = ['Active', 'Suspend', 'Closed'];
+    const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
+    const statusClick = (e) => {
+        setSelectedStatus(e);
+    };
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -28,13 +32,6 @@ const RegisterMember = () => {
     };
 
     const { Option } = Select;
-    const menu = (
-        <Menu >
-            <Menu.Item key="1">1st item</Menu.Item>
-            <Menu.Item key="2">2nd item</Menu.Item>
-            <Menu.Item key="3">3rd item</Menu.Item>
-        </Menu>
-    );
 
     const columns = [
         {
@@ -182,7 +179,7 @@ const RegisterMember = () => {
             settlement: 'Settlement1',
             dFund: 'Def-Fund1',
             ssss: 'SSSS1',
-            status: 'status1',
+            status: 'Active',
         },
         {
             key: '2',
@@ -199,7 +196,7 @@ const RegisterMember = () => {
             settlement: 'Settlement2',
             dFund: 'Def-Fund2',
             ssss: 'SSSS2',
-            status: 'status3',
+            status: 'Active',
         },
         {
             key: '3',
@@ -216,7 +213,7 @@ const RegisterMember = () => {
             settlement: 'Settlement3',
             dFund: 'Def-Fund3',
             ssss: 'SSSS3',
-            status: 'status2',
+            status: 'Active',
         },
     ];
 
@@ -259,6 +256,15 @@ const RegisterMember = () => {
                             </Form.Item>
                             <Form.Item label="SSSS Account">
                                 <Input />
+                            </Form.Item>
+                            <Form.Item label="Status">
+                                <Select
+                                    value={selectedStatus}
+                                    onChange={statusClick}>
+                                    {statusSelect.map(status => (
+                                        <Option value={status}>{status}</Option>
+                                    ))}
+                                </Select>
                             </Form.Item>
                         </div>
                     )}

@@ -276,13 +276,13 @@ function RoutePage() {
                 </div>
                 <DHKLevel />
             </Route>
-            <Route path="/registerclient">
+            <Route path="/memberandclientmanagement/registerclient">
                 <div className="head-content">
                     <Title level={4}>Register Client</Title>
                 </div>
                 <RegisterClient />
             </Route>
-            <Route path="/registermember">
+            <Route path="/memberandclientmanagement/registermember">
                 <div className="head-content">
                     <Title level={4}>Register Member</Title>
                 </div>

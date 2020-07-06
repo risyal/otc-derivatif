@@ -73,7 +73,7 @@ function NewTrade() {
         setPosition(e);
     };
     const rateClick = (e) => {
-        selectedRate(e);
+        setSelectedRate(e);
     };
     const contractClick = (e) => {
         setSelectedContract(e);
