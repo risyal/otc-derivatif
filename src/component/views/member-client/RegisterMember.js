@@ -153,9 +153,9 @@ const RegisterMember = () => {
                     </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-                                    <a>Delete</a>
-                                </Popconfirm>
+                                <span onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) }}>
+                                    Delete
+                                </span>
                             </Menu.Item>
                         </Menu>
                     }
