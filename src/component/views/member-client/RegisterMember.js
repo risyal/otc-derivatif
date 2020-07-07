@@ -302,7 +302,7 @@ const RegisterMember = () => {
                         disable: false,
                     }
                 }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                        Add New Data
+                        Add New Member
                 </Button>
                 </Link>
                 <Table

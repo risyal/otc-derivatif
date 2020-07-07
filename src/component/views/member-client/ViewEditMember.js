@@ -4,9 +4,12 @@ import {
     Input,
     Button,
     Select,
-    Radio
+    Radio,
+    Typography
 } from 'antd';
-import { Typography } from 'antd';
+import {
+    CaretLeftOutlined
+} from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
@@ -38,7 +41,7 @@ const ViewEditMember = (props) => {
             collateral: 'Auto Generate',
             settlement: 'Auto Generate',
             dFund: 'Auto Generate',
-            ssss: ' ',
+            ssss: 'Auto Generate',
             status: 'Active',
         },
         {
@@ -113,7 +116,11 @@ const ViewEditMember = (props) => {
     return (
         <div>
             <div className="head-content">
-                <Title level={4}>{action} Member</Title>
+                <Title level={4}>
+                    <Link to="/memberandclientmanagement/registermember">
+                        <CaretLeftOutlined />
+                    </Link>
+                    {action} Member</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -122,17 +129,17 @@ const ViewEditMember = (props) => {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
-            > <Form.Item label="Six Eyes">
-                    {!disable ? (
-                        <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                            <Radio value={1}>Maker</Radio>
-                            <Radio value={2}>Direct Checker</Radio>
-                            <Radio value={3}>Direct Approver</Radio>
-                        </Radio.Group>
-                    ) : (
-                            <div></div>
-                        )}
+            >
+                {!disable ? (<Form.Item label="Six Eyes">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
                 </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
                 <Form.Item label="Member ID">
                     <Input disabled={disable} defaultValue={dataMemberById.memberID} />
                 </Form.Item>
@@ -172,12 +179,13 @@ const ViewEditMember = (props) => {
                     />
                 </Form.Item>
                 <Form.Item label="SSSS Account">
-                    <Input disabled={disable} defaultValue={dataMemberById.ssss} />
+                    <Input disabled='true' defaultValue={dataMemberById.ssss} />
                 </Form.Item>
                 <Form.Item label="Status">
                     <Select
                         value={selectedStatus}
-                        onChange={statusClick}>
+                        onChange={statusClick}
+                        disabled={disable}>
                         {statusSelect.map(status => (
                             <Option value={status}>{status}</Option>
                         ))}
@@ -186,7 +194,7 @@ const ViewEditMember = (props) => {
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/memberandclientmanagement/registermember">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            {action}
+                            Submit
                         </Button>
                     </Link>
                     ) : (
