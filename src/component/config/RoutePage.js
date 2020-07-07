@@ -54,6 +54,7 @@ import InstructionCOLW from '../views/collateral/InstructionCOLW';
 import TradeConfirmation from '../views/trade/TradeConfirmation';
 import SettlementStatus from '../views/settlement/SettlementStatus';
 import ViewEditMember from '../views/member-client/ViewEditMember';
+import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -287,6 +288,12 @@ function RoutePage() {
                     <Title level={4}>Register Member</Title>
                 </div>
                 <RegisterMember />
+            </Route>
+            <Route path="/memberandclientmanagement/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalMemberClient />
             </Route>
             <Route path="/registercontract">
                 <div className="head-content">

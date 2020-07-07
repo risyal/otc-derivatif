@@ -4,6 +4,7 @@ import {
     Input,
     Button,
     Select,
+    Radio
 } from 'antd';
 import { Typography } from 'antd';
 import { Link } from "react-router-dom";
@@ -104,6 +105,11 @@ const ViewEditMember = (props) => {
     };
     const action = props.location.state.action
     const disable = props.location.state.disable
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
+
     return (
         <div>
             <div className="head-content">
@@ -116,7 +122,18 @@ const ViewEditMember = (props) => {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
-            > <Form.Item label="Member ID">
+            > <Form.Item label="Six Eyes">
+                    {!disable ? (
+                        <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                            <Radio value={1}>Maker</Radio>
+                            <Radio value={2}>Direct Checker</Radio>
+                            <Radio value={3}>Direct Approver</Radio>
+                        </Radio.Group>
+                    ) : (
+                            <div></div>
+                        )}
+                </Form.Item>
+                <Form.Item label="Member ID">
                     <Input disabled={disable} defaultValue={dataMemberById.memberID} />
                 </Form.Item>
                 <Form.Item label="SID/LEI">
