@@ -15,7 +15,8 @@ import { Link } from "react-router-dom";
 const { Title } = Typography;
 const { Option } = Select;
 
-const ViewEditMember = (props) => {
+
+const ViewEditClient = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -32,67 +33,37 @@ const ViewEditMember = (props) => {
             key: '0',
             memberID: ' ',
             sidLei: ' ',
-            namaPerusahaan: ' ',
-            alamat: ' ',
-            pic: ' ',
-            noTelp: ' ',
-            email: ' ',
-            bic: ' ',
-            collateral: 'Auto Generate',
-            settlement: 'Auto Generate',
-            dFund: 'Auto Generate',
-            ssss: 'Auto Generate',
+            namaNasabah: ' ',
+            rtgsAccount: 'Auto Generate',
+            ssssAccount: 'Auto Generate',
             status: 'Active',
         },
         {
+
             key: '1',
-            no: '1',
-            memberID: 'Member123',
-            sidLei: 'ID12',
-            namaPerusahaan: 'PT Jaya Abadi',
-            alamat: 'New York No. 1 Lake Park',
-            pic: 'John Brown',
-            noTelp: '085112345227',
-            email: 'john@gmail.com',
-            bic: 'BIC01',
-            collateral: 'Collateral1',
-            settlement: 'Settlement1',
-            dFund: 'Def-Fund1',
-            ssss: 'SSSS1',
+            memberID: '1',
+            sidLei: 'SID1LEI1',
+            namaNasabah: 'Nas abah',
+            rtgsAccount: 'rtgs Account1',
+            ssssAccount: 'ssss Account1',
             status: 'Active',
         },
         {
             key: '2',
-            no: '2',
-            memberID: 'Member345',
-            sidLei: 'ID23',
-            namaPerusahaan: 'PT Citra Utama',
-            alamat: 'New York No. 1 Lake Park',
-            pic: 'Jim Green',
-            noTelp: '085112345227',
-            email: 'jim@gmail.com',
-            bic: 'BIC02',
-            collateral: 'Collateral2',
-            settlement: 'Settlement2',
-            dFund: 'Def-Fund2',
-            ssss: 'SSSS2',
-            status: 'Closed',
+            memberID: '2',
+            sidLei: 'SID2LEI2',
+            namaNasabah: 'fulan bin fulan',
+            rtgsAccount: 'rtgs Account2',
+            ssssAccount: 'ssss Account2',
+            status: 'Active',
         },
         {
             key: '3',
-            no: '3',
-            memberID: 'Member567',
-            sidLei: 'ID34',
-            namaPerusahaan: 'PT Abadi Makmur',
-            alamat: 'New York No. 1 Lake Park',
-            pic: 'John Black',
-            noTelp: '085112345227',
-            email: 'black@gmail.com',
-            bic: 'BIC03',
-            collateral: 'Collateral3',
-            settlement: 'Settlement3',
-            dFund: 'Def-Fund3',
-            ssss: 'SSSS3',
+            memberID: '3',
+            sidLei: 'SID3LEI3',
+            namaNasabah: 'fulanah bin fulan',
+            rtgsAccount: 'rtgs Account3',
+            ssssAccount: 'ssss Account3',
             status: 'Active',
         },
     ];
@@ -117,7 +88,7 @@ const ViewEditMember = (props) => {
         <div>
             <div className="head-content">
                 <Title level={4}>
-                    <Link to="/memberandclientmanagement/registermember">
+                    <Link to="/memberandclientmanagement/registerclient">
                         <CaretLeftOutlined />
                     </Link>
                     {action} Member</Title>
@@ -146,40 +117,14 @@ const ViewEditMember = (props) => {
                 <Form.Item label="SID/LEI">
                     <Input disabled={disable} defaultValue={dataMemberById.sidLei} />
                 </Form.Item>
-                <Form.Item label="Company Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.namaPerusahaan} />
-                </Form.Item>
-                <Form.Item label="Address">
-                    <Input disabled={disable} defaultValue={dataMemberById.alamat} />
-                </Form.Item>
-                <Form.Item label="PIC">
-                    <Input disabled={disable} defaultValue={dataMemberById.pic} />
-                </Form.Item>
-                <Form.Item label="Telephone Number">
-                    <Input disabled={disable} defaultValue={dataMemberById.noTelp} />
-                </Form.Item>
-                <Form.Item label="Email">
-                    <Input disabled={disable} defaultValue={dataMemberById.email} />
+                <Form.Item label="Client Name">
+                    <Input disabled={disable} defaultValue={dataMemberById.namaNasabah} />
                 </Form.Item>
                 <Form.Item label="RTGS Account">
-                    <Input
-                        addonBefore="Collateral"
-                        defaultValue={dataMemberById.collateral}
-                        disabled='true'
-                        style={{ marginBottom: '15px' }} />
-                    <Input
-                        addonBefore="Settlement"
-                        defaultValue={dataMemberById.settlement}
-                        disabled='true'
-                        style={{ marginBottom: '15px' }} />
-                    <Input
-                        addonBefore="Default Fund"
-                        defaultValue={dataMemberById.dFund}
-                        disabled='true'
-                    />
+                    <Input disabled='true' defaultValue={dataMemberById.rtgsAccount} />
                 </Form.Item>
                 <Form.Item label="SSSS Account">
-                    <Input disabled='true' defaultValue={dataMemberById.ssss} />
+                    <Input disabled='true' defaultValue={dataMemberById.ssssAccount} />
                 </Form.Item>
                 <Form.Item label="Status">
                     <Select
@@ -192,7 +137,7 @@ const ViewEditMember = (props) => {
                     </Select>
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/memberandclientmanagement/registermember">
+                    {!disable ? (<Link to="/memberandclientmanagement/registerclient">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -200,7 +145,7 @@ const ViewEditMember = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/memberandclientmanagement/registermember">
+                    <Link to="/memberandclientmanagement/registerclient">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -216,4 +161,5 @@ const ViewEditMember = (props) => {
     )
 }
 
-export default ViewEditMember
+
+export default ViewEditClient

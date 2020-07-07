@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Form,
     Input,
     Button,
-    Select, 
-    Table
+    Select,
+    Table,
+    Dropdown,
+    Menu
 } from 'antd';
+import { Link } from "react-router-dom";
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
-function RegisterClient(){
+function RegisterClient() {
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -19,7 +25,36 @@ function RegisterClient(){
             sm: { span: 16 },
         },
     };
+    const data = [
+        {
 
+            key: '1',
+            memberID: '1',
+            sidLei: 'SID1LEI1',
+            namaNasabah: 'Nas abah',
+            rtgsAccount: 'rtgs Account1',
+            ssssAccount: 'ssss Account1',
+            status: 'Active',
+        },
+        {
+            key: '2',
+            memberID: '2',
+            sidLei: 'SID2LEI2',
+            namaNasabah: 'fulan bin fulan',
+            rtgsAccount: 'rtgs Account2',
+            ssssAccount: 'ssss Account2',
+            status: 'Active',
+        },
+        {
+            key: '3',
+            memberID: '3',
+            sidLei: 'SID3LEI3',
+            namaNasabah: 'fulanah bin fulan',
+            rtgsAccount: 'rtgs Account3',
+            ssssAccount: 'ssss Account3',
+            status: 'Active',
+        },
+    ];
     const { Option } = Select;
 
     const columns = [
@@ -29,45 +64,74 @@ function RegisterClient(){
             key: 'memberID',
             width: 100,
             fixed: 'left',
-          },
-          {
+        },
+        {
             title: 'SID/LEI',
             dataIndex: 'sidLei',
             key: 'sidLei',
             width: 100,
-          },
-          {
-            title: 'Nama Nasabah',
+        },
+        {
+            title: 'Client Name',
             dataIndex: 'namaNasabah',
             key: 'namaNasabah',
             width: 200,
-          },
-          {
+        },
+        {
             title: 'RTGS Account',
             dataIndex: 'rtgsAccount',
             key: 'rtgsAccount',
             width: 100,
-          },
-          {
+        },
+        {
             title: 'SSSS Account',
             dataIndex: 'ssssAccount',
             key: 'ssssAccount',
             width: 100,
-          },
-          {
+        },
+        {
             title: 'Action',
             key: 'operation',
             fixed: 'right',
             width: 100,
-            render: () => <a>Edit</a>,
-        },
-    ];
-    const data = [
-        {
-        },
-        {
-        },
-        {
+            render: (text, record) => (
+                <Dropdown
+                    overlay={
+                        <Menu>
+                            <Menu.Item>
+                                <Link to={{
+                                    pathname: `/registerClient/viewClient`,
+                                    state: {
+                                        id: record.key,
+                                        action: "View",
+                                        disable: true,
+                                    }
+                                }} style={{ marginRight: '20px' }}>View
+                    </Link>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Link to={{
+                                    pathname: `/registerClient/viewClient`,
+                                    state: {
+                                        id: record.key,
+                                        action: "Edit",
+                                        disable: false,
+                                    }
+                                }} style={{ marginRight: '20px' }}>Edit
+                    </Link>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <span onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) }}>
+                                    Delete
+                                </span>
+                            </Menu.Item>
+                        </Menu>
+                    }
+                    placement="bottomLeft"
+                    trigger={['click']}>
+                    <Button>Action</Button>
+                </Dropdown>
+            )
         },
     ];
 
@@ -79,57 +143,68 @@ function RegisterClient(){
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-            >
-                <Form.Item label="Member ID">
+            > {expand ? (<div>
+                <Form.Item label="Keyword">
                     <Input />
                 </Form.Item>
-                <Form.Item label="SID/LEI">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Nama Nasabah">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="RTGS Account">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="SSSS Account">
-                    <Input />
-                </Form.Item>
+            </div>
+            ) : (
+                    <div>
+                        <Form.Item label="Member ID">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="SID/LEI">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Nama Nasabah">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="RTGS Account">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="SSSS Account">
+                            <Input />
+                        </Form.Item>
+                    </div>
+                )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
+                        Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined />Advance Search</div>) :
+                            (<div><UpOutlined />Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Form
-                    size={componentSize}
-                    layout="horizontal"
-                    initialValues={{ size: componentSize }}
-                    style={{ marginTop: '80px'}}
-                >
-                    <Form.Item label="Search">
-                        <Input.Group compact>
-                            <Form.Item>
-                                <Select placeholder="Select filter">
-                                    <Option value="memberID">Member ID</Option>
-                                    <Option value="sid/lei">SID/LEI</Option>
-                                    <Option value="rtgsAccount">RTGS Account</Option>
-                                    <Option value="ssssAccount">SSSS Account</Option>
-                                </Select>
-                            </Form.Item>
-                            <Form.Item>
-                                <Input style={{ width: '100%' }} />
-                            </Form.Item>
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit">
-                                    Go
-                                </Button>
-                            </Form.Item>
-                        </Input.Group>
-                    </Form.Item>
-                </Form>
+                <Link to={{
+                    pathname: `/registerClient/viewClient`,
+                    state: {
+                        id: '0',
+                        action: "Add New",
+                        disable: false,
+                    }
+                }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                        Add New Client
+                </Button>
+                </Link>
 
                 <Table
                     columns={columns}
@@ -140,7 +215,7 @@ function RegisterClient(){
                 />
             </div>
         </div>
-        
+
     )
 
 }

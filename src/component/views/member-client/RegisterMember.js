@@ -55,13 +55,13 @@ const RegisterMember = () => {
             width: 100,
         },
         {
-            title: 'Nama Perusahaan',
+            title: 'Company Name',
             dataIndex: 'namaPerusahaan',
             key: 'namaPerusahaan',
             width: 200,
         },
         {
-            title: 'Alamat',
+            title: 'Address',
             dataIndex: 'alamat',
             key: 'alamat',
             width: 200,
@@ -73,7 +73,7 @@ const RegisterMember = () => {
             width: 100,
         },
         {
-            title: 'No Telp',
+            title: 'Telephone Number',
             dataIndex: 'noTelp',
             key: 'noTelp',
             width: 150,
@@ -129,7 +129,7 @@ const RegisterMember = () => {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/viewMember`,
+                                    pathname: `/registerClient/viewMember`,
                                     state: {
                                         id: record.key,
                                         action: "View",
@@ -140,7 +140,7 @@ const RegisterMember = () => {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/viewMember`,
+                                    pathname: `/registerClient/viewMember`,
                                     state: {
                                         id: record.key,
                                         action: "Edit",
@@ -246,9 +246,6 @@ const RegisterMember = () => {
                             <Form.Item label="Nama Perusahaan">
                                 <Input />
                             </Form.Item>
-                            <Form.Item label="Kode BIC">
-                                <Input />
-                            </Form.Item>
                             <Form.Item label="RTGS Account">
                                 <Input placeholder="Collateral" style={{ marginBottom: '15px' }} />
                                 <Input placeholder="Settlement" style={{ marginBottom: '15px' }} />
@@ -295,10 +292,10 @@ const RegisterMember = () => {
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
                 <Link to={{
-                    pathname: `/viewMember`,
+                    pathname: `/registerClient/viewMember`,
                     state: {
                         id: '0',
-                        action: "Add New Member",
+                        action: "Add New",
                         disable: false,
                     }
                 }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>

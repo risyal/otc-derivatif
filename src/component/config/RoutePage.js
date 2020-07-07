@@ -54,6 +54,7 @@ import InstructionCOLW from '../views/collateral/InstructionCOLW';
 import TradeConfirmation from '../views/trade/TradeConfirmation';
 import SettlementStatus from '../views/settlement/SettlementStatus';
 import ViewEditMember from '../views/member-client/ViewEditMember';
+import ViewEditClient from '../views/member-client/ViewEditClient';
 import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
 
 function RoutePage() {
@@ -367,7 +368,9 @@ function RoutePage() {
                 </div>
                 <RegisterAts />
             </Route>
-            <Route exact path="/viewMember/" component={ViewEditMember}>
+            <Route exact path="/registerClient/viewMember/" component={ViewEditMember}>
+            </Route>
+            <Route exact path="/registerClient/viewClient" component={ViewEditClient}>
             </Route>
 
         </div>
