@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
     Form,
-    Input,
+    Popconfirm,
     Button,
     Select,
     Radio,
@@ -13,10 +13,9 @@ import {
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
-const { Option } = Select;
 
-
-const ViewEditClient = (props) => {
+const ViewDeleteClient = (props) => {
+    const text = 'Are you sure to delete this task?';
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -39,6 +38,7 @@ const ViewEditClient = (props) => {
             status: 'Active',
         },
         {
+
             key: '1',
             memberID: 'CENAIDJA',
             sidLei: 'SID1LEI1',
@@ -71,11 +71,6 @@ const ViewEditClient = (props) => {
 
     })
 
-    const statusSelect = ['Active', 'Suspend', 'Closed'];
-    const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
-    const statusClick = (e) => {
-        setSelectedStatus(e);
-    };
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -111,40 +106,28 @@ const ViewEditClient = (props) => {
                         <div></div>
                     )}
                 <Form.Item label="Member ID">
-                    <Input disabled={disable} defaultValue={dataMemberById.memberID} />
+                    {dataMemberById.memberID}
                 </Form.Item>
                 <Form.Item label="SID/LEI">
-                    <Input disabled={disable} defaultValue={dataMemberById.sidLei} />
+                    {dataMemberById.sidLei}
                 </Form.Item>
                 <Form.Item label="Client Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.namaNasabah} />
+                    {dataMemberById.namaNasabah}
                 </Form.Item>
-                <Form.Item label="Client Status"
-                    disabled={disable}>
-                    <Select value={1}>
-                        <Option value={1}>Active</Option>
-                        <Option value={2}>Blocked</Option>
-                    </Select>
+                <Form.Item label="Client Status">
+                    Active
                 </Form.Item>
-                <Form.Item label="Collateral Account"
-                    disabled={disable}>
-                    <Input disabled='true' defaultValue={dataMemberById.rtgsAccount} />
+                <Form.Item label="Collateral Account">
+                    {dataMemberById.rtgsAccount}
                 </Form.Item>
                 <Form.Item label="Status">
-                    <Select
-                        value={selectedStatus}
-                        onChange={statusClick}
-                        disabled={disable}>
-                        {statusSelect.map(status => (
-                            <Option value={status}>{status}</Option>
-                        ))}
-                    </Select>
+                    {dataMemberById.status}
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/memberandclientmanagement/registerclient">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
-                        </Button>
+                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        </Popconfirm>
                     </Link>
                     ) : (
                             <div></div>
@@ -165,5 +148,4 @@ const ViewEditClient = (props) => {
     )
 }
 
-
-export default ViewEditClient
+export default ViewDeleteClient

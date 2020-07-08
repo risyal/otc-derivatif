@@ -56,6 +56,7 @@ import SettlementStatus from '../views/settlement/SettlementStatus';
 import ViewEditMember from '../views/member-client/ViewEditMember';
 import ViewEditClient from '../views/member-client/ViewEditClient';
 import ViewDeleteMember from '../views/member-client/ViewDeleteMember';
+import ViewDeleteClient from '../views/member-client/ViewDeleteClient';
 import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
 
 function RoutePage() {
@@ -374,6 +375,8 @@ function RoutePage() {
             <Route exact path="/registerClient/viewClient" component={ViewEditClient}>
             </Route>
             <Route exact path="/registerClient/ViewDeleteMember" component={ViewDeleteMember}>
+            </Route>
+            <Route exact path="/registerClient/ViewDeleteClient" component={ViewDeleteClient}>
             </Route>
 
         </div>

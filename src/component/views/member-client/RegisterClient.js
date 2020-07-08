@@ -27,9 +27,8 @@ function RegisterClient() {
     };
     const data = [
         {
-
             key: '1',
-            memberID: '1',
+            memberID: 'CENAIDJA',
             sidLei: 'SID1LEI1',
             namaNasabah: 'Nas abah',
             rtgsAccount: 'rtgs Account1',
@@ -38,7 +37,7 @@ function RegisterClient() {
         },
         {
             key: '2',
-            memberID: '2',
+            memberID: 'CENAIDJA',
             sidLei: 'SID2LEI2',
             namaNasabah: 'fulan bin fulan',
             rtgsAccount: 'rtgs Account2',
@@ -47,7 +46,7 @@ function RegisterClient() {
         },
         {
             key: '3',
-            memberID: '3',
+            memberID: 'CENAIDJA',
             sidLei: 'SID3LEI3',
             namaNasabah: 'fulanah bin fulan',
             rtgsAccount: 'rtgs Account3',
@@ -63,7 +62,6 @@ function RegisterClient() {
             dataIndex: 'memberID',
             key: 'memberID',
             width: 100,
-            fixed: 'left',
         },
         {
             title: 'SID/LEI',
@@ -78,21 +76,14 @@ function RegisterClient() {
             width: 200,
         },
         {
-            title: 'RTGS Account',
+            title: 'Collateral Account',
             dataIndex: 'rtgsAccount',
             key: 'rtgsAccount',
             width: 100,
         },
         {
-            title: 'SSSS Account',
-            dataIndex: 'ssssAccount',
-            key: 'ssssAccount',
-            width: 100,
-        },
-        {
             title: 'Action',
             key: 'operation',
-            fixed: 'right',
             width: 100,
             render: (text, record) => (
                 <Dropdown
@@ -100,7 +91,7 @@ function RegisterClient() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/viewClient`,
+                                    pathname: `/registerClient/ViewDeleteClient`,
                                     state: {
                                         id: record.key,
                                         action: "View",
@@ -121,9 +112,15 @@ function RegisterClient() {
                     </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <span onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) }}>
-                                    Delete
-                                </span>
+                                <Link to={{
+                                    pathname: `/registerClient/ViewDeleteClient`,
+                                    state: {
+                                        id: record.key,
+                                        action: "Delete",
+                                        disable: false,
+                                    }
+                                }} style={{ marginRight: '20px' }}>Delete
+                                </Link>
                             </Menu.Item>
                         </Menu>
                     }
@@ -159,10 +156,7 @@ function RegisterClient() {
                         <Form.Item label="Nama Nasabah">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="RTGS Account">
-                            <Input />
-                        </Form.Item>
-                        <Form.Item label="SSSS Account">
+                        <Form.Item label="Collateral Account">
                             <Input />
                         </Form.Item>
                     </div>

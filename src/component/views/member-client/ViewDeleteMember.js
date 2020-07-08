@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
-    Form,
-    Input,
+    Form, Popconfirm,
     Button,
     Radio,
     Typography
@@ -15,6 +14,8 @@ const { Title } = Typography;
 
 const ViewDeleteMember = (props) => {
     const componentSize = 'middle';
+    const text = 'Are you sure to delete this task?';
+
     const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
@@ -99,11 +100,6 @@ const ViewDeleteMember = (props) => {
 
     })
 
-    const statusSelect = ['Active', 'Suspend', 'Closed'];
-    const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
-    const statusClick = (e) => {
-        setSelectedStatus(e);
-    };
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -176,10 +172,9 @@ const ViewDeleteMember = (props) => {
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/memberandclientmanagement/registermember">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}
-                            onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) }}>
-                            Delete
-                        </Button>
+                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        </Popconfirm>
                     </Link>
                     ) : (
                             <div></div>
