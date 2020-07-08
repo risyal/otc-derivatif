@@ -126,7 +126,7 @@ const RegisterMember = () => {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/viewMember`,
+                                    pathname: `/registerClient/ViewDeleteMember`,
                                     state: {
                                         id: record.key,
                                         action: "View",
@@ -147,9 +147,15 @@ const RegisterMember = () => {
                     </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <span onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) }}>
-                                    Delete
-                                </span>
+                                <Link to={{
+                                    pathname: `/registerClient/ViewDeleteMember`,
+                                    state: {
+                                        id: record.key,
+                                        action: "Delete",
+                                        disable: false,
+                                    }
+                                }} style={{ marginRight: '20px' }}>Delete
+                                </Link>
                             </Menu.Item>
                         </Menu>
                     }
