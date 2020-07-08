@@ -7,10 +7,14 @@ import {
     Input,
     Table
 } from 'antd';
+import moment from 'moment';
+import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
 
 function ApprovalMemberClient() {
     const componentSize = 'middle';
+    const dateFormat = 'YYYY/MM/DD';
+    const { RangePicker } = DatePicker;
     const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
@@ -66,7 +70,15 @@ function ApprovalMemberClient() {
             key: 'action',
             width: 100,
             fixed: 'right',
-            render: () => <a>Detail</a>,
+            render: (text, record) => (<Link to={{
+                pathname: `/registerClient/ViewDeleteMember`,
+                state: {
+                    id: record.key,
+                    action: "Detail",
+                    disable: true,
+                }
+            }} style={{ marginRight: '20px' }}>Detail
+            </Link>),
         },
     ];
     const [expand, setExpand] = useState(true);
@@ -74,20 +86,24 @@ function ApprovalMemberClient() {
     const data = [
         {
             no: '1',
+            key: '1',
             refNo: 'MCM200709.0001',
             task: ["Register Member: Create", <br />, "CENAIDJA - Bank Central Asia (BCA)"],
             lastUpdate: '08-07-2020',
             updatedBy: 'fulan',
-            status: 'Waiting for Checker'
+            status: 'Waiting for Checker',
+            linkTo: '/registerClient/ViewDeleteMember',
 
         },
         {
             no: '2',
+            key: '2',
             refNo: 'MCM200709.0002',
             task: ["Register Member: Edit", <br />, "CENAIDJA - Bank Central Asia (BCA)"],
             lastUpdate: '08-07-2020',
             updatedBy: 'fulan',
-            status: 'Waiting for Approver'
+            status: 'Waiting for Approver',
+            linkTo: '/registerClient/ViewDeleteMember',
         },
         {
         },
@@ -123,8 +139,11 @@ function ApprovalMemberClient() {
                                 <Option value="approver">Waiting for Approver</Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item label="Date Maker">
-                            <DatePicker />
+                        <Form.Item label="Range Date">
+                            <RangePicker
+                                defaultValue={[moment('2020/07/01', dateFormat), moment('2020/07/09', dateFormat)]}
+                                format={dateFormat}
+                            />
                         </Form.Item>
                     </div>
                 )}

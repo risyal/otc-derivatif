@@ -58,7 +58,7 @@ const ViewDeleteMember = (props) => {
             settlement: 'Settlement1',
             dFund: 'Def-Fund1',
             ssss: 'SSSS1',
-            status: 'Active',
+            status: 'Waiting for Approver',
         },
         {
             key: '2',
@@ -75,7 +75,7 @@ const ViewDeleteMember = (props) => {
             settlement: 'Settlement2',
             dFund: 'Def-Fund2',
             ssss: 'SSSS2',
-            status: 'Closed',
+            status: 'Waiting for Approver',
         },
         {
             key: '3',
@@ -92,11 +92,42 @@ const ViewDeleteMember = (props) => {
             settlement: 'Settlement3',
             dFund: 'Def-Fund3',
             ssss: 'SSSS3',
-            status: 'Active',
+            status: 'Waiting for Approver',
+        },
+    ];
+    const dataChecker = [
+        {
+            key: '0',
+            no: '0',
+            memberID: '',
+            nama: '',
+            email: '',
+            date: ' ',
+        },
+        {
+            key: '1',
+            no: '1',
+            memberID: 'Member123',
+            nama: 'fulan',
+            email: 'Fulan@gmail.com',
+            date: '07-07-2020',
+        },
+        {
+            key: '2',
+            no: '2',
+            memberID: 'Member123',
+            nama: 'fulan',
+            email: 'Fulan@gmail.com',
+            date: '07-07-2020',
         },
     ];
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
+
+    })
+
+    const dataCheckerById = dataChecker.find((checker) => {
+        return checker.key === props.location.state.id
 
     })
 
@@ -170,25 +201,59 @@ const ViewDeleteMember = (props) => {
                 <Form.Item label="Status">
                     {dataMemberById.status}
                 </Form.Item>
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/memberandclientmanagement/registermember">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
-                        </Popconfirm>
-                    </Link>
-                    ) : (
-                            <div></div>
-                        )}
-                    <Link to="/memberandclientmanagement/registermember">
-                        <Button >
-                            {!disable ? (
-                                <div>Cancel</div>
+                {action === 'Detail' ? (
+                    <div>
+                        <br />
+                        Checker Information :
+                        <Form {...formItemLayout}
+                            size={componentSize}
+                            layout="horizontal"
+                            initialValues={{ size: componentSize }}
+                            labelAlign="left"
+                            style={{ marginBottom: '80px' }}>
+                            <Form.Item label="Nama">
+                                {dataCheckerById.nama}
+                            </Form.Item>
+                            <Form.Item label="Email">
+                                {dataCheckerById.email}
+                            </Form.Item>
+
+                            <Form.Item label="Date">
+                                {dataCheckerById.date}
+                            </Form.Item>
+
+                        </Form>
+                        <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                            <Link to="/memberandclientmanagement/approval">
+                                <Button type="primary" style={{ marginRight: '15px' }}>Approve
+                                </Button>
+                                <Button >Reject
+                                </Button>
+                            </Link>
+                        </Form.Item>
+                    </div>
+                ) : (
+                        <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                            {!disable ? (<Link to="/memberandclientmanagement/registermember">
+                                <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                                    <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                                </Popconfirm>
+                            </Link>
                             ) : (
-                                    <div>Back</div>
+                                    <div></div>
                                 )}
-                        </Button>
-                    </Link>
-                </Form.Item>
+                            <Link to="/memberandclientmanagement/registermember">
+                                <Button >
+                                    {!disable ? (
+                                        <div>Cancel</div>
+                                    ) : (
+                                            <div>Back</div>
+                                        )}
+                                </Button>
+                            </Link>
+                        </Form.Item>
+                    )}
+
             </Form>
 
         </div>
