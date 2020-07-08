@@ -27,7 +27,7 @@ function NewTrade() {
     const productSelect = ['OIS', 'IRS', 'DNDF'];
     const paymentFrequency = ['1W', '1M', '3M', '6M', '1Y'];
     const countFraction = ['ACT/360', 'ACT/ACT', 'ACT/365', '30/360'];
-    const businessDay = ['Mod Following', 'Following', 'Preeceding'];
+    const businessDay = ['Mod Following', 'Following', 'Preceeding'];
 
     const productPosition = {
         OIS: ['Fixed', 'Payer'],
@@ -35,8 +35,8 @@ function NewTrade() {
         DNDF: ['Buy', 'Sell'],
     };
     const productRate = {
-        OIS: ['IndONIA', 'JIBOR'],
-        IRS: ['IndONIA', 'JIBOR'],
+        OIS: ['IndONIA'],
+        IRS: ['IndONIA', 'JIBOR 1W', 'JIBOR 1M', 'JIBOR 3M', 'JIBOR 6M', 'JIBOR 12M'],
         DNDF: ['JISDOR'],
     };
     const productContract = {
@@ -83,6 +83,26 @@ function NewTrade() {
     };
 
     const dateFormat = 'YYYY/MM/DD';
+    const [dates, setDates] = useState(moment('2020/01/23', dateFormat));
+    const [effectiveDates, setEffectiveDates] = useState(moment('2020/01/25', dateFormat));
+    function disabledDate(current) {
+        // Can not select days before today and today
+        if (!dates || dates.length === 0) {
+            return false;
+        }
+        const batasMaxDate = dates && current.diff(dates, 'days') > 2;
+        const batasMinDate = dates && dates.diff(current, 'days') > 0;
+        return batasMinDate || batasMaxDate;
+    }
+    const tradeDateClick = (e) => {
+        setDates(e);
+        setEffectiveDates(moment(e).add(2, 'days'));
+    }
+    const effectiveDateClick = (e) => {
+        setEffectiveDates(e);
+    }
+
+
     return (
         <div style={{ margin: '15px 20px' }}>
             <Form
@@ -100,9 +120,12 @@ function NewTrade() {
                         </Radio.Group>
                     </Form.Item> */}
                 <Form.Item label="UTI">
-                    <Input />
+                    <Input disabled='true' defaultValue='Auto Generate' />
                 </Form.Item>
                 <Form.Item label="Reference Number">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="SID/LEI">
                     <Input />
                 </Form.Item>
                 <Form.Item label="Product ">
@@ -112,6 +135,22 @@ function NewTrade() {
                         ))}
                     </Select>
                 </Form.Item>
+                {jenisProduct !== productSelect[2] ?
+                    (<div>
+                        <Form.Item label="Market Side ">
+                            <Select defaultValue="receiver">
+                                <Select.Option value="receiver">Receiver</Select.Option>
+                                <Select.Option value="payer">Payer</Select.Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item label="Leg Type ">
+                            <Select defaultValue="fix">
+                                <Select.Option value="fix">Fix/Float</Select.Option>
+                                <Select.Option value="float">Float/Float</Select.Option>
+                            </Select>
+                        </Form.Item>
+                    </div>) : (<div></div>)
+                }
                 <Form.Item label="Counterparty">
                     <Input />
                 </Form.Item>
@@ -134,19 +173,10 @@ function NewTrade() {
                     </Select>
                 </Form.Item>
                 {jenisProduct === productSelect[2] ?
-
                     <Form.Item label="Deal Rate  ">
-                        <Input.Group compact>
-                            <Select defaultValue="Rp" style={{ width: '15%' }}>
-                                <Select.Option value="Rp">Rp</Select.Option>
-                                <Select.Option value="dollar">$</Select.Option>
-                            </Select>
-                            <InputNumber
-                                defaultValue={0}
-                                formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                                style={{ width: '85%' }} />
-                        </Input.Group>
+                        <Input
+                            addonBefore="Rp"
+                            style={{ marginBottom: '15px' }} />
                     </Form.Item>
                     :
                     <Form.Item label="Fixed Rate  ">
@@ -164,15 +194,23 @@ function NewTrade() {
                     </Form.Item>
                 }
                 <Form.Item label="Currency">
-                    <InputNumber
-                        defaultValue={0}
-                        formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                        style={{ width: '100%' }} />
+                    <Input />
                 </Form.Item>
+                {jenisProduct !== productSelect[2] ?
+                    (<div>
+                        <Form.Item label="Trade Date">
+                            <DatePicker style={{ width: '100%' }}
+                                onChange={tradeDateClick}
+                                defaultValue={moment('2020/01/23', dateFormat)} />
+                        </Form.Item>
+                    </div>) : (<div></div>)
+                }
                 <Form.Item label="Effective Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
+                    <DatePicker
+                        style={{ width: '100%' }}
+                        disabledDate={disabledDate}
+                        onChange={effectiveDateClick}
+                        value={effectiveDates} />
                 </Form.Item>
                 <Form.Item label="Contract Term">
                     <Select value={selectedContract}
@@ -205,7 +243,7 @@ function NewTrade() {
                         ))}
                     </Select>
                 </Form.Item>
-                <Form.Item label="Notional Ammount">
+                <Form.Item label="Notional Amount">
                     {jenisProduct === productSelect[2] ?
                         <Input.Group compact>
                             <Select defaultValue="$" style={{ width: '15%' }}>
@@ -233,7 +271,7 @@ function NewTrade() {
                 <Form.Item label="Spread">
                     <InputNumber style={{ width: '100%' }} />
                 </Form.Item>
-                <Form.Item label="Leverate">
+                <Form.Item label="Leverage">
                     <InputNumber style={{ width: '100%' }} />
                 </Form.Item>
                 <Form.Item label="Day Count Fraction">
@@ -256,6 +294,13 @@ function NewTrade() {
                         <Select.Option value="Final">Final</Select.Option>
                     </Select>
                 </Form.Item>
+                {jenisProduct === productSelect[2] ?
+                    (<div>
+                        <Form.Item label="Notional Foreign Currency ">
+                            <Input disabled='true' defaultValue='USD' />
+                        </Form.Item>
+                    </div>) : (<div></div>)
+                }
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button type="primary" htmlType="submit">
                         Submit

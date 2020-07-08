@@ -39,14 +39,12 @@ const RegisterMember = () => {
             dataIndex: 'no',
             key: 'no',
             width: 50,
-            fixed: 'left',
         },
         {
             title: 'Member ID',
             dataIndex: 'memberID',
             key: 'memberID',
             width: 100,
-            fixed: 'left',
         },
         {
             title: 'SID/LEI',
@@ -121,7 +119,6 @@ const RegisterMember = () => {
             title: 'Actions',
             key: 'actions',
             dataIndex: 'actions',
-            fixed: 'right',
             width: 150,
             render: (text, record) => (
                 <Dropdown
