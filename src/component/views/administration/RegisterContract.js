@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
     Table,
-    Tabs
+    Tabs,
+    Button
 } from 'antd';
 
 function RegisterContract(){
@@ -24,13 +25,6 @@ function RegisterContract(){
             key: 'irs',
             width: 200,
           },
-          {
-            title: 'Action',
-            key: 'operation',
-            fixed: 'right',
-            width: 100,
-            render: () => <a>Edit</a>,
-        },
     ];
     const data = [
         {
@@ -138,13 +132,6 @@ function RegisterContract(){
             key: 'irs',
             width: 200,
           },
-          {
-            title: 'Action',
-            key: 'operation',
-            fixed: 'right',
-            width: 100,
-            render: () => <a>Edit</a>,
-        },
     ];
     const data2 = [
         {
@@ -232,13 +219,6 @@ function RegisterContract(){
             key: 'irs',
             width: 200,
           },
-          {
-            title: 'Action',
-            key: 'operation',
-            fixed: 'right',
-            width: 100,
-            render: () => <a>Edit</a>,
-        },
     ];
     const data3 = [
         {
@@ -280,6 +260,19 @@ function RegisterContract(){
 
             <Tabs onChange={callback} type="card">
                 <TabPane tab="IRS" key="1">
+                    <div>
+                        <Button
+                            type="primary"
+                            style={{ 
+                                marginBottom: '15px', 
+                                float: 'right',
+                                width: '80px',
+                                height: '35px'
+                            }}
+                        >
+                            Edit
+                        </Button>
+                    </div>
                     <Table
                         columns={columns}
                         dataSource={data}
@@ -288,6 +281,19 @@ function RegisterContract(){
                     />
                 </TabPane>
                 <TabPane tab="OIS" key="2">
+                    <div>
+                        <Button
+                            type="primary"
+                            style={{ 
+                                marginBottom: '15px', 
+                                float: 'right',
+                                width: '80px',
+                                height: '35px'
+                            }}
+                        >
+                            Edit
+                        </Button>
+                    </div>
                     <Table
                         columns={columns2}
                         dataSource={data2}
@@ -296,6 +302,19 @@ function RegisterContract(){
                     />
                 </TabPane>
                 <TabPane tab="DNDF" key="3">
+                    <div>
+                        <Button
+                            type="primary"
+                            style={{ 
+                                marginBottom: '15px', 
+                                float: 'right',
+                                width: '80px',
+                                height: '35px'
+                            }}
+                        >
+                            Edit
+                        </Button>
+                    </div>
                     <Table
                         columns={columns3}
                         dataSource={data3}
