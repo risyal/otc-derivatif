@@ -379,11 +379,7 @@ function RoutePage() {
             </Route>
             <Route exact path="/registerClient/ViewDeleteClient" component={ViewDeleteClient}>
             </Route>
-            <Route path="/editRegisterContract">
-                <div className="head-content">
-                    <Title level={4}>Edit Register Contract</Title>
-                </div>
-                <EditRegisterContract />
+            <Route path="/editRegisterContract" component={EditRegisterContract}>
             </Route>
         </div>
     )

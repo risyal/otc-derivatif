@@ -1,12 +1,13 @@
 import React from 'react';
-import { 
+import {
     Table,
     Tabs,
-    Button
+    Button,
+    Row, Col,
 } from 'antd';
 import { Link } from "react-router-dom";
 
-function RegisterContract(){
+function RegisterContract() {
     const { TabPane } = Tabs;
 
     function callback(key) {
@@ -19,13 +20,13 @@ function RegisterContract(){
             dataIndex: 'attribut',
             key: 'attribut',
             width: 100,
-          },
-          {
+        },
+        {
             title: 'Interest Rate Swap',
             dataIndex: 'irs',
             key: 'irs',
             width: 200,
-          },
+        },
     ];
     const data = [
         {
@@ -126,13 +127,13 @@ function RegisterContract(){
             dataIndex: 'attribut',
             key: 'attribut',
             width: 100,
-          },
-          {
+        },
+        {
             title: 'Interest Rate Swap',
             dataIndex: 'irs',
             key: 'irs',
             width: 200,
-          },
+        },
     ];
     const data2 = [
         {
@@ -213,13 +214,13 @@ function RegisterContract(){
             dataIndex: 'attribut',
             key: 'attribut',
             width: 100,
-          },
-          {
+        },
+        {
             title: 'Interest Rate Swap',
             dataIndex: 'irs',
             key: 'irs',
             width: 200,
-          },
+        },
     ];
     const data3 = [
         {
@@ -253,21 +254,33 @@ function RegisterContract(){
             irs: '',
         },
     ];
-
+    const editButton = <Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            width: '80px',
+            height: '35px'
+        }}>Edit</Button>;
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Tabs onChange={callback} type="card">
-                <TabPane tab="IRS" key="1">
-                    <div>
-                        <Button
-                            type="primary"
-                            className="btn-edit"
-                        >
-                            <Link to="/editRegisterContract" >
-                                Edit
+                <TabPane tab="IRS" key="1" >
+                    <Row justify="end">
+                        <Col span={4}>
+                            <Link to={{
+                                pathname: `/editRegisterContract`,
+                                state: {
+                                    id: '1',
+                                    action: "Edit",
+                                    disable: false,
+                                }
+                            }} >
+                                {editButton}
                             </Link>
-                        </Button>
-                    </div>
+                        </Col>
+                    </Row>
                     <Table
                         pagination={false}
                         columns={columns}
@@ -277,19 +290,20 @@ function RegisterContract(){
                     />
                 </TabPane>
                 <TabPane tab="OIS" key="2">
-                    <div>
-                        <Button
-                            type="primary"
-                            style={{ 
-                                marginBottom: '15px', 
-                                float: 'right',
-                                width: '80px',
-                                height: '35px'
-                            }}
-                        >
-                            Edit
-                        </Button>
-                    </div>
+                    <Row justify="end">
+                        <Col span={4}>
+                            <Link to={{
+                                pathname: `/editRegisterContract`,
+                                state: {
+                                    id: '2',
+                                    action: "Edit",
+                                    disable: false,
+                                }
+                            }} >
+                                {editButton}
+                            </Link>
+                        </Col>
+                    </Row>
                     <Table
                         pagination={false}
                         columns={columns2}
@@ -299,19 +313,20 @@ function RegisterContract(){
                     />
                 </TabPane>
                 <TabPane tab="DNDF" key="3">
-                    <div>
-                        <Button
-                            type="primary"
-                            style={{ 
-                                marginBottom: '15px', 
-                                float: 'right',
-                                width: '80px',
-                                height: '35px'
-                            }}
-                        >
-                            Edit
-                        </Button>
-                    </div>
+                    <Row justify="end">
+                        <Col span={4}>
+                            <Link to={{
+                                pathname: `/editRegisterContract`,
+                                state: {
+                                    id: '3',
+                                    action: "Edit",
+                                    disable: false,
+                                }
+                            }} >
+                                {editButton}
+                            </Link>
+                        </Col>
+                    </Row>
                     <Table
                         pagination={false}
                         columns={columns3}
@@ -322,7 +337,7 @@ function RegisterContract(){
                 </TabPane>
             </Tabs>
         </div>
-        
+
     )
 
 }

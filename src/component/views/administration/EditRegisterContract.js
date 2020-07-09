@@ -3,19 +3,16 @@ import {
     Form,
     Input,
     Button,
-    Select,
-    Radio,
     Typography
 } from 'antd';
 import {
-    CaretLeftOutlined
+    CaretLeftOutlined,
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
-const { Option } = Select;
 
-function EditRegisterContract() {
+const EditRegisterContract = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -27,9 +24,72 @@ function EditRegisterContract() {
             sm: { span: 16 },
         },
     };
+    const dataRegister = [
+        {
+            key: '1',
+            no: '1',
+            currency: 'IDR',
+            legType: 'X,L',
+            effective: 'DDMMYYYY',
+            contractTerm: '07-07-2020',
+        },
+        {
+            key: '2',
+            no: '2',
+            currency: 'drachma',
+            legType: 'X,L',
+            effective: 'DDMMYYYY',
+            contractTerm: '07-07-2020',
+        },
+        {
+            key: '3',
+            no: '3',
+            currency: 'usd',
+            legType: 'X,L',
+            effective: 'DDMMYYYY',
+            contractTerm: '07-07-2020',
+        },
+    ];
+    const dataRegisterById = dataRegister.find((register) => {
+        return register.key === props.location.state.id
 
+    })
+
+    const action = props.location.state.action
+    //const disable = props.location.state.disable
+    var editForm;
+    if (props.location.state.id > 0) {
+        if (props.location.state.id === '1') {
+            editForm = <div>
+                <Form.Item label="Currency">
+                    <Input defaultValue={dataRegisterById.currency} />
+                </Form.Item>
+            </div>;
+        }
+        if (props.location.state.id === '2') {
+            editForm = <div>
+                <Form.Item label="Currency">
+                    <Input defaultValue={dataRegisterById.currency} />
+                </Form.Item>
+            </div>;
+        }
+        if (props.location.state.id === '3') {
+            editForm = <div>
+                <Form.Item label="Currency">
+                    <Input defaultValue={dataRegisterById.currency} />
+                </Form.Item>
+            </div>;
+        }
+    } else {
+        editForm = <div>Belum ada</div>;
+    }
     return (
         <div>
+            <div className="head-content">
+                <Title level={4}><Link to="/registercontract">
+                    <CaretLeftOutlined />
+                </Link>{action} Register Contract</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -38,15 +98,15 @@ function EditRegisterContract() {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Form.Item label="Member ID">
-                    <Input  />
-                </Form.Item>
-                <Form.Item label="SID/LEI">
-                    <Input  />
-                </Form.Item>
-                <Form.Item label="Client Name">
-                    <Input  />
-                </Form.Item>
+                {editForm}
+                <Link to="/registercontract">
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
+                        Submit
+                    </Button>
+                    <Button htmlType="submit" style={{ marginRight: '15px' }}>
+                        Back
+                    </Button>
+                </Link>
             </Form>
         </div>
     )
