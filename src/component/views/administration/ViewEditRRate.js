@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
     Form,
     Input,
     Button,
+    Select,
     Radio,
     Typography,
     DatePicker
@@ -13,8 +14,10 @@ import {
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
+const { Option } = Select;
 
-const ViewEditSCMgt = (props) => {
+
+const ViewEditRRate = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -26,50 +29,45 @@ const ViewEditSCMgt = (props) => {
             sm: { span: 16 },
         },
     };
-
     const data = [
         {
-            key: '0',
-            code: '',
-            name: '',
-            type: '',
-            eligibility: '',
-            haircut: '',
-            maturityDate: '',
-        },
-        {
             key: '1',
-            code: 'CENAIDJA',
-            name: 'Instrument1',
-            type: 'Type1',
-            eligibility: 'Eligibility1',
-            haircut: 'Haircut1',
-            maturityDate: '09-07-2020',
+            code: 'JIBOR1',
+            type: 'JIBOR',
+            date: '30-02-2020',
+            value: 'Value',
         },
         {
             key: '2',
-            code: 'CENAIDJA',
-            name: 'Instrument2',
-            type: 'Type2',
-            eligibility: 'Eligibility2',
-            haircut: 'Haircut2',
-            maturityDate: '09-07-2020',
+            code: 'JIBOR1',
+            type: 'INDONIA',
+            date: '30-02-2020',
+            value: 'Value2',        
         },
         {
             key: '3',
-            code: 'CENAIDJA',
-            name: 'Instrument3',
-            type: 'Type3',
-            eligibility: 'Eligibility3',
-            haircut: 'Haircut3',
-            maturityDate: '09-07-2020',
+            code: 'JIBOR2',
+            type: 'JISDOR',
+            date: '24-03-2020',
+            value: 'Value3',        
+        },
+        {
+            key: '4',
+            code: 'JIBOR3',
+            type: 'LIBOR',
+            date: '24-03-2020',
+            value: 'Value4',
         },
     ];
-
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
     })
 
+    const typeSelect = ['JIBOR', 'JISDOR', 'INDONIA', 'LIBOR'];
+    const [selectedType, setSelectedType] = useState(typeSelect[0]);
+    const typeClick = (e) => {
+        setSelectedType(e);
+    }
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -77,12 +75,12 @@ const ViewEditSCMgt = (props) => {
         setSixEyes(e.target.value);
     };
 
-    return(
+    return (
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/securitiescollmgt">
+                        <Link to="/editaccount">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
@@ -96,7 +94,7 @@ const ViewEditSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Six Eyes">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -106,26 +104,28 @@ const ViewEditSCMgt = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Instrument Code">
+                <Form.Item label="Ref. Code">
                     <Input disabled={disable} defaultValue={dataMemberById.code} />
                 </Form.Item>
-                <Form.Item label="Instrument Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.name} />
+                <Form.Item label="Ref. Type">
+                    <Select
+                        defaultValue={dataMemberById.type}
+                        onChange={typeClick}
+                        disabled={disable}
+                        >
+                        {typeSelect.map(type => (
+                            <Option value={type}>{type}</Option>
+                        ))}
+                    </Select>
                 </Form.Item>
-                <Form.Item label="Instrument Type">
-                    <Input disabled={disable} defaultValue={dataMemberById.type} />
-                </Form.Item>
-                <Form.Item label="Eligibity">
-                    <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
-                </Form.Item>
-                <Form.Item label="Haircut">
-                    <Input disabled={disable} defaultValue={dataMemberById.haircut} />
-                </Form.Item>
-                <Form.Item label="Maturity Date">
+                <Form.Item label="Date">
                     <DatePicker style={{ width: '100%'}} />
                 </Form.Item>
+                <Form.Item label="Value">
+                    <Input disabled={disable} defaultValue={dataMemberById.value} />
+                </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/securitiescollmgt">
+                    {!disable ? (<Link to="/editaccount">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -133,7 +133,7 @@ const ViewEditSCMgt = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/securitiescollmgt">
+                    <Link to="/editaccount">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -147,8 +147,7 @@ const ViewEditSCMgt = (props) => {
 
         </div>
     )
-
 }
 
 
-export default ViewEditSCMgt
+export default ViewEditRRate

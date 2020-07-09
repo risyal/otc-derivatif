@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
     Form,
-    Input,
+    Popconfirm,
     Button,
     Radio,
-    Typography,
-    DatePicker
+    Typography
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -14,7 +13,8 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-const ViewEditSCMgt = (props) => {
+const ViewDeleteSCMgt = (props) => {
+    const text = 'Are you sure to delete this task?';
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -26,7 +26,6 @@ const ViewEditSCMgt = (props) => {
             sm: { span: 16 },
         },
     };
-
     const data = [
         {
             key: '0',
@@ -65,9 +64,9 @@ const ViewEditSCMgt = (props) => {
             maturityDate: '09-07-2020',
         },
     ];
-
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
+
     })
 
     const action = props.location.state.action
@@ -77,11 +76,11 @@ const ViewEditSCMgt = (props) => {
         setSixEyes(e.target.value);
     };
 
-    return(
+    return (
         <div>
-            <div className="head-content viewEdit">
+            <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">
+                    <span className="icon-back">   
                         <Link to="/securitiescollmgt">
                             <CaretLeftOutlined />
                         </Link>
@@ -107,28 +106,28 @@ const ViewEditSCMgt = (props) => {
                         <div></div>
                     )}
                 <Form.Item label="Instrument Code">
-                    <Input disabled={disable} defaultValue={dataMemberById.code} />
+                    {dataMemberById.code}
                 </Form.Item>
                 <Form.Item label="Instrument Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.name} />
+                    {dataMemberById.name}
                 </Form.Item>
                 <Form.Item label="Instrument Type">
-                    <Input disabled={disable} defaultValue={dataMemberById.type} />
+                    {dataMemberById.type}
                 </Form.Item>
                 <Form.Item label="Eligibity">
-                    <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
+                    {dataMemberById.eligibility}
                 </Form.Item>
                 <Form.Item label="Haircut">
-                    <Input disabled={disable} defaultValue={dataMemberById.haircut} />
+                    {dataMemberById.haircut}
                 </Form.Item>
                 <Form.Item label="Maturity Date">
-                    <DatePicker style={{ width: '100%'}} />
+                    {dataMemberById.maturityDate}
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/securitiescollmgt">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
-                        </Button>
+                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        </Popconfirm>
                     </Link>
                     ) : (
                             <div></div>
@@ -147,8 +146,6 @@ const ViewEditSCMgt = (props) => {
 
         </div>
     )
-
 }
 
-
-export default ViewEditSCMgt
+export default ViewDeleteSCMgt

@@ -6,7 +6,6 @@ import {
     Table,
     Dropdown,
     Menu,
-    Select,
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
@@ -136,8 +135,6 @@ function SecuritiesCollMgt(){
             maturityDate: '09-07-2020',
         },
     ];
-
-    const { Option } = Select;
 
     return(
         <div style={{ margin: '15px 20px' }}>

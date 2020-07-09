@@ -62,6 +62,11 @@ import EditRegisterContract from '../views/administration/EditRegisterContract';
 import ViewDeleteAccount from '../views/administration/ViewDeleteAccount';
 import ViewEditAccount from '../views/administration/ViewEditAccount';
 import ViewEditSCMgt from '../views/administration/ViewEditSCMgt';
+import ViewDeleteSCMgt from '../views/administration/ViewDeleteSCMgt';
+import ViewEditCCMgt from '../views/administration/ViewEditCCMgt';
+import ViewDeleteCCMgt from '../views/administration/ViewDeleteCCMgt';
+import ViewDeleteRRate from '../views/administration/ViewDeleteRRate';
+import ViewEditRRate from '../views/administration/ViewEditRRate';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -389,6 +394,16 @@ function RoutePage() {
             <Route exact path="/administration/ViewEditAccount" component={ViewEditAccount}>
             </Route>
             <Route exact path="/administration/ViewEditSCMgt" component={ViewEditSCMgt}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteSCMgt" component={ViewDeleteSCMgt}>
+            </Route>
+            <Route exact path="/administration/ViewEditCCMgt" component={ViewEditCCMgt}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteCCMgt" component={ViewDeleteCCMgt}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteRRate" component={ViewDeleteRRate}>
+            </Route>
+            <Route exact path="/administration/ViewEditRRate" component={ViewEditRRate}>
             </Route>
         </div>
     )

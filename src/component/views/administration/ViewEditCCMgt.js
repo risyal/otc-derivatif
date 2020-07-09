@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-const ViewEditSCMgt = (props) => {
+const ViewEditCCMgt = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -32,37 +32,29 @@ const ViewEditSCMgt = (props) => {
             key: '0',
             code: '',
             name: '',
-            type: '',
             eligibility: '',
             haircut: '',
-            maturityDate: '',
         },
         {
             key: '1',
             code: 'CENAIDJA',
             name: 'Instrument1',
-            type: 'Type1',
             eligibility: 'Eligibility1',
             haircut: 'Haircut1',
-            maturityDate: '09-07-2020',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             name: 'Instrument2',
-            type: 'Type2',
             eligibility: 'Eligibility2',
             haircut: 'Haircut2',
-            maturityDate: '09-07-2020',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             name: 'Instrument3',
-            type: 'Type3',
             eligibility: 'Eligibility3',
             haircut: 'Haircut3',
-            maturityDate: '09-07-2020',
         },
     ];
 
@@ -82,7 +74,7 @@ const ViewEditSCMgt = (props) => {
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/securitiescollmgt">
+                        <Link to="/cashcollmgt">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
@@ -106,14 +98,11 @@ const ViewEditSCMgt = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Instrument Code">
+                <Form.Item label="Currency Code">
                     <Input disabled={disable} defaultValue={dataMemberById.code} />
                 </Form.Item>
-                <Form.Item label="Instrument Name">
+                <Form.Item label="Currency Name">
                     <Input disabled={disable} defaultValue={dataMemberById.name} />
-                </Form.Item>
-                <Form.Item label="Instrument Type">
-                    <Input disabled={disable} defaultValue={dataMemberById.type} />
                 </Form.Item>
                 <Form.Item label="Eligibity">
                     <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
@@ -121,11 +110,8 @@ const ViewEditSCMgt = (props) => {
                 <Form.Item label="Haircut">
                     <Input disabled={disable} defaultValue={dataMemberById.haircut} />
                 </Form.Item>
-                <Form.Item label="Maturity Date">
-                    <DatePicker style={{ width: '100%'}} />
-                </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/securitiescollmgt">
+                    {!disable ? (<Link to="/cashcollmgt">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -133,7 +119,7 @@ const ViewEditSCMgt = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/securitiescollmgt">
+                    <Link to="/cashcollmgt">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -151,4 +137,4 @@ const ViewEditSCMgt = (props) => {
 }
 
 
-export default ViewEditSCMgt
+export default ViewEditCCMgt
