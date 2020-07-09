@@ -58,6 +58,7 @@ import ViewEditClient from '../views/member-client/ViewEditClient';
 import ViewDeleteMember from '../views/member-client/ViewDeleteMember';
 import ViewDeleteClient from '../views/member-client/ViewDeleteClient';
 import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
+import EditRegisterContract from '../views/administration/EditRegisterContract';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -378,7 +379,12 @@ function RoutePage() {
             </Route>
             <Route exact path="/registerClient/ViewDeleteClient" component={ViewDeleteClient}>
             </Route>
-
+            <Route path="/editRegisterContract">
+                <div className="head-content">
+                    <Title level={4}>Edit Register Contract</Title>
+                </div>
+                <EditRegisterContract />
+            </Route>
         </div>
     )
 }

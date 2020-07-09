@@ -39,8 +39,9 @@ const ViewEditClient = (props) => {
             status: 'Active',
         },
         {
+
             key: '1',
-            memberID: 'CENAIDJA',
+            memberID: '1',
             sidLei: 'SID1LEI1',
             namaNasabah: 'Nas abah',
             rtgsAccount: 'rtgs Account1',
@@ -49,7 +50,7 @@ const ViewEditClient = (props) => {
         },
         {
             key: '2',
-            memberID: 'CENAIDJA',
+            memberID: '2',
             sidLei: 'SID2LEI2',
             namaNasabah: 'fulan bin fulan',
             rtgsAccount: 'rtgs Account2',
@@ -58,7 +59,7 @@ const ViewEditClient = (props) => {
         },
         {
             key: '3',
-            memberID: 'CENAIDJA',
+            memberID: '3',
             sidLei: 'SID3LEI3',
             namaNasabah: 'fulanah bin fulan',
             rtgsAccount: 'rtgs Account3',
@@ -100,7 +101,7 @@ const ViewEditClient = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Six Eyes">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -119,16 +120,11 @@ const ViewEditClient = (props) => {
                 <Form.Item label="Client Name">
                     <Input disabled={disable} defaultValue={dataMemberById.namaNasabah} />
                 </Form.Item>
-                <Form.Item label="Client Status"
-                    disabled={disable}>
-                    <Select value={1}>
-                        <Option value={1}>Active</Option>
-                        <Option value={2}>Blocked</Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Collateral Account"
-                    disabled={disable}>
+                <Form.Item label="RTGS Account">
                     <Input disabled='true' defaultValue={dataMemberById.rtgsAccount} />
+                </Form.Item>
+                <Form.Item label="SSSS Account">
+                    <Input disabled='true' defaultValue={dataMemberById.ssssAccount} />
                 </Form.Item>
                 <Form.Item label="Status">
                     <Select

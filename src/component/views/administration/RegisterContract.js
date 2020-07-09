@@ -4,6 +4,7 @@ import {
     Tabs,
     Button
 } from 'antd';
+import { Link } from "react-router-dom";
 
 function RegisterContract(){
     const { TabPane } = Tabs;
@@ -253,27 +254,22 @@ function RegisterContract(){
         },
     ];
 
-
-
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-
             <Tabs onChange={callback} type="card">
                 <TabPane tab="IRS" key="1">
                     <div>
                         <Button
                             type="primary"
-                            style={{ 
-                                marginBottom: '15px', 
-                                float: 'right',
-                                width: '80px',
-                                height: '35px'
-                            }}
+                            className="btn-edit"
                         >
-                            Edit
+                            <Link to="/editRegisterContract" >
+                                Edit
+                            </Link>
                         </Button>
                     </div>
                     <Table
+                        pagination={false}
                         columns={columns}
                         dataSource={data}
                         bordered
@@ -295,6 +291,7 @@ function RegisterContract(){
                         </Button>
                     </div>
                     <Table
+                        pagination={false}
                         columns={columns2}
                         dataSource={data2}
                         bordered
@@ -316,6 +313,7 @@ function RegisterContract(){
                         </Button>
                     </div>
                     <Table
+                        pagination={false}
                         columns={columns3}
                         dataSource={data3}
                         bordered
