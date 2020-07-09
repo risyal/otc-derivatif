@@ -39,21 +39,7 @@ function AuditTrail(){
             title: 'User',
             dataIndex: 'user',
             width: 100,
-            filters: [
-                {
-                    text: 'User1',
-                    value: 'User1',
-                },
-                {
-                    text: 'User2',
-                    value: 'User2',
-                },
-                {
-                    text: 'User3',
-                    value: 'User3',
-                },
-            ],
-            onFilter: (value, record) => record.user.indexOf(value) === 0,
+            key: 'user',
         },
         {
             title: 'Module/Service',

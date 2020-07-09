@@ -86,12 +86,14 @@ const ViewEditClient = (props) => {
 
     return (
         <div>
-            <div className="head-content">
+            <div className="head-content viewEdit">
                 <Title level={4}>
-                    <Link to="/memberandclientmanagement/registerclient">
-                        <CaretLeftOutlined />
-                    </Link>
-                    {action} Member</Title>
+                    <span className="icon-back">
+                        <Link to="/memberandclientmanagement/registerclient">
+                            <CaretLeftOutlined />
+                        </Link>
+                    </span>
+                {action} Member</Title>
             </div>
             <Form
                 {...formItemLayout}
