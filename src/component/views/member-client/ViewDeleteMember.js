@@ -3,6 +3,7 @@ import {
     Form, Popconfirm,
     Button,
     Radio,
+    Input,
     Typography
 } from 'antd';
 import {
@@ -157,9 +158,8 @@ const ViewDeleteMember = (props) => {
             >
                 {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
+                        <Radio value={1}>Direct Checker</Radio>
+                        <Radio value={2}>Direct Approver</Radio>
                     </Radio.Group>
                 </Form.Item>
                 ) : (
@@ -223,6 +223,9 @@ const ViewDeleteMember = (props) => {
                             </Form.Item>
 
                         </Form>
+                        <Form.Item label="Catatan">
+                            <Input.TextArea rows={4} />
+                        </Form.Item>
                         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                             <Link to="/memberandclientmanagement/approval">
                                 <Button type="primary" style={{ marginRight: '15px' }}>Approve

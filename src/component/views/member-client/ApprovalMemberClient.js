@@ -75,7 +75,7 @@ function ApprovalMemberClient() {
                 state: {
                     id: record.key,
                     action: "Detail",
-                    disable: true,
+                    disable: false,
                 }
             }} style={{ marginRight: '20px' }}>Detail
             </Link>),
@@ -104,12 +104,6 @@ function ApprovalMemberClient() {
             updatedBy: 'fulan',
             status: 'Waiting for Approver',
             linkTo: '/registerClient/ViewDeleteMember',
-        },
-        {
-        },
-        {
-        },
-        {
         },
     ];
 
