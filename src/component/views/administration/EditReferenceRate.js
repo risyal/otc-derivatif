@@ -25,50 +25,17 @@ function EditReferenceRate(){
       {
           title: 'Ref. Code',
           dataIndex: 'code',
-          filters: [
-              {
-                text: 'JIBOR1',
-                value: 'JIBOR1',
-              },
-              {
-                text: 'JIBOR2',
-                value: 'JIBOR2',
-              },
-              {
-                text: 'JIBOR3',
-                value: 'JIBOR3',
-              },
-          ],
-          onFilter: (value, record) => record.code.indexOf(value) === 0,
+          key: 'code',
       },
       {
           title: 'Ref. Type',
           dataIndex: 'type',
-          filters: [
-              {
-                  text: 'JIBOR',
-                  value: 'JIBOR',
-              },
-              {
-                  text: 'JISDOR',
-                  value: 'JISDOR',
-              },
-              {
-                  text: 'INDONIA',
-                  value: 'INDONIA',
-              },
-              {
-                  text: 'LIBOR',
-                  value: 'LIBOR',
-              },
-          ],
-          onFilter: (value, record) => record.type.indexOf(value) === 0,
+          key: 'type',
       },
       {
           title: 'Date',
           dataIndex: 'date',
-          defaultSortOrder: 'descend',
-          sorter: (a, b) => a.date - b.date,
+          key: 'date',
       },
       {
         title: 'Value',

@@ -6,21 +6,7 @@ function SecuritiesCollMgt(){
         {
             title: 'Instrument Code',
             dataIndex: 'code',
-            filters: [
-                {
-                    text: 'IC123',
-                    value: 'IC123',
-                },
-                {
-                    text: 'IC456',
-                    value: 'IC456',
-                },
-                {
-                    text: 'IC789',
-                    value: 'IC789',
-                },
-            ],
-            onFilter: (value, record) => record.code.indexOf(value) === 0,
+            key:'code',
         },
         {
             title: 'Instrument Name',
@@ -30,21 +16,7 @@ function SecuritiesCollMgt(){
         {
             title: 'Instrument Type',
             dataIndex: 'type',
-            filters: [
-                {
-                    text: 'Type1',
-                    value: 'Type1',
-                },
-                {
-                    text: 'Type2',
-                    value: 'Type2',
-                },
-                {
-                    text: 'Type3',
-                    value: 'Type3',
-                },
-            ],
-            onFilter: (value, record) => record.name.indexOf(value) === 0,
+            key: 'type',
         },
         {
             title: 'Eligibility',
