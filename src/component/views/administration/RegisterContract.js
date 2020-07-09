@@ -42,7 +42,7 @@ function RegisterContract() {
         {
             key: '3',
             attribut: 'Effective/commencement date',
-            irs: 'DDMMYYYY',
+            irs: '07-07-2020',
         },
         {
             key: '4',
@@ -66,7 +66,7 @@ function RegisterContract() {
         },
         {
             key: '8',
-            attribut: 'Floating rate index',
+            attribut: 'Floating Rate Index',
             irs: '',
         },
         {
@@ -76,23 +76,23 @@ function RegisterContract() {
         },
         {
             key: '10',
-            attribut: 'Day count fraction (fix and float)',
+            attribut: 'Day Count Fraction (fix and float)',
             irs: '',
         },
         {
             key: '11',
-            attribut: 'Floating rate reset frequency',
+            attribut: 'Floating Rate Reset Frequency',
             irs: '1W, 1M, 3M, 6M, 12M',
         },
         {
             key: '12',
-            attribut: 'Floating rate index tenor',
+            attribut: 'Floating Rate Index Tenor',
             irs: '1W, 1M, 3M, 6M, 12M',
         },
         {
             key: '13',
-            attribut: 'Business day convention',
-            irs: '',
+            attribut: 'Business Day Convention',
+            irs: 'M',
         },
         {
             key: '14',
@@ -101,7 +101,7 @@ function RegisterContract() {
         },
         {
             key: '15',
-            attribut: 'Rounding payment',
+            attribut: 'Rounding Payment',
             irs: '',
         },
         {
@@ -111,7 +111,7 @@ function RegisterContract() {
         },
         {
             key: '17',
-            attribut: 'Forward starting',
+            attribut: 'Forward Starting',
             irs: '',
         },
         {
@@ -149,7 +149,7 @@ function RegisterContract() {
         {
             key: '3',
             attribut: 'Effective/commencement date',
-            irs: 'DDMMYYYY',
+            irs: '07-07-2020',
         },
         {
             key: '4',
@@ -178,31 +178,21 @@ function RegisterContract() {
         },
         {
             key: '9',
-            attribut: 'Spread',
-            irs: '',
-        },
-        {
-            key: '10',
-            attribut: 'Day count fraction (fix and float)',
-            irs: '',
-        },
-        {
-            key: '11',
             attribut: 'Business day convention',
             irs: 'M, F, P',
         },
         {
-            key: '12',
+            key: '10',
             attribut: 'Calendar (payment, fixing, holiday)',
             irs: '',
         },
         {
-            key: '13',
+            key: '11',
             attribut: 'Rounding',
             irs: '',
         },
         {
-            key: '14',
+            key: '12',
             attribut: 'Forward starting',
             irs: '',
         },
@@ -246,7 +236,7 @@ function RegisterContract() {
         {
             key: '5',
             attribut: 'Tenor',
-            irs: '1W, 1M, 3M, 6,M, 9 M, 12M',
+            irs: '1W, 1M, 3M, 6M, 9M, 12M',
         },
         {
             key: '6',

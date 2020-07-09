@@ -93,7 +93,7 @@ const ViewEditClient = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Member</Title>
+                {action} Client</Title>
             </div>
             <Form
                 {...formItemLayout}

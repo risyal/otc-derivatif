@@ -59,6 +59,9 @@ import ViewDeleteMember from '../views/member-client/ViewDeleteMember';
 import ViewDeleteClient from '../views/member-client/ViewDeleteClient';
 import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
 import EditRegisterContract from '../views/administration/EditRegisterContract';
+import ViewDeleteAccount from '../views/administration/ViewDeleteAccount';
+import ViewEditAccount from '../views/administration/ViewEditAccount';
+import ViewEditSCMgt from '../views/administration/ViewEditSCMgt';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -380,6 +383,12 @@ function RoutePage() {
             <Route exact path="/registerClient/ViewDeleteClient" component={ViewDeleteClient}>
             </Route>
             <Route path="/editRegisterContract" component={EditRegisterContract}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteAccount" component={ViewDeleteAccount}>
+            </Route>
+            <Route exact path="/administration/ViewEditAccount" component={ViewEditAccount}>
+            </Route>
+            <Route exact path="/administration/ViewEditSCMgt" component={ViewEditSCMgt}>
             </Route>
         </div>
     )
