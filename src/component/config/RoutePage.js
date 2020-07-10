@@ -68,6 +68,8 @@ import ViewEditCCMgt from '../views/administration/ViewEditCCMgt';
 import ViewDeleteCCMgt from '../views/administration/ViewDeleteCCMgt';
 import ViewDeleteRRate from '../views/administration/ViewDeleteRRate';
 import ViewEditRRate from '../views/administration/ViewEditRRate';
+import ViewDeleteParam from '../views/administration/ViewDeleteParam';
+import ViewEditParam from '../views/administration/ViewEditParam';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -411,6 +413,10 @@ function RoutePage() {
             <Route exact path="/administration/ViewDeleteRRate" component={ViewDeleteRRate}>
             </Route>
             <Route exact path="/administration/ViewEditRRate" component={ViewEditRRate}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteParam" component={ViewDeleteParam}>
+            </Route>
+            <Route exact path="/administration/ViewEditParam" component={ViewEditParam}>
             </Route>
         </div>
     )
