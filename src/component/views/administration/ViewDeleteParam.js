@@ -4,7 +4,8 @@ import {
     Popconfirm,
     Button,
     Radio,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -26,25 +27,57 @@ const ViewDeleteParam = (props) => {
             sm: { span: 16 },
         },
     };
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
     const data = [
         {
 			key: '1',
-			parameter: 'Trade Submission & Validation',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+			title: 'Parameter',
+			paramData: 'Trade Submission & Validation',
         },
         {
 			key: '2',
-			parameter: 'Settlement and Reconciliation',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+			title: 'Start Time',
+			paramData: '23-02-2020',
         },
         {
 			key: '3',
-			parameter: 'Clearing Process',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+			title: 'End Time',
+			paramData: '23-02-2020',
         },
+        {
+			key: '4',
+			title: 'End Time',
+			paramData: '23-02-2020',
+        },
+        // {
+		// 	key: '1',
+		// 	parameter: 'Trade Submission & Validation',
+		// 	startTime: '23-02-2020',
+		// 	endTime: '29-02-2020',
+        // },
+        // {
+		// 	key: '2',
+		// 	parameter: 'Settlement and Reconciliation',
+		// 	startTime: '23-02-2020',
+		// 	endTime: '29-02-2020',
+        // },
+        // {
+		// 	key: '3',
+		// 	parameter: 'Clearing Process',
+		// 	startTime: '23-02-2020',
+		// 	endTime: '29-02-2020',
+        // },
     ];
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
@@ -62,7 +95,7 @@ const ViewDeleteParam = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">   
-                        <Link to="/editaccount">
+                        <Link to="/editparameter">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
@@ -86,7 +119,7 @@ const ViewDeleteParam = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Parameter">
+                {/* <Form.Item label="Parameter">
                     {dataMemberById.parameter}
                 </Form.Item>
                 <Form.Item label="Start Time">
@@ -94,7 +127,15 @@ const ViewDeleteParam = (props) => {
                 </Form.Item>
                 <Form.Item label="End Time">
                     {dataMemberById.endTime}
-                </Form.Item>
+                </Form.Item> */}
+                <Table
+					columns={columns}
+					dataSource={data}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' :  'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+				/>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editparameter">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
@@ -105,7 +146,7 @@ const ViewDeleteParam = (props) => {
                             <div></div>
                         )}
                     <Link to="/editparameter">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (
