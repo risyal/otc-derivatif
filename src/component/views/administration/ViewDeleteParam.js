@@ -39,49 +39,45 @@ const ViewDeleteParam = (props) => {
             key: 'paramData',
         },
     ];
-    const data = [
+    const [data] = useState([
         {
-			key: '1',
-			title: 'Parameter',
-			paramData: 'Trade Submission & Validation',
+            key: '1',
+            parameter: 'Trade Submission & Validation',
+            startTime: '23-02-2020',
+            endTime: '29-02-2020',
         },
         {
-			key: '2',
-			title: 'Start Time',
-			paramData: '23-02-2020',
+            key: '2',
+            parameter: 'Settlement and Reconciliation',
+            startTime: '23-02-2020',
+            endTime: '29-02-2020',
         },
         {
-			key: '3',
-			title: 'End Time',
-			paramData: '23-02-2020',
+            key: '3',
+            parameter: 'Clearing Process',
+            startTime: '23-02-2020',
+            endTime: '29-02-2020',
         },
-        {
-			key: '4',
-			title: 'End Time',
-			paramData: '23-02-2020',
-        },
-        // {
-		// 	key: '1',
-		// 	parameter: 'Trade Submission & Validation',
-		// 	startTime: '23-02-2020',
-		// 	endTime: '29-02-2020',
-        // },
-        // {
-		// 	key: '2',
-		// 	parameter: 'Settlement and Reconciliation',
-		// 	startTime: '23-02-2020',
-		// 	endTime: '29-02-2020',
-        // },
-        // {
-		// 	key: '3',
-		// 	parameter: 'Clearing Process',
-		// 	startTime: '23-02-2020',
-		// 	endTime: '29-02-2020',
-        // },
-    ];
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    ]);
+    const dataParamById = data.find((param) => {
+        return param.key === props.location.state.id
     })
+
+    const [dataForView] = useState([
+        {
+            title: "Parameter",
+            paramData: dataParamById.parameter
+        },
+        {
+            title: "Start Time",
+            paramData: dataParamById.startTime
+        },
+        {
+            title: "End Time",
+            paramData: dataParamById.endTime
+        },
+
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -94,12 +90,12 @@ const ViewDeleteParam = (props) => {
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">   
+                    <span className="icon-back">
                         <Link to="/editparameter">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Parameter</Title>
+                    {action} Parameter</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -129,13 +125,13 @@ const ViewDeleteParam = (props) => {
                     {dataMemberById.endTime}
                 </Form.Item> */}
                 <Table
-					columns={columns}
-					dataSource={data}
+                    columns={columns}
+                    dataSource={dataForView}
                     showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' :  'table-row-dark'}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
                     size="middle"
                     pagination={false}
-				/>
+                />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editparameter">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
