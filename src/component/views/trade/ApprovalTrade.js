@@ -10,10 +10,10 @@ import {
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+const dateFormat = 'YYYY/MM/DD';
 
 function ApprovalTrade() {
     const componentSize = 'middle';
-    const dateFormat = 'YYYY/MM/DD';
     const { RangePicker } = DatePicker;
     const formItemLayout = {
         labelCol: {

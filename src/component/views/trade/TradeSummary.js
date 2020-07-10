@@ -5,6 +5,7 @@ import {
     Table,
     Select,
     DatePicker,
+    Input,
 } from 'antd';
 import moment from 'moment';
 
@@ -95,12 +96,7 @@ function TradeSummary() {
                 labelAlign="left"
             >
                 <Form.Item label="Member ID" >
-                    <Select
-                        placeholder="Select Member ID"
-                    >
-                        <Select.Option value="checker">Member1</Select.Option>
-                        <Select.Option value="approver">Member2</Select.Option>
-                    </Select>
+                    <Input />
                 </Form.Item>
                 <Form.Item label="Trade  Date">
                     <DatePicker style={{ width: '100%' }}
