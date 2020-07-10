@@ -59,6 +59,7 @@ import ViewDeleteMember from '../views/member-client/ViewDeleteMember';
 import ViewDeleteClient from '../views/member-client/ViewDeleteClient';
 import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
 import EditRegisterContract from '../views/administration/EditRegisterContract';
+import ApprovalTrade from '../views/trade/ApprovalTrade';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -100,6 +101,12 @@ function RoutePage() {
                     <Title level={4}>Trade Confirmation</Title>
                 </div>
                 <TradeConfirmation />
+            </Route>
+            <Route path="/trade/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalTrade />
             </Route>
             <Route path="/clearingManagement/clearingPosition">
                 <div className="head-content">

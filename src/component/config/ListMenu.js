@@ -40,6 +40,10 @@ const Menu = [
             name: 'Trade Summary',
             key: 'tradesummary',
             linkTo: '/tradesummary'
+        }, {
+            name: 'Approval',
+            key: 'approval',
+            linkTo: '/trade/approval'
         }]
     },
     {
