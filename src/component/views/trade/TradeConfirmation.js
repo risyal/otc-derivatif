@@ -8,6 +8,7 @@ import {
     DatePicker,
 } from 'antd';
 import moment from 'moment';
+import { Link } from "react-router-dom";
 
 function TradeConfirmation() {
     const columns = [
@@ -41,6 +42,23 @@ function TradeConfirmation() {
             width: 100,
             dataIndex: 'tradeDate',
             key: 'tradeDate',
+        },
+        {
+            title: 'Action',
+            key: 'operation',
+            fixed: 'right',
+            width: 100,
+            render: () =>
+                <div>
+                    <Link to={{
+                        pathname: `/tradeConfirmation`,
+                        state: {
+                            action: "Detail",
+                            disable: false,
+                        }
+                    }} style={{ marginRight: '20px' }}>Detail
+                    </Link>
+                </div>,
         },
     ];
     const data = [
