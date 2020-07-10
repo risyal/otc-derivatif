@@ -1,7 +1,9 @@
 import React from 'react';
 import {
     LeftSquareOutlined,
-    RightSquareOutlined
+    RightSquareOutlined,
+    MenuUnfoldOutlined,
+    MenuFoldOutlined 
 } from '@ant-design/icons';
 
 const TopHeader = ({ collapsed, siderClick, header }) => {
@@ -10,8 +12,8 @@ const TopHeader = ({ collapsed, siderClick, header }) => {
         <Header className="site-header">
             <button onClick={siderClick} className="trigger">
                 {collapsed ?
-                    (<RightSquareOutlined />) :
-                    (<LeftSquareOutlined />)
+                    (<MenuUnfoldOutlined />) :
+                    (<MenuFoldOutlined />)
                 }
             </button>
         </Header>

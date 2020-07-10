@@ -8,7 +8,8 @@ import {
     DatePicker
 } from 'antd';
 import {
-    CaretLeftOutlined
+    CaretLeftOutlined,
+    ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import moment from 'moment';
@@ -85,7 +86,7 @@ const ViewEditSCMgt = (props) => {
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/securitiescollmgt">
-                            <CaretLeftOutlined />
+                            <ArrowLeftOutlined />
                         </Link>
                     </span>
                 {action} Instrument</Title>

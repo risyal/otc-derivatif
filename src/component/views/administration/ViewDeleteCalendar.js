@@ -8,7 +8,8 @@ import {
     Table,
 } from 'antd';
 import {
-    CaretLeftOutlined
+    CaretLeftOutlined,
+    ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
@@ -94,7 +95,7 @@ const ViewDeleteCalendar= (props) => {
                 <Title level={4}>
                     <span className="icon-back">   
                         <Link to="/calendar">
-                            <CaretLeftOutlined />
+                            <ArrowLeftOutlined />
                         </Link>
                     </span>
                 {action} Calendar</Title>

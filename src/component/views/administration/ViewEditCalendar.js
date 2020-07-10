@@ -8,7 +8,8 @@ import {
     DatePicker,
 } from 'antd';
 import {
-    CaretLeftOutlined
+    CaretLeftOutlined,
+    ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import moment from 'moment';
@@ -71,7 +72,7 @@ const ViewEditCalendar = (props) => {
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/calendar">
-                            <CaretLeftOutlined />
+                            <ArrowLeftOutlined />
                         </Link>
                     </span>
                     {action} Calendar</Title>

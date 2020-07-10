@@ -9,6 +9,7 @@ import {
 } from 'antd';
 import {
     CaretLeftOutlined,
+    ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
@@ -273,7 +274,7 @@ const EditRegisterContract = (props) => {
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/registercontract">
-                            <CaretLeftOutlined />
+                            <ArrowLeftOutlined />
                         </Link>
                     </span>
                 {action} Register Contract</Title>

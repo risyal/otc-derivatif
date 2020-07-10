@@ -8,7 +8,8 @@ import {
     Typography
 } from 'antd';
 import {
-    CaretLeftOutlined
+    CaretLeftOutlined,
+    ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
@@ -91,7 +92,7 @@ const ViewEditAccount = (props) => {
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/editaccount">
-                            <CaretLeftOutlined />
+                            <ArrowLeftOutlined />
                         </Link>
                     </span>
                 {action} Account</Title>
