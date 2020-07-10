@@ -70,6 +70,9 @@ import ViewDeleteRRate from '../views/administration/ViewDeleteRRate';
 import ViewEditRRate from '../views/administration/ViewEditRRate';
 import ViewDeleteParam from '../views/administration/ViewDeleteParam';
 import ViewEditParam from '../views/administration/ViewEditParam';
+import ViewEditUser from '../views/administration/ViewEditUser';
+import ViewDeleteUser from '../views/administration/ViewDeleteUser';
+// import AddUser from '..views/administration/AddUser';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -418,6 +421,12 @@ function RoutePage() {
             </Route>
             <Route exact path="/administration/ViewEditParam" component={ViewEditParam}>
             </Route>
+            <Route exact path="/administration/ViewEditUser" component={ViewEditUser}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteUser" component={ViewDeleteUser}>
+            </Route>
+            {/* <Route exact path="/administration/AddUser" component={AddUser}>
+            </Route> */}
         </div>
     )
 }

@@ -31,14 +31,14 @@ const ViewDeleteRRate = (props) => {
             key: '1',
             code: 'JIBOR1',
             type: 'JIBOR',
-            date: '30-02-2020',
+            date: '24-03-2020',
             value: 'Value',
         },
         {
             key: '2',
             code: 'JIBOR1',
             type: 'INDONIA',
-            date: '30-02-2020',
+            date: '24-03-2020',
             value: 'Value2',        
         },
         {
@@ -72,7 +72,7 @@ const ViewDeleteRRate = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">   
-                        <Link to="/editaccount">
+                        <Link to="/editreferencerate">
                             <CaretLeftOutlined />
                         </Link>
                     </span>

@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
     Form,
-    Input,
+    Popconfirm,
     Button,
     Radio,
-    Typography,
-    DatePicker
+    Typography
 } from 'antd';
 import {
     CaretLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-import moment from 'moment';
 
 const { Title } = Typography;
 
-const ViewEditSCMgt = (props) => {
+const ViewDeleteUser= (props) => {
+    const text = 'Are you sure to delete this task?';
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -27,46 +26,43 @@ const ViewEditSCMgt = (props) => {
             sm: { span: 16 },
         },
     };
-
     const data = [
         {
-            key: '0',
-            code: '',
-            name: '',
-            type: '',
-            eligibility: '',
-            haircut: '',
-            maturityDate: '',
-        },
-        {
             key: '1',
-            code: 'CENAIDJA',
-            name: 'Instrument1',
-            type: 'Type1',
-            eligibility: 'Eligibility1',
-            haircut: 'Haircut1',
-            maturityDate: '09-07-2020',
+            userId: 'User1',
+            memberId: 'Member1',
+            status: 'Active',
+            lastLogin: '10:04:34',
         },
         {
             key: '2',
-            code: 'CENAIDJA',
-            name: 'Instrument2',
-            type: 'Type2',
-            eligibility: 'Eligibility2',
-            haircut: 'Haircut2',
-            maturityDate: '09-07-2020',
+            userId: 'User2',
+            memberId: 'Member2',
+            status: 'Blocked',
+            lastLogin: '10:04:34',
         },
         {
             key: '3',
-            code: 'CENAIDJA',
-            name: 'Instrument3',
-            type: 'Type3',
-            eligibility: 'Eligibility3',
-            haircut: 'Haircut3',
-            maturityDate: '09-07-2020',
+            userId: 'User3',
+            memberId: 'Member3',
+            status: 'Active',
+            lastLogin: '10:04:34',
+        },
+        {
+            key: '4',
+            userId: 'User4',
+            memberId: 'Member4',
+            status: 'Active',
+            lastLogin: '10:04:34',
+        },
+        {
+            key: '5',
+            userId: 'User5',
+            memberId: 'Member5',
+            status: 'Blocked',
+            lastLogin: '10:04:34',
         },
     ];
-
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
     })
@@ -77,18 +73,17 @@ const ViewEditSCMgt = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
-    const dateFormat = 'YYYY/MM/DD';
 
-    return(
+    return (
         <div>
-            <div className="head-content viewEdit">
+            <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">
-                        <Link to="/securitiescollmgt">
+                    <span className="icon-back">   
+                        <Link to="/usermanagement">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Data</Title>
+                {action} User</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -108,35 +103,25 @@ const ViewEditSCMgt = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Instrument Code">
-                    <Input disabled={disable} defaultValue={dataMemberById.code} />
+                <Form.Item label="User ID">
+                    {dataMemberById.userId}
                 </Form.Item>
-                <Form.Item label="Instrument Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.name} />
+                <Form.Item label="Member ID">
+                    {dataMemberById.memberId}
                 </Form.Item>
-                <Form.Item label="Instrument Type">
-                    <Input disabled={disable} defaultValue={dataMemberById.type} />
-                </Form.Item>
-                <Form.Item label="Eligibity">
-                    <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
-                </Form.Item>
-                <Form.Item label="Haircut">
-                    <Input disabled={disable} defaultValue={dataMemberById.haircut} />
-                </Form.Item>
-                <Form.Item label="Maturity Date">
-                    <DatePicker style={{ width: '100%'}} 
-                        defaultValue={moment('2020/07/09', dateFormat)}/>
+                <Form.Item label="Status">
+                    {dataMemberById.status}
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/securitiescollmgt">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
-                        </Button>
+                    {!disable ? (<Link to="/usermanagement">
+                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        </Popconfirm>
                     </Link>
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/securitiescollmgt">
+                    <Link to="/usermanagement">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -150,8 +135,6 @@ const ViewEditSCMgt = (props) => {
 
         </div>
     )
-
 }
 
-
-export default ViewEditSCMgt
+export default ViewDeleteUser

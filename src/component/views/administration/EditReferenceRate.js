@@ -104,14 +104,14 @@ function EditReferenceRate(){
         key: '1',
         code: 'JIBOR1',
         type: 'JIBOR',
-        date: '30-02-2020',
+        date: '24-03-2020',
         value: 'Value',
       },
       {
         key: '2',
         code: 'JIBOR1',
         type: 'INDONIA',
-        date: '30-02-2020',
+        date: '24-03-2020',
         value: 'Value2',        },
       {
         key: '3',

@@ -12,6 +12,7 @@ import {
     CaretLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import moment from 'moment';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -34,14 +35,14 @@ const ViewEditRRate = (props) => {
             key: '1',
             code: 'JIBOR1',
             type: 'JIBOR',
-            date: '30-02-2020',
+            date: '24-03-2020',
             value: 'Value',
         },
         {
             key: '2',
             code: 'JIBOR1',
             type: 'INDONIA',
-            date: '30-02-2020',
+            date: '24-03-2020',
             value: 'Value2',        
         },
         {
@@ -74,13 +75,14 @@ const ViewEditRRate = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+    const dateFormat = 'YYYY/MM/DD';
 
     return (
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/editaccount">
+                        <Link to="/editreferencerate">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
@@ -94,7 +96,7 @@ const ViewEditRRate = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Six Eyes">
+                {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -119,13 +121,14 @@ const ViewEditRRate = (props) => {
                     </Select>
                 </Form.Item>
                 <Form.Item label="Date">
-                    <DatePicker style={{ width: '100%'}} />
+                    <DatePicker style={{ width: '100%'}} 
+                        defaultValue={moment('2020/03/24', dateFormat)}/>   
                 </Form.Item>
                 <Form.Item label="Value">
                     <Input disabled={disable} defaultValue={dataMemberById.value} />
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/editaccount">
+                    {!disable ? (<Link to="/editreferencerate">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -133,7 +136,7 @@ const ViewEditRRate = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/editaccount">
+                    <Link to="/editreferencerate">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>

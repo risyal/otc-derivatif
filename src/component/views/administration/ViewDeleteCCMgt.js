@@ -72,7 +72,7 @@ const ViewDeleteCCMgt = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">   
-                        <Link to="/securitiescollmgt">
+                        <Link to="/cashcollmgt">
                             <CaretLeftOutlined />
                         </Link>
                     </span>

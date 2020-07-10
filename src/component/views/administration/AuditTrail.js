@@ -1,15 +1,15 @@
-import React from 'react';
-import { 
-    Form, 
-    DatePicker, 
-    Button, 
-    Select,
+import React, { useState } from 'react';
+import {
+    Form,
     Input,
-    Table 
+    Button,
+    Table,
 } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function AuditTrail(){
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -77,35 +77,61 @@ function AuditTrail(){
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-            >
-                <Form.Item label="User">
+            > {expand ? (<div>
+                <Form.Item label="Keyword">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Activity">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Time">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Date">
-                    <DatePicker />
-                </Form.Item>
+            </div>
+            ) : (
+                    <div>
+                        <Form.Item label="User">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Activity">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Time">
+                            <Input />
+                        </Form.Item>
+                    </div>
+                )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined />Advance Search</div>) :
+                            (<div><UpOutlined />Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
 
-            <Table
-                columns={columns}
-                dataSource={data}
-                bordered
-                size="middle"
-            />
-            <Button type="primary" icon={<DownloadOutlined />}>
-                Export File
-            </Button>
+            <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+                <Table
+                    columns={columns}
+                    dataSource={data}
+                    bordered
+                    size="middle"
+                />
+                <Button type="primary" icon={<DownloadOutlined />}>
+                    Export File
+                </Button>
+            </div>
         </div>
     )
 }
