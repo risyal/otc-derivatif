@@ -138,7 +138,7 @@ function CancelTrade() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/ViewDeleteClient`,
+                                    pathname: `/canceltrade`,
                                     state: {
                                         id: record.key,
                                         action: "View",
@@ -149,7 +149,7 @@ function CancelTrade() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/viewClient`,
+                                    pathname: `/canceltrade`,
                                     state: {
                                         id: record.key,
                                         action: "Edit",

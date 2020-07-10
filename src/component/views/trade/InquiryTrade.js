@@ -135,7 +135,7 @@ function InquiryTrade() {
             render: () =>
                 <div>
                     <Link to={{
-                        pathname: `/registerClient/viewClient`,
+                        pathname: `/inquerytrade`,
                         state: {
                             action: "Detail",
                             disable: false,
