@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Button,
@@ -8,9 +8,10 @@ import {
     Input,
 } from 'antd';
 import moment from 'moment';
+const dateFormat = 'YYYY/MM/DD';
 
 function TradeSummary() {
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Product',
             width: 50,
@@ -54,8 +55,8 @@ function TradeSummary() {
             dataIndex: 'totalTrade',
             key: 'totalTrade',
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
@@ -68,9 +69,9 @@ function TradeSummary() {
         },
         {
         },
-    ];
-    const componentSize = 'middle';
-    const formItemLayout = {
+    ]);
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -79,13 +80,12 @@ function TradeSummary() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-    const productSelect = ['OIS', 'IRS', 'DNDF'];
+    });
+    const [productSelect] = useState(['OIS', 'IRS', 'DNDF']);
     const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
     const productClick = (e) => {
         SetJenisProduct(e);
     };
-    const dateFormat = 'YYYY/MM/DD';
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Input,
@@ -10,9 +10,10 @@ import {
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const dateFormat = 'YYYY/MM/DD';
 
 function MonitoringTrade() {
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Reference Number',
             width: 100,
@@ -146,8 +147,8 @@ function MonitoringTrade() {
             width: 100,
             render: () => <a>Detail</a>,
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
@@ -160,8 +161,8 @@ function MonitoringTrade() {
         },
         {
         },
-    ];
-    const componentSize = 'middle';
+    ]);
+    const [componentSize] = useMemo(() => 'middle');
     const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
@@ -172,12 +173,11 @@ function MonitoringTrade() {
             sm: { span: 16 },
         },
     };
-    const productSelect = ['OIS', 'IRS', 'DNDF'];
+    const [productSelect] = useState(['OIS', 'IRS', 'DNDF']);
     const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
     const productClick = (e) => {
         SetJenisProduct(e);
     };
-    const dateFormat = 'YYYY/MM/DD';
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     return (
