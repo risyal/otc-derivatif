@@ -5,7 +5,8 @@ import {
     Button,
     Select,
     Radio,
-    Typography
+    Typography,
+    DatePicker
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -16,7 +17,7 @@ const { Title } = Typography;
 const { Option } = Select;
 
 
-const ViewEditClient = (props) => {
+const ViewEditRRate = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -30,53 +31,43 @@ const ViewEditClient = (props) => {
     };
     const data = [
         {
-            key: '0',
-            memberID: ' ',
-            sidLei: ' ',
-            namaNasabah: ' ',
-            rtgsAccount: 'Auto Generate',
-            ssssAccount: 'Auto Generate',
-            status: 'Active',
-        },
-        {
-
             key: '1',
-            memberID: '1',
-            sidLei: 'SID1LEI1',
-            namaNasabah: 'Nas abah',
-            rtgsAccount: 'rtgs Account1',
-            ssssAccount: 'ssss Account1',
-            status: 'Active',
+            code: 'JIBOR1',
+            type: 'JIBOR',
+            date: '30-02-2020',
+            value: 'Value',
         },
         {
             key: '2',
-            memberID: '2',
-            sidLei: 'SID2LEI2',
-            namaNasabah: 'fulan bin fulan',
-            rtgsAccount: 'rtgs Account2',
-            ssssAccount: 'ssss Account2',
-            status: 'Active',
+            code: 'JIBOR1',
+            type: 'INDONIA',
+            date: '30-02-2020',
+            value: 'Value2',        
         },
         {
             key: '3',
-            memberID: '3',
-            sidLei: 'SID3LEI3',
-            namaNasabah: 'fulanah bin fulan',
-            rtgsAccount: 'rtgs Account3',
-            ssssAccount: 'ssss Account3',
-            status: 'Active',
+            code: 'JIBOR2',
+            type: 'JISDOR',
+            date: '24-03-2020',
+            value: 'Value3',        
+        },
+        {
+            key: '4',
+            code: 'JIBOR3',
+            type: 'LIBOR',
+            date: '24-03-2020',
+            value: 'Value4',
         },
     ];
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
-
     })
 
-    const statusSelect = ['Active', 'Suspend', 'Closed'];
-    const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
-    const statusClick = (e) => {
-        setSelectedStatus(e);
-    };
+    const typeSelect = ['JIBOR', 'JISDOR', 'INDONIA', 'LIBOR'];
+    const [selectedType, setSelectedType] = useState(typeSelect[0]);
+    const typeClick = (e) => {
+        setSelectedType(e);
+    }
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -89,11 +80,11 @@ const ViewEditClient = (props) => {
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/memberandclientmanagement/registerclient">
+                        <Link to="/editaccount">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                    {action} Client</Title>
+                {action} Data</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -103,7 +94,7 @@ const ViewEditClient = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Six Eyes">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -113,33 +104,28 @@ const ViewEditClient = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Member ID">
-                    <Input disabled={disable} defaultValue={dataMemberById.memberID} />
+                <Form.Item label="Ref. Code">
+                    <Input disabled={disable} defaultValue={dataMemberById.code} />
                 </Form.Item>
-                <Form.Item label="SID/LEI">
-                    <Input disabled={disable} defaultValue={dataMemberById.sidLei} />
-                </Form.Item>
-                <Form.Item label="Client Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.namaNasabah} />
-                </Form.Item>
-                <Form.Item label="RTGS Account">
-                    <Input disabled='true' defaultValue={dataMemberById.rtgsAccount} />
-                </Form.Item>
-                <Form.Item label="SSSS Account">
-                    <Input disabled='true' defaultValue={dataMemberById.ssssAccount} />
-                </Form.Item>
-                <Form.Item label="Status">
+                <Form.Item label="Ref. Type">
                     <Select
-                        value={selectedStatus}
-                        onChange={statusClick}
-                        disabled={disable}>
-                        {statusSelect.map(status => (
-                            <Option value={status}>{status}</Option>
+                        defaultValue={dataMemberById.type}
+                        onChange={typeClick}
+                        disabled={disable}
+                        >
+                        {typeSelect.map(type => (
+                            <Option value={type}>{type}</Option>
                         ))}
                     </Select>
                 </Form.Item>
+                <Form.Item label="Date">
+                    <DatePicker style={{ width: '100%'}} />
+                </Form.Item>
+                <Form.Item label="Value">
+                    <Input disabled={disable} defaultValue={dataMemberById.value} />
+                </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/memberandclientmanagement/registerclient">
+                    {!disable ? (<Link to="/editaccount">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -147,7 +133,7 @@ const ViewEditClient = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/memberandclientmanagement/registerclient">
+                    <Link to="/editaccount">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -164,4 +150,4 @@ const ViewEditClient = (props) => {
 }
 
 
-export default ViewEditClient
+export default ViewEditRRate

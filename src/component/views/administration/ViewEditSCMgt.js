@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
     Form,
     Input,
     Button,
-    Select,
     Radio,
-    Typography
+    Typography,
+    DatePicker
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -13,10 +13,8 @@ import {
 import { Link } from "react-router-dom";
 
 const { Title } = Typography;
-const { Option } = Select;
 
-
-const ViewEditClient = (props) => {
+const ViewEditSCMgt = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -28,55 +26,50 @@ const ViewEditClient = (props) => {
             sm: { span: 16 },
         },
     };
+
     const data = [
         {
             key: '0',
-            memberID: ' ',
-            sidLei: ' ',
-            namaNasabah: ' ',
-            rtgsAccount: 'Auto Generate',
-            ssssAccount: 'Auto Generate',
-            status: 'Active',
+            code: '',
+            name: '',
+            type: '',
+            eligibility: '',
+            haircut: '',
+            maturityDate: '',
         },
         {
-
             key: '1',
-            memberID: '1',
-            sidLei: 'SID1LEI1',
-            namaNasabah: 'Nas abah',
-            rtgsAccount: 'rtgs Account1',
-            ssssAccount: 'ssss Account1',
-            status: 'Active',
+            code: 'CENAIDJA',
+            name: 'Instrument1',
+            type: 'Type1',
+            eligibility: 'Eligibility1',
+            haircut: 'Haircut1',
+            maturityDate: '09-07-2020',
         },
         {
             key: '2',
-            memberID: '2',
-            sidLei: 'SID2LEI2',
-            namaNasabah: 'fulan bin fulan',
-            rtgsAccount: 'rtgs Account2',
-            ssssAccount: 'ssss Account2',
-            status: 'Active',
+            code: 'CENAIDJA',
+            name: 'Instrument2',
+            type: 'Type2',
+            eligibility: 'Eligibility2',
+            haircut: 'Haircut2',
+            maturityDate: '09-07-2020',
         },
         {
             key: '3',
-            memberID: '3',
-            sidLei: 'SID3LEI3',
-            namaNasabah: 'fulanah bin fulan',
-            rtgsAccount: 'rtgs Account3',
-            ssssAccount: 'ssss Account3',
-            status: 'Active',
+            code: 'CENAIDJA',
+            name: 'Instrument3',
+            type: 'Type3',
+            eligibility: 'Eligibility3',
+            haircut: 'Haircut3',
+            maturityDate: '09-07-2020',
         },
     ];
+
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
-
     })
 
-    const statusSelect = ['Active', 'Suspend', 'Closed'];
-    const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
-    const statusClick = (e) => {
-        setSelectedStatus(e);
-    };
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -84,16 +77,16 @@ const ViewEditClient = (props) => {
         setSixEyes(e.target.value);
     };
 
-    return (
+    return(
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/memberandclientmanagement/registerclient">
+                        <Link to="/securitiescollmgt">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                    {action} Client</Title>
+                {action} Data</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -113,33 +106,26 @@ const ViewEditClient = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Member ID">
-                    <Input disabled={disable} defaultValue={dataMemberById.memberID} />
+                <Form.Item label="Instrument Code">
+                    <Input disabled={disable} defaultValue={dataMemberById.code} />
                 </Form.Item>
-                <Form.Item label="SID/LEI">
-                    <Input disabled={disable} defaultValue={dataMemberById.sidLei} />
+                <Form.Item label="Instrument Name">
+                    <Input disabled={disable} defaultValue={dataMemberById.name} />
                 </Form.Item>
-                <Form.Item label="Client Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.namaNasabah} />
+                <Form.Item label="Instrument Type">
+                    <Input disabled={disable} defaultValue={dataMemberById.type} />
                 </Form.Item>
-                <Form.Item label="RTGS Account">
-                    <Input disabled='true' defaultValue={dataMemberById.rtgsAccount} />
+                <Form.Item label="Eligibity">
+                    <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
                 </Form.Item>
-                <Form.Item label="SSSS Account">
-                    <Input disabled='true' defaultValue={dataMemberById.ssssAccount} />
+                <Form.Item label="Haircut">
+                    <Input disabled={disable} defaultValue={dataMemberById.haircut} />
                 </Form.Item>
-                <Form.Item label="Status">
-                    <Select
-                        value={selectedStatus}
-                        onChange={statusClick}
-                        disabled={disable}>
-                        {statusSelect.map(status => (
-                            <Option value={status}>{status}</Option>
-                        ))}
-                    </Select>
+                <Form.Item label="Maturity Date">
+                    <DatePicker style={{ width: '100%'}} />
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/memberandclientmanagement/registerclient">
+                    {!disable ? (<Link to="/securitiescollmgt">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -147,7 +133,7 @@ const ViewEditClient = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/memberandclientmanagement/registerclient">
+                    <Link to="/securitiescollmgt">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -161,7 +147,8 @@ const ViewEditClient = (props) => {
 
         </div>
     )
+
 }
 
 
-export default ViewEditClient
+export default ViewEditSCMgt
