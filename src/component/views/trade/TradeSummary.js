@@ -94,6 +94,14 @@ function TradeSummary() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
+                <Form.Item label="Member ID" >
+                    <Select
+                        placeholder="Select Member ID"
+                    >
+                        <Select.Option value="checker">Member1</Select.Option>
+                        <Select.Option value="approver">Member2</Select.Option>
+                    </Select>
+                </Form.Item>
                 <Form.Item label="Trade  Date">
                     <DatePicker style={{ width: '100%' }}
                         defaultValue={moment('2020/01/23', dateFormat)} />
