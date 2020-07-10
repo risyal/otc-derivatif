@@ -4,7 +4,8 @@ import {
     Popconfirm,
     Button,
     Radio,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -26,7 +27,22 @@ const ViewDeleteClient = (props) => {
             sm: { span: 16 },
         },
     };
-    const data = [
+
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
+
+    const [data] = useState([
         {
             key: '0',
             memberID: ' ',
@@ -64,11 +80,35 @@ const ViewDeleteClient = (props) => {
             ssssAccount: 'ssss Account3',
             status: 'Active',
         },
-    ];
+    ]);
+
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
 
     })
+
+    const [dataForView] = useState([
+        {
+            title: "Member ID :",
+            paramData: dataMemberById.memberID
+        },
+        {
+            title: "SID/LEI :",
+            paramData: dataMemberById.sidLei
+        },
+        {
+            title: "Client Name :",
+            paramData: dataMemberById.namaNasabah
+        },
+        {
+            title: "Collateral Account :",
+            paramData: dataMemberById.rtgsAccount
+        },
+        {
+            title: "Status :",
+            paramData: dataMemberById.status
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -86,7 +126,7 @@ const ViewDeleteClient = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Member</Title>
+                {action} Client</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -96,7 +136,7 @@ const ViewDeleteClient = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -106,24 +146,16 @@ const ViewDeleteClient = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Member ID">
-                    {dataMemberById.memberID}
-                </Form.Item>
-                <Form.Item label="SID/LEI">
-                    {dataMemberById.sidLei}
-                </Form.Item>
-                <Form.Item label="Client Name">
-                    {dataMemberById.namaNasabah}
-                </Form.Item>
-                <Form.Item label="Client Status">
-                    Active
-                </Form.Item>
-                <Form.Item label="Collateral Account">
-                    {dataMemberById.rtgsAccount}
-                </Form.Item>
-                <Form.Item label="Status">
-                    {dataMemberById.status}
-                </Form.Item>
+
+                    <Table
+                        className="viewDelTable"
+                        columns={columns}
+                        dataSource={dataForView}
+                        showHeader={false}
+                        rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                        size="middle"
+                        pagination={false}
+                    />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/memberandclientmanagement/registerclient">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
@@ -134,7 +166,7 @@ const ViewDeleteClient = (props) => {
                             <div></div>
                         )}
                     <Link to="/memberandclientmanagement/registerclient">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (

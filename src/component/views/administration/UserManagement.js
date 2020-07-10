@@ -69,7 +69,7 @@ function UserManagement(){
                                         disable: true,
                                     }
                                 }} style={{ marginRight: '20px' }}>View
-                    </Link>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
@@ -80,7 +80,7 @@ function UserManagement(){
                                         disable: false,
                                     }
                                 }} style={{ marginRight: '20px' }}>Edit
-                    </Link>
+                                </Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
@@ -199,12 +199,7 @@ function UserManagement(){
            
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
                 <Link to={{
-                    pathname: `/administration/AddUser`,
-                    // state: {
-                    //     id: '0',
-                    //     action: "Add New",
-                    //     disable: false,
-                    // }
+                    pathname: `/administration/AddUser`
                 }}>
                     <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
                         Add New User

@@ -4,7 +4,8 @@ import {
     Popconfirm,
     Button,
     Radio,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -26,7 +27,20 @@ const ViewDeleteRRate = (props) => {
             sm: { span: 16 },
         },
     };
-    const data = [
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
+    const [data] = useState([
         {
             key: '1',
             code: 'JIBOR1',
@@ -55,10 +69,29 @@ const ViewDeleteRRate = (props) => {
             date: '24-03-2020',
             value: 'Value4',
         },
-    ];
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    ]);
+    const dataRRateById = data.find((refrate) => {
+        return refrate.key === props.location.state.id
     })
+
+    const [dataForView] = useState([
+        {
+            title: "Reff. Code :",
+            paramData: dataRRateById.code
+        },
+        {
+            title: "Reff. Type :",
+            paramData: dataRRateById.type
+        },
+        {
+            title: "Date :",
+            paramData: dataRRateById.date
+        },
+        {
+            title: "Value :",
+            paramData: dataRRateById.value
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -76,7 +109,7 @@ const ViewDeleteRRate = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Data</Title>
+                {action} Reference Rate</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -86,7 +119,7 @@ const ViewDeleteRRate = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -96,18 +129,15 @@ const ViewDeleteRRate = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Ref. Code">
-                    {dataMemberById.code}
-                </Form.Item>
-                <Form.Item label="Ref. Type">
-                    {dataMemberById.type}
-                </Form.Item>
-                <Form.Item label="Date">
-                    {dataMemberById.date}
-                </Form.Item>
-                <Form.Item label="Value">
-                    {dataMemberById.value}
-                </Form.Item>
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editreferencerate">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
@@ -118,7 +148,7 @@ const ViewDeleteRRate = (props) => {
                             <div></div>
                         )}
                     <Link to="/editreferencerate">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (

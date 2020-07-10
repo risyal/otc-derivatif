@@ -78,7 +78,7 @@ const ViewEditCCMgt = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Data</Title>
+                {action} Data Currency</Title>
             </div>
             <Form
                 {...formItemLayout}

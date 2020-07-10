@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-const ViewDeleteParam = (props) => {
+const ViewDeleteCalendar= (props) => {
     const text = 'Are you sure to delete this task?';
     const componentSize = 'middle';
     const formItemLayout = {
@@ -42,42 +42,43 @@ const ViewDeleteParam = (props) => {
     ];
     const [data] = useState([
         {
+            key: '0',
+            date: '',
+            information: '',
+            update: '',
+        },
+        {
             key: '1',
-            parameter: 'Trade Submission & Validation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            date: '31-07-2020',
+            information: 'Eid Al-Adha',
+            update: '01-07-2020',
         },
         {
             key: '2',
-            parameter: 'Settlement and Reconciliation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            date: '17-08-2020',
+            information: 'Hari Proklamasi Indonesia',
+            update: '01-08-2020',
         },
         {
             key: '3',
-            parameter: 'Clearing Process',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            date: '28-10-2020',
+            information: 'Cuti Bersama',
+            update: '01-08-2020',
         },
     ]);
-    const dataParamById = data.find((param) => {
-        return param.key === props.location.state.id
+    const dataUserById = data.find((user) => {
+        return user.key === props.location.state.id
     })
 
     const [dataForView] = useState([
         {
-            title: "Parameter :",
-            paramData: dataParamById.parameter
+            title: "Date :",
+            paramData: dataUserById.date
         },
         {
-            title: "Start Time :",
-            paramData: dataParamById.startTime
+            title: "Information :",
+            paramData: dataUserById.information
         },
-        {
-            title: "End Time :",
-            paramData: dataParamById.endTime
-        },
-
     ]);
 
     const action = props.location.state.action
@@ -91,12 +92,12 @@ const ViewDeleteParam = (props) => {
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">
-                        <Link to="/editparameter">
+                    <span className="icon-back">   
+                        <Link to="/calendar">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                    {action} Parameter</Title>
+                {action} Calendar</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -126,7 +127,7 @@ const ViewDeleteParam = (props) => {
                     pagination={false}
                 />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/editparameter">
+                    {!disable ? (<Link to="/calendar">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
                             <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
@@ -134,7 +135,7 @@ const ViewDeleteParam = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/editparameter">
+                    <Link to="/calendar">
                         <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
@@ -145,8 +146,9 @@ const ViewDeleteParam = (props) => {
                     </Link>
                 </Form.Item>
             </Form>
+
         </div>
     )
 }
 
-export default ViewDeleteParam
+export default ViewDeleteCalendar

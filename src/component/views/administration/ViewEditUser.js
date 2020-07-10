@@ -86,7 +86,7 @@ const ViewEditUser = (props) => {
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/usermanagementt">
+                        <Link to="/usermanagement">
                             <CaretLeftOutlined />
                         </Link>
                     </span>

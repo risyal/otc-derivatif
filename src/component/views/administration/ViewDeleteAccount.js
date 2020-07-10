@@ -4,7 +4,8 @@ import {
     Popconfirm,
     Button,
     Radio,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -26,7 +27,20 @@ const ViewDeleteAccount = (props) => {
             sm: { span: 16 },
         },
     };
-    const data = [
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
+    const [data] = useState([
         {
             key: '1',
             code: 'CENAIDJA',
@@ -66,11 +80,54 @@ const ViewDeleteAccount = (props) => {
             accNo3: 'D4212',
             status3: 'Active',
         },
-    ];
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    ]);
+    const dataAccountById = data.find((account) => {
+        return account.key === props.location.state.id
 
     })
+
+    const [dataForView] = useState([
+        {
+            title: "Member ID :",
+            paramData: "Code : " + dataAccountById.code
+        },
+        {
+            title: "",
+            paramData: "SID/LEI : " + dataAccountById.sidLei
+        },
+        {
+            title: "Name :",
+            paramData: dataAccountById.name
+        },
+        {
+            title: "Currency :",
+            paramData: "Code : " + dataAccountById.currency
+        },
+        {
+            title: "Cash Collateral : ",
+            paramData: "ACC No : " + dataAccountById.accNo
+        },
+        {
+            title: "",
+            paramData: "Status : " + dataAccountById.status
+        },
+        {
+            title: "Non-Cash Collateral : ",
+            paramData: "ACC No : " + dataAccountById.accNo2
+        },
+        {
+            title: "",
+            paramData: "Status : " + dataAccountById.status2
+        },
+        {
+            title: "Default Fund : ",
+            paramData: "ACC No : " + dataAccountById.accNo3
+        },
+        {
+            title: "",
+            paramData: "Status : " + dataAccountById.status3
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -98,7 +155,7 @@ const ViewDeleteAccount = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -108,52 +165,15 @@ const ViewDeleteAccount = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Member ID">
-                    <Form layout="inline">
-                        <Form.Item label="Code">
-                            {dataMemberById.code}
-                        </Form.Item>
-                        <Form.Item label="SID/LEI">
-                            {dataMemberById.sidLei}
-                        </Form.Item>
-                    </Form>
-                </Form.Item>
-                <Form.Item label="Name">
-                    {dataMemberById.name}
-                </Form.Item>
-                <Form.Item label="Currency">
-                    {dataMemberById.currency}
-                </Form.Item>
-                <Form.Item label="Cash collateral">
-                    <Form layout="inline">
-                        <Form.Item label="ACC No">
-                            {dataMemberById.accNo}
-                        </Form.Item>
-                        <Form.Item label="Status">
-                            {dataMemberById.status}
-                        </Form.Item>
-                    </Form>
-                </Form.Item>
-                <Form.Item label="Non-Cash collateral">
-                    <Form layout="inline">
-                        <Form.Item label="ACC No">
-                            {dataMemberById.accNo2}
-                        </Form.Item>
-                        <Form.Item label="Status">
-                            {dataMemberById.status2}
-                        </Form.Item>
-                    </Form>
-                </Form.Item>
-                <Form.Item label="Default Fund">
-                    <Form layout="inline">
-                        <Form.Item label="ACC No">
-                            {dataMemberById.accNo3}
-                        </Form.Item>
-                        <Form.Item label="Status">
-                            {dataMemberById.status3}
-                        </Form.Item>
-                    </Form>
-                </Form.Item>
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editaccount">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
@@ -164,7 +184,7 @@ const ViewDeleteAccount = (props) => {
                             <div></div>
                         )}
                     <Link to="/editaccount">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (

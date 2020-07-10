@@ -6,7 +6,6 @@ import {
     Table,
     Dropdown,
     Menu,
-    Select,
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined } from '@ant-design/icons';

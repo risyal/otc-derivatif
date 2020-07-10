@@ -33,13 +33,10 @@ function RegisterAts(){
                 <Form.Item label="Address">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Nama Perusahaan">
+                <Form.Item label="PIC Name">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Nama PIC">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="No Telp">
+                <Form.Item label="Telephone Number">
                     <Input />
                 </Form.Item>
                 <Form.Item label="Email">

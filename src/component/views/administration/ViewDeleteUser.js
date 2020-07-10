@@ -4,7 +4,8 @@ import {
     Popconfirm,
     Button,
     Radio,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -26,7 +27,20 @@ const ViewDeleteUser= (props) => {
             sm: { span: 16 },
         },
     };
-    const data = [
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
+    const [data] = useState([
         {
             key: '1',
             userId: 'User1',
@@ -62,10 +76,29 @@ const ViewDeleteUser= (props) => {
             status: 'Blocked',
             lastLogin: '10:04:34',
         },
-    ];
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    ]);
+    const dataUserById = data.find((user) => {
+        return user.key === props.location.state.id
     })
+
+    const [dataForView] = useState([
+        {
+            title: "User ID :",
+            paramData: dataUserById.userId
+        },
+        {
+            title: "Member ID :",
+            paramData: dataUserById.memberId
+        },
+        {
+            title: "Status :",
+            paramData: dataUserById.status
+        },
+        {
+            title: "Last Login :",
+            paramData: dataUserById.lastLogin
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -93,7 +126,7 @@ const ViewDeleteUser= (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -103,15 +136,15 @@ const ViewDeleteUser= (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="User ID">
-                    {dataMemberById.userId}
-                </Form.Item>
-                <Form.Item label="Member ID">
-                    {dataMemberById.memberId}
-                </Form.Item>
-                <Form.Item label="Status">
-                    {dataMemberById.status}
-                </Form.Item>
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/usermanagement">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
@@ -122,7 +155,7 @@ const ViewDeleteUser= (props) => {
                             <div></div>
                         )}
                     <Link to="/usermanagement">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (

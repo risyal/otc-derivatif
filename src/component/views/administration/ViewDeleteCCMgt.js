@@ -4,7 +4,8 @@ import {
     Popconfirm,
     Button,
     Radio,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -26,7 +27,20 @@ const ViewDeleteCCMgt = (props) => {
             sm: { span: 16 },
         },
     };
-    const data = [
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
+    const [data] = useState([
         {
             key: '0',
             code: '',
@@ -55,10 +69,29 @@ const ViewDeleteCCMgt = (props) => {
             eligibility: 'Eligibility3',
             haircut: 'Haircut3',
         },
-    ];
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    ]);
+    const dataCurrencyById = data.find((currency) => {
+        return currency.key === props.location.state.id
     })
+
+    const [dataForView] = useState([
+        {
+            title: "Currency Code :",
+            paramData: dataCurrencyById.code
+        },
+        {
+            title: "Currency Name :",
+            paramData: dataCurrencyById.name
+        },
+        {
+            title: "Eligibility :",
+            paramData: dataCurrencyById.eligibility
+        },
+        {
+            title: "Haircut :",
+            paramData: dataCurrencyById.haircut
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -76,7 +109,7 @@ const ViewDeleteCCMgt = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Data</Title>
+                {action} Data Currency</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -86,7 +119,7 @@ const ViewDeleteCCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -96,18 +129,15 @@ const ViewDeleteCCMgt = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Currency Code">
-                    {dataMemberById.code}
-                </Form.Item>
-                <Form.Item label="Currency Name">
-                    {dataMemberById.name}
-                </Form.Item>
-                <Form.Item label="Eligibity">
-                    {dataMemberById.eligibility}
-                </Form.Item>
-                <Form.Item label="Haircut">
-                    {dataMemberById.haircut}
-                </Form.Item>
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/cashcollmgt">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
@@ -118,7 +148,7 @@ const ViewDeleteCCMgt = (props) => {
                             <div></div>
                         )}
                     <Link to="/cashcollmgt">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (

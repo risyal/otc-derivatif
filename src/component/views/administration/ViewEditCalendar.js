@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
     Form,
     Input,
     Button,
     Radio,
     Typography,
-    DatePicker
+    DatePicker,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -15,7 +15,7 @@ import moment from 'moment';
 
 const { Title } = Typography;
 
-const ViewEditSCMgt = (props) => {
+const ViewEditCalendar = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -27,48 +27,34 @@ const ViewEditSCMgt = (props) => {
             sm: { span: 16 },
         },
     };
-
     const data = [
         {
             key: '0',
-            code: '',
-            name: '',
-            type: '',
-            eligibility: '',
-            haircut: '',
-            maturityDate: '',
+            date: '',
+            information: '',
+            update: '',
         },
         {
             key: '1',
-            code: 'CENAIDJA',
-            name: 'Instrument1',
-            type: 'Type1',
-            eligibility: 'Eligibility1',
-            haircut: 'Haircut1',
-            maturityDate: '09-07-2020',
+            date: '31-07-2020',
+            information: 'Eid Al-Adha',
+            update: '01-07-2020',
         },
         {
             key: '2',
-            code: 'CENAIDJA',
-            name: 'Instrument2',
-            type: 'Type2',
-            eligibility: 'Eligibility2',
-            haircut: 'Haircut2',
-            maturityDate: '09-07-2020',
+            date: '17-08-2020',
+            information: 'Hari Proklamasi Indonesia',
+            update: '01-08-2020',
         },
         {
             key: '3',
-            code: 'CENAIDJA',
-            name: 'Instrument3',
-            type: 'Type3',
-            eligibility: 'Eligibility3',
-            haircut: 'Haircut3',
-            maturityDate: '09-07-2020',
+            date: '28-10-2020',
+            information: 'Cuti Bersama',
+            update: '01-08-2020',
         },
     ];
-
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    const dataCalendarById = data.find((calendar) => {
+        return calendar.key === props.location.state.id
     })
 
     const action = props.location.state.action
@@ -79,16 +65,16 @@ const ViewEditSCMgt = (props) => {
     };
     const dateFormat = 'YYYY/MM/DD';
 
-    return(
+    return (
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/securitiescollmgt">
+                        <Link to="/calendar">
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Instrument</Title>
+                    {action} Calendar</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -108,27 +94,15 @@ const ViewEditSCMgt = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Instrument Code">
-                    <Input disabled={disable} defaultValue={dataMemberById.code} />
+                <Form.Item label="Date">
+                    <DatePicker style={{ width: '100%' }}
+                        defaultValue={moment('2020/07/31', dateFormat)}/>
                 </Form.Item>
-                <Form.Item label="Instrument Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.name} />
-                </Form.Item>
-                <Form.Item label="Instrument Type">
-                    <Input disabled={disable} defaultValue={dataMemberById.type} />
-                </Form.Item>
-                <Form.Item label="Eligibity">
-                    <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
-                </Form.Item>
-                <Form.Item label="Haircut">
-                    <Input disabled={disable} defaultValue={dataMemberById.haircut} />
-                </Form.Item>
-                <Form.Item label="Maturity Date">
-                    <DatePicker style={{ width: '100%'}} 
-                        defaultValue={moment('2020/07/09', dateFormat)}/>
+                <Form.Item label="Information">
+                    <Input disabled={disable} defaultValue={dataCalendarById.information}/>
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/securitiescollmgt">
+                    {!disable ? (<Link to="/calendar">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -136,7 +110,7 @@ const ViewEditSCMgt = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/securitiescollmgt">
+                    <Link to="/calendar">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -150,8 +124,7 @@ const ViewEditSCMgt = (props) => {
 
         </div>
     )
-
 }
 
 
-export default ViewEditSCMgt
+export default ViewEditCalendar

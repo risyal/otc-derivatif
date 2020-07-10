@@ -4,7 +4,8 @@ import {
     Button,
     Radio,
     Input,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -27,7 +28,22 @@ const ViewDeleteMember = (props) => {
             sm: { span: 16 },
         },
     };
-    const data = [
+
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
+
+    const [data] = useState([
         {
             key: '0',
             memberID: ' ',
@@ -95,7 +111,8 @@ const ViewDeleteMember = (props) => {
             ssss: 'SSSS3',
             status: 'Waiting for Approver',
         },
-    ];
+    ]);
+
     const dataChecker = [
         {
             key: '0',
@@ -132,6 +149,53 @@ const ViewDeleteMember = (props) => {
 
     })
 
+    const [dataForView] = useState([
+        {
+            title: "Member ID :",
+            paramData: dataMemberById.memberID
+        },
+        {
+            title: "SID/LEI :",
+            paramData: dataMemberById.sidLei
+        },
+        {
+            title: "Company Name :",
+            paramData: dataMemberById.namaPerusahaan
+        },
+        {
+            title: "Address :",
+            paramData: dataMemberById.alamat
+        },
+        {
+            title: "PIC :",
+            paramData: dataMemberById.pic
+        },
+        {
+            title: "Telephone Number :",
+            paramData: dataMemberById.noTelp
+        },
+        {
+            title: "Email :",
+            paramData: dataMemberById.email
+        },
+        {
+            title: "RTGS Account :",
+            paramData: "Settlement : " + dataMemberById.settlement
+        },
+        {
+            title: "",
+            paramData: "Default fund : " + dataMemberById.dFund
+        },
+        {
+            title: "SSSS Account :",
+            paramData: dataMemberById.ssss
+        },
+        {
+            title: "Status :",
+            paramData: dataMemberById.status
+        },
+    ]);
+
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -158,7 +222,7 @@ const ViewDeleteMember = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Direct Checker</Radio>
                         <Radio value={2}>Direct Approver</Radio>
@@ -167,42 +231,15 @@ const ViewDeleteMember = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Member ID">
-                    {dataMemberById.memberID}
-                </Form.Item>
-                <Form.Item label="SID/LEI">
-                    {dataMemberById.sidLei}
-                </Form.Item>
-                <Form.Item label="Company Name">
-                    {dataMemberById.namaPerusahaan}
-                </Form.Item>
-                <Form.Item label="Address">
-                    {dataMemberById.alamat}
-                </Form.Item>
-                <Form.Item label="PIC">
-                    {dataMemberById.pic}
-                </Form.Item>
-                <Form.Item label="Telephone Number">
-                    {dataMemberById.noTelp}
-                </Form.Item>
-                <Form.Item label="Email">
-                    {dataMemberById.email}
-                </Form.Item>
-                <Form.Item label="RTGS Account">
-                    <Form.Item label="Settlement" >
-                        {dataMemberById.settlement}
-                    </Form.Item>
-                    <Form.Item label="Default Fund"
-                        style={{ marginBottom: '0px' }}  >
-                        {dataMemberById.dFund}
-                    </Form.Item>
-                </Form.Item>
-                <Form.Item label="SSSS Account">
-                    {dataMemberById.ssss}
-                </Form.Item>
-                <Form.Item label="Status">
-                    {dataMemberById.status}
-                </Form.Item>
+                    <Table
+                        className="viewDelTable"
+                        columns={columns}
+                        dataSource={dataForView}
+                        showHeader={false}
+                        rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                        size="middle"
+                        pagination={false}
+                    />
                 {action === 'Detail' ? (
                     <div>
                         <br />
@@ -248,7 +285,7 @@ const ViewDeleteMember = (props) => {
                                     <div></div>
                                 )}
                             <Link to="/memberandclientmanagement/registermember">
-                                <Button >
+                                <Button style={{ marginTop: '15px' }}>
                                     {!disable ? (
                                         <div>Cancel</div>
                                     ) : (

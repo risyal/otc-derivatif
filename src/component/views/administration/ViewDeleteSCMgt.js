@@ -4,7 +4,8 @@ import {
     Popconfirm,
     Button,
     Radio,
-    Typography
+    Typography,
+    Table,
 } from 'antd';
 import {
     CaretLeftOutlined
@@ -26,7 +27,20 @@ const ViewDeleteSCMgt = (props) => {
             sm: { span: 16 },
         },
     };
-    const data = [
+    const columns = [
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ];
+    const [data] = useState([
         {
             key: '0',
             code: '',
@@ -63,11 +77,38 @@ const ViewDeleteSCMgt = (props) => {
             haircut: 'Haircut3',
             maturityDate: '09-07-2020',
         },
-    ];
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    ]);
+    const dataInstrumentById = data.find((instrument) => {
+        return instrument.key === props.location.state.id
 
     })
+
+    const [dataForView] = useState([
+        {
+            title: "Instrument Code :",
+            paramData: dataInstrumentById.code
+        },
+        {
+            title: "Instrument Name :",
+            paramData: dataInstrumentById.name
+        },
+        {
+            title: "Instrument Type :",
+            paramData: dataInstrumentById.type
+        },
+        {
+            title: "Eligibility :",
+            paramData: dataInstrumentById.eligibility
+        },
+        {
+            title: "Haircut :",
+            paramData: dataInstrumentById.haircut
+        },
+        {
+            title: "Maturity Date :",
+            paramData: dataInstrumentById.maturityDate
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -85,7 +126,7 @@ const ViewDeleteSCMgt = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Data</Title>
+                {action} Instrument</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -95,7 +136,7 @@ const ViewDeleteSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -105,24 +146,15 @@ const ViewDeleteSCMgt = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Instrument Code">
-                    {dataMemberById.code}
-                </Form.Item>
-                <Form.Item label="Instrument Name">
-                    {dataMemberById.name}
-                </Form.Item>
-                <Form.Item label="Instrument Type">
-                    {dataMemberById.type}
-                </Form.Item>
-                <Form.Item label="Eligibity">
-                    {dataMemberById.eligibility}
-                </Form.Item>
-                <Form.Item label="Haircut">
-                    {dataMemberById.haircut}
-                </Form.Item>
-                <Form.Item label="Maturity Date">
-                    {dataMemberById.maturityDate}
-                </Form.Item>
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/securitiescollmgt">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
@@ -133,7 +165,7 @@ const ViewDeleteSCMgt = (props) => {
                             <div></div>
                         )}
                     <Link to="/securitiescollmgt">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (

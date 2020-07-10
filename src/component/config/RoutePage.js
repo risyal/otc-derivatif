@@ -72,7 +72,9 @@ import ViewDeleteParam from '../views/administration/ViewDeleteParam';
 import ViewEditParam from '../views/administration/ViewEditParam';
 import ViewEditUser from '../views/administration/ViewEditUser';
 import ViewDeleteUser from '../views/administration/ViewDeleteUser';
-// import AddUser from '..views/administration/AddUser';
+import AddUser from '../views/administration/AddUser';
+import ViewEditCalendar from '../views/administration/ViewEditCalendar';
+import ViewDeleteCalendar from '../views/administration/ViewDeleteCalendar';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -425,8 +427,16 @@ function RoutePage() {
             </Route>
             <Route exact path="/administration/ViewDeleteUser" component={ViewDeleteUser}>
             </Route>
-            {/* <Route exact path="/administration/AddUser" component={AddUser}>
-            </Route> */}
+            <Route path="/administration/AddUser">
+                <div className="head-content">
+                    <Title level={4}>Add New User</Title>
+                </div>
+                <AddUser />
+            </Route>
+            <Route exact path="/administration/ViewEditCalendar" component={ViewEditCalendar}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteCalendar" component={ViewDeleteCalendar}>
+            </Route>
         </div>
     )
 }

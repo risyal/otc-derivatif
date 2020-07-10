@@ -86,7 +86,7 @@ const ViewEditRRate = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Data</Title>
+                {action} Referency Rate</Title>
             </div>
             <Form
                 {...formItemLayout}
