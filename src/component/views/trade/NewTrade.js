@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     Input,
@@ -10,12 +10,13 @@ import {
 } from 'antd';
 
 import moment from 'moment';
+const dateFormat = 'YYYY/MM/DD';
 
 
 
 function NewTrade() {
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -24,32 +25,32 @@ function NewTrade() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-    const productSelect = ['OIS', 'IRS', 'DNDF'];
-    const paymentFrequency = ['1W', '1M', '3M', '6M', '1Y'];
-    const countFraction = ['ACT/360', 'ACT/ACT', 'ACT/365', '30/360'];
-    const businessDay = ['Mod Following', 'Following', 'Preceeding'];
+    });
+    const [productSelect] = useState(['OIS', 'IRS', 'DNDF']);
+    const [paymentFrequency] = useState(['1W', '1M', '3M', '6M', '1Y']);
+    const [countFraction] = useState(['ACT/360', 'ACT/ACT', 'ACT/365', '30/360']);
+    const [businessDay] = useState(['Mod Following', 'Following', 'Preceeding']);
 
-    const productPosition = {
+    const [productPosition] = useState({
         OIS: ['Fixed', 'Payer'],
         IRS: ['Fixed', 'Receive'],
         DNDF: ['Buy', 'Sell'],
-    };
-    const productRate = {
+    });
+    const [productRate] = useState({
         OIS: ['IndONIA'],
         IRS: ['IndONIA', 'JIBOR 1W', 'JIBOR 1M', 'JIBOR 3M', 'JIBOR 6M', 'JIBOR 12M'],
         DNDF: ['JISDOR'],
-    };
-    const productContract = {
+    });
+    const [productContract] = useState({
         OIS: ['1W', '1M', '3M', '6M', '9M', '12M '],
         IRS: ['1W', '1M', '3M', '6M', '9M', '12M '],
         DNDF: ['3D', '1W', '1M', '3M', '6M', '9M', '1Y'],
-    };
-    const resetFrequency = {
+    });
+    const [resetFrequency] = useState({
         OIS: ['1D'],
         IRS: ['1W', '1M', '3M', '6M', '1Y'],
         DNDF: ['1W', '1M', '3M', '6M', '1Y'],
-    };
+    });
     const [jenisProduct, SetJenisProduct] = useState();
     const [postitionSelect, setPositionSelect] = useState(productPosition[productSelect[0]]);
     const [position, setPosition] = useState(productPosition[productSelect[0]][0]);
@@ -83,11 +84,10 @@ function NewTrade() {
         setSelectedReset(e);
     };
 
-    const dateFormat = 'YYYY/MM/DD';
     const [dates, setDates] = useState(moment('2020/01/23', dateFormat));
     const [effectiveDates, setEffectiveDates] = useState(moment('2020/01/25', dateFormat));
     function disabledDate(current) {
-        // Can not select days before today and today
+        // Can not select days before today and after two today
         if (!dates || dates.length === 0) {
             return false;
         }
@@ -106,300 +106,6 @@ function NewTrade() {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
-    var productForm;
-    if (jenisProduct != null) {
-        if (jenisProduct === productSelect[0]
-            || jenisProduct === productSelect[1]) {
-            productForm = <div>
-                <Form.Item label="Position">
-                    <Select
-                        value={position}
-                        onChange={positionClick} >
-                        {postitionSelect.map(pos => (
-                            <Select.Option key={pos}>{pos}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Reference Rate">
-                    <Select
-                        value={selectedRate}
-                        onChange={rateClick} >
-                        {rateSelect.map(rate => (
-                            <Select.Option key={rate}>{rate}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                {/* <Form.Item label="Market Side ">
-                    <Select defaultValue="receiver">
-                        <Select.Option value="receiver">Receiver</Select.Option>
-                        <Select.Option value="payer">Payer</Select.Option>
-                    </Select>
-                </Form.Item> */}
-                <Form.Item label="Counterparty">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Currency">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Leg Type ">
-                    <Select defaultValue="fix">
-                        <Select.Option value="fix">Fix/Float</Select.Option>
-                        <Select.Option value="float">Float/Float</Select.Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Trade Date">
-                    <DatePicker style={{ width: '100%' }}
-                        onChange={tradeDateClick}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
-                <Form.Item label="Effective Date">
-                    <DatePicker
-                        style={{ width: '100%' }}
-                        disabledDate={disabledDate}
-                        onChange={effectiveDateClick}
-                        value={effectiveDates} />
-                </Form.Item>
-                <Form.Item label="Maturity Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
-                <Form.Item label="Settlement Type">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Contract Term">
-                    <Select value={selectedContract}
-                        onChange={contractClick} >
-                        {contractSelect.map(contract => (
-                            <Select.Option key={contract}>{contract}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Notional Amount">
-                    <Input.Group compact>
-                        <Select defaultValue="Rp" style={{ width: '15%' }}>
-                            <Select.Option value="Rp">Rp</Select.Option>
-                        </Select>
-                        <InputNumber
-                            min={1000000000}
-                            formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                            parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                            style={{ width: '85%' }} />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Payment Frequency">
-                    <Select >
-                        {paymentFrequency.map(payment => (
-                            <Select.Option key={payment}>{payment}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Next Fixing Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
-                <Form.Item label="Fixed Rate  ">
-                    <Input.Group compact>
-                        <InputNumber
-                            defaultValue={0}
-                            min={0}
-                            max={100}
-                            style={{ width: '85%' }}
-                        /><Select defaultValue="%" style={{ width: '15%' }}>
-                            <Select.Option value="%">%</Select.Option>
-                        </Select>
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Floating Rate Index">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Spread">
-                    <InputNumber style={{ width: '100%' }} />
-                </Form.Item>
-                <Form.Item label="Leverage">
-                    <InputNumber style={{ width: '100%' }} />
-                </Form.Item>
-                <Form.Item label="Day Count Fraction">
-                    <Select defaultValue={countFraction[0]}>
-                        {countFraction.map(fraction => (
-                            <Select.Option key={fraction}>{fraction}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Reset Frequency">
-                    <Select value={selectedReset}
-                        onChange={resetClick} >
-                        {resetSelect.map(reset => (
-                            <Select.Option key={reset}>{reset}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                {jenisProduct === productSelect[0] ? (<div>
-                    <Form.Item label="Floating Rate Index Tenor">
-                        <Select >
-                            <Select.Option key="1W">1W</Select.Option>
-                            <Select.Option key="1M">1M</Select.Option>
-                            <Select.Option key="3M">3M</Select.Option>
-                            <Select.Option key="6M">6M</Select.Option>
-                            <Select.Option key="1Y">1Y</Select.Option>
-                        </Select>
-                    </Form.Item>
-                </div>) : (<div>
-                    <Form.Item label="Floating Rate Index Tenor">
-                        <Select >
-                            <Select.Option key="O">Overnight</Select.Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item label="Floating Rate Compounding ">
-                        <Select >
-                            <Select.Option key="D">Daily Compounding </Select.Option>
-                        </Select>
-                    </Form.Item>
-                </div>)
-                }
-                <Form.Item label="Business Day Convention">
-                    <Select defaultValue={businessDay[0]}>
-                        {businessDay.map(bday => (
-                            <Select.Option key={bday}>{bday}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                {/* calendar ????? */}
-                <Form.Item label="Rounding Payment">
-                    <InputNumber style={{ width: '100%' }} />
-                </Form.Item>
-                {jenisProduct === productSelect[0] ? (<div>
-                    <Form.Item label="Stub Payment">
-                        <Select defaultValue="Initial">
-                            <Select.Option value="Initial">Initial</Select.Option>
-                            <Select.Option value="Final">Final</Select.Option>
-                        </Select>
-                    </Form.Item>
-                </div>) : (<div>
-                </div>)
-                }
-                <Form.Item label="Forward Starting">
-                    <Select defaultValue="Eligible">
-                        <Select.Option value="Eligible">Eligible</Select.Option>
-                        <Select.Option value="NotE ligible">Not Eligible</Select.Option>
-                    </Select>
-                </Form.Item>
-                {/* Cash Payment Compounding ????? */}
-                <Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </div>;
-        } if (jenisProduct === productSelect[2]) {
-            productForm = <div>
-                <Form.Item label="Position">
-                    <Select
-                        value={position}
-                        onChange={positionClick} >
-                        {postitionSelect.map(pos => (
-                            <Select.Option key={pos}>{pos}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Currency">
-                    <Select value="USD">
-                        <Select.Option value="USD">USD/IDR</Select.Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Notional Foreign Currency ">
-                    <Select defaultValue="USD">
-                        <Select.Option value="USD">USD</Select.Option>
-                    </Select>
-                </Form.Item>
-                {/*  <Form.Item label="Forward">
-                    <Select defaultValue="IDR">
-                        <Select.Option value="IDR">IDR</Select.Option>
-                    </Select>
-                </Form.Item> */}
-                <Form.Item label="Deal Rate  ">
-                    <Input
-                        addonBefore="Rp"
-                        style={{ marginBottom: '15px' }} />
-                </Form.Item>
-                <Form.Item label="Reference Rate">
-                    <Select
-                        value={selectedRate}
-                        onChange={rateClick} >
-                        {rateSelect.map(rate => (
-                            <Select.Option key={rate}>{rate}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Settlement Date">
-                    <DatePicker style={{ width: '100%' }}
-                        onChange={tradeDateClick}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
-                <Form.Item label="Fixing Date">
-                    <DatePicker
-                        style={{ width: '100%' }}
-                        disabledDate={disabledDate}
-                        onChange={effectiveDateClick}
-                        value={effectiveDates} />
-                </Form.Item>
-                <Form.Item label="Settlement Currency ">
-                    <Select defaultValue="IDR">
-                        <Select.Option value="IDR">IDR</Select.Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Settlement Type">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Contract Term">
-                    <Select value={selectedContract}
-                        onChange={contractClick} >
-                        {contractSelect.map(contract => (
-                            <Select.Option key={contract}>{contract}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Rounding">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Price Source Disruption">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Notional Amount">
-                    <Input.Group compact>
-                        <Select defaultValue="$" style={{ width: '15%' }}>
-                            <Select.Option value="$">$</Select.Option>
-                        </Select>
-                        <InputNumber
-                            defaultValue={0}
-                            formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                            parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                            style={{ width: '85%' }} />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Role ">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </div>;
-        }
-    } else {
-        productForm = <div>Select a Product</div>;
-    }
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -432,7 +138,296 @@ function NewTrade() {
                         ))}
                     </Select>
                 </Form.Item>
-                {productForm}
+                {jenisProduct == null ? (
+                    <div>Select a Product</div>
+                ) : jenisProduct === productSelect[0]
+                    || jenisProduct === productSelect[1] ? (
+                            <div>
+                                <Form.Item label="Position">
+                                    <Select
+                                        value={position}
+                                        onChange={positionClick} >
+                                        {postitionSelect.map(pos => (
+                                            <Select.Option key={pos}>{pos}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Reference Rate">
+                                    <Select
+                                        value={selectedRate}
+                                        onChange={rateClick} >
+                                        {rateSelect.map(rate => (
+                                            <Select.Option key={rate}>{rate}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                {/* <Form.Item label="Market Side ">
+                                    <Select defaultValue="receiver">
+                                        <Select.Option value="receiver">Receiver</Select.Option>
+                                        <Select.Option value="payer">Payer</Select.Option>
+                                    </Select>
+                                </Form.Item> */}
+                                <Form.Item label="Counterparty">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Currency">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Leg Type ">
+                                    <Select defaultValue="fix">
+                                        <Select.Option value="fix">Fix/Float</Select.Option>
+                                        <Select.Option value="float">Float/Float</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Trade Date">
+                                    <DatePicker style={{ width: '100%' }}
+                                        onChange={tradeDateClick}
+                                        defaultValue={moment('2020/01/23', dateFormat)} />
+                                </Form.Item>
+                                <Form.Item label="Effective Date">
+                                    <DatePicker
+                                        style={{ width: '100%' }}
+                                        disabledDate={disabledDate}
+                                        onChange={effectiveDateClick}
+                                        value={effectiveDates} />
+                                </Form.Item>
+                                <Form.Item label="Maturity Date">
+                                    <DatePicker style={{ width: '100%' }}
+                                        defaultValue={moment('2020/01/23', dateFormat)} />
+                                </Form.Item>
+                                <Form.Item label="Settlement Type">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Contract Term">
+                                    <Select value={selectedContract}
+                                        onChange={contractClick} >
+                                        {contractSelect.map(contract => (
+                                            <Select.Option key={contract}>{contract}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Notional Amount">
+                                    <Input.Group compact>
+                                        <Select defaultValue="Rp" style={{ width: '15%' }}>
+                                            <Select.Option value="Rp">Rp</Select.Option>
+                                        </Select>
+                                        <InputNumber
+                                            min={1000000000}
+                                            formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                            parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                            style={{ width: '85%' }} />
+                                    </Input.Group>
+                                </Form.Item>
+                                <Form.Item label="Payment Frequency">
+                                    <Select >
+                                        {paymentFrequency.map(payment => (
+                                            <Select.Option key={payment}>{payment}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Next Fixing Date">
+                                    <DatePicker style={{ width: '100%' }}
+                                        defaultValue={moment('2020/01/23', dateFormat)} />
+                                </Form.Item>
+                                <Form.Item label="Fixed Rate  ">
+                                    <Input.Group compact>
+                                        <InputNumber
+                                            defaultValue={0}
+                                            min={0}
+                                            max={100}
+                                            style={{ width: '85%' }}
+                                        /><Select defaultValue="%" style={{ width: '15%' }}>
+                                            <Select.Option value="%">%</Select.Option>
+                                        </Select>
+                                    </Input.Group>
+                                </Form.Item>
+                                <Form.Item label="Floating Rate Index">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Spread">
+                                    <InputNumber style={{ width: '100%' }} />
+                                </Form.Item>
+                                <Form.Item label="Leverage">
+                                    <InputNumber style={{ width: '100%' }} />
+                                </Form.Item>
+                                <Form.Item label="Day Count Fraction">
+                                    <Select defaultValue={countFraction[0]}>
+                                        {countFraction.map(fraction => (
+                                            <Select.Option key={fraction}>{fraction}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Reset Frequency">
+                                    <Select value={selectedReset}
+                                        onChange={resetClick} >
+                                        {resetSelect.map(reset => (
+                                            <Select.Option key={reset}>{reset}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                {jenisProduct === productSelect[0] ? (<div>
+                                    <Form.Item label="Floating Rate Index Tenor">
+                                        <Select >
+                                            <Select.Option key="1W">1W</Select.Option>
+                                            <Select.Option key="1M">1M</Select.Option>
+                                            <Select.Option key="3M">3M</Select.Option>
+                                            <Select.Option key="6M">6M</Select.Option>
+                                            <Select.Option key="1Y">1Y</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                </div>) : (<div>
+                                    <Form.Item label="Floating Rate Index Tenor">
+                                        <Select >
+                                            <Select.Option key="O">Overnight</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                    <Form.Item label="Floating Rate Compounding ">
+                                        <Select >
+                                            <Select.Option key="D">Daily Compounding </Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                </div>)
+                                }
+                                <Form.Item label="Business Day Convention">
+                                    <Select defaultValue={businessDay[0]}>
+                                        {businessDay.map(bday => (
+                                            <Select.Option key={bday}>{bday}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                {/* calendar ????? */}
+                                <Form.Item label="Rounding Payment">
+                                    <InputNumber style={{ width: '100%' }} />
+                                </Form.Item>
+                                {jenisProduct === productSelect[0] ? (<div>
+                                    <Form.Item label="Stub Payment">
+                                        <Select defaultValue="Initial">
+                                            <Select.Option value="Initial">Initial</Select.Option>
+                                            <Select.Option value="Final">Final</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                </div>) : (<div>
+                                </div>)
+                                }
+                                <Form.Item label="Forward Starting">
+                                    <Select defaultValue="Eligible">
+                                        <Select.Option value="Eligible">Eligible</Select.Option>
+                                        <Select.Option value="NotE ligible">Not Eligible</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                {/* Cash Payment Compounding ????? */}
+                                <Form.Item label="Role">
+                                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                        <Radio value={1}>Maker</Radio>
+                                        <Radio value={2}>Direct Checker</Radio>
+                                        <Radio value={3}>Direct Approver</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                                    <Button type="primary" htmlType="submit">
+                                        Submit</Button>
+                                </Form.Item>
+                            </div>
+                        ) : jenisProduct === productSelect[2] ? (
+                            <div>
+                                <Form.Item label="Position">
+                                    <Select
+                                        value={position}
+                                        onChange={positionClick} >
+                                        {postitionSelect.map(pos => (
+                                            <Select.Option key={pos}>{pos}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Currency">
+                                    <Select value="USD">
+                                        <Select.Option value="USD">USD/IDR</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Notional Foreign Currency ">
+                                    <Select defaultValue="USD">
+                                        <Select.Option value="USD">USD</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                {/* <Form.Item label="Forward">
+                                    <Select defaultValue="IDR">
+                                        <Select.Option value="IDR">IDR</Select.Option>
+                                    </Select>
+                                </Form.Item> */}
+                                <Form.Item label="Deal Rate  ">
+                                    <Input
+                                        addonBefore="Rp"
+                                        style={{ marginBottom: '15px' }} />
+                                </Form.Item>
+                                <Form.Item label="Reference Rate">
+                                    <Select
+                                        value={selectedRate}
+                                        onChange={rateClick} >
+                                        {rateSelect.map(rate => (
+                                            <Select.Option key={rate}>{rate}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Settlement Date">
+                                    <DatePicker style={{ width: '100%' }}
+                                        onChange={tradeDateClick}
+                                        defaultValue={moment('2020/01/23', dateFormat)} />
+                                </Form.Item>
+                                <Form.Item label="Fixing Date">
+                                    <DatePicker
+                                        style={{ width: '100%' }}
+                                        disabledDate={disabledDate}
+                                        onChange={effectiveDateClick}
+                                        value={effectiveDates} />
+                                </Form.Item>
+                                <Form.Item label="Settlement Currency ">
+                                    <Select defaultValue="IDR">
+                                        <Select.Option value="IDR">IDR</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Settlement Type">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Contract Term">
+                                    <Select value={selectedContract}
+                                        onChange={contractClick} >
+                                        {contractSelect.map(contract => (
+                                            <Select.Option key={contract}>{contract}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Rounding">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Price Source Disruption">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Notional Amount">
+                                    <Input.Group compact>
+                                        <Select defaultValue="$" style={{ width: '15%' }}>
+                                            <Select.Option value="$">$</Select.Option>
+                                        </Select>
+                                        <InputNumber
+                                            defaultValue={0}
+                                            formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                            parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                            style={{ width: '85%' }} />
+                                    </Input.Group>
+                                </Form.Item>
+                                <Form.Item label="Role ">
+                                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                        <Radio value={1}>Maker</Radio>
+                                        <Radio value={2}>Direct Checker</Radio>
+                                        <Radio value={3}>Direct Approver</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                                    <Button type="primary" htmlType="submit">
+                                        Submit</Button>
+                                </Form.Item>
+                            </div>
+                        ) : null
+                }
             </Form>
         </div>
     )

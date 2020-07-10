@@ -42,7 +42,7 @@ const Menu = [
             linkTo: '/tradesummary'
         }, {
             name: 'Approval',
-            key: 'approval',
+            key: 'tradeApproval',
             linkTo: '/trade/approval'
         }]
     },
@@ -174,7 +174,7 @@ const Menu = [
             linkTo: '/memberandclientmanagement/registerclient'
         }, {
             name: 'Approval',
-            key: 'approval',
+            key: 'memberclientapproval',
             linkTo: '/memberandclientmanagement/approval'
         }]
     },
@@ -224,7 +224,7 @@ const Menu = [
             linkTo: '/calendar'
         }, {
             name: 'Approval',
-            key: 'approval',
+            key: 'administrationApproval',
             linkTo: '/approval'
         }, {
             name: 'Register ATS',

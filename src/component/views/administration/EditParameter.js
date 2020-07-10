@@ -1,53 +1,53 @@
 import React, { useState } from 'react';
 import {
-    Form,
-    Input,
-    Button,
-    Select,
-    Table,
-    Dropdown,
-    Menu,
+	Form,
+	Input,
+	Button,
+	Select,
+	Table,
+	Dropdown,
+	Menu,
 	DatePicker
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
-function EditParameter(){
+function EditParameter() {
 	const [expand, setExpand] = useState(true);
-    const [form] = Form.useForm();
-    const componentSize = 'middle';
-    const formItemLayout = {
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
+	const [form] = Form.useForm();
+	const componentSize = 'middle';
+	const formItemLayout = {
+		labelCol: {
+			xs: { span: 24 },
+			sm: { span: 6 },
+		},
+		wrapperCol: {
+			xs: { span: 24 },
+			sm: { span: 16 },
+		},
 	};
-	
-    const columns = [
-        {
-            title: 'Parameter',
-            dataIndex: 'parameter',
-            key: 'parameter',
-          },
-          {
-            title: 'Start Time',
-            dataIndex: 'startTime',
-            key: 'startTime',
-          },
-          {
-            title: 'End Time',
-            dataIndex: 'endTime',
-            key: 'endTime',
-          },
-          {
-            title: 'Action',
-            key: 'action',
-            fixed: 'right',
-            render: (text, record) => (
+
+	const columns = [
+		{
+			title: 'Parameter',
+			dataIndex: 'parameter',
+			key: 'parameter',
+		},
+		{
+			title: 'Start Time',
+			dataIndex: 'startTime',
+			key: 'startTime',
+		},
+		{
+			title: 'End Time',
+			dataIndex: 'endTime',
+			key: 'endTime',
+		},
+		{
+			title: 'Action',
+			key: 'action',
+			fixed: 'right',
+			render: (text, record) => (
 				<Dropdown
 					overlay={
 						<Menu>
@@ -91,33 +91,33 @@ function EditParameter(){
 					<Button>Action</Button>
 				</Dropdown>
 			)
-        },
-    ];
-    const data = [
-        {
+		},
+	];
+	const data = [
+		{
 			key: '1',
 			parameter: 'Trade Submission & Validation',
 			startTime: '23-02-2020',
 			endTime: '29-02-2020',
-        },
-        {
+		},
+		{
 			key: '2',
 			parameter: 'Settlement and Reconciliation',
 			startTime: '23-02-2020',
 			endTime: '29-02-2020',
-        },
-        {
+		},
+		{
 			key: '3',
 			parameter: 'Clearing Process',
 			startTime: '23-02-2020',
 			endTime: '29-02-2020',
-        },
+		},
 	];
-	
+
 	const { Option } = Select;
-   
-    return (
-        <div style={{ margin: '15px 20px' }}>
+
+	return (
+		<div style={{ margin: '15px 20px' }}>
 			<Form
 				{...formItemLayout}
 				size={componentSize}
@@ -130,44 +130,44 @@ function EditParameter(){
 				</Form.Item>
 			</div>
 			) : (
-				<div>
-					<Form.Item label="Parameter">
-						<Input />
-					</Form.Item>
-					<Form.Item label="Start Time">
-						<DatePicker style={{ width: '100%' }} />
-					</Form.Item>
-					<Form.Item label="End Time">
-						<DatePicker style={{ width: '100%' }} />
-					</Form.Item>
-				</div>
-			)}
+					<div>
+						<Form.Item label="Parameter">
+							<Input />
+						</Form.Item>
+						<Form.Item label="Start Time">
+							<DatePicker style={{ width: '100%' }} />
+						</Form.Item>
+						<Form.Item label="End Time">
+							<DatePicker style={{ width: '100%' }} />
+						</Form.Item>
+					</div>
+				)}
 
-			<Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        tyle={{ marginRight: '15px' }}>
-                        Search
+				<Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+					<Button
+						type="primary"
+						htmlType="submit"
+						tyle={{ marginRight: '15px' }}>
+						Search
                                 </Button>
-                    <Button
-                        style={{ margin: '0 8px' }}
-                        onClick={() => {
-                            form.resetFields();
-                        }}>
-                        Clear
+					<Button
+						style={{ margin: '0 8px' }}
+						onClick={() => {
+							form.resetFields();
+						}}>
+						Clear
                         </Button>
-                    <Button
-                        htmlType="submit"
-                        onClick={() => {
-                            setExpand(!expand);
-                        }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
-                    </Button>
-                </Form.Item>
-            </Form>
-			
+					<Button
+						htmlType="submit"
+						onClick={() => {
+							setExpand(!expand);
+						}}>
+						{expand ? (<div><DownOutlined />Advance Search</div>) :
+							(<div><UpOutlined />Simple Search</div>)}
+					</Button>
+				</Form.Item>
+			</Form>
+
 			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
 				<Table
 					columns={columns}
@@ -176,8 +176,8 @@ function EditParameter(){
 					size="middle"
 				/>
 			</div>
-        </div>
-    )
+		</div>
+	)
 }
 
 export default EditParameter

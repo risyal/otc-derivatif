@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     DatePicker,
@@ -10,10 +10,10 @@ import {
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+const dateFormat = 'YYYY/MM/DD';
 
 function ApprovalTrade() {
-    const componentSize = 'middle';
-    const dateFormat = 'YYYY/MM/DD';
+    const [componentSize] = useMemo(() => 'middle');
     const { RangePicker } = DatePicker;
     const formItemLayout = {
         labelCol: {
@@ -28,7 +28,7 @@ function ApprovalTrade() {
 
     const { Option } = Select;
 
-    const columns = [
+    const [columns] = useState([
         {
             title: 'No',
             dataIndex: 'no',
@@ -80,10 +80,10 @@ function ApprovalTrade() {
             }} style={{ marginRight: '20px' }}>Detail
             </Link>),
         },
-    ];
+    ]);
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    const data = [
+    const [data] = useState([
         {
             no: '1',
             key: '1',
@@ -105,7 +105,7 @@ function ApprovalTrade() {
             status: 'Waiting for Approver',
             linkTo: '/registerClient/ViewDeleteMember',
         },
-    ];
+    ]);
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>

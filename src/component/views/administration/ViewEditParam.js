@@ -32,22 +32,22 @@ const ViewEditParam = (props) => {
     };
     const data = [
         {
-			key: '1',
-			parameter: 'Trade Submission & Validation',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+            key: '1',
+            parameter: 'Trade Submission & Validation',
+            startTime: '23-02-2020',
+            endTime: '29-02-2020',
         },
         {
-			key: '2',
-			parameter: 'Settlement and Reconciliation',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+            key: '2',
+            parameter: 'Settlement and Reconciliation',
+            startTime: '23-02-2020',
+            endTime: '29-02-2020',
         },
         {
-			key: '3',
-			parameter: 'Clearing Process',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+            key: '3',
+            parameter: 'Clearing Process',
+            startTime: '23-02-2020',
+            endTime: '29-02-2020',
         },
     ];
     const dataMemberById = data.find((member) => {
@@ -71,7 +71,7 @@ const ViewEditParam = (props) => {
                             <CaretLeftOutlined />
                         </Link>
                     </span>
-                {action} Parameter</Title>
+                    {action} Parameter</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -95,12 +95,12 @@ const ViewEditParam = (props) => {
                     <Input disabled={disable} defaultValue={dataMemberById.parameter} />
                 </Form.Item>
                 <Form.Item label="Start Time">
-                    <DatePicker style={{ width: '100%'}} 
-                        defaultValue={moment('2020/02/23', dateFormat)}/>
+                    <DatePicker style={{ width: '100%' }}
+                        defaultValue={moment('2020/02/23', dateFormat)} />
                 </Form.Item>
                 <Form.Item label="End Time">
-                    <DatePicker style={{ width: '100%'}} 
-                        defaultValue={moment('2020/02/29', dateFormat)}/>   
+                    <DatePicker style={{ width: '100%' }}
+                        defaultValue={moment('2020/02/29', dateFormat)} />
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editparameter">

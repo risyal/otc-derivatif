@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Input,
@@ -12,9 +12,10 @@ import {
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const dateFormat = 'YYYY/MM/DD';
 
 function InquiryTrade() {
-    const columns = [
+    const [columns] = useState([
         {
             title: 'UTI',
             width: 100,
@@ -144,8 +145,8 @@ function InquiryTrade() {
                     </Link>
                 </div>,
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
@@ -158,9 +159,9 @@ function InquiryTrade() {
         },
         {
         },
-    ];
-    const componentSize = 'middle';
-    const formItemLayout = {
+    ]);
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -169,13 +170,12 @@ function InquiryTrade() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-    const productSelect = ['OIS', 'IRS', 'DNDF'];
+    });
+    const [productSelect] = useState(['OIS', 'IRS', 'DNDF']);
     const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
     const productClick = (e) => {
         SetJenisProduct(e);
     };
-    const dateFormat = 'YYYY/MM/DD';
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     return (
