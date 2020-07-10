@@ -6,6 +6,7 @@ import {
     Select,
     DatePicker,
     InputNumber,
+    Radio,
 } from 'antd';
 
 import moment from 'moment';
@@ -101,6 +102,10 @@ function NewTrade() {
     const effectiveDateClick = (e) => {
         setEffectiveDates(e);
     }
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
     var productForm;
     if (jenisProduct != null) {
         if (jenisProduct === productSelect[0]
@@ -279,6 +284,13 @@ function NewTrade() {
                     </Select>
                 </Form.Item>
                 {/* Cash Payment Compounding ????? */}
+                <Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button type="primary" htmlType="submit">
                         Submit
@@ -370,6 +382,13 @@ function NewTrade() {
                             parser={value => value.replace(/\$\s?|(,*)/g, '')}
                             style={{ width: '85%' }} />
                     </Input.Group>
+                </Form.Item>
+                <Form.Item label="Role ">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button type="primary" htmlType="submit">

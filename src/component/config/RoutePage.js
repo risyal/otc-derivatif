@@ -79,7 +79,7 @@ function RoutePage() {
             </Route>
             <Route path="/canceltrade">
                 <div className="head-content">
-                    <Title level={4}>Cancel Trade Input Trade</Title>
+                    <Title level={4}>Cancel Trade</Title>
                 </div>
                 <CancelTradePage />
             </Route>

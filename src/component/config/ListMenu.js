@@ -21,13 +21,17 @@ const Menu = [
             key: 'newtrade',
             linkTo: '/newtrade'
         }, {
-            name: 'Cancel Trade',
-            key: 'canceltrade',
-            linkTo: '/canceltrade'
-        }, {
             name: 'Inquiry Input Trade',
             key: 'inquerytrade',
             linkTo: '/inquerytrade'
+        }, {
+            name: 'Trade Confirmation',
+            key: 'tradeConfirmation',
+            linkTo: '/tradeConfirmation'
+        }, {
+            name: 'Cancel Trade',
+            key: 'canceltrade',
+            linkTo: '/canceltrade'
         }, {
             name: 'Monitoring Trade',
             key: 'monitoringtrade',
@@ -36,10 +40,6 @@ const Menu = [
             name: 'Trade Summary',
             key: 'tradesummary',
             linkTo: '/tradesummary'
-        }, {
-            name: 'Trade Confirmation',
-            key: 'tradeConfirmation',
-            linkTo: '/tradeConfirmation'
         }]
     },
     {
