@@ -2,7 +2,8 @@ import React from 'react';
 import {
     Form,
     Input,
-    Button
+    Button,
+    Radio,
 } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -37,6 +38,15 @@ function AddUser(){
                 <Form.Item label="Pincode">
                     <Input />
                 </Form.Item>
+                
+                <Form.Item label="Role">
+                    <Radio.Group>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Link to={{
                     pathname: `/usermanagement`}}>

@@ -137,16 +137,7 @@ const ViewDeleteSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                
                 <Table
                     className="viewDelTable"
                     columns={columns}
@@ -156,6 +147,18 @@ const ViewDeleteSCMgt = (props) => {
                     size="middle"
                     pagination={false}
                 />
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/securitiescollmgt">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">

@@ -107,16 +107,7 @@ const ViewEditSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                
                 <Form.Item label="Instrument Code">
                     <Input disabled={disable} defaultValue={dataMemberById.code} />
                 </Form.Item>
@@ -145,6 +136,18 @@ const ViewEditSCMgt = (props) => {
                     <DatePicker style={{ width: '100%'}} 
                         defaultValue={moment('2020/07/09', dateFormat)}/>
                 </Form.Item>
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/securitiescollmgt">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>

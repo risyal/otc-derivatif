@@ -129,6 +129,17 @@ const ViewDeleteRegAts = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
+                
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
+
                 {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
@@ -139,15 +150,6 @@ const ViewDeleteRegAts = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/registerats">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">

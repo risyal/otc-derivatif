@@ -85,6 +85,15 @@ const ViewEditCalendar = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
+                
+                <Form.Item label="Date">
+                    <DatePicker style={{ width: '100%' }}
+                        defaultValue={moment('2020/07/31', dateFormat)}/>
+                </Form.Item>
+                <Form.Item label="Information">
+                    <Input disabled={disable} defaultValue={dataCalendarById.information}/>
+                </Form.Item>
+
                 {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
@@ -95,13 +104,7 @@ const ViewEditCalendar = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/07/31', dateFormat)}/>
-                </Form.Item>
-                <Form.Item label="Information">
-                    <Input disabled={disable} defaultValue={dataCalendarById.information}/>
-                </Form.Item>
+                    
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/calendar">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
