@@ -3,14 +3,14 @@ import {
 	Form,
 	Input,
 	Button,
-	Select,
 	Table,
 	Dropdown,
 	Menu,
-	DatePicker
+	TimePicker
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 function EditParameter() {
 	const [expand, setExpand] = useState(true);
@@ -97,24 +97,24 @@ function EditParameter() {
 		{
 			key: '1',
 			parameter: 'Trade Submission & Validation',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+			startTime: '12:08',
+			endTime: '15:08',
 		},
 		{
 			key: '2',
 			parameter: 'Settlement and Reconciliation',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+			startTime: '12:08',
+			endTime: '15:08',
 		},
 		{
 			key: '3',
 			parameter: 'Clearing Process',
-			startTime: '23-02-2020',
-			endTime: '29-02-2020',
+			startTime: '12:08',
+			endTime: '15:08',
 		},
 	];
 
-	const { Option } = Select;
+	const format = 'HH:mm';
 
 	return (
 		<div style={{ margin: '15px 20px' }}>
@@ -135,10 +135,10 @@ function EditParameter() {
 							<Input />
 						</Form.Item>
 						<Form.Item label="Start Time">
-							<DatePicker style={{ width: '100%' }} />
+							<TimePicker style={{width:'100%'}}	/>
 						</Form.Item>
 						<Form.Item label="End Time">
-							<DatePicker style={{ width: '100%' }} />
+							<TimePicker style={{width:'100%'}}	/>
 						</Form.Item>
 					</div>
 				)}

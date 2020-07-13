@@ -1,24 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
     Form,
     Input,
     Button,
-    Select,
     Radio,
     Typography,
-    DatePicker
 } from 'antd';
 import {
     CaretLeftOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-import moment from 'moment';
 
-const { Title } = Typography;
-const { Option } = Select;
+const { Title } = Typography;    
 
-const ViewEditRRate = (props) => {
+const ViewEditRegAts = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -30,70 +26,63 @@ const ViewEditRRate = (props) => {
             sm: { span: 16 },
         },
     };
+
     const data = [
         {
             key: '0',
-            code: '',
-            type: '',
-            date: '',
-            value: '',
+            name: '',
+            address: '',
+            pic: '',
+            telp: '',
+            email: '',
         },
         {
             key: '1',
-            code: 'JIBOR1',
-            type: 'JIBOR',
-            date: '24-03-2020',
-            value: 'Value',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '2',
-            code: 'JIBOR1',
-            type: 'INDONIA',
-            date: '24-03-2020',
-            value: 'Value2',        
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '3',
-            code: 'JIBOR2',
-            type: 'JISDOR',
-            date: '24-03-2020',
-            value: 'Value3',        
-        },
-        {
-            key: '4',
-            code: 'JIBOR3',
-            type: 'LIBOR',
-            date: '24-03-2020',
-            value: 'Value4',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
     ];
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+
+    const dataAtsById = data.find((ats) => {
+        return ats.key === props.location.state.id
     })
 
-    const typeSelect = ['JIBOR', 'JISDOR', 'INDONIA', 'LIBOR'];
-    const [selectedType, setSelectedType] = useState(typeSelect[0]);
-    const typeClick = (e) => {
-        setSelectedType(e);
-    }
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
-    const dateFormat = 'YYYY/MM/DD';
 
-    return (
+    return(
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/editreferencerate">
+                        <Link to="/registerats">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Referency Rate</Title>
+                {action} Register Ats</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -113,29 +102,23 @@ const ViewEditRRate = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Ref. Code">
-                    <Input disabled={disable} defaultValue={dataMemberById.code} />
+                <Form.Item label="Company name">
+                    <Input disabled={disable} defaultValue={dataAtsById.name}/>
                 </Form.Item>
-                <Form.Item label="Ref. Type">
-                    <Select
-                        defaultValue={dataMemberById.type}
-                        onChange={typeClick}
-                        disabled={disable}
-                        >
-                        {typeSelect.map(type => (
-                            <Option value={type}>{type}</Option>
-                        ))}
-                    </Select>
+                <Form.Item label="Address">
+                    <Input disabled={disable} defaultValue={dataAtsById.address}/>
                 </Form.Item>
-                <Form.Item label="Date">
-                    <DatePicker style={{ width: '100%'}} 
-                        defaultValue={moment('2020/03/24', dateFormat)}/>   
+                <Form.Item label="PIC Name">
+                    <Input disabled={disable} defaultValue={dataAtsById.pic}/>
                 </Form.Item>
-                <Form.Item label="Value">
-                    <Input disabled={disable} defaultValue={dataMemberById.value} />
+                <Form.Item label="Telephone Number">
+                    <Input disabled={disable} defaultValue={dataAtsById.telp}/>
+                </Form.Item>
+                <Form.Item label="Email">
+                    <Input disabled={disable} defaultValue={dataAtsById.email}/>
                 </Form.Item>
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/editreferencerate">
+                    {!disable ? (<Link to="/registerats">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -143,7 +126,7 @@ const ViewEditRRate = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/editreferencerate">
+                    <Link to="/registerats">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -157,7 +140,8 @@ const ViewEditRRate = (props) => {
 
         </div>
     )
+
 }
 
 
-export default ViewEditRRate
+export default ViewEditRegAts

@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-const ViewDeleteSCMgt = (props) => {
+const ViewDeleteRegAts = (props) => {
     const text = 'Are you sure to delete this task?';
     const componentSize = 'middle';
     const formItemLayout = {
@@ -44,70 +44,62 @@ const ViewDeleteSCMgt = (props) => {
     const [data] = useState([
         {
             key: '0',
-            code: '',
             name: '',
-            type: '',
-            eligibility: '',
-            haircut: '',
-            maturityDate: '',
+            address: '',
+            pic: '',
+            telp: '',
+            email: '',
         },
         {
             key: '1',
-            code: 'CENAIDJA',
-            name: 'Instrument1',
-            type: 'Type1',
-            eligibility: 'True',
-            haircut: 'Haircut1',
-            maturityDate: '09-07-2020',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '2',
-            code: 'CENAIDJA',
-            name: 'Instrument2',
-            type: 'Type2',
-            eligibility: 'False',
-            haircut: 'Haircut2',
-            maturityDate: '09-07-2020',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '3',
-            code: 'CENAIDJA',
-            name: 'Instrument3',
-            type: 'Type3',
-            eligibility: 'True',
-            haircut: 'Haircut3',
-            maturityDate: '09-07-2020',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
     ]);
-    const dataInstrumentById = data.find((instrument) => {
-        return instrument.key === props.location.state.id
+    const dataAtsById = data.find((ats) => {
+        return ats.key === props.location.state.id
 
     })
 
     const [dataForView] = useState([
         {
-            title: "Instrument Code :",
-            paramData: dataInstrumentById.code
+            title: "Company Name :",
+            paramData: dataAtsById.name
         },
         {
-            title: "Instrument Name :",
-            paramData: dataInstrumentById.name
+            title: "Address :",
+            paramData: dataAtsById.address
         },
         {
-            title: "Instrument Type :",
-            paramData: dataInstrumentById.type
+            title: "PIC Name :",
+            paramData: dataAtsById.pic
         },
         {
-            title: "Eligibility :",
-            paramData: dataInstrumentById.eligibility
+            title: "Telephone Number :",
+            paramData: dataAtsById.telp
         },
         {
-            title: "Haircut :",
-            paramData: dataInstrumentById.haircut
-        },
-        {
-            title: "Maturity Date :",
-            paramData: dataInstrumentById.maturityDate
+            title: "Email :",
+            paramData: dataAtsById.email
         },
     ]);
 
@@ -123,11 +115,11 @@ const ViewDeleteSCMgt = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">   
-                        <Link to="/securitiescollmgt">
+                        <Link to="/registerats">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Instrument</Title>
+                {action} Register Ats</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -157,7 +149,7 @@ const ViewDeleteSCMgt = (props) => {
                     pagination={false}
                 />
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/securitiescollmgt">
+                    {!disable ? (<Link to="/registerats">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
                             <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
@@ -165,7 +157,7 @@ const ViewDeleteSCMgt = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/securitiescollmgt">
+                    <Link to="/registerats">
                         <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
@@ -181,4 +173,4 @@ const ViewDeleteSCMgt = (props) => {
     )
 }
 
-export default ViewDeleteSCMgt
+export default ViewDeleteRegAts

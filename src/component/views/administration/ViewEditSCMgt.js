@@ -5,7 +5,8 @@ import {
     Button,
     Radio,
     Typography,
-    DatePicker
+    DatePicker,
+    Select
 } from 'antd';
 import {
     CaretLeftOutlined,
@@ -14,7 +15,8 @@ import {
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
-const { Title } = Typography;
+const { Title } = Typography;    
+const { Option } = Select;
 
 const ViewEditSCMgt = (props) => {
     const componentSize = 'middle';
@@ -44,7 +46,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument1',
             type: 'Type1',
-            eligibility: 'Eligibility1',
+            eligibility: 'True',
             haircut: 'Haircut1',
             maturityDate: '09-07-2020',
         },
@@ -53,7 +55,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument2',
             type: 'Type2',
-            eligibility: 'Eligibility2',
+            eligibility: 'False',
             haircut: 'Haircut2',
             maturityDate: '09-07-2020',
         },
@@ -62,7 +64,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument3',
             type: 'Type3',
-            eligibility: 'Eligibility3',
+            eligibility: 'True',
             haircut: 'Haircut3',
             maturityDate: '09-07-2020',
         },
@@ -71,6 +73,12 @@ const ViewEditSCMgt = (props) => {
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
     })
+
+    const typeSelect = ['True', 'False'];
+    const [selectedType, setSelectedType] = useState(typeSelect[0]);
+    const typeClick = (e) => {
+        setSelectedType(e);
+    }
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -119,7 +127,16 @@ const ViewEditSCMgt = (props) => {
                     <Input disabled={disable} defaultValue={dataMemberById.type} />
                 </Form.Item>
                 <Form.Item label="Eligibity">
-                    <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
+                    {/* <Input disabled={disable} defaultValue={dataMemberById.eligibility} /> */}
+                    <Select
+                        defaultValue={dataMemberById.eligibility}
+                        onChange={typeClick}
+                        disabled={disable}
+                        >
+                        {typeSelect.map(type => (
+                            <Option value={type}>{type}</Option>
+                        ))}
+                    </Select>
                 </Form.Item>
                 <Form.Item label="Haircut">
                     <Input disabled={disable} defaultValue={dataMemberById.haircut} />

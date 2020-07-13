@@ -44,20 +44,20 @@ const ViewDeleteParam = (props) => {
         {
             key: '1',
             parameter: 'Trade Submission & Validation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
         {
             key: '2',
             parameter: 'Settlement and Reconciliation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
         {
             key: '3',
             parameter: 'Clearing Process',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
     ]);
     const dataParamById = data.find((param) => {
