@@ -71,11 +71,12 @@ function ApprovalTrade() {
             width: 100,
             fixed: 'right',
             render: (text, record) => (<Link to={{
-                pathname: `/trade/approval`,
+                pathname: `/trade/detailView`,
                 state: {
-                    id: record.key,
-                    action: "Detail",
+                    id: "1",
+                    action: "Approval",
                     disable: false,
+                    linkBack: "/trade/approval",
                 }
             }} style={{ marginRight: '20px' }}>Detail
             </Link>),

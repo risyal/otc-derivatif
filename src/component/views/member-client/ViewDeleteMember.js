@@ -196,6 +196,20 @@ const ViewDeleteMember = (props) => {
             paramData: dataMemberById.status
         },
     ]);
+    const [dataForChecker] = useState([
+        {
+            title: "Nama :",
+            paramData: "Fulan"
+        },
+        {
+            title: "Email :",
+            paramData: "Fulan@gmail.com"
+        },
+        {
+            title: "Date :",
+            paramData: "07-07-2020"
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -208,12 +222,12 @@ const ViewDeleteMember = (props) => {
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">   
+                    <span className="icon-back">
                         <Link to="/memberandclientmanagement/registermember">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Member</Title>
+                    {action} Member</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -232,37 +246,30 @@ const ViewDeleteMember = (props) => {
                 ) : (
                         <div></div>
                     )}
-                    <Table
-                        className="viewDelTable"
-                        columns={columns}
-                        dataSource={dataForView}
-                        showHeader={false}
-                        rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                        size="middle"
-                        pagination={false}
-                    />
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
                 {action === 'Detail' ? (
                     <div>
                         <br />
-                        Checker Information :
-                        <Form {...formItemLayout}
-                            size={componentSize}
-                            layout="horizontal"
-                            initialValues={{ size: componentSize }}
-                            labelAlign="left"
-                            style={{ marginBottom: '80px' }}>
-                            <Form.Item label="Nama">
-                                {dataCheckerById.nama}
-                            </Form.Item>
-                            <Form.Item label="Email">
-                                {dataCheckerById.email}
-                            </Form.Item>
+                        <h2>Checker Information :</h2>
+                        <Table
+                            className="viewDelTable"
+                            columns={columns}
+                            dataSource={dataForChecker}
+                            showHeader={false}
+                            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                            size="middle"
+                            pagination={false}
+                        />
 
-                            <Form.Item label="Date">
-                                {dataCheckerById.date}
-                            </Form.Item>
-
-                        </Form>
+                        <br />
                         <Form.Item label="Catatan">
                             <Input.TextArea rows={4} />
                         </Form.Item>

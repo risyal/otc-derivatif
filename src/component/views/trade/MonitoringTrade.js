@@ -145,7 +145,15 @@ function MonitoringTrade() {
             key: 'operation',
             fixed: 'right',
             width: 100,
-            render: () => <a>Detail</a>,
+            render: () => <Link to={{
+                pathname: `/trade/detailView`,
+                state: {
+                    id: "1",
+                    action: "Detail",
+                    disable: true,
+                    linkBack: "/monitoringtrade",
+                }
+            }} style={{ marginRight: '20px' }}>Detail</Link>,
         },
     ]);
     const [data] = useState([
@@ -236,8 +244,10 @@ function MonitoringTrade() {
                             <Select
                                 placeholder="Select a Status"
                             >
-                                <Select.Option value="checker">Waiting for Checker</Select.Option>
-                                <Select.Option value="approver">Waiting for Approver</Select.Option>
+                                <Select.Option value="diterima">Diterima</Select.Option>
+                                <Select.Option value="eligibility1">Eligibility Check 1</Select.Option>
+                                <Select.Option value="eligibility2">Eligibility Check 2</Select.Option>
+                                <Select.Option value="novasi">Novasi</Select.Option>
                             </Select>
                         </Form.Item>
                     </div>

@@ -8,7 +8,6 @@ import {
     Table,
 } from 'antd';
 import {
-    CaretLeftOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";

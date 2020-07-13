@@ -75,6 +75,7 @@ import ViewDeleteUser from '../views/administration/ViewDeleteUser';
 import AddUser from '../views/administration/AddUser';
 import ViewEditCalendar from '../views/administration/ViewEditCalendar';
 import ViewDeleteCalendar from '../views/administration/ViewDeleteCalendar';
+import DetailViewTrade from '../views/trade/DetailView';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -436,6 +437,8 @@ function RoutePage() {
             <Route exact path="/administration/ViewEditCalendar" component={ViewEditCalendar}>
             </Route>
             <Route exact path="/administration/ViewDeleteCalendar" component={ViewDeleteCalendar}>
+            </Route>
+            <Route exact path="/trade/detailView" component={DetailViewTrade}>
             </Route>
         </div>
     )

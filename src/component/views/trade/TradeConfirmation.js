@@ -6,6 +6,8 @@ import {
     Table,
     Select,
     DatePicker,
+    Dropdown,
+    Menu,
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
@@ -50,16 +52,39 @@ function TradeConfirmation() {
             fixed: 'right',
             width: 100,
             render: () =>
-                <div>
-                    <Link to={{
-                        pathname: `/tradeConfirmation`,
-                        state: {
-                            action: "Detail",
-                            disable: false,
-                        }
-                    }} style={{ marginRight: '20px' }}>Detail
+                <Dropdown
+                    overlay={
+                        <Menu>
+                            <Menu.Item>
+                                <Link to={{
+                                    pathname: `/trade/detailView`,
+                                    state: {
+                                        id: "1",
+                                        action: "Detail",
+                                        disable: true,
+                                        linkBack: "/tradeConfirmation",
+                                    }
+                                }} style={{ marginRight: '20px' }}>Detail
                     </Link>
-                </div>,
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Link to={{
+                                    pathname: `/trade/detailView`,
+                                    state: {
+                                        id: "1",
+                                        action: "Confirmation",
+                                        disable: false,
+                                        linkBack: "/tradeConfirmation",
+                                    }
+                                }} style={{ marginRight: '20px' }}>Confirmation
+                    </Link>
+                            </Menu.Item>
+                        </Menu>
+                    }
+                    placement="bottomLeft"
+                    trigger={['click']}>
+                    <Button>Action</Button>
+                </Dropdown>
         },
     ]);
     const [data] = useState([

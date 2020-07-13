@@ -139,22 +139,24 @@ function CancelTrade() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/canceltrade`,
+                                    pathname: `/trade/detailView`,
                                     state: {
-                                        id: record.key,
+                                        id: "1",
                                         action: "View",
                                         disable: true,
+                                        linkBack: "/canceltrade",
                                     }
                                 }} style={{ marginRight: '20px' }}>View
                     </Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/canceltrade`,
+                                    pathname: `/trade/detailView`,
                                     state: {
-                                        id: record.key,
-                                        action: "Edit",
+                                        id: "1",
+                                        action: "Cancel",
                                         disable: false,
+                                        linkBack: "/canceltrade",
                                     }
                                 }} style={{ marginRight: '20px' }}>Cancel
                     </Link>
@@ -246,8 +248,10 @@ function CancelTrade() {
                                 <Select
                                     placeholder="Select a Status"
                                 >
-                                    <Select.Option value="checker">Waiting for Checker</Select.Option>
-                                    <Select.Option value="approver">Waiting for Approver</Select.Option>
+                                    <Select.Option value="diterima">Diterima</Select.Option>
+                                    <Select.Option value="eligibility1">Eligibility Check 1</Select.Option>
+                                    <Select.Option value="eligibility2">Eligibility Check 2</Select.Option>
+                                    <Select.Option value="novasi">Novasi</Select.Option>
                                 </Select>
                             </Form.Item>
                         </div>

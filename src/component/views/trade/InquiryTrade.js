@@ -136,10 +136,12 @@ function InquiryTrade() {
             render: () =>
                 <div>
                     <Link to={{
-                        pathname: `/inquerytrade`,
+                        pathname: `/trade/detailView`,
                         state: {
+                            id: "1",
                             action: "Detail",
-                            disable: false,
+                            disable: true,
+                            linkBack: "/inquerytrade",
                         }
                     }} style={{ marginRight: '20px' }}>Detail
                     </Link>
@@ -224,8 +226,10 @@ function InquiryTrade() {
                                 <Select
                                     placeholder="Select a Status"
                                 >
-                                    <Select.Option value="checker">Waiting for Checker</Select.Option>
-                                    <Select.Option value="approver">Waiting for Approver</Select.Option>
+                                    <Select.Option value="diterima">Diterima</Select.Option>
+                                    <Select.Option value="eligibility1">Eligibility Check 1</Select.Option>
+                                    <Select.Option value="eligibility2">Eligibility Check 2</Select.Option>
+                                    <Select.Option value="novasi">Novasi</Select.Option>
                                 </Select>
                             </Form.Item>
                         </div>
