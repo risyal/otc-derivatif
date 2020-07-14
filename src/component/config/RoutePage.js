@@ -78,7 +78,10 @@ import ViewDeleteCalendar from '../views/administration/ViewDeleteCalendar';
 import DetailViewTrade from '../views/trade/DetailView';
 import ViewEditRegAts from '../views/administration/ViewEditRegAts';
 import ViewDeleteRegAts from '../views/administration/ViewDeleteRegAts';
-
+import ViewAdd from '../views/collateral/ViewAdd';
+import ViewAddColw from '../views/collateral/ViewAddColw';
+import DetailCancelCOLDP from '../views/collateral/DetailCancelCOLDP';
+import DetailCancelCOLW from '../views/collateral/DetailCancelCOLW';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -446,6 +449,22 @@ function RoutePage() {
             <Route exact path="/administration/ViewEditRegAts" component={ViewEditRegAts}>
             </Route>
             <Route exact path="/administration/ViewDeleteRegAts" component={ViewDeleteRegAts}>
+            </Route>
+            <Route path="/collateralManagement/ViewAdd">
+                <div className="head-content">
+                    <Title level={4}>Add New Instruction</Title>
+                </div>
+                <ViewAdd />
+            </Route>
+            <Route path="/collateralManagement/ViewAddColw">
+                <div className="head-content">
+                    <Title level={4}>Add New Instruction</Title>
+                </div>
+                <ViewAdd />
+            </Route>
+            <Route exact path="/collateralManagement/detailCancel" component={DetailCancelCOLDP}>
+            </Route>
+            <Route exact path="/collateralManagement/detailCancelColw" component={DetailCancelCOLW}>
             </Route>
         </div>
     )
