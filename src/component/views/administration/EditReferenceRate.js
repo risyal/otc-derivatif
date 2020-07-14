@@ -157,7 +157,7 @@ function EditReferenceRate(){
 							<Option value="indonia">INDONIA</Option>
 							<Option value="jisdor">JISDOR</Option>
 							<Option value="libor">LIBOR</Option>
-                        </Select>
+            </Select>
 					</Form.Item>
 				</div>
 			)}
@@ -187,6 +187,17 @@ function EditReferenceRate(){
             </Form>
 
 			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+				<Link to={{
+                        pathname: `/administration/ViewEditRRate`,
+                        state: {
+                            id: '0',
+                            action: "Add New",
+                            disable: false,
+                        }
+                    }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                            Add New Data
+                    </Button>
+                </Link>
 				<Table
 					columns={columns}
 					dataSource={data}

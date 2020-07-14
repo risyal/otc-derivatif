@@ -136,7 +136,7 @@ function EditAccount(){
                                 }} style={{ marginRight: '20px' }}>Edit
                     </Link>
                             </Menu.Item>
-                            <Menu.Item>
+                            {/* <Menu.Item>
                                 <Link to={{
                                     pathname: `/administration/ViewDeleteAccount`,
                                     state: {
@@ -146,7 +146,7 @@ function EditAccount(){
                                     }
                                 }} style={{ marginRight: '20px' }}>Delete
                                 </Link>
-                            </Menu.Item>
+                            </Menu.Item> */}
                         </Menu>
                     }
                     placement="bottomLeft"
@@ -162,7 +162,7 @@ function EditAccount(){
             code: 'CENAIDJA',
             sidLei: 'SID1LEI1',
             name: 'Nas abah',
-            currency: '$10',
+            currency: 'Rp',
             accNo: 'D4211',
             status: 'Active',
             accNo2: 'D4211',
@@ -175,7 +175,7 @@ function EditAccount(){
             code: 'CENAIDJA',
             sidLei: 'SID1LEI2',
             name: 'Mega',
-            currency: '$50',
+            currency: 'Rp',
             accNo: 'D4212',
             status: 'Active',
             accNo2: 'D4212',
@@ -188,7 +188,7 @@ function EditAccount(){
             code: 'CENAIDJA',
             sidLei: 'SID1LEI3',
             name: 'Tera',
-            currency: '$25',
+            currency: 'Rp',
             accNo: 'D4212',
             status: 'Frozen',
             accNo2: 'D4212',

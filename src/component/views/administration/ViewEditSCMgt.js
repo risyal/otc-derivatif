@@ -5,7 +5,8 @@ import {
     Button,
     Radio,
     Typography,
-    DatePicker
+    DatePicker,
+    Select
 } from 'antd';
 import {
     CaretLeftOutlined,
@@ -14,7 +15,8 @@ import {
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
-const { Title } = Typography;
+const { Title } = Typography;    
+const { Option } = Select;
 
 const ViewEditSCMgt = (props) => {
     const componentSize = 'middle';
@@ -44,7 +46,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument1',
             type: 'Type1',
-            eligibility: 'Eligibility1',
+            eligibility: 'True',
             haircut: 'Haircut1',
             maturityDate: '09-07-2020',
         },
@@ -53,7 +55,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument2',
             type: 'Type2',
-            eligibility: 'Eligibility2',
+            eligibility: 'False',
             haircut: 'Haircut2',
             maturityDate: '09-07-2020',
         },
@@ -62,7 +64,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument3',
             type: 'Type3',
-            eligibility: 'Eligibility3',
+            eligibility: 'True',
             haircut: 'Haircut3',
             maturityDate: '09-07-2020',
         },
@@ -71,6 +73,12 @@ const ViewEditSCMgt = (props) => {
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
     })
+
+    const typeSelect = ['True', 'False'];
+    const [selectedType, setSelectedType] = useState(typeSelect[0]);
+    const typeClick = (e) => {
+        setSelectedType(e);
+    }
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -99,16 +107,7 @@ const ViewEditSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                
                 <Form.Item label="Instrument Code">
                     <Input disabled={disable} defaultValue={dataMemberById.code} />
                 </Form.Item>
@@ -119,7 +118,16 @@ const ViewEditSCMgt = (props) => {
                     <Input disabled={disable} defaultValue={dataMemberById.type} />
                 </Form.Item>
                 <Form.Item label="Eligibity">
-                    <Input disabled={disable} defaultValue={dataMemberById.eligibility} />
+                    {/* <Input disabled={disable} defaultValue={dataMemberById.eligibility} /> */}
+                    <Select
+                        defaultValue={dataMemberById.eligibility}
+                        onChange={typeClick}
+                        disabled={disable}
+                        >
+                        {typeSelect.map(type => (
+                            <Option value={type}>{type}</Option>
+                        ))}
+                    </Select>
                 </Form.Item>
                 <Form.Item label="Haircut">
                     <Input disabled={disable} defaultValue={dataMemberById.haircut} />
@@ -128,6 +136,18 @@ const ViewEditSCMgt = (props) => {
                     <DatePicker style={{ width: '100%'}} 
                         defaultValue={moment('2020/07/09', dateFormat)}/>
                 </Form.Item>
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/securitiescollmgt">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>

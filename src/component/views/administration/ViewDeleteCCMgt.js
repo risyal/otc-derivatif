@@ -53,21 +53,21 @@ const ViewDeleteCCMgt = (props) => {
             key: '1',
             code: 'CENAIDJA',
             name: 'Instrument1',
-            eligibility: 'Eligibility1',
+            eligibility: 'False',
             haircut: 'Haircut1',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             name: 'Instrument2',
-            eligibility: 'Eligibility2',
+            eligibility: 'True',
             haircut: 'Haircut2',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             name: 'Instrument3',
-            eligibility: 'Eligibility3',
+            eligibility: 'True',
             haircut: 'Haircut3',
         },
     ]);
@@ -120,16 +120,7 @@ const ViewDeleteCCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                
                 <Table
                     className="viewDelTable"
                     columns={columns}
@@ -139,6 +130,18 @@ const ViewDeleteCCMgt = (props) => {
                     size="middle"
                     pagination={false}
                 />
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/cashcollmgt">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">

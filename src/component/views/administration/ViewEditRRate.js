@@ -18,7 +18,6 @@ import moment from 'moment';
 const { Title } = Typography;
 const { Option } = Select;
 
-
 const ViewEditRRate = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
@@ -32,6 +31,13 @@ const ViewEditRRate = (props) => {
         },
     };
     const data = [
+        {
+            key: '0',
+            code: '',
+            type: '',
+            date: '',
+            value: '',
+        },
         {
             key: '1',
             code: 'JIBOR1',
@@ -97,16 +103,7 @@ const ViewEditRRate = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                
                 <Form.Item label="Ref. Code">
                     <Input disabled={disable} defaultValue={dataMemberById.code} />
                 </Form.Item>
@@ -128,6 +125,18 @@ const ViewEditRRate = (props) => {
                 <Form.Item label="Value">
                     <Input disabled={disable} defaultValue={dataMemberById.value} />
                 </Form.Item>
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+                    
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editreferencerate">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>

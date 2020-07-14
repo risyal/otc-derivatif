@@ -56,7 +56,7 @@ const ViewDeleteSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument1',
             type: 'Type1',
-            eligibility: 'Eligibility1',
+            eligibility: 'True',
             haircut: 'Haircut1',
             maturityDate: '09-07-2020',
         },
@@ -65,7 +65,7 @@ const ViewDeleteSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument2',
             type: 'Type2',
-            eligibility: 'Eligibility2',
+            eligibility: 'False',
             haircut: 'Haircut2',
             maturityDate: '09-07-2020',
         },
@@ -74,7 +74,7 @@ const ViewDeleteSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument3',
             type: 'Type3',
-            eligibility: 'Eligibility3',
+            eligibility: 'True',
             haircut: 'Haircut3',
             maturityDate: '09-07-2020',
         },
@@ -137,16 +137,7 @@ const ViewDeleteSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                
                 <Table
                     className="viewDelTable"
                     columns={columns}
@@ -156,6 +147,18 @@ const ViewDeleteSCMgt = (props) => {
                     size="middle"
                     pagination={false}
                 />
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/securitiescollmgt">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">

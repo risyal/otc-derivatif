@@ -35,7 +35,7 @@ const ViewEditAccount = (props) => {
             code: 'CENAIDJA',
             sidLei: 'SID1LEI1',
             name: 'Nas abah',
-            currency: '$10',
+            currency: 'Rp',
             accNo: 'D4211',
             status: 'Active',
             accNo2: 'D4211',
@@ -48,7 +48,7 @@ const ViewEditAccount = (props) => {
             code: 'CENAIDJA',
             sidLei: 'SID1LEI2',
             name: 'Mega',
-            currency: '$50',
+            currency: 'Rp',
             accNo: 'D4212',
             status: 'Active',
             accNo2: 'D4212',
@@ -61,7 +61,7 @@ const ViewEditAccount = (props) => {
             code: 'CENAIDJA',
             sidLei: 'SID1LEI3',
             name: 'Tera',
-            currency: '$25',
+            currency: 'Rp',
             accNo: 'D4212',
             status: 'Frozen',
             accNo2: 'D4212',
@@ -105,16 +105,7 @@ const ViewEditAccount = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+            
                 <Form.Item label="Member ID">
                     <Input.Group compact >
                         <Input 
@@ -242,6 +233,18 @@ const ViewEditAccount = (props) => {
                     </Select>
                     </Input.Group>
                 </Form.Item>
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editaccount">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>

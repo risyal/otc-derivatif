@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-const ViewDeleteRRate = (props) => {
+const ViewDeleteRegAts = (props) => {
     const text = 'Are you sure to delete this task?';
     const componentSize = 'middle';
     const formItemLayout = {
@@ -43,54 +43,63 @@ const ViewDeleteRRate = (props) => {
     ];
     const [data] = useState([
         {
+            key: '0',
+            name: '',
+            address: '',
+            pic: '',
+            telp: '',
+            email: '',
+        },
+        {
             key: '1',
-            code: 'JIBOR1',
-            type: 'JIBOR',
-            date: '24-03-2020',
-            value: 'Value',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '2',
-            code: 'JIBOR1',
-            type: 'INDONIA',
-            date: '24-03-2020',
-            value: 'Value2',        
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '3',
-            code: 'JIBOR2',
-            type: 'JISDOR',
-            date: '24-03-2020',
-            value: 'Value3',        
-        },
-        {
-            key: '4',
-            code: 'JIBOR3',
-            type: 'LIBOR',
-            date: '24-03-2020',
-            value: 'Value4',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
     ]);
-    const dataRRateById = data.find((refrate) => {
-        return refrate.key === props.location.state.id
+    const dataAtsById = data.find((ats) => {
+        return ats.key === props.location.state.id
+
     })
 
     const [dataForView] = useState([
         {
-            title: "Reff. Code :",
-            paramData: dataRRateById.code
+            title: "Company Name :",
+            paramData: dataAtsById.name
         },
         {
-            title: "Reff. Type :",
-            paramData: dataRRateById.type
+            title: "Address :",
+            paramData: dataAtsById.address
         },
         {
-            title: "Date :",
-            paramData: dataRRateById.date
+            title: "PIC Name :",
+            paramData: dataAtsById.pic
         },
         {
-            title: "Value :",
-            paramData: dataRRateById.value
+            title: "Telephone Number :",
+            paramData: dataAtsById.telp
+        },
+        {
+            title: "Email :",
+            paramData: dataAtsById.email
         },
     ]);
 
@@ -106,11 +115,11 @@ const ViewDeleteRRate = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">   
-                        <Link to="/editreferencerate">
+                        <Link to="/registerats">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Reference Rate</Title>
+                {action} Register Ats</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -131,7 +140,7 @@ const ViewDeleteRRate = (props) => {
                     pagination={false}
                 />
 
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -141,9 +150,8 @@ const ViewDeleteRRate = (props) => {
                 ) : (
                         <div></div>
                     )}
-
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/editreferencerate">
+                    {!disable ? (<Link to="/registerats">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
                             <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
@@ -151,7 +159,7 @@ const ViewDeleteRRate = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/editreferencerate">
+                    <Link to="/registerats">
                         <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
@@ -162,8 +170,9 @@ const ViewDeleteRRate = (props) => {
                     </Link>
                 </Form.Item>
             </Form>
+
         </div>
     )
 }
 
-export default ViewDeleteRRate
+export default ViewDeleteRegAts

@@ -44,20 +44,20 @@ const ViewDeleteParam = (props) => {
         {
             key: '1',
             parameter: 'Trade Submission & Validation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
         {
             key: '2',
             parameter: 'Settlement and Reconciliation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
         {
             key: '3',
             parameter: 'Clearing Process',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
     ]);
     const dataParamById = data.find((param) => {
@@ -106,6 +106,17 @@ const ViewDeleteParam = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
+                
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
+
                 {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
@@ -116,15 +127,7 @@ const ViewDeleteParam = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editparameter">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">

@@ -6,7 +6,7 @@ import {
     Select,
     Radio,
     Typography,
-    DatePicker
+    TimePicker
 } from 'antd';
 import {
     CaretLeftOutlined,
@@ -35,20 +35,20 @@ const ViewEditParam = (props) => {
         {
             key: '1',
             parameter: 'Trade Submission & Validation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
         {
             key: '2',
             parameter: 'Settlement and Reconciliation',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
         {
             key: '3',
             parameter: 'Clearing Process',
-            startTime: '23-02-2020',
-            endTime: '29-02-2020',
+            startTime: '12:08',
+			endTime: '15:08',
         },
     ];
     const dataMemberById = data.find((member) => {
@@ -61,7 +61,7 @@ const ViewEditParam = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
-    const dateFormat = 'YYYY/MM/DD';
+    const format = 'HH:mm';
 
     return (
         <div>
@@ -82,6 +82,25 @@ const ViewEditParam = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
+                
+                <Form.Item label="Parameter">
+                    <Input disabled={disable} defaultValue={dataMemberById.parameter} />
+                </Form.Item>
+                <Form.Item label="Start Time">
+                    <TimePicker
+                        defaultValue={moment('12:08', format)}
+                        format={format}
+                        style={{ width: '100%' }}
+                    />
+                </Form.Item>
+                <Form.Item label="End Time">
+                    <TimePicker
+                        defaultValue={moment('15:08', format)}
+                        format={format}
+                        style={{ width: '100%' }}
+                    />
+                </Form.Item>
+
                 {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
@@ -92,17 +111,7 @@ const ViewEditParam = (props) => {
                 ) : (
                         <div></div>
                     )}
-                <Form.Item label="Parameter">
-                    <Input disabled={disable} defaultValue={dataMemberById.parameter} />
-                </Form.Item>
-                <Form.Item label="Start Time">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/02/23', dateFormat)} />
-                </Form.Item>
-                <Form.Item label="End Time">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/02/29', dateFormat)} />
-                </Form.Item>
+                    
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editparameter">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>

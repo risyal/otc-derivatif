@@ -5,7 +5,6 @@ import {
     Button,
     Radio,
     Typography,
-    Select
 } from 'antd';
 import {
     CaretLeftOutlined,
@@ -13,10 +12,9 @@ import {
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
-const { Title } = Typography;
-const { Option } = Select;
+const { Title } = Typography;    
 
-const ViewEditCCMgt = (props) => {
+const ViewEditRegAts = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -32,43 +30,42 @@ const ViewEditCCMgt = (props) => {
     const data = [
         {
             key: '0',
-            code: '',
             name: '',
-            eligibility: '',
-            haircut: '',
+            address: '',
+            pic: '',
+            telp: '',
+            email: '',
         },
         {
             key: '1',
-            code: 'CENAIDJA',
-            name: 'Instrument1',
-            eligibility: 'False',
-            haircut: 'Haircut1',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '2',
-            code: 'CENAIDJA',
-            name: 'Instrument2',
-            eligibility: 'True',
-            haircut: 'Haircut2',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
         {
             key: '3',
-            code: 'CENAIDJA',
-            name: 'Instrument3',
-            eligibility: 'True',
-            haircut: 'Haircut3',
+            name: 'PT 123',
+            address: 'Jl. Kenanga',
+            pic: 'Jihan',
+            telp: '082221829',
+            email: '123@gmail.com',
         },
     ];
 
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
+    const dataAtsById = data.find((ats) => {
+        return ats.key === props.location.state.id
     })
 
-    const typeSelect = ['True', 'False'];
-    const [selectedType, setSelectedType] = useState(typeSelect[0]);
-    const typeClick = (e) => {
-        setSelectedType(e);
-    }
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -81,11 +78,11 @@ const ViewEditCCMgt = (props) => {
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/cashcollmgt">
+                        <Link to="/registerats">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Data Currency</Title>
+                {action} Register Ats</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -96,26 +93,20 @@ const ViewEditCCMgt = (props) => {
                 style={{ marginBottom: '80px' }}
             >
                 
-                <Form.Item label="Currency Code">
-                    <Input disabled={disable} defaultValue={dataMemberById.code} />
+                <Form.Item label="Company name">
+                    <Input disabled={disable} defaultValue={dataAtsById.name}/>
                 </Form.Item>
-                <Form.Item label="Currency Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.name} />
+                <Form.Item label="Address">
+                    <Input disabled={disable} defaultValue={dataAtsById.address}/>
                 </Form.Item>
-                <Form.Item label="Eligibity">
-                    {/* <Input disabled={disable} defaultValue={dataMemberById.eligibility} /> */}
-                    <Select
-                        defaultValue={dataMemberById.eligibility}
-                        onChange={typeClick}
-                        disabled={disable}
-                        >
-                        {typeSelect.map(type => (
-                            <Option value={type}>{type}</Option>
-                        ))}
-                    </Select>
+                <Form.Item label="PIC Name">
+                    <Input disabled={disable} defaultValue={dataAtsById.pic}/>
                 </Form.Item>
-                <Form.Item label="Haircut">
-                    <Input disabled={disable} defaultValue={dataMemberById.haircut} />
+                <Form.Item label="Telephone Number">
+                    <Input disabled={disable} defaultValue={dataAtsById.telp}/>
+                </Form.Item>
+                <Form.Item label="Email">
+                    <Input disabled={disable} defaultValue={dataAtsById.email}/>
                 </Form.Item>
 
                 {!disable ? (<Form.Item label="Role">
@@ -130,7 +121,7 @@ const ViewEditCCMgt = (props) => {
                     )}
                     
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/cashcollmgt">
+                    {!disable ? (<Link to="/registerats">
                         <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
@@ -138,7 +129,7 @@ const ViewEditCCMgt = (props) => {
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/cashcollmgt">
+                    <Link to="/registerats">
                         <Button >
                             {!disable ? (
                                 <div>Cancel</div>
@@ -156,4 +147,4 @@ const ViewEditCCMgt = (props) => {
 }
 
 
-export default ViewEditCCMgt
+export default ViewEditRegAts
