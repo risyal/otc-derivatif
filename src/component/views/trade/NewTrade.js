@@ -38,7 +38,7 @@ function NewTrade() {
     });
     const [productRate] = useState({
         OIS: ['IndONIA'],
-        IRS: ['IndONIA', 'JIBOR 1W', 'JIBOR 1M', 'JIBOR 3M', 'JIBOR 6M', 'JIBOR 12M'],
+        IRS: ['JIBOR 1W', 'JIBOR 1M', 'JIBOR 3M', 'JIBOR 6M', 'JIBOR 12M'],
         DNDF: ['JISDOR'],
     });
     const [productContract] = useState({
@@ -83,7 +83,7 @@ function NewTrade() {
     const resetClick = (e) => {
         setSelectedReset(e);
     };
-
+    const [disableFR, setDisableFR] = useState(false);
     const [dates, setDates] = useState(moment('2020/01/23', dateFormat));
     const [effectiveDates, setEffectiveDates] = useState(moment('2020/01/25', dateFormat));
     function disabledDate(current) {
@@ -91,9 +91,9 @@ function NewTrade() {
         if (!dates || dates.length === 0) {
             return false;
         }
-        const batasMaxDate = dates && current.diff(dates, 'days') > 2;
-        const batasMinDate = dates && dates.diff(current, 'days') > 0;
-        return batasMinDate || batasMaxDate;
+        const batasMaxDate = dates && current.diff(dates, 'days') != 2;
+        //const batasMinDate = dates && dates.diff(current, 'days') == 0;
+        return batasMaxDate;
     }
     const tradeDateClick = (e) => {
         setDates(e);
@@ -102,10 +102,40 @@ function NewTrade() {
     const effectiveDateClick = (e) => {
         setEffectiveDates(e);
     }
+    const frdisableClick = (e) => {
+        if (e === "float") {
+            setDisableFR(true);
+        }
+        else {
+
+            setDisableFR(false);
+        }
+    }
+    const [showFSDate, setShowFSDate] = useState(true);
+    const forwardStartingClick = (e) => {
+        if (e === "eligible") {
+            setShowFSDate(true);
+        }
+        else {
+
+            setShowFSDate(false);
+        }
+    }
+    const [showClientId, setShowClientId] = useState(false);
+    const typeClick = (e) => {
+        if (e === "client") {
+            setShowClientId(true);
+        }
+        else {
+
+            setShowClientId(false);
+        }
+    }
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -119,16 +149,27 @@ function NewTrade() {
                 <Form.Item label="UTI">
                     <Input disabled='true' defaultValue='Auto Generate' />
                 </Form.Item>
-                <Form.Item label="Member ID">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Client ID">
-                    <Input />
-                </Form.Item>
                 <Form.Item label="Reference Number">
                     <Input />
                 </Form.Item>
-                <Form.Item label="SID/LEI">
+                <Form.Item label="Member ID">
+                    <Input />
+                </Form.Item>
+                <Form.Item label="Transaction Type">
+                    <Select defaultValue="house" onChange={typeClick}>
+                        <Select.Option value="house">House</Select.Option>
+                        <Select.Option value="client">Client</Select.Option>
+                    </Select>
+                </Form.Item>
+                {showClientId ?
+                    <Form.Item label="Client ID">
+                        <Select defaultValue="house">
+                            <Select.Option value="house">clientid1</Select.Option>
+                            <Select.Option value="client">clientid2</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    : null}
+                <Form.Item label="Counterparty">
                     <Input />
                 </Form.Item>
                 <Form.Item label="Product ">
@@ -161,22 +202,19 @@ function NewTrade() {
                                         ))}
                                     </Select>
                                 </Form.Item>
-                                {/* <Form.Item label="Market Side ">
-                                    <Select defaultValue="receiver">
-                                        <Select.Option value="receiver">Receiver</Select.Option>
-                                        <Select.Option value="payer">Payer</Select.Option>
+                                <Form.Item label="Market Side ">
+                                    <Select defaultValue="Receive">
+                                        <Select.Option value="Receive">Receive</Select.Option>
+                                        <Select.Option value="Pay">Pay</Select.Option>
                                     </Select>
-                                </Form.Item> */}
-                                <Form.Item label="Counterparty">
-                                    <Input />
                                 </Form.Item>
                                 <Form.Item label="Currency">
                                     <Input />
                                 </Form.Item>
                                 <Form.Item label="Leg Type ">
-                                    <Select defaultValue="fix">
-                                        <Select.Option value="fix">Fix/Float</Select.Option>
-                                        <Select.Option value="float">Float/Float</Select.Option>
+                                    <Select defaultValue="fix" onChange={frdisableClick}>
+                                        <Select.Option value="fix">Fix</Select.Option>
+                                        <Select.Option value="float">Float</Select.Option>
                                     </Select>
                                 </Form.Item>
                                 <Form.Item label="Trade Date">
@@ -184,6 +222,19 @@ function NewTrade() {
                                         onChange={tradeDateClick}
                                         defaultValue={moment('2020/01/23', dateFormat)} />
                                 </Form.Item>
+                                <Form.Item label="Forward Starting">
+                                    <Select defaultValue="Eligible"
+                                        onChange={forwardStartingClick}>
+                                        <Select.Option value="eligible">Eligible</Select.Option>
+                                        <Select.Option value="notEligible">Not Eligible</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                {showFSDate ?
+                                    <Form.Item label="Forward Starting Date">
+                                        <DatePicker style={{ width: '100%' }}
+                                            defaultValue={moment('2020/01/23', dateFormat)} />
+                                    </Form.Item>
+                                    : null}
                                 <Form.Item label="Effective Date">
                                     <DatePicker
                                         style={{ width: '100%' }}
@@ -196,7 +247,7 @@ function NewTrade() {
                                         defaultValue={moment('2020/01/23', dateFormat)} />
                                 </Form.Item>
                                 <Form.Item label="Settlement Type">
-                                    <Input />
+                                    <Input value="Cash" />
                                 </Form.Item>
                                 <Form.Item label="Contract Term">
                                     <Select value={selectedContract}
@@ -229,7 +280,7 @@ function NewTrade() {
                                     <DatePicker style={{ width: '100%' }}
                                         defaultValue={moment('2020/01/23', dateFormat)} />
                                 </Form.Item>
-                                <Form.Item label="Fixed Rate  ">
+                                {disableFR ? null : (<Form.Item label="Fixed Rate  ">
                                     <Input.Group compact>
                                         <InputNumber
                                             defaultValue={0}
@@ -240,7 +291,7 @@ function NewTrade() {
                                             <Select.Option value="%">%</Select.Option>
                                         </Select>
                                     </Input.Group>
-                                </Form.Item>
+                                </Form.Item>)}
                                 <Form.Item label="Floating Rate Index">
                                     <Input />
                                 </Form.Item>
@@ -309,12 +360,6 @@ function NewTrade() {
                                 </div>) : (<div>
                                 </div>)
                                 }
-                                <Form.Item label="Forward Starting">
-                                    <Select defaultValue="Eligible">
-                                        <Select.Option value="Eligible">Eligible</Select.Option>
-                                        <Select.Option value="NotE ligible">Not Eligible</Select.Option>
-                                    </Select>
-                                </Form.Item>
                                 {/* Cash Payment Compounding ????? */}
                                 <Form.Item label="Role">
                                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
@@ -339,6 +384,21 @@ function NewTrade() {
                                         ))}
                                     </Select>
                                 </Form.Item>
+                                <Form.Item label="Market Side ">
+                                    <Select defaultValue="buy">
+                                        <Select.Option value="buy">Buy</Select.Option>
+                                        <Select.Option value="sell">Pay</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="Reference Rate">
+                                    <Select
+                                        value={selectedRate}
+                                        onChange={rateClick} >
+                                        {rateSelect.map(rate => (
+                                            <Select.Option key={rate}>{rate}</Select.Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
                                 <Form.Item label="Currency">
                                     <Select value="USD">
                                         <Select.Option value="USD">USD/IDR</Select.Option>
@@ -357,16 +417,7 @@ function NewTrade() {
                                 <Form.Item label="Deal Rate  ">
                                     <Input
                                         addonBefore="Rp"
-                                        style={{ marginBottom: '15px' }} />
-                                </Form.Item>
-                                <Form.Item label="Reference Rate">
-                                    <Select
-                                        value={selectedRate}
-                                        onChange={rateClick} >
-                                        {rateSelect.map(rate => (
-                                            <Select.Option key={rate}>{rate}</Select.Option>
-                                        ))}
-                                    </Select>
+                                    />
                                 </Form.Item>
                                 <Form.Item label="Settlement Date">
                                     <DatePicker style={{ width: '100%' }}
@@ -386,7 +437,7 @@ function NewTrade() {
                                     </Select>
                                 </Form.Item>
                                 <Form.Item label="Settlement Type">
-                                    <Input />
+                                    <Input value="Non Deliverable" />
                                 </Form.Item>
                                 <Form.Item label="Contract Term">
                                     <Select value={selectedContract}
