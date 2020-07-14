@@ -237,15 +237,7 @@ const ViewDeleteMember = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Direct Checker</Radio>
-                        <Radio value={2}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                
                 <Table
                     className="viewDelTable"
                     columns={columns}
@@ -255,6 +247,17 @@ const ViewDeleteMember = (props) => {
                     size="middle"
                     pagination={false}
                 />
+                
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Direct Checker</Radio>
+                        <Radio value={2}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )}
+
                 {action === 'Detail' ? (
                     <div>
                         <br />

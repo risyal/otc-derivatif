@@ -230,7 +230,6 @@ const RegisterMember = () => {
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-                style={{ marginBottom: '80px' }}
             >
 
                 {expand ? (<div>
