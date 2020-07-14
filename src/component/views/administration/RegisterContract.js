@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Table,
     Tabs,
@@ -244,7 +244,7 @@ function RegisterContract() {
             irs: '',
         },
     ];
-    const editButton = <Button
+    const [editButton] = useState(<Button
         type="primary"
         style={{
             marginBottom: '15px',
@@ -252,7 +252,7 @@ function RegisterContract() {
             float: 'right',
             width: '80px',
             height: '35px'
-        }}>Edit</Button>;
+        }}>Edit</Button>);
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Tabs onChange={callback} type="card">
