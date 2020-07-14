@@ -82,6 +82,10 @@ import ViewAdd from '../views/collateral/ViewAdd';
 import ViewAddColw from '../views/collateral/ViewAddColw';
 import DetailCancelCOLDP from '../views/collateral/DetailCancelCOLDP';
 import DetailCancelCOLW from '../views/collateral/DetailCancelCOLW';
+import ViewAddSM from '../views/instruction/ViewAddSM';
+import DetailCancelSM from '../views/instruction/DetailCancelSM';
+import ViewAddCM from '../views/instruction/ViewAddCM';
+import DetailCancelCM from '../views/instruction/DetailCancelCM';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -460,11 +464,27 @@ function RoutePage() {
                 <div className="head-content">
                     <Title level={4}>Add New Instruction</Title>
                 </div>
-                <ViewAdd />
+                <ViewAddColw />
             </Route>
             <Route exact path="/collateralManagement/detailCancel" component={DetailCancelCOLDP}>
             </Route>
             <Route exact path="/collateralManagement/detailCancelColw" component={DetailCancelCOLW}>
+            </Route>
+            <Route path="/instructionManagement/ViewAddSM">
+                <div className="head-content">
+                    <Title level={4}>Add New Instruction</Title>
+                </div>
+                <ViewAddSM />
+            </Route>
+            <Route exact path="/instructionManagement/detailCancelSM" component={DetailCancelSM}>
+            </Route>
+            <Route path="/instructionManagement/ViewAddCM">
+                <div className="head-content">
+                    <Title level={4}>Add New Instruction</Title>
+                </div>
+                <ViewAddCM />
+            </Route>
+            <Route exact path="/instructionManagement/detailCancelCM" component={DetailCancelCM}>
             </Route>
         </div>
     )

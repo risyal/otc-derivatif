@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import {
     Form,
     Input,
@@ -7,9 +7,11 @@ import {
     DatePicker,
 } from 'antd';
 import moment from 'moment';
-
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
 function InquirySecManagement() {
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -21,7 +23,6 @@ function InquirySecManagement() {
             sm: { span: 16 },
         },
     };
-
 
     const columns = [
         {
@@ -102,30 +103,59 @@ function InquirySecManagement() {
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-            >
-
-                <Form.Item label="Participant Code" >
+            > {expand ? (<div>
+                <Form.Item label="Keyword">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Source Acc" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Dest Account" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Security Code" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Settlement Date" >
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
+            </div>
+            ) : (
+                    <div>
+                        <Form.Item label="Participant Code" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Source Acc" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Dest Account" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Security Code" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Settlement Date" >
+                            <DatePicker style={{ width: '100%' }}
+                                defaultValue={moment('2020/01/23', dateFormat)} />
+                        </Form.Item>
+                        <Form.Item label="Status" >
+                            <Input />
+                        </Form.Item>
+                    </div>
+                )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined />Advance Search</div>) :
+                            (<div><UpOutlined />Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
+
             <Table
                 columns={columns}
                 dataSource={data}
