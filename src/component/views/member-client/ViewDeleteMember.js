@@ -202,10 +202,6 @@ const ViewDeleteMember = (props) => {
             paramData: "Fulan"
         },
         {
-            title: "Email :",
-            paramData: "Fulan@gmail.com"
-        },
-        {
             title: "Date :",
             paramData: "07-07-2020"
         },
@@ -237,7 +233,7 @@ const ViewDeleteMember = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                
+
                 <Table
                     className="viewDelTable"
                     columns={columns}
@@ -247,16 +243,6 @@ const ViewDeleteMember = (props) => {
                     size="middle"
                     pagination={false}
                 />
-                
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Direct Checker</Radio>
-                        <Radio value={2}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
 
                 {action === 'Detail' ? (
                     <div>
@@ -276,6 +262,17 @@ const ViewDeleteMember = (props) => {
                         <Form.Item label="Catatan">
                             <Input.TextArea rows={4} />
                         </Form.Item>
+
+                        {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                            <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                <Radio value={1}>Direct Checker</Radio>
+                                <Radio value={2}>Direct Approver</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        ) : (
+                                <div></div>
+                            )}
+
                         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                             <Link to="/memberandclientmanagement/approval">
                                 <Button type="primary" style={{ marginRight: '15px' }}>Approve
