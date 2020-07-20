@@ -86,6 +86,7 @@ import ViewAddSM from '../views/instruction/ViewAddSM';
 import DetailCancelSM from '../views/instruction/DetailCancelSM';
 import ViewAddCM from '../views/instruction/ViewAddCM';
 import DetailCancelCM from '../views/instruction/DetailCancelCM';
+import ClearingDetailView from '../views/clearing/ClearingDetail';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -485,6 +486,8 @@ function RoutePage() {
                 <ViewAddCM />
             </Route>
             <Route exact path="/instructionManagement/detailCancelCM" component={DetailCancelCM}>
+            </Route>
+            <Route exact path="/clearingManagement/clearingDetail" component={ClearingDetailView}>
             </Route>
         </div>
     )

@@ -41,6 +41,11 @@ function NewTrade() {
         IRS: ['JIBOR 1W', 'JIBOR 1M', 'JIBOR 3M', 'JIBOR 6M', 'JIBOR 12M'],
         DNDF: ['JISDOR'],
     });
+    const [floatingRate] = useState({
+        OIS: ['INDONIA'],
+        IRS: ['JIBOR'],
+        DNDF: [''],
+    });
     const [productContract] = useState({
         OIS: ['1W', '1M', '3M', '6M', '9M', '12M '],
         IRS: ['1W', '1M', '3M', '6M', '9M', '12M '],
@@ -56,16 +61,19 @@ function NewTrade() {
     const [position, setPosition] = useState(productPosition[productSelect[0]][0]);
     const [rateSelect, setRateSelect] = useState(productRate[productSelect[0]]);
     const [selectedRate, setSelectedRate] = useState(productRate[productSelect[0]][0]);
+    const [selectedfloatingRate, setSelectedfloatingRate] = useState(floatingRate[productSelect[2]][0]);
     const [contractSelect, setContractSelect] = useState(productContract[productSelect[0]]);
     const [selectedContract, setSelectedContract] = useState(productContract[productSelect[0]][0]);
     const [resetSelect, setResetSelect] = useState(resetFrequency[productSelect[0]]);
     const [selectedReset, setSelectedReset] = useState(resetFrequency[productSelect[0]][0]);
+    const [selectedTenor, setSelectedTenor] = useState(resetFrequency[productSelect[0]][0]);
     const productClick = (e) => {
         SetJenisProduct(e);
         setPositionSelect(productPosition[e]);
         setPosition(productPosition[e][0])
         setRateSelect(productRate[e]);
         setSelectedRate(productRate[e][0]);
+        setSelectedfloatingRate(floatingRate[e][0]);
         setContractSelect(productContract[e]);
         setSelectedContract(productContract[e][0]);
         setResetSelect(resetFrequency[e]);
@@ -82,6 +90,9 @@ function NewTrade() {
     };
     const resetClick = (e) => {
         setSelectedReset(e);
+    };
+    const tenorClick = (e) => {
+        setSelectedTenor(e);
     };
     const [disableFR, setDisableFR] = useState(false);
     const [dates, setDates] = useState(moment('2020/01/23', dateFormat));
@@ -120,6 +131,12 @@ function NewTrade() {
 
             setShowFSDate(false);
         }
+    }
+    const [selectedPayFreq, setSelectedPayFreq] = useState('');
+    const payFrequencyClick = (e) => {
+        setSelectedPayFreq(e);
+        setSelectedReset(e);
+        setSelectedTenor(e);
     }
     const [showClientId, setShowClientId] = useState(false);
     const typeClick = (e) => {
@@ -194,13 +211,13 @@ function NewTrade() {
                                     </Select>
                                 </Form.Item>
                                 <Form.Item label="Reference Rate">
-                                    <Select
+                                    {jenisProduct === productSelect[1] ? <Select
                                         value={selectedRate}
                                         onChange={rateClick} >
                                         {rateSelect.map(rate => (
                                             <Select.Option key={rate}>{rate}</Select.Option>
                                         ))}
-                                    </Select>
+                                    </Select> : selectedRate}
                                 </Form.Item>
                                 <Form.Item label="Market Side ">
                                     <Select defaultValue="Receive">
@@ -217,11 +234,15 @@ function NewTrade() {
                                         <Select.Option value="float">Float</Select.Option>
                                     </Select>
                                 </Form.Item>
-                                <Form.Item label="Trade Date">
+                                <Form.Item label="Floating Rate Index">
+                                    {disableFR ?
+                                        (selectedfloatingRate) : (<Input />)}
+                                </Form.Item>
+                                {/* <Form.Item label="Trade Date">
                                     <DatePicker style={{ width: '100%' }}
                                         onChange={tradeDateClick}
                                         defaultValue={moment('2020/01/23', dateFormat)} />
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item label="Forward Starting">
                                     <Select defaultValue="Eligible"
                                         onChange={forwardStartingClick}>
@@ -270,7 +291,8 @@ function NewTrade() {
                                     </Input.Group>
                                 </Form.Item>
                                 <Form.Item label="Payment Frequency">
-                                    <Select >
+                                    <Select value={selectedPayFreq}
+                                        onChange={payFrequencyClick} >
                                         {paymentFrequency.map(payment => (
                                             <Select.Option key={payment}>{payment}</Select.Option>
                                         ))}
@@ -292,9 +314,6 @@ function NewTrade() {
                                         </Select>
                                     </Input.Group>
                                 </Form.Item>)}
-                                <Form.Item label="Floating Rate Index">
-                                    <Input />
-                                </Form.Item>
                                 <Form.Item label="Spread">
                                     <InputNumber style={{ width: '100%' }} />
                                 </Form.Item>
@@ -308,30 +327,32 @@ function NewTrade() {
                                         ))}
                                     </Select>
                                 </Form.Item>
-                                <Form.Item label="Reset Frequency">
-                                    <Select value={selectedReset}
-                                        onChange={resetClick} >
-                                        {resetSelect.map(reset => (
-                                            <Select.Option key={reset}>{reset}</Select.Option>
-                                        ))}
-                                    </Select>
-                                </Form.Item>
-                                {jenisProduct === productSelect[0] ? (<div>
+                                {jenisProduct !== productSelect[0] ? (<div>
+
+                                    <Form.Item label="Floating Rate Reset Frequency">
+                                        <Select value={selectedReset}
+                                            onChange={resetClick}
+                                            disabled={!disableFR}>
+                                            {resetSelect.map(reset => (
+                                                <Select.Option key={reset}>{reset}</Select.Option>
+                                            ))}
+                                        </Select>
+                                    </Form.Item>
                                     <Form.Item label="Floating Rate Index Tenor">
-                                        <Select >
-                                            <Select.Option key="1W">1W</Select.Option>
-                                            <Select.Option key="1M">1M</Select.Option>
-                                            <Select.Option key="3M">3M</Select.Option>
-                                            <Select.Option key="6M">6M</Select.Option>
-                                            <Select.Option key="1Y">1Y</Select.Option>
+                                        <Select value={selectedTenor}
+                                            onChange={tenorClick}
+                                            disabled={!disableFR}>
+                                            {resetSelect.map(reset => (
+                                                <Select.Option key={reset}>{reset}</Select.Option>
+                                            ))}
                                         </Select>
                                     </Form.Item>
                                 </div>) : (<div>
-                                    <Form.Item label="Floating Rate Index Tenor">
+                                    {/* <Form.Item label="Floating Rate Index Tenor">
                                         <Select >
                                             <Select.Option key="O">Overnight</Select.Option>
                                         </Select>
-                                    </Form.Item>
+                                    </Form.Item> */}
                                     <Form.Item label="Floating Rate Compounding ">
                                         <Select >
                                             <Select.Option key="D">Daily Compounding </Select.Option>
@@ -347,17 +368,16 @@ function NewTrade() {
                                     </Select>
                                 </Form.Item>
                                 {/* calendar ????? */}
-                                <Form.Item label="Rounding Payment">
+                                {/* <Form.Item label="Rounding Payment">
                                     <InputNumber style={{ width: '100%' }} />
-                                </Form.Item>
-                                {jenisProduct === productSelect[0] ? (<div>
+                                </Form.Item> */}
+                                {jenisProduct === productSelect[0] ? null : (<div>
                                     <Form.Item label="Stub Payment">
                                         <Select defaultValue="Initial">
                                             <Select.Option value="Initial">Initial</Select.Option>
                                             <Select.Option value="Final">Final</Select.Option>
                                         </Select>
                                     </Form.Item>
-                                </div>) : (<div>
                                 </div>)
                                 }
                                 {/* Cash Payment Compounding ????? */}
@@ -384,24 +404,18 @@ function NewTrade() {
                                         ))}
                                     </Select>
                                 </Form.Item>
+                                <Form.Item label="Reference Rate">
+                                    {selectedRate}
+                                </Form.Item>
                                 <Form.Item label="Market Side ">
                                     <Select defaultValue="buy">
                                         <Select.Option value="buy">Buy</Select.Option>
                                         <Select.Option value="sell">Pay</Select.Option>
                                     </Select>
                                 </Form.Item>
-                                <Form.Item label="Reference Rate">
-                                    <Select
-                                        value={selectedRate}
-                                        onChange={rateClick} >
-                                        {rateSelect.map(rate => (
-                                            <Select.Option key={rate}>{rate}</Select.Option>
-                                        ))}
-                                    </Select>
-                                </Form.Item>
                                 <Form.Item label="Currency">
-                                    <Select value="USD">
-                                        <Select.Option value="USD">USD/IDR</Select.Option>
+                                    <Select value="IDR">
+                                        <Select.Option value="IDR">IDR</Select.Option>
                                     </Select>
                                 </Form.Item>
                                 <Form.Item label="Notional Foreign Currency ">
@@ -419,11 +433,11 @@ function NewTrade() {
                                         addonBefore="Rp"
                                     />
                                 </Form.Item>
-                                <Form.Item label="Settlement Date">
+                                {/* <Form.Item label="Settlement Date">
                                     <DatePicker style={{ width: '100%' }}
                                         onChange={tradeDateClick}
                                         defaultValue={moment('2020/01/23', dateFormat)} />
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item label="Fixing Date">
                                     <DatePicker
                                         style={{ width: '100%' }}
@@ -447,12 +461,12 @@ function NewTrade() {
                                         ))}
                                     </Select>
                                 </Form.Item>
-                                <Form.Item label="Rounding">
+                                {/* <Form.Item label="Rounding">
                                     <Input />
-                                </Form.Item>
-                                <Form.Item label="Price Source Disruption">
+                                </Form.Item> */}
+                                {/* <Form.Item label="Price Source Disruption">
                                     <Input />
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item label="Notional Amount">
                                     <Input.Group compact>
                                         <Select defaultValue="$" style={{ width: '15%' }}>

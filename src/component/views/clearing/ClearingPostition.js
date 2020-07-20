@@ -8,6 +8,7 @@ import {
     DatePicker,
 } from 'antd';
 import moment from 'moment';
+import { Link } from "react-router-dom";
 
 function ClearingPostition() {
     const columns = [
@@ -120,7 +121,19 @@ function ClearingPostition() {
             key: 'operation',
             fixed: 'right',
             width: 100,
-            render: () => <a>Detail</a>,
+            render: () =>
+                <div>
+                    <Link to={{
+                        pathname: `/clearingManagement/clearingDetail`,
+                        state: {
+                            id: "1",
+                            action: "Detail",
+                            disable: true,
+                            linkBack: "/clearingManagement/clearingPosition",
+                        }
+                    }} style={{ marginRight: '20px' }}>Detail
+                    </Link>
+                </div>,
         },
     ];
     const data = [

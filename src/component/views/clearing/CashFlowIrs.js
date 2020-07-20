@@ -6,6 +6,8 @@ import {
     Table,
 } from 'antd';
 
+import { Link } from "react-router-dom";
+
 function CashFlowIrs() {
     const columns = [
         {
@@ -98,7 +100,19 @@ function CashFlowIrs() {
             key: 'operation',
             fixed: 'right',
             width: 100,
-            render: () => <a>Detail</a>,
+            render: () =>
+                <div>
+                    <Link to={{
+                        pathname: `/clearingManagement/clearingDetail`,
+                        state: {
+                            id: "1",
+                            action: "Detail",
+                            disable: true,
+                            linkBack: "/clearingManagement/cashFlowIrs",
+                        }
+                    }} style={{ marginRight: '20px' }}>Detail
+                    </Link>
+                </div>,
         },
     ];
     const data = [
