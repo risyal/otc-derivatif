@@ -6,6 +6,7 @@ import {
     Row, Col,
 } from 'antd';
 import { Link } from "react-router-dom";
+import { DownloadOutlined } from '@ant-design/icons';
 
 function RegisterContract() {
     const { TabPane } = Tabs;
@@ -16,321 +17,473 @@ function RegisterContract() {
 
     const columns = [
         {
-            title: 'Attribut',
-            dataIndex: 'attribut',
-            key: 'attribut',
+            title: 'Parameters',
+            dataIndex: 'parameters',
+            key: 'parameters',
+            width: 200,
+        },
+        {
+            title: 'Values',
+            dataIndex: 'values',
+            key: 'values',
             width: 100,
         },
         {
-            title: 'Interest Rate Swap',
-            dataIndex: 'irs',
-            key: 'irs',
-            width: 200,
+            title: 'Action',
+            dataIndex: 'action',
+            key: 'action',
+            width: 50,
+            render: text => <a>{text}</a>,
         },
     ];
-    const data = [
+
+    const dataIrs = [
         {
             key: '1',
-            attribut: 'Currency',
-            irs: 'IDR',
+            parameters: 'Currency',
+            values: 'IDR',
+            action: 
+                <Link to={{ pathname: `/administration/irsEditCurrency` }}>
+                    Edit
+                </Link>
         },
         {
             key: '2',
-            attribut: 'Leg type/sub-product',
-            irs: 'X,L',
+            parameters: 'Leg Type/Sub-Product',
+            values: 'Fix/Float',
+            action: 
+                <Link to={{ pathname: `/administration/irsEditLegType` }}>
+                    Edit
+                </Link>
         },
         {
             key: '3',
-            attribut: 'Effective/commencement date',
-            irs: '07-07-2020',
+            parameters: 'Effective/Commencement Date',
+            values: '2',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '4',
-            attribut: 'Contract term',
-            irs: '1W, 1M, 3M, 6,M, 9 M, 12M',
+            parameters: 'Contract Term',
+            values: '1W, 1M, 3M, 6M, 9M, 12M',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '5',
-            attribut: 'Notional amount',
-            irs: '',
+            parameters: 'Notional Amount',
+            values: '1.000.000.000',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '6',
-            attribut: 'Payment frequency (fix and float)',
-            irs: '1W, 1M, 3M, 6M, 12M',
+            parameters: 'Payment Frequency',
+            values: '1W, 1M, 3M, 6M, 12M',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '7',
-            attribut: 'Valuation/Fixing Date',
-            irs: '-2',
+            parameters: 'Valuation/Fixing Date',
+            values: '-2',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '8',
-            attribut: 'Floating Rate Index',
-            irs: '',
+            parameters: 'Floating Rate Index',
+            values: 'JIBOR',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '9',
-            attribut: 'Spread',
-            irs: '',
+            parameters: 'Spread',
+            values: '0.12301',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '10',
-            attribut: 'Day Count Fraction (fix and float)',
-            irs: '',
+            parameters: 'Day Count Fraction',
+            values: 'Act/360',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '11',
-            attribut: 'Floating Rate Reset Frequency',
-            irs: '1W, 1M, 3M, 6M, 12M',
+            parameters: 'Floating Rate Reset Frequency',
+            values: '1W, 1M, 3M, 6M, 12M',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '12',
-            attribut: 'Floating Rate Index Tenor',
-            irs: '1W, 1M, 3M, 6M, 12M',
+            parameters: 'Floating Rate Index Tenor',
+            values: '1W, 1M, 3M, 6M, 12M',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '13',
-            attribut: 'Business Day Convention',
-            irs: 'M',
+            parameters: 'Business Day Convention',
+            values: 'Modified Following',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '14',
-            attribut: 'Calendar (payment, fixing, holiday)',
-            irs: '',
+            parameters: 'Calendar',
+            values: '',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '15',
-            attribut: 'Rounding Payment',
-            irs: '',
+            parameters: 'Rounding Payment',
+            values: 'IDR 1; 0.00001',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '16',
-            attribut: 'Stub Payment',
-            irs: '',
+            parameters: 'Stub Payment',
+            values: 'Initial/Front',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '17',
-            attribut: 'Forward Starting',
-            irs: '',
+            parameters: 'Forward Starting',
+            values: 'Eligible',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '18',
-            attribut: 'Cash Payment Compounding',
-            irs: '',
+            parameters: 'Cash Payment Compounding',
+            values: 'Compounding',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
     ];
 
-    const columns2 = [
-        {
-            title: 'Attribut',
-            dataIndex: 'attribut',
-            key: 'attribut',
-            width: 100,
-        },
-        {
-            title: 'Interest Rate Swap',
-            dataIndex: 'irs',
-            key: 'irs',
-            width: 200,
-        },
-    ];
-    const data2 = [
+    const dataOis = [
         {
             key: '1',
-            attribut: 'Currency',
-            irs: 'IDR',
+            parameters: 'Currency',
+            values: 'IDR',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '2',
-            attribut: 'Leg type/sub-product',
-            irs: 'X,L',
+            parameters: 'Leg Type/Sub-Product',
+            values: 'Fix/Float',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '3',
-            attribut: 'Effective/commencement date',
-            irs: '07-07-2020',
+            parameters: 'Effective/Commencement Date',
+            values: '2',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '4',
-            attribut: 'Contract term',
-            irs: '1W, 1M, 3M, 6,M, 9 M, 12M',
+            parameters: 'Contract Term',
+            values: '1W, 1M, 3M, 6M, 9M, 12M',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '5',
-            attribut: 'Notional amount',
-            irs: '',
+            parameters: 'Notional Amount',
+            values: '1.000.000.000',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '6',
-            attribut: 'Floating rate index',
-            irs: '',
+            parameters: 'Floating Rate Index',
+            values: 'INDONIA',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '7',
-            attribut: 'Spread',
-            irs: '',
+            parameters: 'Day Count Fraction',
+            values: 'Act/360',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '8',
-            attribut: 'Day count fraction (fix and float)',
-            irs: '',
+            parameters: 'Business Day Convention',
+            values: 'Modified Following',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '9',
-            attribut: 'Business day convention',
-            irs: 'M, F, P',
+            parameters: 'Calendar',
+            values: '',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '10',
-            attribut: 'Calendar (payment, fixing, holiday)',
-            irs: '',
+            parameters: 'Rounding Payment',
+            values: 'IDR 1; 0.00001',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '11',
-            attribut: 'Rounding',
-            irs: '',
+            parameters: 'Forward Starting',
+            values: 'Eligible',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '12',
-            attribut: 'Forward starting',
-            irs: '',
+            parameters: 'Valuation/Fixing Date',
+            values: 'Daily',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
+        },
+        {
+            key: '13',
+            parameters: 'Floating Rate Reset Frequency ',
+            values: 'Daily',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
+        },
+        {
+            key: '14',
+            parameters: 'Floating Rate Index Tenor ',
+            values: 'Overnight',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
+        },
+        {
+            key: '11',
+            parameters: 'Floating Rate Compounding',
+            values: 'Daily Compounding',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
     ];
 
-    const columns3 = [
-        {
-            title: 'Attribut',
-            dataIndex: 'attribut',
-            key: 'attribut',
-            width: 100,
-        },
-        {
-            title: 'Interest Rate Swap',
-            dataIndex: 'irs',
-            key: 'irs',
-            width: 200,
-        },
-    ];
-    const data3 = [
+    const dataDndf = [
         {
             key: '1',
-            attribut: 'Currency Pair',
-            irs: 'USD/IDR',
+            parameters: 'Currency',
+            values: 'USD,IDR',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '2',
-            attribut: 'Notional Foreign Currency',
-            irs: 'USD',
+            parameters: 'Notional Foreign Currency',
+            values: 'USD',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '3',
-            attribut: 'Fixing Date',
-            irs: '-2',
+            parameters: 'Fixing Date',
+            values: '-2',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '4',
-            attribut: 'Reference Rate',
-            irs: '',
+            parameters: 'Reference Rate',
+            values: 'JISDOR',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '5',
-            attribut: 'Tenor',
-            irs: '1W, 1M, 3M, 6M, 9M, 12M',
+            parameters: 'Tenor',
+            values: '1D, 3D, 1W, 1M, 3M, 6M, 9M, 12M',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
         {
             key: '6',
-            attribut: 'Notional Amount',
-            irs: '',
+            parameters: 'Notional Amount',
+            values: 'USD',
+            action: 
+                <Link to={{ pathname: `/administration/` }}>
+                    Edit
+                </Link>
         },
     ];
-    const [editButton] = useState(<Button
+
+    const [exportButtton] = useState(<Button
         type="primary"
         style={{
             marginBottom: '15px',
             paddingBottom: '15px',
             float: 'right',
-            width: '80px',
             height: '35px'
-        }}>Edit</Button>);
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Tabs onChange={callback} type="card">
-                <TabPane tab="IRS" key="1" >
+                <TabPane tab="Interest Rate Swap (IRS)" key="1" >
                     <Row justify="end">
                         <Col span={4}>
-                            <Link to={{
-                                pathname: `/editRegisterContract`,
+                            {/* <Link to={{
+                                pathname: `#`,
                                 state: {
                                     id: '1',
                                     action: "Edit",
                                     disable: false,
                                 }
-                            }} >
-                                {editButton}
-                            </Link>
+                            }} > */}
+                            {exportButtton}
+                            {/* </Link> */}
                         </Col>
                     </Row>
                     <Table
                         pagination={false}
                         columns={columns}
-                        dataSource={data}
+                        dataSource={dataIrs}
                         bordered
                         size="middle"
                     />
                 </TabPane>
-                <TabPane tab="OIS" key="2">
+
+                <TabPane tab="Overnight Index Swap (OIS)" key="2">
                     <Row justify="end">
                         <Col span={4}>
-                            <Link to={{
-                                pathname: `/editRegisterContract`,
+                            {/* <Link to={{
+                                pathname: `#`,
                                 state: {
-                                    id: '2',
+                                    id: '1',
                                     action: "Edit",
                                     disable: false,
                                 }
-                            }} >
-                                {editButton}
-                            </Link>
+                            }} > */}
+                            {exportButtton}
+                            {/* </Link> */}
                         </Col>
                     </Row>
                     <Table
                         pagination={false}
-                        columns={columns2}
-                        dataSource={data2}
+                        columns={columns}
+                        dataSource={dataOis}
                         bordered
                         size="middle"
                     />
                 </TabPane>
-                <TabPane tab="DNDF" key="3">
+
+                <TabPane tab="Domestic Non Deliverable Forward (DNDF)" key="3">
                     <Row justify="end">
                         <Col span={4}>
-                            <Link to={{
-                                pathname: `/editRegisterContract`,
+                            {/* <Link to={{
+                                pathname: `#`,
                                 state: {
-                                    id: '3',
+                                    id: '1',
                                     action: "Edit",
                                     disable: false,
                                 }
-                            }} >
-                                {editButton}
-                            </Link>
+                            }} > */}
+                            {exportButtton}
+                            {/* </Link> */}
                         </Col>
                     </Row>
                     <Table
                         pagination={false}
-                        columns={columns3}
-                        dataSource={data3}
+                        columns={columns}
+                        dataSource={dataDndf}
                         bordered
                         size="middle"
                     />
                 </TabPane>
             </Tabs>
         </div>
-
     )
-
 }
-
 
 export default RegisterContract

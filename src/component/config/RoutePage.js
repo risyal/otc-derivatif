@@ -87,6 +87,8 @@ import DetailCancelSM from '../views/instruction/DetailCancelSM';
 import ViewAddCM from '../views/instruction/ViewAddCM';
 import DetailCancelCM from '../views/instruction/DetailCancelCM';
 import ClearingDetailView from '../views/clearing/ClearingDetail';
+import IrsEditCurrency from '../views/administration/IrsEditCurrency';
+import IrsEditLegType from '../views/administration/IrsEditLegType';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -335,7 +337,7 @@ function RoutePage() {
             </Route>
             <Route path="/registercontract">
                 <div className="head-content">
-                    <Title level={4}>Register Contract (KPEI)</Title>
+                    <Title level={4}>Register Contract</Title>
                 </div>
                 <RegisterContract />
             </Route>
@@ -488,6 +490,12 @@ function RoutePage() {
             <Route exact path="/instructionManagement/detailCancelCM" component={DetailCancelCM}>
             </Route>
             <Route exact path="/clearingManagement/clearingDetail" component={ClearingDetailView}>
+            </Route>
+            <Route path="/administration/irsEditCurrency">
+                <IrsEditCurrency />
+            </Route>
+            <Route path="/administration/irsEditLegType">
+                <IrsEditLegType />
             </Route>
         </div>
     )

@@ -6,7 +6,8 @@ import {
     Typography,
     Select,
     DatePicker,
-    Checkbox
+    Checkbox,
+    InputNumber
 } from 'antd';
 import {
     CaretLeftOutlined,
@@ -36,7 +37,7 @@ const EditRegisterContract = (props) => {
             key: '1',
             no: '1',
             currency: 'IDR',
-            legType: 'X',
+            legType: 'Fix/Float',
             effective: '07-07-2020',
             contractTerm: '1W',
             notionalAmount: '',
@@ -44,10 +45,10 @@ const EditRegisterContract = (props) => {
             valuationFixingDate: '-2',
             floatingRateIndex: '',
             spread: '',
-            dayCountFraction: '',
+            dayCountFraction: 'ACT/360',
             floatingRateResetFrequency: '1W',
             floatingRateIndexTenor: '1W',
-            businessDayConvention: 'M',
+            businessDayConvention: 'Mod Following',
             calendar: '07-07-2020',
             roundingPayment: '',
             stubPayment: '',
@@ -100,6 +101,10 @@ const EditRegisterContract = (props) => {
         { label: '12M', value: '12M' },
     ];
 
+    function onChangeDec(value) {
+        console.log('changed', value);
+      }
+
     const action = props.location.state.action
     let editForm;
     if (props.location.state.id > 0) {
@@ -107,12 +112,16 @@ const EditRegisterContract = (props) => {
             editForm =
                 <div>
                     <Form.Item label="Currency">
-                        <Input defaultValue={dataRegisterById.currency} />
+                        {/* <Input defaultValue={dataRegisterById.currency} /> */}
+                        <Select defaultValue={dataRegisterById.currency}>
+                            <Option value="idr">IDR</Option>
+                            <Option value="usd">USD</Option>
+                        </Select>
                     </Form.Item>
                     <Form.Item label="Leg type/sub-product">
                         <Select defaultValue={dataRegisterById.legType}>
-                            <Option value="x">X</Option>
-                            <Option value="l">L</Option>
+                            <Option value="fix-float">Fix/Float</Option>
+                            <Option value="float-float">Float/Float</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item label="Effective/commencement date">
@@ -159,10 +168,22 @@ const EditRegisterContract = (props) => {
                         <Input defaultValue={dataRegisterById.floatingRateIndex} />
                     </Form.Item>
                     <Form.Item label="Spread">
-                        <Input defaultValue={dataRegisterById.spread} />
+                        {/* <Input defaultValue={dataRegisterById.spread} /> */}
+                        <InputNumber 
+                            min={0}
+                            step={0.1} 
+                            onChange={onChangeDec} 
+                            defaultValue={dataRegisterById.spread} 
+                            style={{ width: '100%'}}/>
                     </Form.Item>
                     <Form.Item label="Day Count Fraction (fix and float)">
-                        <Input defaultValue={dataRegisterById.dayCountFraction} />
+                        {/* <Input defaultValue={dataRegisterById.dayCountFraction} /> */}
+                        <Select defaultValue={dataRegisterById.dayCountFraction}>
+                            <Option value="act360">ACT/360</Option>
+                            <Option value="actact">ACT/ACT</Option>
+                            <Option value="act365">ACT/365</Option>
+                            <Option value="30360">30/360</Option>
+                        </Select>
                     </Form.Item>
                     <Form.Item label="Floating Rate Reset Frequency">
                         <Select defaultValue={dataRegisterById.floatingRateResetFrequency}>
@@ -184,9 +205,9 @@ const EditRegisterContract = (props) => {
                     </Form.Item>
                     <Form.Item label="Business Day Convention">
                         <Select defaultValue={dataRegisterById.businessDayConvention}>
-                            <Option value="m">M</Option>
-                            <Option value="f">F</Option>
-                            <Option value="p">P</Option>
+                            <Option value="m">Mod Following</Option>
+                            <Option value="f">Following</Option>
+                            <Option value="p">Preceding</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item label="Calendar (payment, fixing, holiday)">
@@ -247,9 +268,9 @@ const EditRegisterContract = (props) => {
                     </Form.Item>
                     <Form.Item label="Business Day Convention">
                         <Select defaultValue={dataRegisterById.businessDayConvention}>
-                            <Option value="m">M</Option>
-                            <Option value="f">F</Option>
-                            <Option value="p">P</Option>
+                            <Option value="m">Mod Following</Option>
+                            <Option value="f">Following</Option>
+                            <Option value="p">Preceding</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item label="Calendar (payment, fixing, holiday)">
