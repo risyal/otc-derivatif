@@ -36,6 +36,11 @@ function NewTrade() {
         IRS: ['Fixed', 'Receive'],
         DNDF: ['Buy', 'Sell'],
     });
+    const [productMarket] = useState({
+        OIS: ['Receiver', 'Payer'],
+        IRS: ['Receiver', 'Payer'],
+        DNDF: ['Buyer', 'Seller'],
+    });
     const [productRate] = useState({
         OIS: ['IndONIA'],
         IRS: ['JIBOR 1W', 'JIBOR 1M', 'JIBOR 3M', 'JIBOR 6M', 'JIBOR 12M'],
@@ -67,6 +72,8 @@ function NewTrade() {
     const [resetSelect, setResetSelect] = useState(resetFrequency[productSelect[0]]);
     const [selectedReset, setSelectedReset] = useState(resetFrequency[productSelect[0]][0]);
     const [selectedTenor, setSelectedTenor] = useState(resetFrequency[productSelect[0]][0]);
+    const [selectedMarket, setSelectedMarket] = useState(productMarket[productSelect[0]]);
+    const [market, setMarket] = useState(productPosition[productSelect[0]][0]);
     const productClick = (e) => {
         SetJenisProduct(e);
         setPositionSelect(productPosition[e]);
@@ -78,9 +85,14 @@ function NewTrade() {
         setSelectedContract(productContract[e][0]);
         setResetSelect(resetFrequency[e]);
         setSelectedReset(resetFrequency[e][0]);
+        setMarket(productMarket[e]);
+        setSelectedMarket(productMarket[e][0]);
     };
     const positionClick = (e) => {
         setPosition(e);
+    };
+    const marketClick = (e) => {
+        setSelectedMarket(e);
     };
     const rateClick = (e) => {
         setSelectedRate(e);
@@ -220,9 +232,10 @@ function NewTrade() {
                                     </Select> : selectedRate}
                                 </Form.Item>
                                 <Form.Item label="Market Side ">
-                                    <Select defaultValue="Receive">
-                                        <Select.Option value="Receive">Receive</Select.Option>
-                                        <Select.Option value="Pay">Pay</Select.Option>
+                                    <Select value={selectedMarket} onChange={marketClick}>
+                                        {market.map(side => (
+                                            <Select.Option key={side}>{side}</Select.Option>
+                                        ))}
                                     </Select>
                                 </Form.Item>
                                 <Form.Item label="Currency">
@@ -408,9 +421,10 @@ function NewTrade() {
                                     {selectedRate}
                                 </Form.Item>
                                 <Form.Item label="Market Side ">
-                                    <Select defaultValue="buy">
-                                        <Select.Option value="buy">Buy</Select.Option>
-                                        <Select.Option value="sell">Pay</Select.Option>
+                                    <Select value={selectedMarket} onChange={marketClick}>
+                                        {market.map(side => (
+                                            <Select.Option key={side}>{side}</Select.Option>
+                                        ))}
                                     </Select>
                                 </Form.Item>
                                 <Form.Item label="Currency">

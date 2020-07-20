@@ -259,7 +259,7 @@ const ViewDeleteMember = (props) => {
                         />
 
                         <br />
-                        <Form.Item label="Catatan">
+                        <Form.Item label="Note">
                             <Input.TextArea rows={4} />
                         </Form.Item>
 
