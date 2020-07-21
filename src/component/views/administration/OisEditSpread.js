@@ -5,7 +5,7 @@ import {
     Form,
     Radio,
     Typography,
-    Input
+    InputNumber
 } from 'antd';
 import {
     ArrowLeftOutlined,
@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-function OisEditNotionalAmount(){
+function OisEditSpread(){
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -33,6 +33,10 @@ function OisEditNotionalAmount(){
         setSixEyes(e.target.value);
     }
 
+    function onChange(value) {
+        console.log('changed', value);
+    }
+
     return (
         <div>
             <div className="head-content viewEdit">
@@ -42,7 +46,7 @@ function OisEditNotionalAmount(){
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    OIS - Edit Notional Amount</Title>
+                    OIS - Edit Spread</Title>
             </div>
 
             <div style={{ margin: '15px 20px' }}>
@@ -53,8 +57,12 @@ function OisEditNotionalAmount(){
                     initialValues={{ size: componentSize }}
                     labelAlign="left"
                 >
-                    <Form.Item label="Notional Amount">
-                        <Input prefix="IDR" defaultValue="1000000000"/>
+                    <Form.Item label="Spread">
+                        <InputNumber    min={0}
+                                        defaultValue="0.12301"
+                                        step={0.00001} 
+                                        onChange={onChange}
+                                        style={{ width: '100%' }} />
                     </Form.Item>
                     
                     <Form.Item label="Role">
@@ -84,4 +92,4 @@ function OisEditNotionalAmount(){
 }
 
 
-export default OisEditNotionalAmount
+export default OisEditSpread

@@ -54,7 +54,7 @@ function IrsEditNotionalAmount(){
                     labelAlign="left"
                 >
                     <Form.Item label="Notional Amount">
-                        <Input defaultValue="1000000000"/>
+                        <Input prefix="IDR" defaultValue="1000000000"/>
                     </Form.Item>
                     
                     <Form.Item label="Role">

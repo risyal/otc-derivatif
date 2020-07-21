@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-function OisEditNotionalAmount(){
+function DndfEditFixingDate(){
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -42,7 +42,7 @@ function OisEditNotionalAmount(){
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    OIS - Edit Notional Amount</Title>
+                    DNDF - Edit Fixing Date</Title>
             </div>
 
             <div style={{ margin: '15px 20px' }}>
@@ -53,8 +53,8 @@ function OisEditNotionalAmount(){
                     initialValues={{ size: componentSize }}
                     labelAlign="left"
                 >
-                    <Form.Item label="Notional Amount">
-                        <Input prefix="IDR" defaultValue="1000000000"/>
+                    <Form.Item label="Number">
+                        <Input defaultValue="-2"/>
                     </Form.Item>
                     
                     <Form.Item label="Role">
@@ -84,4 +84,4 @@ function OisEditNotionalAmount(){
 }
 
 
-export default OisEditNotionalAmount
+export default DndfEditFixingDate

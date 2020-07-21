@@ -114,6 +114,11 @@ import OisEditDayCountF from '../views/administration/OisEditDayCountF';
 import OisBDC from '../views/administration/OisBDC';
 import OisEditRoundingP from '../views/administration/OisEditRoundingP';
 import OisEditForwardStart from '../views/administration/OisEditForwardS';
+import OisEditSpread from '../views/administration/OisEditSpread';
+import DndfEditCurrency from '../views/administration/DndfEditCurrency';
+import DndfEditFixingDate from '../views/administration/DndfEditFixingDate';
+import DndfTenor from '../views/administration/DndfTenor';
+import DndfEditNotionalAmount from '../views/administration/DndfEditNotionalAmount';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -596,6 +601,21 @@ function RoutePage() {
             </Route>
             <Route path="/administration/oisforwardS">
                 <OisEditForwardStart/>
+            </Route>
+            <Route path="/administration/oisEditSpread">
+                <OisEditSpread/>
+            </Route>
+            <Route path="/administration/dndfEditCurrency">
+                <DndfEditCurrency />
+            </Route>
+            <Route path="/administration/dndfEditFixingDate">
+                <DndfEditFixingDate />
+            </Route>
+            <Route path="/administration/dndfTenor">
+                <DndfTenor />
+            </Route>
+            <Route path="/administration/dndfEditNotionalAmount">
+                <DndfEditNotionalAmount />
             </Route>
         </div>
     )

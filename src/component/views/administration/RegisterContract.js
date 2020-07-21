@@ -105,10 +105,10 @@ function RegisterContract() {
             key: '8',
             parameters: 'Floating Rate Index',
             values: 'JIBOR',
-            action: 
-                <Link to={{ pathname: `/administration/irsFloatingRateindex` }}>
-                    View
-                </Link>
+            // action: 
+            //     <Link to={{ pathname: `/administration/irsFloatingRateindex` }}>
+            //         View
+            //     </Link>
         },
         {
             key: '9',
@@ -250,15 +250,42 @@ function RegisterContract() {
         },
         {
             key: '6',
+            parameters: 'Payment Frequency',
+            values: 'On Maturity Date',
+            // action: 
+            //     <Link to={{ pathname: `/administration/oisFloatingRateindex` }}>
+            //         Edit
+            //     </Link>
+        },
+        {
+            key: '7',
+            parameters: 'Valuation/Fixing Date',
+            values: 'Daily',
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
+        },
+        {
+            key: '8',
             parameters: 'Floating Rate Index',
             values: 'INDONIA',
+            // action: 
+            //     <Link to={{ pathname: `/administration/oisFloatingRateindex` }}>
+            //         Edit
+            //     </Link>
+        },
+        {
+            key: '9',
+            parameters: 'Spread',
+            values: '0.12301',
             action: 
-                <Link to={{ pathname: `/administration/oisFloatingRateindex` }}>
+                <Link to={{ pathname: `/administration/oisEditSpread` }}>
                     Edit
                 </Link>
         },
         {
-            key: '7',
+            key: '10',
             parameters: 'Day Count Fraction',
             values: 'Act/360',
             action: 
@@ -267,7 +294,34 @@ function RegisterContract() {
                 </Link>
         },
         {
-            key: '8',
+            key: '11',
+            parameters: 'Floating Rate Reset Frequency ',
+            values: 'Daily',
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
+        },
+        {
+            key: '12',
+            parameters: 'Floating Rate Index Tenor ',
+            values: 'Overnight',
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
+        },
+        {
+            key: '13',
+            parameters: 'Floating Rate Compounding',
+            values: 'Daily Compounding',
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
+        },
+        {
+            key: '14',
             parameters: 'Business Day Convention',
             values: 'Modified Following',
             action: 
@@ -276,7 +330,7 @@ function RegisterContract() {
                 </Link>
         },
         {
-            key: '9',
+            key: '15',
             parameters: 'Calendar',
             values: '',
             action: 
@@ -285,7 +339,7 @@ function RegisterContract() {
                 </Link>
         },
         {
-            key: '10',
+            key: '16',
             parameters: 'Rounding Payment',
             values: 'IDR 1; 0.00001',
             action: 
@@ -294,7 +348,7 @@ function RegisterContract() {
                 </Link>
         },
         {
-            key: '11',
+            key: '17',
             parameters: 'Forward Starting',
             values: 'Eligible',
             action: 
@@ -302,42 +356,7 @@ function RegisterContract() {
                     Edit
                 </Link>
         },
-        {
-            key: '12',
-            parameters: 'Valuation/Fixing Date',
-            values: 'Daily',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
-        },
-        {
-            key: '13',
-            parameters: 'Floating Rate Reset Frequency ',
-            values: 'Daily',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
-        },
-        {
-            key: '14',
-            parameters: 'Floating Rate Index Tenor ',
-            values: 'Overnight',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
-        },
-        {
-            key: '11',
-            parameters: 'Floating Rate Compounding',
-            values: 'Daily Compounding',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
-        },
+        
     ];
 
     const dataDndf = [
@@ -346,7 +365,7 @@ function RegisterContract() {
             parameters: 'Currency',
             values: 'USD,IDR',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/dndfEditCurrency` }}>
                     Edit
                 </Link>
         },
@@ -354,17 +373,17 @@ function RegisterContract() {
             key: '2',
             parameters: 'Notional Foreign Currency',
             values: 'USD',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
         },
         {
             key: '3',
             parameters: 'Fixing Date',
             values: '-2',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/dndfEditFixingDate` }}>
                     Edit
                 </Link>
         },
@@ -372,26 +391,26 @@ function RegisterContract() {
             key: '4',
             parameters: 'Reference Rate',
             values: 'JISDOR',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
         },
         {
             key: '5',
             parameters: 'Tenor',
-            values: '1D, 3D, 1W, 1M, 3M, 6M, 9M, 12M',
+            values: '3D, 1W, 1M, 3M, 6M, 9M, 12M',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/dndfTenor` }}>
                     Edit
                 </Link>
         },
         {
             key: '6',
             parameters: 'Notional Amount',
-            values: 'USD',
+            values: '1.000.000.000',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/dndfEditNotionalAmount` }}>
                     Edit
                 </Link>
         },

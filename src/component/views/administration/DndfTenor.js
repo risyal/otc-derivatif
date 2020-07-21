@@ -4,8 +4,7 @@ import {
     Checkbox,
     Form,
     Radio,
-    Typography,
-    Input
+    Typography
 } from 'antd';
 import {
     ArrowLeftOutlined,
@@ -15,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-function OisEditNotionalAmount(){
+function DndfTenor(){
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -42,7 +41,7 @@ function OisEditNotionalAmount(){
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    OIS - Edit Notional Amount</Title>
+                    DNDF - Edit Tenor</Title>
             </div>
 
             <div style={{ margin: '15px 20px' }}>
@@ -53,8 +52,20 @@ function OisEditNotionalAmount(){
                     initialValues={{ size: componentSize }}
                     labelAlign="left"
                 >
-                    <Form.Item label="Notional Amount">
-                        <Input prefix="IDR" defaultValue="1000000000"/>
+                    <Form.Item label="Tenor">
+                        <Checkbox defaultChecked>3D</Checkbox>
+                        <Checkbox defaultChecked>1W</Checkbox>
+                        <Checkbox defaultChecked>1M</Checkbox>
+                        <br/>
+                        <Checkbox defaultChecked>3M</Checkbox>
+                        <Checkbox defaultChecked>6M</Checkbox>
+                        <Checkbox defaultChecked>9M</Checkbox>
+                        <br/>
+                        <Checkbox defaultChecked>12M</Checkbox>
+                        <br/>
+                        <Button type="primary" icon={<PlusOutlined />} size="small" style={{ marginTop: '15px', paddingBottom: '15px'}} >
+                            Add Tenor
+                        </Button>
                     </Form.Item>
                     
                     <Form.Item label="Role">
@@ -84,4 +95,4 @@ function OisEditNotionalAmount(){
 }
 
 
-export default OisEditNotionalAmount
+export default DndfTenor
