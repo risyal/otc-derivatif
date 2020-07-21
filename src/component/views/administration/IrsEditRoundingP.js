@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import {
     Button,
-    Checkbox,
     Form,
     Radio,
-    Typography
+    Typography,
+    InputNumber,
+    Input
 } from 'antd';
 import {
     ArrowLeftOutlined,
@@ -14,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-function IrsEditLegType(){
+function IrsEditRoundingP(){
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -32,6 +33,10 @@ function IrsEditLegType(){
         setSixEyes(e.target.value);
     }
 
+    function onChange(value) {
+        console.log('changed', value);
+    }
+
     return (
         <div>
             <div className="head-content viewEdit">
@@ -41,7 +46,7 @@ function IrsEditLegType(){
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    IRS - Edit Leg Type/Sub-Product</Title>
+                    IRS - Edit Rounding Payment</Title>
             </div>
 
             <div style={{ margin: '15px 20px' }}>
@@ -52,14 +57,36 @@ function IrsEditLegType(){
                     initialValues={{ size: componentSize }}
                     labelAlign="left"
                 >
-                    <Form.Item label="Leg Type/Sub-Product">
-                        <Checkbox defaultChecked>Fix/Float</Checkbox>
-                        <br/>
-                        <Checkbox>Float/Float</Checkbox>
-                        <br/>
-                        {/* <Button type="primary" icon={<PlusOutlined />} size="small" style={{ marginTop: '15px', paddingBottom: '15px'}} >
-                            Add Currency
-                        </Button> */}
+                    <Form.Item label="Rounding Payment">
+                        <Input.Group compact >
+                            <Input 
+                                style={{ width: '45%', textAlign: 'center' }} 
+                                placeholder="IDR" 
+                                defaultValue="1"/>
+                            <Input
+                                className="site-input-split"
+                                style={{
+                                    width: '10%',
+                                    borderLeft: 0,
+                                    borderRight: 0,
+                                    pointerEvents: 'none', textAlign: 'center'
+                                }}
+                                placeholder="|"
+                                disabled
+                            />
+                            <InputNumber
+                                className="site-input-right"
+                                style={{
+                                    width: '45%',
+                                    textAlign: 'center',
+                                }}
+                                placeholder="Interest Rate"
+                                defaultValue="0.00001"
+                                min={0}
+                                step={0.00001} 
+                                onChange={onChange}
+                            />
+                        </Input.Group>
                     </Form.Item>
                     
                     <Form.Item label="Role">
@@ -89,4 +116,4 @@ function IrsEditLegType(){
 }
 
 
-export default IrsEditLegType
+export default IrsEditRoundingP

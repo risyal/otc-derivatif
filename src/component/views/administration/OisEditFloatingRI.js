@@ -4,7 +4,8 @@ import {
     Checkbox,
     Form,
     Radio,
-    Typography
+    Typography,
+    Input
 } from 'antd';
 import {
     ArrowLeftOutlined,
@@ -14,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-function IrsEditLegType(){
+function OisEditFloatingRI(){
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -41,7 +42,7 @@ function IrsEditLegType(){
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    IRS - Edit Leg Type/Sub-Product</Title>
+                    OIS - Edit Floating Rate Index</Title>
             </div>
 
             <div style={{ margin: '15px 20px' }}>
@@ -52,31 +53,26 @@ function IrsEditLegType(){
                     initialValues={{ size: componentSize }}
                     labelAlign="left"
                 >
-                    <Form.Item label="Leg Type/Sub-Product">
-                        <Checkbox defaultChecked>Fix/Float</Checkbox>
-                        <br/>
-                        <Checkbox>Float/Float</Checkbox>
-                        <br/>
-                        {/* <Button type="primary" icon={<PlusOutlined />} size="small" style={{ marginTop: '15px', paddingBottom: '15px'}} >
-                            Add Currency
-                        </Button> */}
+                    <Form.Item label="Floating Rate Index">
+                        {/* <Input defaultValue="JIBOR" disabled/> */}
+                        <span>INDONIA</span>
                     </Form.Item>
                     
-                    <Form.Item label="Role">
+                    {/* <Form.Item label="Role">
                         <Radio.Group onChange={radioOnChange} value={sixEyes}>
                             <Radio value={1}>Maker</Radio>
                             <Radio value={2}>Direct Checker</Radio>
                             <Radio value={3}>Direct Approver</Radio>
                         </Radio.Group>
-                    </Form.Item>
+                    </Form.Item> */}
 
                     <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                         <Link to={{
                             pathname: `/registercontract`}}>
-                            <Button type="primary" htmlType="submit">
+                            {/* <Button type="primary" htmlType="submit">
                                 Submit
-                            </Button>
-                            <Button style={{ marginLeft: '15px' }}>
+                            </Button> */}
+                            <Button >
                                 Back
                             </Button>
                         </Link>
@@ -89,4 +85,4 @@ function IrsEditLegType(){
 }
 
 
-export default IrsEditLegType
+export default OisEditFloatingRI

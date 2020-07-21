@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
-function IrsEditLegType(){
+function OisEditLegType(){
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -41,7 +41,7 @@ function IrsEditLegType(){
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    IRS - Edit Leg Type/Sub-Product</Title>
+                    OIS - Edit Leg Type/Sub-Product</Title>
             </div>
 
             <div style={{ margin: '15px 20px' }}>
@@ -89,4 +89,4 @@ function IrsEditLegType(){
 }
 
 
-export default IrsEditLegType
+export default OisEditLegType

@@ -89,6 +89,31 @@ import DetailCancelCM from '../views/instruction/DetailCancelCM';
 import ClearingDetailView from '../views/clearing/ClearingDetail';
 import IrsEditCurrency from '../views/administration/IrsEditCurrency';
 import IrsEditLegType from '../views/administration/IrsEditLegType';
+import IrsEffectiveDate from '../views/administration/IrsEffectiveDate';
+import IrsEditContractTerm from '../views/administration/IrsEditContractTerm';
+import IrsEditNotionalAmount from '../views/administration/IrsEditNotionalAmount';
+import IrsEditPaymentFreq from '../views/administration/IrsEditPaymentFreq';
+import IrsEditFixingDate from '../views/administration/IrsEditFixingDate';
+import IrsEditFloatingRI from '../views/administration/IrsEditFloatingRI';
+import IrsEditSpread from '../views/administration/IrsEditSpread';
+import IrsEditDayCountF from '../views/administration/IrsEditDayCountF';
+import IrsFloatingRatrRFreq from '../views/administration/IrsFloatingRateRFreq';
+import IrsFloatingRIndex from '../views/administration/IrsFloatingRIndex';
+import IrsBDC from '../views/administration/IrsBDC';
+import IrsEditRoundingP from '../views/administration/IrsEditRoundingP';
+import IrsEditStubPayment from '../views/administration/IrsEditStubPayment';
+import IrsEditForwardStart from '../views/administration/IrsEditForwardStart';
+import IrsEditCashPaymentC from '../views/administration/IrsEditCashPaymentC';
+import OisEditCurrency from '../views/administration/OisEditCurrenct';
+import OisEditLegType from '../views/administration/OisEditLegType';
+import OisEffectiveDate from '../views/administration/OisEffectiveDate';
+import OisEditContractTerm from '../views/administration/OisEditContractTerm';
+import OisEditNotionalAmount from '../views/administration/OisEditNotionalAmount';
+import OisEditFloatingRI from '../views/administration/OisEditFloatingRI';
+import OisEditDayCountF from '../views/administration/OisEditDayCountF';
+import OisBDC from '../views/administration/OisBDC';
+import OisEditRoundingP from '../views/administration/OisEditRoundingP';
+import OisEditForwardStart from '../views/administration/OisEditForwardS';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -496,6 +521,81 @@ function RoutePage() {
             </Route>
             <Route path="/administration/irsEditLegType">
                 <IrsEditLegType />
+            </Route>
+            <Route path="/administration/irsEffectiveDate">
+                <IrsEffectiveDate />
+            </Route>
+            <Route path="/administration/irsEditContractTerm">
+                <IrsEditContractTerm />
+            </Route>
+            <Route path="/administration/irsEditNotionalAmount">
+                <IrsEditNotionalAmount />
+            </Route>
+            <Route path="/administration/irsEditPaymentFreq">
+                <IrsEditPaymentFreq />
+            </Route>
+            <Route path="/administration/irsEditFixingDate">
+                <IrsEditFixingDate />
+            </Route>
+            <Route path="/administration/irsFloatingRateindex">
+                <IrsEditFloatingRI />
+            </Route>
+            <Route path="/administration/irsEditSpread">
+                <IrsEditSpread/>
+            </Route>
+            <Route path="/administration/irsEditDayCountF">
+                <IrsEditDayCountF/>
+            </Route>
+            <Route path="/administration/irsFloatingRRFreq">
+                <IrsFloatingRatrRFreq/>
+            </Route>
+            <Route path="/administration/irsFloatingRIndex">
+                <IrsFloatingRIndex/>
+            </Route>
+            <Route path="/administration/irsBDC">
+                <IrsBDC/>
+            </Route>
+            <Route path="/administration/irsRoundingPayment">
+                <IrsEditRoundingP/>
+            </Route>
+            <Route path="/administration/irsEditStubP">
+                <IrsEditStubPayment/>
+            </Route>
+            <Route path="/administration/irsforwardS">
+                <IrsEditForwardStart/>
+            </Route>
+            <Route path="/administration/irsEditCashPC">
+                <IrsEditCashPaymentC/>
+            </Route>
+            <Route path="/administration/oisEditCurrency">
+                <OisEditCurrency />
+            </Route>
+            <Route path="/administration/oisEditLegType">
+                <OisEditLegType />
+            </Route>
+            <Route path="/administration/oisEffectiveDate">
+                <OisEffectiveDate />
+            </Route>
+            <Route path="/administration/oisEditContractTerm">
+                <OisEditContractTerm/>
+            </Route>
+            <Route path="/administration/oisEditNotionalAmount">
+                <OisEditNotionalAmount />
+            </Route>
+            <Route path="/administration/oisFloatingRateindex">
+                <OisEditFloatingRI/>
+            </Route>
+            <Route path="/administration/oisEditDayCountF">
+                <OisEditDayCountF/>
+            </Route>
+            <Route path="/administration/oisBDC">
+                <OisBDC/>
+            </Route>
+            <Route path="/administration/oisRoundingPayment">
+                <OisEditRoundingP/>
+            </Route>
+            <Route path="/administration/oisforwardS">
+                <OisEditForwardStart/>
             </Route>
         </div>
     )

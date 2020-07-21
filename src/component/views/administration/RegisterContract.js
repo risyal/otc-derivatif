@@ -61,7 +61,7 @@ function RegisterContract() {
             parameters: 'Effective/Commencement Date',
             values: '2',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEffectiveDate` }}>
                     Edit
                 </Link>
         },
@@ -70,7 +70,7 @@ function RegisterContract() {
             parameters: 'Contract Term',
             values: '1W, 1M, 3M, 6M, 9M, 12M',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditContractTerm` }}>
                     Edit
                 </Link>
         },
@@ -79,7 +79,7 @@ function RegisterContract() {
             parameters: 'Notional Amount',
             values: '1.000.000.000',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditNotionalAmount` }}>
                     Edit
                 </Link>
         },
@@ -88,7 +88,7 @@ function RegisterContract() {
             parameters: 'Payment Frequency',
             values: '1W, 1M, 3M, 6M, 12M',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditPaymentFreq` }}>
                     Edit
                 </Link>
         },
@@ -97,7 +97,7 @@ function RegisterContract() {
             parameters: 'Valuation/Fixing Date',
             values: '-2',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditFixingDate` }}>
                     Edit
                 </Link>
         },
@@ -106,8 +106,8 @@ function RegisterContract() {
             parameters: 'Floating Rate Index',
             values: 'JIBOR',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
+                <Link to={{ pathname: `/administration/irsFloatingRateindex` }}>
+                    View
                 </Link>
         },
         {
@@ -115,7 +115,7 @@ function RegisterContract() {
             parameters: 'Spread',
             values: '0.12301',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditSpread` }}>
                     Edit
                 </Link>
         },
@@ -124,7 +124,7 @@ function RegisterContract() {
             parameters: 'Day Count Fraction',
             values: 'Act/360',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditDayCountF` }}>
                     Edit
                 </Link>
         },
@@ -133,7 +133,7 @@ function RegisterContract() {
             parameters: 'Floating Rate Reset Frequency',
             values: '1W, 1M, 3M, 6M, 12M',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsFloatingRRFreq` }}>
                     Edit
                 </Link>
         },
@@ -142,7 +142,7 @@ function RegisterContract() {
             parameters: 'Floating Rate Index Tenor',
             values: '1W, 1M, 3M, 6M, 12M',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsFloatingRIndex` }}>
                     Edit
                 </Link>
         },
@@ -151,7 +151,7 @@ function RegisterContract() {
             parameters: 'Business Day Convention',
             values: 'Modified Following',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsBDC` }}>
                     Edit
                 </Link>
         },
@@ -169,7 +169,7 @@ function RegisterContract() {
             parameters: 'Rounding Payment',
             values: 'IDR 1; 0.00001',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsRoundingPayment` }}>
                     Edit
                 </Link>
         },
@@ -178,7 +178,7 @@ function RegisterContract() {
             parameters: 'Stub Payment',
             values: 'Initial/Front',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditStubP` }}>
                     Edit
                 </Link>
         },
@@ -187,7 +187,7 @@ function RegisterContract() {
             parameters: 'Forward Starting',
             values: 'Eligible',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsforwardS` }}>
                     Edit
                 </Link>
         },
@@ -196,7 +196,7 @@ function RegisterContract() {
             parameters: 'Cash Payment Compounding',
             values: 'Compounding',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/irsEditCashPC` }}>
                     Edit
                 </Link>
         },
@@ -208,7 +208,7 @@ function RegisterContract() {
             parameters: 'Currency',
             values: 'IDR',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisEditCurrency` }}>
                     Edit
                 </Link>
         },
@@ -217,7 +217,7 @@ function RegisterContract() {
             parameters: 'Leg Type/Sub-Product',
             values: 'Fix/Float',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisEditLegType` }}>
                     Edit
                 </Link>
         },
@@ -226,7 +226,7 @@ function RegisterContract() {
             parameters: 'Effective/Commencement Date',
             values: '2',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisEffectiveDate` }}>
                     Edit
                 </Link>
         },
@@ -235,7 +235,7 @@ function RegisterContract() {
             parameters: 'Contract Term',
             values: '1W, 1M, 3M, 6M, 9M, 12M',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisEditContractTerm` }}>
                     Edit
                 </Link>
         },
@@ -244,7 +244,7 @@ function RegisterContract() {
             parameters: 'Notional Amount',
             values: '1.000.000.000',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisEditNotionalAmount` }}>
                     Edit
                 </Link>
         },
@@ -253,7 +253,7 @@ function RegisterContract() {
             parameters: 'Floating Rate Index',
             values: 'INDONIA',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisFloatingRateindex` }}>
                     Edit
                 </Link>
         },
@@ -262,7 +262,7 @@ function RegisterContract() {
             parameters: 'Day Count Fraction',
             values: 'Act/360',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisEditDayCountF` }}>
                     Edit
                 </Link>
         },
@@ -271,7 +271,7 @@ function RegisterContract() {
             parameters: 'Business Day Convention',
             values: 'Modified Following',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisBDC` }}>
                     Edit
                 </Link>
         },
@@ -289,7 +289,7 @@ function RegisterContract() {
             parameters: 'Rounding Payment',
             values: 'IDR 1; 0.00001',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisRoundingPayment` }}>
                     Edit
                 </Link>
         },
@@ -298,7 +298,7 @@ function RegisterContract() {
             parameters: 'Forward Starting',
             values: 'Eligible',
             action: 
-                <Link to={{ pathname: `/administration/` }}>
+                <Link to={{ pathname: `/administration/oisforwardS` }}>
                     Edit
                 </Link>
         },
