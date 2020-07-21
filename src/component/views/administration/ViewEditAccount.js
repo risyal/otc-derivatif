@@ -5,10 +5,10 @@ import {
     Button,
     Select,
     Radio,
-    Typography
+    Typography,
+    Tooltip 
 } from 'antd';
 import {
-    CaretLeftOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
@@ -35,39 +35,42 @@ const ViewEditAccount = (props) => {
             code: 'CENAIDJA',
             sidLei: 'SID1LEI1',
             name: 'Nas abah',
-            currency: 'Rp',
+            // currency: '',
             accNo: 'D4211',
             status: 'Active',
             accNo2: 'D4211',
             status2: 'Frozen',
             accNo3: 'D4211',
             status3: 'Close',
+            settlementAcc: 'Settlement1',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI2',
             name: 'Mega',
-            currency: 'Rp',
+            // currency: 'Rp',
             accNo: 'D4212',
             status: 'Active',
             accNo2: 'D4212',
             status2: 'Frozen',
             accNo3: 'D4212',
             status3: 'Frozen',
+            settlementAcc: 'Settlement2',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI3',
             name: 'Tera',
-            currency: 'Rp',
+            // currency: 'Rp',
             accNo: 'D4212',
             status: 'Frozen',
             accNo2: 'D4212',
             status2: 'Close',
             accNo3: 'D4212',
             status3: 'Active',
+            settlementAcc: 'Settlement3',
         },
     ];
     const dataMemberById = data.find((member) => {
@@ -95,7 +98,7 @@ const ViewEditAccount = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Account</Title>
+                {action} Account Status</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -108,10 +111,12 @@ const ViewEditAccount = (props) => {
             
                 <Form.Item label="Member ID">
                     <Input.Group compact >
-                        <Input 
-                            style={{ width: '45%', textAlign: 'center' }} 
-                            placeholder="Code" 
-                            defaultValue={dataMemberById.code}/>
+                        <Tooltip title="Code">
+                            <Input 
+                                style={{ width: '45%', textAlign: 'center' }} 
+                                placeholder="Code" 
+                                defaultValue={dataMemberById.code}/>
+                        </Tooltip>
                         <Input
                             className="site-input-split"
                             style={{
@@ -123,29 +128,33 @@ const ViewEditAccount = (props) => {
                             placeholder="|"
                             disabled
                         />
-                        <Input
-                            className="site-input-right"
-                            style={{
-                                width: '45%',
-                                textAlign: 'center',
-                            }}
-                            placeholder="SID/LEI"
-                            defaultValue={dataMemberById.sidLei}
-                        />
+                        <Tooltip title="SID/LEI">
+                            <Input
+                                className="site-input-right"
+                                style={{
+                                    width: '45%',
+                                    textAlign: 'center',
+                                }}
+                                placeholder="SID/LEI"
+                                defaultValue={dataMemberById.sidLei}
+                            />
+                        </Tooltip>
                     </Input.Group>
                 </Form.Item>
                 <Form.Item label="Name">
                     <Input disabled={disable} defaultValue={dataMemberById.name} />
                 </Form.Item>
-                <Form.Item label="Currency">
+                {/* <Form.Item label="Currency">
                     <Input disabled={disable} defaultValue={dataMemberById.currency} />
-                </Form.Item>                
+                </Form.Item>                 */}
                 <Form.Item label="Cash Collateral">
                     <Input.Group compact >
-                        <Input 
-                            style={{ width: '45%', textAlign: 'center' }} 
-                            placeholder="Acc No" 
-                            defaultValue={dataMemberById.accNo}/>
+                        <Tooltip title="Account No">
+                            <Input 
+                                style={{ width: '45%', textAlign: 'center' }} 
+                                placeholder="Account No" 
+                                defaultValue={dataMemberById.accNo}/>
+                        </Tooltip>
                         <Input
                             className="site-input-split"
                             style={{
@@ -157,26 +166,30 @@ const ViewEditAccount = (props) => {
                             placeholder="|"
                             disabled
                         />
-                        <Select
-                            defaultValue={dataMemberById.status}
-                            onChange={statusClick}
-                            disabled={disable}
-                            style={{
-                                width: '45%',
-                                textAlign: 'center',
-                            }}>
-                        {statusSelect.map(status => (
-                            <Option value={status}>{status}</Option>
-                        ))}
-                    </Select>
+                        <Tooltip title="Status">
+                            <Select
+                                    defaultValue={dataMemberById.status}
+                                    onChange={statusClick}
+                                    disabled={disable}
+                                    style={{
+                                        width: '45%',
+                                        textAlign: 'center',
+                                    }}>
+                                {statusSelect.map(status => (
+                                    <Option value={status}>{status}</Option>
+                                ))}
+                            </Select>
+                        </Tooltip>
                     </Input.Group>
                 </Form.Item>
                 <Form.Item label="Non-Cash Collateral">
                     <Input.Group compact >
-                        <Input 
-                            style={{ width: '45%', textAlign: 'center' }} 
-                            placeholder="Acc No" 
-                            defaultValue={dataMemberById.accNo2}/>
+                        <Tooltip title="Account No">
+                            <Input 
+                                style={{ width: '45%', textAlign: 'center' }} 
+                                placeholder="Account No" 
+                                defaultValue={dataMemberById.accNo2}/>
+                        </Tooltip>
                         <Input
                             className="site-input-split"
                             style={{
@@ -188,26 +201,30 @@ const ViewEditAccount = (props) => {
                             placeholder="|"
                             disabled
                         />
-                        <Select
-                            defaultValue={dataMemberById.status2}
-                            onChange={statusClick}
-                            disabled={disable}
-                            style={{
-                                width: '45%',
-                                textAlign: 'center',
-                            }}>
-                        {statusSelect.map(status => (
-                            <Option value={status}>{status}</Option>
-                        ))}
-                    </Select>
+                        <Tooltip title="Status">
+                            <Select
+                                defaultValue={dataMemberById.status2}
+                                onChange={statusClick}
+                                disabled={disable}
+                                style={{
+                                    width: '45%',
+                                    textAlign: 'center',
+                                }}>
+                            {statusSelect.map(status => (
+                                <Option value={status}>{status}</Option>
+                            ))}
+                            </Select>
+                        </Tooltip>
                     </Input.Group>
                 </Form.Item>
                 <Form.Item label="Default fund">
                     <Input.Group compact >
-                        <Input 
-                            style={{ width: '45%', textAlign: 'center' }} 
-                            placeholder="Acc No" 
-                            defaultValue={dataMemberById.accNo3}/>
+                        <Tooltip title="Account No">
+                            <Input 
+                                style={{ width: '45%', textAlign: 'center' }} 
+                                placeholder="Account No" 
+                                defaultValue={dataMemberById.accNo3}/>
+                        </Tooltip>
                         <Input
                             className="site-input-split"
                             style={{
@@ -219,19 +236,24 @@ const ViewEditAccount = (props) => {
                             placeholder="|"
                             disabled
                         />
-                        <Select
-                            defaultValue={dataMemberById.status3}
-                            onChange={statusClick}
-                            disabled={disable}
-                            style={{
-                                width: '45%',
-                                textAlign: 'center',
-                            }}>
-                        {statusSelect.map(status => (
-                            <Option value={status}>{status}</Option>
-                        ))}
-                    </Select>
+                        <Tooltip title="Status">
+                            <Select
+                                defaultValue={dataMemberById.status3}
+                                onChange={statusClick}
+                                disabled={disable}
+                                style={{
+                                    width: '45%',
+                                    textAlign: 'center',
+                                }}>
+                            {statusSelect.map(status => (
+                                <Option value={status}>{status}</Option>
+                            ))}
+                            </Select>
+                        </Tooltip>
                     </Input.Group>
+                </Form.Item>
+                <Form.Item label="Settlement Account">
+                    <Input disabled={disable} defaultValue={dataMemberById.settlementAcc} />
                 </Form.Item>
 
                 {!disable ? (<Form.Item label="Role">

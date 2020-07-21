@@ -6,10 +6,12 @@ import {
     Select,
     Table,
     Dropdown,
-    Menu
+    Menu,
+    Row,
+    Col,
 } from 'antd';
 import { Link } from "react-router-dom";
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function EditAccount(){
     const [expand, setExpand] = useState(true);
@@ -35,13 +37,13 @@ function EditAccount(){
                     width: 100,
                     dataIndex: 'code',
                     key: 'code',
-                    fixed: 'left',
+                    // fixed: 'left',
                 }, {
                     title: 'SID/LEI',
                     width: 100,
                     dataIndex: 'sidLei',
                     key: 'sidLei',
-                    fixed: 'left',
+                    // fixed: 'left',
                 }
             ]
         },
@@ -51,17 +53,17 @@ function EditAccount(){
             dataIndex: 'name',
             key: 'name',
         },
-        {
-            title: 'Currency',
-            width: 100,
-            dataIndex: 'currency',
-            key: 'currency',
-        },
+        // {
+        //     title: 'Currency',
+        //     width: 100,
+        //     dataIndex: 'currency',
+        //     key: 'currency',
+        // },
         {
             title: 'Cash Collateral',
             children: [
                 {
-                    title: 'ACC No',
+                    title: 'Account No',
                     width: 100,
                     dataIndex: 'accNo',
                     key: 'accNo',
@@ -77,7 +79,7 @@ function EditAccount(){
             title: 'Non-cash Collateral',
             children: [
                 {
-                    title: 'ACC No',
+                    title: 'Account No',
                     width: 100,
                     dataIndex: 'accNo2',
                     key: 'accNo',
@@ -93,7 +95,7 @@ function EditAccount(){
             title: 'Default Fund',
             children: [
                 {
-                    title: 'ACC No',
+                    title: 'Account No',
                     width: 100,
                     dataIndex: 'accNo3',
                     key: 'accNo',
@@ -106,9 +108,15 @@ function EditAccount(){
             ]
         },
         {
+            title: 'Settlement Account',
+            width: 100,
+            dataIndex: 'settlementAcc',
+            key: 'settlementAcc',
+        },
+        {
             title: 'Action',
             key: 'action',
-            fixed: 'right',
+            // fixed: 'right',
             width: 100,
             render: (text, record) => (
                 <Dropdown
@@ -151,7 +159,7 @@ function EditAccount(){
                     }
                     placement="bottomLeft"
                     trigger={['click']}>
-                    <Button>Action</Button>
+                    <Button>Actions</Button>
                 </Dropdown>
             )
         },
@@ -162,43 +170,55 @@ function EditAccount(){
             code: 'CENAIDJA',
             sidLei: 'SID1LEI1',
             name: 'Nas abah',
-            currency: 'Rp',
+            currency: '',
             accNo: 'D4211',
             status: 'Active',
             accNo2: 'D4211',
             status2: 'Frozen',
             accNo3: 'D4211',
             status3: 'Close',
+            settlementAcc: 'Settlement1',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI2',
             name: 'Mega',
-            currency: 'Rp',
+            currency: '',
             accNo: 'D4212',
             status: 'Active',
             accNo2: 'D4212',
             status2: 'Frozen',
             accNo3: 'D4212',
             status3: 'Frozen',
+            settlementAcc: 'Settlement2',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI3',
             name: 'Tera',
-            currency: 'Rp',
+            currency: '',
             accNo: 'D4212',
             status: 'Frozen',
             accNo2: 'D4212',
             status2: 'Close',
             accNo3: 'D4212',
             status3: 'Active',
+            settlementAcc: 'Settlement3',
         },
     ];
 
     const { Option } = Select;
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -242,7 +262,7 @@ function EditAccount(){
                         <Form.Item label="Name">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="ACC No">
+                        <Form.Item label="Account No">
                             <Input />
                         </Form.Item>
                         <Form.Item label="Status">
@@ -280,7 +300,22 @@ function EditAccount(){
                 </Form.Item>
             </Form>
 
-            <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                        pathname: `#`,
+                        state: {
+                            id: '1',
+                            action: "Edit",
+                            disable: false,
+                        }
+                    }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+
+            <div style={{ margin: '15px 0px 0px 0px' }} scroll={{ x: 1300 }}>
                 <Table
                     columns={columns}
                     dataSource={data}

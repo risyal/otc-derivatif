@@ -187,11 +187,11 @@ const Menu = [
             key: 'registerContract',
             linkTo: '/registercontract'
         }, {
-            name: 'Edit Account',
+            name: 'Edit Account Status',
             key: 'editAccount',
             linkTo: '/editaccount'
         }, {
-            name: 'Securities Coll Mgt',
+            name: 'Securities Collateral Management',
             key: 'securitiesCollMgt',
             linkTo: '/securitiescollmgt'
         }, {

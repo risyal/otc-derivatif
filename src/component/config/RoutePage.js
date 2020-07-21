@@ -373,13 +373,13 @@ function RoutePage() {
             </Route>
             <Route path="/editaccount">
                 <div className="head-content">
-                    <Title level={4}>Edit Account (Status)</Title>
+                    <Title level={4}>Edit Account Status</Title>
                 </div>
                 <EditAccount />
             </Route>
             <Route path="/securitiescollmgt">
                 <div className="head-content">
-                    <Title level={4}>Securities Coll Management (Register Inst, Eligibility, Haircut)</Title>
+                    <Title level={4}>Securities Collateral Management</Title>
                 </div>
                 <SecuritiesCollMgt />
             </Route>

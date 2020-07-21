@@ -6,10 +6,13 @@ import {
     Radio,
     Typography,
     Table,
+    Row,
+    Col,
 } from 'antd';
 import {
     CaretLeftOutlined,
-    ArrowLeftOutlined
+    ArrowLeftOutlined,
+    DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
@@ -47,39 +50,42 @@ const ViewDeleteAccount = (props) => {
             code: 'CENAIDJA',
             sidLei: 'SID1LEI1',
             name: 'Nas abah',
-            currency: '$10',
+            // currency: '$10',
             accNo: 'D4211',
             status: 'Active',
             accNo2: 'D4211',
             status2: 'Frozen',
             accNo3: 'D4211',
             status3: 'Close',
+            settlementAcc: 'Settlement1',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI2',
             name: 'Mega',
-            currency: '$50',
+            // currency: '$50',
             accNo: 'D4212',
             status: 'Active',
             accNo2: 'D4212',
             status2: 'Frozen',
             accNo3: 'D4212',
             status3: 'Frozen',
+            settlementAcc: 'Settlement2',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI3',
             name: 'Tera',
-            currency: '$25',
+            // currency: '$25',
             accNo: 'D4212',
             status: 'Frozen',
             accNo2: 'D4212',
             status2: 'Close',
             accNo3: 'D4212',
             status3: 'Active',
+            settlementAcc: 'Settlement3',
         },
     ]);
     const dataAccountById = data.find((account) => {
@@ -100,13 +106,13 @@ const ViewDeleteAccount = (props) => {
             title: "Name :",
             paramData: dataAccountById.name
         },
-        {
-            title: "Currency :",
-            paramData: "Code : " + dataAccountById.currency
-        },
+        // {
+        //     title: "Currency :",
+        //     paramData: "Code : " + dataAccountById.currency
+        // },
         {
             title: "Cash Collateral : ",
-            paramData: "ACC No : " + dataAccountById.accNo
+            paramData: "Account No : " + dataAccountById.accNo
         },
         {
             title: "",
@@ -114,7 +120,7 @@ const ViewDeleteAccount = (props) => {
         },
         {
             title: "Non-Cash Collateral : ",
-            paramData: "ACC No : " + dataAccountById.accNo2
+            paramData: "Account No : " + dataAccountById.accNo2
         },
         {
             title: "",
@@ -122,11 +128,15 @@ const ViewDeleteAccount = (props) => {
         },
         {
             title: "Default Fund : ",
-            paramData: "ACC No : " + dataAccountById.accNo3
+            paramData: "Account No : " + dataAccountById.accNo3
         },
         {
             title: "",
             paramData: "Status : " + dataAccountById.status3
+        },
+        {
+            title: "Settlement Account : ",
+            paramData: dataAccountById.settlementAcc
         },
     ]);
 
@@ -136,6 +146,15 @@ const ViewDeleteAccount = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div>
@@ -146,7 +165,7 @@ const ViewDeleteAccount = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Account</Title>
+                {action} Account Status</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -166,6 +185,20 @@ const ViewDeleteAccount = (props) => {
                 ) : (
                         <div></div>
                     )}
+                    <Row justify="end">
+                        <Col span={4}>
+                            {/* <Link to={{
+                                pathname: `#`,
+                                state: {
+                                    id: '1',
+                                    action: "Edit",
+                                    disable: false,
+                                }
+                            }} > */}
+                            {exportButtton}
+                            {/* </Link> */}
+                        </Col>
+                    </Row>
                 <Table
                     className="viewDelTable"
                     columns={columns}

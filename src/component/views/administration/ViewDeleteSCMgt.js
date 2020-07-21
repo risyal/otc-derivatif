@@ -6,10 +6,13 @@ import {
     Radio,
     Typography,
     Table,
+    Row,
+    Col,
 } from 'antd';
 import {
     CaretLeftOutlined,
-    ArrowLeftOutlined
+    ArrowLeftOutlined,
+    DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
@@ -117,6 +120,15 @@ const ViewDeleteSCMgt = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div>
@@ -137,7 +149,20 @@ const ViewDeleteSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                
+                <Row justify="end">
+                    <Col span={4}>
+                        {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                        {exportButtton}
+                        {/* </Link> */}
+                    </Col>
+                </Row>
                 <Table
                     className="viewDelTable"
                     columns={columns}

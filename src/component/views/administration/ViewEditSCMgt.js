@@ -46,7 +46,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument1',
             type: 'Type1',
-            eligibility: 'True',
+            eligibility: 'Yes',
             haircut: 'Haircut1',
             maturityDate: '09-07-2020',
         },
@@ -55,7 +55,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument2',
             type: 'Type2',
-            eligibility: 'False',
+            eligibility: 'No',
             haircut: 'Haircut2',
             maturityDate: '09-07-2020',
         },
@@ -64,7 +64,7 @@ const ViewEditSCMgt = (props) => {
             code: 'CENAIDJA',
             name: 'Instrument3',
             type: 'Type3',
-            eligibility: 'True',
+            eligibility: 'Yes',
             haircut: 'Haircut3',
             maturityDate: '09-07-2020',
         },
@@ -74,7 +74,7 @@ const ViewEditSCMgt = (props) => {
         return member.key === props.location.state.id
     })
 
-    const typeSelect = ['True', 'False'];
+    const typeSelect = ['Yes', 'No'];
     const [selectedType, setSelectedType] = useState(typeSelect[0]);
     const typeClick = (e) => {
         setSelectedType(e);

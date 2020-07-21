@@ -6,9 +6,11 @@ import {
     Table,
     Dropdown,
     Menu,
+    Row,
+    Col,
 } from 'antd';
 import { Link } from "react-router-dom";
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function SecuritiesCollMgt(){
     const [expand, setExpand] = useState(true);
@@ -136,6 +138,16 @@ function SecuritiesCollMgt(){
         },
     ];
 
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     return(
         <div style={{ margin: '15px 20px' }}>
             <Form
@@ -197,6 +209,20 @@ function SecuritiesCollMgt(){
                             Add New Data
                     </Button>
                 </Link>
+                <Row justify="end">
+                    <Col span={4}>
+                        {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                        {exportButtton}
+                        {/* </Link> */}
+                    </Col>
+                </Row>
                 <Table
                     columns={columns}
                     dataSource={data}
