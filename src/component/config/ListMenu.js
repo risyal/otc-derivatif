@@ -195,7 +195,7 @@ const Menu = [
             key: 'securitiesCollMgt',
             linkTo: '/securitiescollmgt'
         }, {
-            name: 'Cash Coll Mgt',
+            name: 'Cash Collateral Management',
             key: 'cashCollMgt',
             linkTo: '/cashcollmgt'
         }, {

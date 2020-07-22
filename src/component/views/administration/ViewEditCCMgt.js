@@ -41,21 +41,21 @@ const ViewEditCCMgt = (props) => {
             key: '1',
             code: 'CENAIDJA',
             name: 'Instrument1',
-            eligibility: 'False',
+            eligibility: 'No',
             haircut: 'Haircut1',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             name: 'Instrument2',
-            eligibility: 'True',
+            eligibility: 'Yes',
             haircut: 'Haircut2',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             name: 'Instrument3',
-            eligibility: 'True',
+            eligibility: 'No',
             haircut: 'Haircut3',
         },
     ];
@@ -64,7 +64,7 @@ const ViewEditCCMgt = (props) => {
         return member.key === props.location.state.id
     })
 
-    const typeSelect = ['True', 'False'];
+    const typeSelect = ['Yes', 'No'];
     const [selectedType, setSelectedType] = useState(typeSelect[0]);
     const typeClick = (e) => {
         setSelectedType(e);

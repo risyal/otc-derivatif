@@ -385,7 +385,7 @@ function RoutePage() {
             </Route>
             <Route path="/cashcollmgt">
                 <div className="head-content">
-                    <Title level={4}>Cash Coll Management (Register Mata Uang, Eligibility, Haircut)</Title>
+                    <Title level={4}>Cash Collateral Management</Title>
                 </div>
                 <CashCollMgt />
             </Route>

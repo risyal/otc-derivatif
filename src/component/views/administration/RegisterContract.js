@@ -158,11 +158,11 @@ function RegisterContract() {
         {
             key: '14',
             parameters: 'Calendar',
-            values: '',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
+            values: 'BI Business Calendar',
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
         },
         {
             key: '15',
@@ -332,11 +332,11 @@ function RegisterContract() {
         {
             key: '15',
             parameters: 'Calendar',
-            values: '',
-            action: 
-                <Link to={{ pathname: `/administration/` }}>
-                    Edit
-                </Link>
+            values: 'BI Business Calendar',
+            // action: 
+            //     <Link to={{ pathname: `/administration/` }}>
+            //         Edit
+            //     </Link>
         },
         {
             key: '16',

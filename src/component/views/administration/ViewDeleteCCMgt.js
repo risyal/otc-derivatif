@@ -6,10 +6,13 @@ import {
     Radio,
     Typography,
     Table,
+    Row,
+    Col,
 } from 'antd';
 import {
     CaretLeftOutlined,
-    ArrowLeftOutlined
+    ArrowLeftOutlined,
+    DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
@@ -53,21 +56,21 @@ const ViewDeleteCCMgt = (props) => {
             key: '1',
             code: 'CENAIDJA',
             name: 'Instrument1',
-            eligibility: 'False',
+            eligibility: 'No',
             haircut: 'Haircut1',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             name: 'Instrument2',
-            eligibility: 'True',
+            eligibility: 'Yes',
             haircut: 'Haircut2',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             name: 'Instrument3',
-            eligibility: 'True',
+            eligibility: 'Yes',
             haircut: 'Haircut3',
         },
     ]);
@@ -101,6 +104,16 @@ const ViewDeleteCCMgt = (props) => {
         setSixEyes(e.target.value);
     };
 
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
         <div>
             <div className="head-content viewDelete">
@@ -120,7 +133,21 @@ const ViewDeleteCCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                
+                <Row justify="end">
+                    <Col span={4}>
+                        {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                        {exportButtton}
+                        {/* </Link> */}
+                    </Col>
+                </Row>
+
                 <Table
                     className="viewDelTable"
                     columns={columns}
