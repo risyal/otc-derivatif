@@ -43,7 +43,7 @@ function NewTrade() {
     });
     const [productRate] = useState({
         OIS: ['IndONIA'],
-        IRS: ['JIBOR 1W', 'JIBOR 1M', 'JIBOR 3M', 'JIBOR 6M', 'JIBOR 12M'],
+        IRS: ['1W', '1M', '3M', '6M', '12M'],
         DNDF: ['JISDOR'],
     });
     const [floatingRate] = useState({
@@ -213,7 +213,7 @@ function NewTrade() {
                 ) : jenisProduct === productSelect[0]
                     || jenisProduct === productSelect[1] ? (
                             <div>
-                                <Form.Item label="Position">
+                                {/*  <Form.Item label="Position">
                                     <Select
                                         value={position}
                                         onChange={positionClick} >
@@ -221,15 +221,24 @@ function NewTrade() {
                                             <Select.Option key={pos}>{pos}</Select.Option>
                                         ))}
                                     </Select>
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item label="Reference Rate">
-                                    {jenisProduct === productSelect[1] ? <Select
-                                        value={selectedRate}
-                                        onChange={rateClick} >
-                                        {rateSelect.map(rate => (
-                                            <Select.Option key={rate}>{rate}</Select.Option>
-                                        ))}
-                                    </Select> : selectedRate}
+                                    {jenisProduct === productSelect[1] ?
+                                        <Input.Group compact>
+                                            <Select defaultValue="Rp" style={{ width: '15%' }}
+                                                disabled='true'>
+                                                <Select.Option value="Rp">JIBOR</Select.Option>
+                                            </Select>
+                                            <Select
+                                                value={selectedRate}
+                                                onChange={rateClick}
+                                                style={{ width: '85%' }} >
+                                                {rateSelect.map(rate => (
+                                                    <Select.Option key={rate}>{rate}</Select.Option>
+                                                ))}
+                                            </Select>
+                                        </Input.Group>
+                                        : selectedRate}
                                 </Form.Item>
                                 <Form.Item label="Market Side ">
                                     <Select value={selectedMarket} onChange={marketClick}>
@@ -242,28 +251,45 @@ function NewTrade() {
                                     <Input />
                                 </Form.Item>
                                 <Form.Item label="Leg Type ">
-                                    <Select defaultValue="fix" onChange={frdisableClick}>
-                                        <Select.Option value="fix">Fix</Select.Option>
-                                        <Select.Option value="float">Float</Select.Option>
-                                    </Select>
+                                    <Input.Group compact>
+                                        <Select defaultValue="fix"
+                                            style={{ width: '15%' }} onChange={frdisableClick}>
+                                            <Select.Option value="fix">Fix</Select.Option>
+                                            <Select.Option value="float">Float</Select.Option>
+                                        </Select>
+                                        <Input
+                                            disabled={disableFR}
+                                            style={{ width: '80%' }} />
+                                        <Select disabled={disableFR} defaultValue="%" style={{ width: '5%' }}>
+                                            <Select.Option value="%">%</Select.Option>
+                                        </Select>
+                                    </Input.Group>
                                 </Form.Item>
-                                <Form.Item label="Floating Rate Index">
+                                {/* <Form.Item label="Floating Rate Index">
                                     {disableFR ?
                                         (selectedfloatingRate) : (<Input />)}
                                 </Form.Item>
-                                {/* <Form.Item label="Trade Date">
+                                <Form.Item label="Trade Date">
                                     <DatePicker style={{ width: '100%' }}
                                         onChange={tradeDateClick}
                                         defaultValue={moment('2020/01/23', dateFormat)} />
                                 </Form.Item> */}
                                 <Form.Item label="Forward Starting">
-                                    <Select defaultValue="Eligible"
-                                        onChange={forwardStartingClick}>
-                                        <Select.Option value="eligible">Eligible</Select.Option>
-                                        <Select.Option value="notEligible">Not Eligible</Select.Option>
-                                    </Select>
+                                    <Input.Group compact>
+                                        <Select defaultValue="Eligible"
+                                            onChange={forwardStartingClick}
+                                            style={{ width: '25%' }}>
+                                            <Select.Option value="eligible">Eligible</Select.Option>
+                                            <Select.Option value="notEligible">Not Eligible</Select.Option>
+                                        </Select>
+                                        {showFSDate ?
+                                            <DatePicker
+                                                disabled={!showFSDate} style={{ width: '75%' }}
+                                                defaultValue={moment('2020/01/23', dateFormat)} />
+                                            : null}
+                                    </Input.Group>
                                 </Form.Item>
-                                {showFSDate ?
+                                {/*  {showFSDate ?
                                     <Form.Item label="Forward Starting Date">
                                         <DatePicker style={{ width: '100%' }}
                                             defaultValue={moment('2020/01/23', dateFormat)} />
@@ -275,7 +301,7 @@ function NewTrade() {
                                         disabledDate={disabledDate}
                                         onChange={effectiveDateClick}
                                         value={effectiveDates} />
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item label="Maturity Date">
                                     <DatePicker style={{ width: '100%' }}
                                         defaultValue={moment('2020/01/23', dateFormat)} />
@@ -408,7 +434,7 @@ function NewTrade() {
                             </div>
                         ) : jenisProduct === productSelect[2] ? (
                             <div>
-                                <Form.Item label="Position">
+                                {/* <Form.Item label="Position">
                                     <Select
                                         value={position}
                                         onChange={positionClick} >
@@ -416,7 +442,7 @@ function NewTrade() {
                                             <Select.Option key={pos}>{pos}</Select.Option>
                                         ))}
                                     </Select>
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item label="Reference Rate">
                                     {selectedRate}
                                 </Form.Item>

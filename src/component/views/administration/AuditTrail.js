@@ -7,11 +7,11 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function AuditTrail(){
+function AuditTrail() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
-    const formItemLayout = {
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -20,9 +20,9 @@ function AuditTrail(){
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Date',
             dataIndex: 'date',
@@ -59,7 +59,7 @@ function AuditTrail(){
             width: 100,
             key: 'detailNote',
         },
-    ];
+    ]);
     const data = [
         {
         },
