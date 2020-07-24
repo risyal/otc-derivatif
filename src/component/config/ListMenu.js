@@ -203,7 +203,7 @@ const Menu = [
             key: 'editReferenceRate',
             linkTo: '/editreferencerate'
         }, {
-            name: 'Edit Parameter',
+            name: 'Edit Time Parameter',
             key: 'editParameter',
             linkTo: '/editparameter'
         }, {

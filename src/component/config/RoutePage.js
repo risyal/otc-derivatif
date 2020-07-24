@@ -29,16 +29,16 @@ import BlockCollateralClient from '../views/account/BlockCollateralClient';
 import DefaultFund from '../views/account/DefaultFund';
 import RegisterBeneficiaries from '../views/account/RegisterBeneficiaries';
 import InquiryBeneficiaries from '../views/account/InquiryBeneficiaries';
-import RegisterContract from '../views/administration/RegisterContract';
-import EditAccount from '../views/administration/EditAccount';
-import SecuritiesCollMgt from '../views/administration/SecuritiesCollMgt';
-import CashCollMgt from '../views/administration/CashCollMgt';
-import EditReferenceRate from '../views/administration/EditReferenceRate';
-import EditParameter from '../views/administration/EditParameter';
+import RegisterContract from '../views/administration/registerContract/RegisterContract';
+import EditAccount from '../views/administration/editAccountStatus/EditAccount';
+import SecuritiesCollMgt from '../views/administration/securitiesCollMgt/SecuritiesCollMgt';
+import CashCollMgt from '../views/administration/cashCollMgt/CashCollMgt';
+import EditReferenceRate from '../views/administration/editReferenceRate/EditReferenceRate';
+import EditParameter from '../views/administration/editParameter/EditParameter';
 import AuditTrail from '../views/administration/AuditTrail';
-import UserManagement from '../views/administration/UserManagement';
-import SystemParameter from '../views/administration/SystemParameter';
-import Calendar from '../views/administration/Calendar';
+import UserManagement from '../views/administration/userManagement/UserManagement';
+import SystemParameter from '../views/administration/systemParameter/SystemParameter';
+import Calendar from '../views/administration/calendar/Calendar';
 import Approval from '../views/administration/Approval';
 import RegisterAts from '../views/administration/RegisterAts';
 import SettlementInstruction from '../views/settlement/SettlementInstruction';
@@ -60,21 +60,21 @@ import ViewDeleteClient from '../views/member-client/ViewDeleteClient';
 import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
 import EditRegisterContract from '../views/administration/EditRegisterContract';
 import ApprovalTrade from '../views/trade/ApprovalTrade';
-import ViewDeleteAccount from '../views/administration/ViewDeleteAccount';
-import ViewEditAccount from '../views/administration/ViewEditAccount';
-import ViewEditSCMgt from '../views/administration/ViewEditSCMgt';
-import ViewDeleteSCMgt from '../views/administration/ViewDeleteSCMgt';
-import ViewEditCCMgt from '../views/administration/ViewEditCCMgt';
-import ViewDeleteCCMgt from '../views/administration/ViewDeleteCCMgt';
-import ViewDeleteRRate from '../views/administration/ViewDeleteRRate';
-import ViewEditRRate from '../views/administration/ViewEditRRate';
-import ViewDeleteParam from '../views/administration/ViewDeleteParam';
-import ViewEditParam from '../views/administration/ViewEditParam';
-import ViewEditUser from '../views/administration/ViewEditUser';
-import ViewDeleteUser from '../views/administration/ViewDeleteUser';
-import AddUser from '../views/administration/AddUser';
-import ViewEditCalendar from '../views/administration/ViewEditCalendar';
-import ViewDeleteCalendar from '../views/administration/ViewDeleteCalendar';
+import ViewDeleteAccount from '../views/administration/editAccountStatus/ViewDeleteAccount';
+import ViewEditAccount from '../views/administration/editAccountStatus/ViewEditAccount';
+import ViewEditSCMgt from '../views/administration/securitiesCollMgt/ViewEditSCMgt';
+import ViewDeleteSCMgt from '../views/administration/securitiesCollMgt/ViewDeleteSCMgt';
+import ViewEditCCMgt from '../views/administration/cashCollMgt/ViewEditCCMgt';
+import ViewDeleteCCMgt from '../views/administration/cashCollMgt/ViewDeleteCCMgt';
+import ViewDeleteJibor from '../views/administration/editReferenceRate/ViewDeleteJibor';
+import ViewEditJibor from '../views/administration/editReferenceRate/ViewEditJibor';
+import ViewDeleteParam from '../views/administration/editParameter/ViewDeleteParam';
+import ViewEditParam from '../views/administration/editParameter/ViewEditParam';
+import ViewEditUser from '../views/administration/userManagement/ViewEditUser';
+import ViewDeleteUser from '../views/administration/userManagement/ViewDeleteUser';
+import AddUser from '../views/administration/userManagement/AddUser';
+import ViewEditCalendar from '../views/administration/calendar/ViewEditCalendar';
+import ViewDeleteCalendar from '../views/administration/calendar/ViewDeleteCalendar';
 import DetailViewTrade from '../views/trade/DetailView';
 import ViewEditRegAts from '../views/administration/ViewEditRegAts';
 import ViewDeleteRegAts from '../views/administration/ViewDeleteRegAts';
@@ -87,38 +87,42 @@ import DetailCancelSM from '../views/instruction/DetailCancelSM';
 import ViewAddCM from '../views/instruction/ViewAddCM';
 import DetailCancelCM from '../views/instruction/DetailCancelCM';
 import ClearingDetailView from '../views/clearing/ClearingDetail';
-import IrsEditCurrency from '../views/administration/IrsEditCurrency';
-import IrsEditLegType from '../views/administration/IrsEditLegType';
-import IrsEffectiveDate from '../views/administration/IrsEffectiveDate';
-import IrsEditContractTerm from '../views/administration/IrsEditContractTerm';
-import IrsEditNotionalAmount from '../views/administration/IrsEditNotionalAmount';
-import IrsEditPaymentFreq from '../views/administration/IrsEditPaymentFreq';
-import IrsEditFixingDate from '../views/administration/IrsEditFixingDate';
-import IrsEditFloatingRI from '../views/administration/IrsEditFloatingRI';
-import IrsEditSpread from '../views/administration/IrsEditSpread';
-import IrsEditDayCountF from '../views/administration/IrsEditDayCountF';
-import IrsFloatingRatrRFreq from '../views/administration/IrsFloatingRateRFreq';
-import IrsFloatingRIndex from '../views/administration/IrsFloatingRIndex';
-import IrsBDC from '../views/administration/IrsBDC';
-import IrsEditRoundingP from '../views/administration/IrsEditRoundingP';
-import IrsEditStubPayment from '../views/administration/IrsEditStubPayment';
-import IrsEditForwardStart from '../views/administration/IrsEditForwardStart';
-import IrsEditCashPaymentC from '../views/administration/IrsEditCashPaymentC';
-import OisEditCurrency from '../views/administration/OisEditCurrenct';
-import OisEditLegType from '../views/administration/OisEditLegType';
-import OisEffectiveDate from '../views/administration/OisEffectiveDate';
-import OisEditContractTerm from '../views/administration/OisEditContractTerm';
-import OisEditNotionalAmount from '../views/administration/OisEditNotionalAmount';
-import OisEditFloatingRI from '../views/administration/OisEditFloatingRI';
-import OisEditDayCountF from '../views/administration/OisEditDayCountF';
-import OisBDC from '../views/administration/OisBDC';
-import OisEditRoundingP from '../views/administration/OisEditRoundingP';
-import OisEditForwardStart from '../views/administration/OisEditForwardS';
-import OisEditSpread from '../views/administration/OisEditSpread';
-import DndfEditCurrency from '../views/administration/DndfEditCurrency';
-import DndfEditFixingDate from '../views/administration/DndfEditFixingDate';
-import DndfTenor from '../views/administration/DndfTenor';
-import DndfEditNotionalAmount from '../views/administration/DndfEditNotionalAmount';
+import IrsEditCurrency from '../views/administration/registerContract/IrsEditCurrency';
+import IrsEditLegType from '../views/administration/registerContract/IrsEditLegType';
+import IrsEffectiveDate from '../views/administration/registerContract/IrsEffectiveDate';
+import IrsEditContractTerm from '../views/administration/registerContract/IrsEditContractTerm';
+import IrsEditNotionalAmount from '../views/administration/registerContract/IrsEditNotionalAmount';
+import IrsEditPaymentFreq from '../views/administration/registerContract/IrsEditPaymentFreq';
+import IrsEditFixingDate from '../views/administration/registerContract/IrsEditFixingDate';
+import IrsEditSpread from '../views/administration/registerContract/IrsEditSpread';
+import IrsEditDayCountF from '../views/administration/registerContract/IrsEditDayCountF';
+import IrsFloatingRatrRFreq from '../views/administration/registerContract/IrsFloatingRateRFreq';
+import IrsFloatingRIndex from '../views/administration/registerContract/IrsFloatingRIndex';
+import IrsBDC from '../views/administration/registerContract/IrsBDC';
+import IrsEditRoundingP from '../views/administration/registerContract/IrsEditRoundingP';
+import IrsEditStubPayment from '../views/administration/registerContract/IrsEditStubPayment';
+import IrsEditForwardStart from '../views/administration/registerContract/IrsEditForwardStart';
+import IrsEditCashPaymentC from '../views/administration/registerContract/IrsEditCashPaymentC';
+import OisEditCurrency from '../views/administration/registerContract/OisEditCurrenct';
+import OisEditLegType from '../views/administration/registerContract/OisEditLegType';
+import OisEffectiveDate from '../views/administration/registerContract/OisEffectiveDate';
+import OisEditContractTerm from '../views/administration/registerContract/OisEditContractTerm';
+import OisEditNotionalAmount from '../views/administration/registerContract/OisEditNotionalAmount';
+import OisEditDayCountF from '../views/administration/registerContract/OisEditDayCountF';
+import OisBDC from '../views/administration/registerContract/OisBDC';
+import OisEditRoundingP from '../views/administration/registerContract/OisEditRoundingP';
+import OisEditForwardStart from '../views/administration/registerContract/OisEditForwardS';
+import OisEditSpread from '../views/administration/registerContract/OisEditSpread';
+import DndfEditCurrency from '../views/administration/registerContract/DndfEditCurrency';
+import DndfEditFixingDate from '../views/administration/registerContract/DndfEditFixingDate';
+import DndfTenor from '../views/administration/registerContract/DndfTenor';
+import DndfEditNotionalAmount from '../views/administration/registerContract/DndfEditNotionalAmount';
+import ViewDeleteJisdor from '../views/administration/editReferenceRate/ViewDeleteJisdor';
+import ViewEditJisdor from '../views/administration/editReferenceRate/ViewEditJisdor';
+import ViewDeleteIndonia from '../views/administration/editReferenceRate/ViewDeleteIndonia';
+import ViewEditIndonia from '../views/administration/editReferenceRate/ViewEditIndonia';
+import ViewDeleteSysParam from '../views/administration/systemParameter/ViewDeleteSysParam';
+import ViewEditSysParam from '../views/administration/systemParameter/ViewEditSysParam';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -391,19 +395,19 @@ function RoutePage() {
             </Route>
             <Route path="/editreferencerate">
                 <div className="head-content">
-                    <Title level={4}>Edit Reference Rate (JIBOR, JISDOR, INDONIA, LIBOR)</Title>
+                    <Title level={4}>Edit Reference Rate</Title>
                 </div>
                 <EditReferenceRate />
             </Route>
             <Route path="/editparameter">
                 <div className="head-content">
-                    <Title level={4}>Edit Parameter</Title>
+                    <Title level={4}>Time Parameter</Title>
                 </div>
                 <EditParameter />
             </Route>
             <Route path="/audittrail">
                 <div className="head-content">
-                    <Title level={4}>Audit trail</Title>
+                    <Title level={4}>Audit Trail</Title>
                 </div>
                 <AuditTrail />
             </Route>
@@ -421,7 +425,7 @@ function RoutePage() {
             </Route>
             <Route path="/calendar">
                 <div className="head-content">
-                    <Title level={4}>Calender (Hari Libur/BI Calender)</Title>
+                    <Title level={4}>Calendar</Title>
                 </div>
                 <Calendar />
             </Route>
@@ -459,9 +463,9 @@ function RoutePage() {
             </Route>
             <Route exact path="/administration/ViewDeleteCCMgt" component={ViewDeleteCCMgt}>
             </Route>
-            <Route exact path="/administration/ViewDeleteRRate" component={ViewDeleteRRate}>
+            <Route exact path="/administration/ViewDeleteJibor" component={ViewDeleteJibor}>
             </Route>
-            <Route exact path="/administration/ViewEditRRate" component={ViewEditRRate}>
+            <Route exact path="/administration/ViewEditJibor" component={ViewEditJibor}>
             </Route>
             <Route exact path="/administration/ViewDeleteParam" component={ViewDeleteParam}>
             </Route>
@@ -472,9 +476,6 @@ function RoutePage() {
             <Route exact path="/administration/ViewDeleteUser" component={ViewDeleteUser}>
             </Route>
             <Route path="/administration/AddUser">
-                <div className="head-content">
-                    <Title level={4}>Add New User</Title>
-                </div>
                 <AddUser />
             </Route>
             <Route exact path="/administration/ViewEditCalendar" component={ViewEditCalendar}>
@@ -542,9 +543,6 @@ function RoutePage() {
             <Route path="/administration/irsEditFixingDate">
                 <IrsEditFixingDate />
             </Route>
-            <Route path="/administration/irsFloatingRateindex">
-                <IrsEditFloatingRI />
-            </Route>
             <Route path="/administration/irsEditSpread">
                 <IrsEditSpread/>
             </Route>
@@ -587,9 +585,6 @@ function RoutePage() {
             <Route path="/administration/oisEditNotionalAmount">
                 <OisEditNotionalAmount />
             </Route>
-            <Route path="/administration/oisFloatingRateindex">
-                <OisEditFloatingRI/>
-            </Route>
             <Route path="/administration/oisEditDayCountF">
                 <OisEditDayCountF/>
             </Route>
@@ -616,6 +611,18 @@ function RoutePage() {
             </Route>
             <Route path="/administration/dndfEditNotionalAmount">
                 <DndfEditNotionalAmount />
+            </Route>
+            <Route exact path="/administration/ViewDeleteJisdor" component={ViewDeleteJisdor}>
+            </Route>
+            <Route exact path="/administration/ViewEditJisdor" component={ViewEditJisdor}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteIndonia" component={ViewDeleteIndonia}>
+            </Route>
+            <Route exact path="/administration/ViewEditIndonia" component={ViewEditIndonia}>
+            </Route>
+            <Route exact path="/administration/ViewDeleteSysParam" component={ViewDeleteSysParam}>
+            </Route>
+            <Route exact path="/administration/ViewEditSysParam" component={ViewEditSysParam}>
             </Route>
         </div>
     )
