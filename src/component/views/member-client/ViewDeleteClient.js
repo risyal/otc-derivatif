@@ -6,9 +6,11 @@ import {
     Radio,
     Typography,
     Table,
+    Row,
+    Col,
 } from 'antd';
 import {
-    CaretLeftOutlined,
+    DownloadOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
@@ -18,7 +20,7 @@ const { Title } = Typography;
 const ViewDeleteClient = (props) => {
     const text = 'Are you sure to delete this task?';
     const componentSize = 'middle';
-    const formItemLayout = {
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -27,9 +29,9 @@ const ViewDeleteClient = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
-    const columns = [
+    const [columns] = useState([
         {
             title: '',
             dataIndex: 'title',
@@ -41,7 +43,7 @@ const ViewDeleteClient = (props) => {
             dataIndex: 'paramData',
             key: 'paramData',
         },
-    ];
+    ]);
 
     const [data] = useState([
         {
@@ -117,17 +119,26 @@ const ViewDeleteClient = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">   
+                    <span className="icon-back">
                         <Link to="/memberandclientmanagement/registerclient">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Client</Title>
+                    {action} Client</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -137,17 +148,21 @@ const ViewDeleteClient = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                
 
-                    <Table
-                        className="viewDelTable"
-                        columns={columns}
-                        dataSource={dataForView}
-                        showHeader={false}
-                        rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                        size="middle"
-                        pagination={false}
-                    />
+                <Row justify="end">
+                    <Col span={4}>
+                        {exportButtton}
+                    </Col>
+                </Row>
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
 
                 {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>

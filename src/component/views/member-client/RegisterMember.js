@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     Input,
@@ -6,21 +6,23 @@ import {
     Select,
     Table,
     Dropdown,
-    Menu
+    Menu,
+    Row,
+    Col,
 } from 'antd';
 import { Link } from "react-router-dom";
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 const RegisterMember = () => {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    const statusSelect = ['Active', 'Suspend', 'Closed'];
+    const [statusSelect] = useState(['Active', 'Suspend', 'Closed']);
     const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
     const statusClick = (e) => {
         setSelectedStatus(e);
     };
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -29,11 +31,11 @@ const RegisterMember = () => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
     const { Option } = Select;
 
-    const columns = [
+    const [columns] = useState([
         {
             title: 'No',
             dataIndex: 'no',
@@ -165,8 +167,8 @@ const RegisterMember = () => {
                 </Dropdown>
             )
         }
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
             key: '1',
             no: '1',
@@ -218,7 +220,16 @@ const RegisterMember = () => {
             ssss: 'SSSS3',
             status: 'Active',
         },
-    ];
+    ]);
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -293,17 +304,25 @@ const RegisterMember = () => {
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Link to={{
-                    pathname: `/registerClient/viewMember`,
-                    state: {
-                        id: '0',
-                        action: "Add New",
-                        disable: false,
-                    }
-                }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                        Add New Member
+                <Row justify="end">
+                    <Col span={8}>
+                        <Link to={{
+                            pathname: `/registerClient/viewMember`,
+                            state: {
+                                id: '0',
+                                action: "Add New",
+                                disable: false,
+                            }
+                        }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                Add New Member
                 </Button>
-                </Link>
+                        </Link>
+                    </Col>
+                    <Col span={8} offset={8}>
+                        {exportButtton}
+                    </Col>
+                </Row>
+
                 <Table
                     columns={columns}
                     dataSource={data}

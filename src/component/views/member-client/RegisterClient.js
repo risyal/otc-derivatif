@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     Input,
@@ -6,16 +6,18 @@ import {
     Select,
     Table,
     Dropdown,
-    Menu
+    Menu,
+    Row,
+    Col,
 } from 'antd';
 import { Link } from "react-router-dom";
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function RegisterClient() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -24,8 +26,8 @@ function RegisterClient() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-    const data = [
+    });
+    const [data] = useState([
         {
             key: '1',
             memberID: 'CENAIDJA',
@@ -53,10 +55,10 @@ function RegisterClient() {
             ssssAccount: 'ssss Account3',
             status: 'Active',
         },
-    ];
+    ]);
     const { Option } = Select;
 
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Member ID',
             dataIndex: 'memberID',
@@ -130,7 +132,16 @@ function RegisterClient() {
                 </Dropdown>
             )
         },
-    ];
+    ]);
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -188,18 +199,24 @@ function RegisterClient() {
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Link to={{
-                    pathname: `/registerClient/viewClient`,
-                    state: {
-                        id: '0',
-                        action: "Add New",
-                        disable: false,
-                    }
-                }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                        Add New Client
+                <Row justify="end">
+                    <Col span={8}>
+                        <Link to={{
+                            pathname: `/registerClient/viewMember`,
+                            state: {
+                                id: '0',
+                                action: "Add New",
+                                disable: false,
+                            }
+                        }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                Add New Member
                 </Button>
-                </Link>
-
+                        </Link>
+                    </Col>
+                    <Col span={8} offset={8}>
+                        {exportButtton}
+                    </Col>
+                </Row>
                 <Table
                     columns={columns}
                     dataSource={data}

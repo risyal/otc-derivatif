@@ -5,7 +5,9 @@ import {
     Button,
     Select,
     Input,
-    Table
+    Table,
+    Row,
+    Col,
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
@@ -15,7 +17,7 @@ function ApprovalMemberClient() {
     const componentSize = 'middle';
     const dateFormat = 'YYYY/MM/DD';
     const { RangePicker } = DatePicker;
-    const formItemLayout = {
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -24,11 +26,11 @@ function ApprovalMemberClient() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
     const { Option } = Select;
 
-    const columns = [
+    const [columns] = useState([
         {
             title: 'No',
             dataIndex: 'no',
@@ -80,10 +82,10 @@ function ApprovalMemberClient() {
             }} style={{ marginRight: '20px' }}>Detail
             </Link>),
         },
-    ];
+    ]);
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    const data = [
+    const [data] = useState([
         {
             no: '1',
             key: '1',
@@ -105,7 +107,16 @@ function ApprovalMemberClient() {
             status: 'Waiting for Approver',
             linkTo: '/registerClient/ViewDeleteMember',
         },
-    ];
+    ]);
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
@@ -166,6 +177,11 @@ function ApprovalMemberClient() {
                     </Button>
                 </Form.Item>
             </Form>
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
 
             <Table
                 columns={columns}
@@ -173,9 +189,6 @@ function ApprovalMemberClient() {
                 bordered
                 size="middle"
             />
-            <Button type="primary" icon={<DownloadOutlined />}>
-                Export File
-            </Button>
         </div>
     )
 }

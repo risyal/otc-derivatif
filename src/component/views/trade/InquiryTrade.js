@@ -8,6 +8,8 @@ import {
     DatePicker,
     Dropdown,
     Menu,
+    Row,
+    Col,
 } from 'antd';
 import { Link } from "react-router-dom";
 import moment from 'moment';
@@ -180,6 +182,15 @@ function InquiryTrade() {
     };
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form
@@ -258,6 +269,11 @@ function InquiryTrade() {
                     </Button>
                 </Form.Item>
             </Form>
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
             <Table
                 columns={columns}
                 dataSource={data}
@@ -265,9 +281,6 @@ function InquiryTrade() {
                 size="middle"
                 scroll={{ x: 'calc(700px + 50%)' }}
             />
-            <Button type="primary" icon={<DownloadOutlined />}>
-                Export File
-            </Button>
         </div>
     )
 }

@@ -6,8 +6,11 @@ import {
     Select,
     DatePicker,
     Input,
+    Row,
+    Col,
 } from 'antd';
 import moment from 'moment';
+import { DownloadOutlined } from '@ant-design/icons';
 const dateFormat = 'YYYY/MM/DD';
 
 function TradeSummary() {
@@ -86,6 +89,16 @@ function TradeSummary() {
     const productClick = (e) => {
         SetJenisProduct(e);
     };
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form
@@ -115,6 +128,12 @@ function TradeSummary() {
                     </Button>
                 </Form.Item>
             </Form>
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
+
             <Table
                 columns={columns}
                 dataSource={data}

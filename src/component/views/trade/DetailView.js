@@ -300,14 +300,29 @@ const DetailView = (props) => {
                         </Form.Item>
                     </div>) : null
                 }
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : null}
+                {disable ? null :
+                    action === "Confirmation" ? (<Form.Item label="Role" className="roleViewDel">
+                        <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                            <Radio value={1}>Checker</Radio>
+                            <Radio value={2}>Direct Approver</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    ) : action === "Approval" ?
+                            (<Form.Item label="Role" className="roleViewDel">
+                                <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                    <Radio value={1}>Checker</Radio>
+                                    <Radio value={2}>Direct Approver</Radio>
+                                </Radio.Group>
+                            </Form.Item>)
+                            :
+                            (<Form.Item label="Role" className="roleViewDel">
+                                <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                    <Radio value={1}>Maker</Radio>
+                                    <Radio value={2}>Direct Checker</Radio>
+                                    <Radio value={3}>Direct Approver</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to={linkBack}>
                         <Popconfirm placement="leftTop" title={action === "Cancel" ? text : null} okText="Yes" cancelText="No">
