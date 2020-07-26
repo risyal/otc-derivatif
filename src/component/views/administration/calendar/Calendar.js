@@ -1,14 +1,19 @@
-import React from 'react';
-import { 
+import React, { useState, useMemo } from 'react';
+import {
     Button,
     Table,
     Dropdown,
-    Menu
- } from 'antd';
- import { Link } from "react-router-dom";
+    Menu,
+    Row,
+    Col,
+    Tabs,
+} from 'antd';
+import { Link } from "react-router-dom";
+import { DownloadOutlined } from '@ant-design/icons';
 
-function Calendar(){
-    const columns = [
+function Calendar() {
+    const { TabPane } = Tabs;
+    const [columns] = useState([
         {
             title: 'Date',
             dataIndex: 'date',
@@ -66,8 +71,8 @@ function Calendar(){
             key: 'update',
             width: 100,
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
             key: '1',
             date: '31-07-2020',
@@ -86,32 +91,118 @@ function Calendar(){
             information: 'Cuti Bersama',
             update: '01-08-2020',
         },
-    ];
-
-    return(
+    ]);
+    const [data19] = useState([
+        {
+            key: '1',
+            date: '31-07-2019',
+            information: 'Eid Al-Adha',
+            update: '01-07-2019',
+        },
+        {
+            key: '2',
+            date: '17-08-2019',
+            information: 'Hari Proklamasi Indonesia',
+            update: '01-08-2019',
+        },
+        {
+            key: '3',
+            date: '28-10-2019',
+            information: 'Cuti Bersama',
+            update: '01-08-2019',
+        },
+    ]);
+    const [data18] = useState([
+        {
+            key: '1',
+            date: '31-07-2018',
+            information: 'Eid Al-Adha',
+            update: '01-07-2018',
+        },
+        {
+            key: '2',
+            date: '17-08-2018',
+            information: 'Hari Proklamasi Indonesia',
+            update: '01-08-2018',
+        },
+        {
+            key: '3',
+            date: '28-10-2018',
+            information: 'Cuti Bersama',
+            update: '01-08-2018',
+        },
+    ]);
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+    return (
         <div>
             <Link to={{
-                    pathname: `/administration/ViewEditCalendar`,
-                    state: {
-                        id: '0',
-                        action: "Add New",
-                        disable: false,
-                    }
-                }}>
-                    <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' , marginRight: '15px'}}>
-                        Add New
+                pathname: `/administration/ViewEditCalendar`,
+                state: {
+                    id: '0',
+                    action: "Add New",
+                    disable: false,
+                }
+            }}>
+                <Button type="primary" htmlType="submit" style={{ marginBottom: '15px', marginRight: '15px' }}>
+                    Add New
                     </Button>
             </Link>
             <Button type="primary">Import</Button>
+            <Tabs type="card">
+                <TabPane tab="2020" key="1" >
+                    <Row justify="end">
+                        <Col span={4}>
+                            {exportButtton}
+                        </Col>
+                    </Row>
+                    <Table
+                        pagination={false}
+                        columns={columns}
+                        dataSource={data19}
+                        bordered
+                        size="middle"
+                    />
+                </TabPane>
 
-            <div style={{ marginTop: '15px' }}>
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    bordered
-                    size="middle"
-                />
-            </div>
+                <TabPane tab="2019" key="2">
+                    <Row justify="end">
+                        <Col span={4}>
+                            {exportButtton}
+                        </Col>
+                    </Row>
+                    <Table
+                        pagination={false}
+                        columns={columns}
+                        dataSource={data18}
+                        bordered
+                        size="middle"
+                    />
+                </TabPane>
+
+                <TabPane tab="2018" key="3">
+                    <Row justify="end">
+                        <Col span={4}>
+                            {exportButtton}
+                        </Col>
+                    </Row>
+                    <Table
+                        pagination={false}
+                        columns={columns}
+                        dataSource={data}
+                        bordered
+                        size="middle"
+                    />
+                </TabPane>
+            </Tabs>
+
         </div>
     )
 
