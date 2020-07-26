@@ -281,7 +281,7 @@ const ViewDeleteMember = (props) => {
 
                         {!disable ? (<Form.Item label="Role" className="roleViewDel">
                             <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                                <Radio value={1}>Direct Checker</Radio>
+                                <Radio value={1}>Checker</Radio>
                                 <Radio value={2}>Direct Approver</Radio>
                             </Radio.Group>
                         </Form.Item>

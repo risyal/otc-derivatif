@@ -15,7 +15,11 @@ function Navigation(props) {
         }; */
     return (
         <Sider theme="light" trigger={null} collapsible collapsed={props.collapsed}
-            width="280" >
+            width="280"
+            style={{
+                height: '100vh',
+                overflow: 'auto',
+            }}>
             <div className="logo" />
             <Menu mode="inline" className="sider-menu" >
                 {ListMenu.map(function (menuItem) {
