@@ -425,7 +425,7 @@ function RoutePage() {
             </Route>
             <Route path="/calendar">
                 <div className="head-content">
-                    <Title level={4}>Calendar</Title>
+                    <Title level={4}>Calendar - Market Holidays</Title>
                 </div>
                 <Calendar />
             </Route>
@@ -544,31 +544,31 @@ function RoutePage() {
                 <IrsEditFixingDate />
             </Route>
             <Route path="/administration/irsEditSpread">
-                <IrsEditSpread/>
+                <IrsEditSpread />
             </Route>
             <Route path="/administration/irsEditDayCountF">
-                <IrsEditDayCountF/>
+                <IrsEditDayCountF />
             </Route>
             <Route path="/administration/irsFloatingRRFreq">
-                <IrsFloatingRatrRFreq/>
+                <IrsFloatingRatrRFreq />
             </Route>
             <Route path="/administration/irsFloatingRIndex">
-                <IrsFloatingRIndex/>
+                <IrsFloatingRIndex />
             </Route>
             <Route path="/administration/irsBDC">
-                <IrsBDC/>
+                <IrsBDC />
             </Route>
             <Route path="/administration/irsRoundingPayment">
-                <IrsEditRoundingP/>
+                <IrsEditRoundingP />
             </Route>
             <Route path="/administration/irsEditStubP">
-                <IrsEditStubPayment/>
+                <IrsEditStubPayment />
             </Route>
             <Route path="/administration/irsforwardS">
-                <IrsEditForwardStart/>
+                <IrsEditForwardStart />
             </Route>
             <Route path="/administration/irsEditCashPC">
-                <IrsEditCashPaymentC/>
+                <IrsEditCashPaymentC />
             </Route>
             <Route path="/administration/oisEditCurrency">
                 <OisEditCurrency />
@@ -580,25 +580,25 @@ function RoutePage() {
                 <OisEffectiveDate />
             </Route>
             <Route path="/administration/oisEditContractTerm">
-                <OisEditContractTerm/>
+                <OisEditContractTerm />
             </Route>
             <Route path="/administration/oisEditNotionalAmount">
                 <OisEditNotionalAmount />
             </Route>
             <Route path="/administration/oisEditDayCountF">
-                <OisEditDayCountF/>
+                <OisEditDayCountF />
             </Route>
             <Route path="/administration/oisBDC">
-                <OisBDC/>
+                <OisBDC />
             </Route>
             <Route path="/administration/oisRoundingPayment">
-                <OisEditRoundingP/>
+                <OisEditRoundingP />
             </Route>
             <Route path="/administration/oisforwardS">
-                <OisEditForwardStart/>
+                <OisEditForwardStart />
             </Route>
             <Route path="/administration/oisEditSpread">
-                <OisEditSpread/>
+                <OisEditSpread />
             </Route>
             <Route path="/administration/dndfEditCurrency">
                 <DndfEditCurrency />
