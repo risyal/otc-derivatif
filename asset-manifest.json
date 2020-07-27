@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/otc-derivatif/static/css/main.669cb1e3.chunk.css",
-    "main.js": "/otc-derivatif/static/js/main.8876c014.chunk.js",
-    "main.js.map": "/otc-derivatif/static/js/main.8876c014.chunk.js.map",
+    "main.js": "/otc-derivatif/static/js/main.c843a15f.chunk.js",
+    "main.js.map": "/otc-derivatif/static/js/main.c843a15f.chunk.js.map",
     "runtime-main.js": "/otc-derivatif/static/js/runtime-main.0011e410.js",
     "runtime-main.js.map": "/otc-derivatif/static/js/runtime-main.0011e410.js.map",
     "static/js/2.f2d3d40a.chunk.js": "/otc-derivatif/static/js/2.f2d3d40a.chunk.js",
     "static/js/2.f2d3d40a.chunk.js.map": "/otc-derivatif/static/js/2.f2d3d40a.chunk.js.map",
     "index.html": "/otc-derivatif/index.html",
-    "precache-manifest.3813dbb7c226e7bb8420b156d100a363.js": "/otc-derivatif/precache-manifest.3813dbb7c226e7bb8420b156d100a363.js",
+    "precache-manifest.d38bc32db7a7e99da647917cd0b14e65.js": "/otc-derivatif/precache-manifest.d38bc32db7a7e99da647917cd0b14e65.js",
     "service-worker.js": "/otc-derivatif/service-worker.js",
     "static/css/main.669cb1e3.chunk.css.map": "/otc-derivatif/static/css/main.669cb1e3.chunk.css.map",
     "static/js/2.f2d3d40a.chunk.js.LICENSE.txt": "/otc-derivatif/static/js/2.f2d3d40a.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.0011e410.js",
     "static/js/2.f2d3d40a.chunk.js",
     "static/css/main.669cb1e3.chunk.css",
-    "static/js/main.8876c014.chunk.js"
+    "static/js/main.c843a15f.chunk.js"
   ]
 }

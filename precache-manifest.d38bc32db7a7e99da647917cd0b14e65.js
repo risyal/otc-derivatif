@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b292091e8279733c3ecec87cab02235d",
+    "revision": "2dadbdf98879ddbe735668ddcb2c0f2b",
     "url": "/otc-derivatif/index.html"
   },
   {
-    "revision": "1701968b82bea6b2a0df",
+    "revision": "13e64d83676037695ff1",
     "url": "/otc-derivatif/static/css/main.669cb1e3.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/otc-derivatif/static/js/2.f2d3d40a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1701968b82bea6b2a0df",
-    "url": "/otc-derivatif/static/js/main.8876c014.chunk.js"
+    "revision": "13e64d83676037695ff1",
+    "url": "/otc-derivatif/static/js/main.c843a15f.chunk.js"
   },
   {
     "revision": "d7ed2933e608f6422600",
