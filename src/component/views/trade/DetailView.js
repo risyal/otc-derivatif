@@ -9,6 +9,7 @@ import {
     Input,
     Row,
     Col,
+    Divider,
 } from 'antd';
 import {
     ArrowLeftOutlined
@@ -209,7 +210,48 @@ const DetailView = (props) => {
         },
 
     ]);
-
+    const [approvalHistory] = useState([
+        {
+            key: '1',
+            no: '1',
+            user: 'Fulan',
+            dateTime: '27-07-2020 12:09:12',
+            status: 'Maker',
+            notes: ' ',
+        },
+    ]);
+    const [columnsAppHistory] = useState([
+        {
+            title: 'No',
+            dataIndex: 'no',
+            width: 5,
+            key: 'no',
+        },
+        {
+            title: 'User',
+            dataIndex: 'user',
+            width: 100,
+            key: 'user',
+        },
+        {
+            title: 'Date Time',
+            dataIndex: 'dateTime',
+            width: 200,
+            key: 'dateTime',
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            width: 100,
+            key: 'status',
+        },
+        {
+            title: 'Notes',
+            dataIndex: 'notes',
+            width: 100,
+            key: 'notes',
+        },
+    ]);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const linkBack = props.location.state.linkBack
@@ -261,16 +303,7 @@ const DetailView = (props) => {
             >
                 <Row justify="end">
                     <Col span={4}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
                         {exportButtton}
-                        {/* </Link> */}
                     </Col>
                 </Row>
                 <Table
@@ -284,17 +317,18 @@ const DetailView = (props) => {
                 />
                 {action === "Approval" ? (
                     <div><br />
-                        <h2>Checker Information :</h2>
+                        <Divider orientation="left">
+                            <h2>Approval History</h2></Divider>
                         <Table
-                            className="viewDelTable"
-                            columns={columns}
-                            dataSource={dataForChecker}
-                            showHeader={false}
-                            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                            size="middle"
                             pagination={false}
+                            columns={columnsAppHistory}
+                            dataSource={approvalHistory}
+                            bordered
+                            size="middle"
                         />
                         <br />
+                        <Divider orientation="left">
+                            <h2>Approval</h2></Divider>
                         <Form.Item label="Note">
                             <Input.TextArea rows={4} />
                         </Form.Item>

@@ -123,6 +123,7 @@ import ViewDeleteIndonia from '../views/administration/editReferenceRate/ViewDel
 import ViewEditIndonia from '../views/administration/editReferenceRate/ViewEditIndonia';
 import ViewDeleteSysParam from '../views/administration/systemParameter/ViewDeleteSysParam';
 import ViewEditSysParam from '../views/administration/systemParameter/ViewEditSysParam';
+import DetailApproval from '../views/administration/DetailApproval';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -440,6 +441,9 @@ function RoutePage() {
                     <Title level={4}>Register ATS</Title>
                 </div>
                 <RegisterAts />
+            </Route>
+            <Route path="/administration/approvaldetail"
+                component={DetailApproval}>
             </Route>
             <Route exact path="/registerClient/viewMember" component={ViewEditMember}>
             </Route>

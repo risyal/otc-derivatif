@@ -137,12 +137,21 @@ function ApprovalTrade() {
                         <Form.Item label="Reff. No">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Status">
+                        <Form.Item label="Approver Status">
                             <Select
                                 placeholder="Select a Status"
                             >
-                                <Option value="checker">Waiting for Checker</Option>
-                                <Option value="approver">Waiting for Approver</Option>
+                                <Option value="approved">Approved</Option>
+                                <Option value="rejected">Rejected</Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item label="Checker Status">
+                            <Select
+                                placeholder="Select a Status"
+                            >
+                                <Option value="approved">Checked </Option>
+                                <Option value="tobeCheckedover">to be Checked</Option>
+                                <Option value="rejected">Rejected</Option>
                             </Select>
                         </Form.Item>
                         <Form.Item label="Range Date">

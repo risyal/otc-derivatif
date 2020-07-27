@@ -8,6 +8,7 @@ import {
     Table,
     Row,
     Col,
+    Divider,
 } from 'antd';
 import {
     DownloadOutlined,
@@ -116,41 +117,58 @@ const ViewDeleteMember = (props) => {
         },
     ]);
 
-    const [dataChecker] = useState([
-        {
-            key: '0',
-            no: '0',
-            memberID: '',
-            nama: '',
-            email: '',
-            date: ' ',
-        },
+    const [approvalHistory] = useState([
         {
             key: '1',
             no: '1',
-            memberID: 'Member123',
-            nama: 'fulan',
-            email: 'Fulan@gmail.com',
-            date: '07-07-2020',
-        },
-        {
-            key: '2',
-            no: '2',
-            memberID: 'Member123',
-            nama: 'fulan',
-            email: 'Fulan@gmail.com',
-            date: '07-07-2020',
+            user: 'Fulan',
+            dateTime: '27-07-2020 12:09:12',
+            status: 'Maker',
+            notes: ' ',
         },
     ]);
+    const [columnsAppHistory] = useState([
+        {
+            title: 'No',
+            dataIndex: 'no',
+            width: 5,
+            key: 'no',
+        },
+        {
+            title: 'User',
+            dataIndex: 'user',
+            width: 100,
+            key: 'user',
+        },
+        {
+            title: 'Date Time',
+            dataIndex: 'dateTime',
+            width: 200,
+            key: 'dateTime',
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            width: 100,
+            key: 'status',
+        },
+        {
+            title: 'Notes',
+            dataIndex: 'notes',
+            width: 100,
+            key: 'notes',
+        },
+    ]);
+
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
 
     })
-
-    const dataCheckerById = dataChecker.find((checker) => {
-        return checker.key === props.location.state.id
-
-    })
+    /* 
+        const dataCheckerById = dataChecker.find((checker) => {
+            return checker.key === props.location.state.id
+    
+        }) */
 
     const [dataForView] = useState([
         {
@@ -198,16 +216,16 @@ const ViewDeleteMember = (props) => {
             paramData: dataMemberById.status
         },
     ]);
-    const [dataForChecker] = useState([
-        {
-            title: "Nama :",
-            paramData: "Fulan"
-        },
-        {
-            title: "Date :",
-            paramData: "07-07-2020"
-        },
-    ]);
+    /*     const [dataForChecker] = useState([
+            {
+                title: "Nama :",
+                paramData: "Fulan"
+            },
+            {
+                title: "Date :",
+                paramData: "07-07-2020"
+            },
+        ]); */
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -263,18 +281,18 @@ const ViewDeleteMember = (props) => {
                 {action === 'Detail' ? (
                     <div>
                         <br />
-                        <h2>Checker Information :</h2>
+                        <Divider orientation="left">
+                            <h2>Approval History</h2></Divider>
                         <Table
-                            className="viewDelTable"
-                            columns={columns}
-                            dataSource={dataForChecker}
-                            showHeader={false}
-                            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                            size="middle"
                             pagination={false}
+                            columns={columnsAppHistory}
+                            dataSource={approvalHistory}
+                            bordered
+                            size="middle"
                         />
-
                         <br />
+                        <Divider orientation="left">
+                            <h2>Approval</h2></Divider>
                         <Form.Item label="Note">
                             <Input.TextArea rows={4} />
                         </Form.Item>
@@ -289,11 +307,14 @@ const ViewDeleteMember = (props) => {
                                 <div></div>
                             )}
 
+                        <br />
                         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                             <Link to="/memberandclientmanagement/approval">
                                 <Button type="primary" style={{ marginRight: '15px' }}>Approve
                                 </Button>
-                                <Button >Reject
+                                <Button style={{ marginRight: '15px' }}>Reject
+                                </Button>
+                                <Button >Cancel
                                 </Button>
                             </Link>
                         </Form.Item>

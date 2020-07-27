@@ -223,13 +223,13 @@ const Menu = [
             key: 'calendar',
             linkTo: '/calendar'
         }, {
-            name: 'Approval',
-            key: 'administrationApproval',
-            linkTo: '/approval'
-        }, {
             name: 'Register ATS',
             key: 'registerAts',
             linkTo: '/registerats'
+        }, {
+            name: 'Approval',
+            key: 'administrationApproval',
+            linkTo: '/approval'
         }]
     },
     {
