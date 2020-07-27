@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
-function RegisterAts(){
+function RegisterAts() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -29,7 +29,12 @@ function RegisterAts(){
         {
             title: 'Company Name',
             dataIndex: 'name',
-            key:'name',
+            key: 'name',
+        },
+        {
+            title: 'Application Name',
+            dataIndex: 'applicationName',
+            key: 'applicationName',
         },
         {
             title: 'Address',
@@ -105,6 +110,7 @@ function RegisterAts(){
         {
             key: '1',
             name: 'PT 123',
+            applicationName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -113,6 +119,7 @@ function RegisterAts(){
         {
             key: '2',
             name: 'PT 123',
+            applicationName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -121,6 +128,7 @@ function RegisterAts(){
         {
             key: '3',
             name: 'PT 123',
+            applicationName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -150,7 +158,7 @@ function RegisterAts(){
                             <Input />
                         </Form.Item>
                         <Form.Item label="PIC Name">
-                        <Input />
+                            <Input />
                         </Form.Item>
                         <Form.Item label="Telephone Number">
                             <Input />
@@ -166,14 +174,14 @@ function RegisterAts(){
                         type="primary"
                         htmlType="submit"
                         tyle={{ marginRight: '15px' }}>
-                            Search
+                        Search
                     </Button>
                     <Button
                         style={{ margin: '0 8px' }}
                         onClick={() => {
                             form.resetFields();
                         }}>
-                            Clear
+                        Clear
                     </Button>
                     <Button
                         htmlType="submit"
@@ -188,14 +196,14 @@ function RegisterAts(){
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
                 <Link to={{
-                        pathname: `/administration/ViewEditRegAts`,
-                        state: {
-                            id: '0',
-                            action: "Add New",
-                            disable: false,
-                        }
-                    }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                            Add New Data
+                    pathname: `/administration/ViewEditRegAts`,
+                    state: {
+                        id: '0',
+                        action: "Add New",
+                        disable: false,
+                    }
+                }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                        Add New Data
                     </Button>
                 </Link>
                 <Table
@@ -206,7 +214,7 @@ function RegisterAts(){
                 />
             </div>
         </div>
-        
+
     )
 
 }

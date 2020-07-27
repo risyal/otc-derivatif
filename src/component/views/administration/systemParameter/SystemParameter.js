@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { 
+import {
     Form,
     Input,
-    Button, 
+    Button,
     Table,
     Row,
     Col,
@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function SystemParameter(){
+function SystemParameter() {
     const [form] = Form.useForm();
     const [componentSize] = useMemo(() => 'middle');
     const [formItemLayout] = useState({
@@ -25,63 +25,19 @@ function SystemParameter(){
             sm: { span: 16 },
         },
     });
-    
+
     const [columns] = useState([
         {
-            title: 'Settlement Window',
+            title: 'System Paramater',
             width: 100,
             dataIndex: 'settlement',
             key: 'settlement',
         },
         {
-            title: 'Trade Validation Time',
+            title: 'Value',
             width: 100,
-            dataIndex: 'tvTime',
-            key: 'tvTime',
-        },
-        {
-            title: 'Initial Margin Percentage',
-            width: 100,
-            dataIndex: 'initialMp',
-            key: 'initialMp',
-        },
-        {
-            title: 'Indicator Percentage Chart',
-            width: 100,
-            dataIndex: 'ipChart',
-            key: 'ipChart',
-        },
-        {
-            title: 'Fees',
-            children: [
-                {
-                    title: 'Fee Type',
-                    width: 100,
-                    dataIndex: 'feeType',
-                    key: 'feeType',
-                }, {
-                    title: 'Product',
-                    width: 100,
-                    dataIndex: 'product',
-                    key: 'product',
-                }, {
-                    title: 'Object Fee',
-                    width: 100,
-                    dataIndex: 'objectFee',
-                    key: 'objectFee',
-                }, {
-                    title: 'Variables',
-                    width: 100,
-                    dataIndex: 'variables',
-                    key: 'variables',
-                }, {
-                    title: 'Settlement Cycle',
-                    width: 100,
-                    dataIndex: 'cycle',
-                    key: 'cycle',
-                }
-                
-            ]
+            dataIndex: 'value',
+            key: 'value',
         },
         {
             title: 'Action',
@@ -137,39 +93,18 @@ function SystemParameter(){
     const [data] = useState([
         {
             key: '1',
-            settlement: 'SettlementWindow1',
-            tvTime: 'TradeValidationTime1',
-            initialMp: 'InitialMarginPercentage1',
-            ipChart: 'IndicatorPercentageChart1',
-            feeType: 'Type1',
-            product: 'Product1',
-            objectFee: 'Object1',
-            variables: 'Variables1',
-            cycle: 'SettlementCycle1',
+            settlement: 'Maintenance Fee',
+            value: '0.1%',
         },
         {
             key: '2',
-            settlement: 'SettlementWindow2',
-            tvTime: 'TradeValidationTime2',
-            initialMp: 'InitialMarginPercentage2',
-            ipChart: 'IndicatorPercentageChart2',
-            feeType: 'Type2',
-            product: 'Product2',
-            objectFee: 'Object2',
-            variables: 'Variables2',
-            cycle: 'SettlementCycle2',
+            settlement: 'Registration Fee',
+            value: '0.1%',
         },
         {
             key: '3',
-            settlement: 'SettlementWindow3',
-            tvTime: 'TradeValidationTime3',
-            initialMp: 'InitialMarginPercentage3',
-            ipChart: 'IndicatorPercentageChart3',
-            feeType: 'Type3',
-            product: 'Product3',
-            objectFee: 'Object3',
-            variables: 'Variables3',
-            cycle: 'SettlementCycle3',
+            settlement: 'Service Fee',
+            value: '0.1%',
         },
     ]);
 
@@ -191,7 +126,7 @@ function SystemParameter(){
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-            > 
+            >
                 <div>
                     <Form.Item label="Keyword">
                         <Input />
@@ -202,29 +137,29 @@ function SystemParameter(){
                         type="primary"
                         htmlType="submit"
                         tyle={{ marginRight: '15px' }}>
-                            Search
+                        Search
                     </Button>
                     <Button
                         style={{ margin: '0 8px' }}
                         onClick={() => {
                             form.resetFields();
                         }}>
-                            Clear
+                        Clear
                     </Button>
                 </Form.Item>
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
                 <Link to={{
-                        pathname: `/administration/ViewEditSysParam`,
-                        state: {
-                            id: '0',
-                            action: "Add New",
-                            disable: false,
-                        }
-                    }}>
-                        <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                            Add New Parameter
+                    pathname: `/administration/ViewEditSysParam`,
+                    state: {
+                        id: '0',
+                        action: "Add New",
+                        disable: false,
+                    }
+                }}>
+                    <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                        Add New Parameter
                         </Button>
                 </Link>
 
@@ -248,7 +183,6 @@ function SystemParameter(){
                     dataSource={data}
                     bordered
                     size="middle"
-                    scroll={{ x: 'calc(700px + 50%)' }}
                 />
             </div>
         </div>

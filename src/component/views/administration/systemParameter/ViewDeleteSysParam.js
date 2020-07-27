@@ -44,55 +44,27 @@ const ViewDeleteSysParam = (props) => {
             key: 'paramData',
         },
     ]);
-    
+
     const [data] = useState([
         {
             key: '0',
-            settlement: '',
-            tvTime: '',
-            initialMp: '',
-            ipChart: '',
-            feeType: '',
-            product: '',
-            objectFee: '',
-            variables: '',
-            cycle: '',
+            settlement: ' ',
+            value: ' ',
         },
         {
             key: '1',
-            settlement: 'SettlementWindow1',
-            tvTime: 'TradeValidationTime1',
-            initialMp: 'InitialMarginPercentage1',
-            ipChart: 'IndicatorPercentageChart1',
-            feeType: 'Type1',
-            product: 'Product1',
-            objectFee: 'Object1',
-            variables: 'Variables1',
-            cycle: 'SettlementCycle1',
+            settlement: 'Maintenance Fee',
+            value: '0.1%',
         },
         {
             key: '2',
-            settlement: 'SettlementWindow2',
-            tvTime: 'TradeValidationTime2',
-            initialMp: 'InitialMarginPercentage2',
-            ipChart: 'IndicatorPercentageChart2',
-            feeType: 'Type2',
-            product: 'Product2',
-            objectFee: 'Object2',
-            variables: 'Variables2',
-            cycle: 'SettlementCycle2',
+            settlement: 'Registration Fee',
+            value: '0.1%',
         },
         {
             key: '3',
-            settlement: 'SettlementWindow3',
-            tvTime: 'TradeValidationTime3',
-            initialMp: 'InitialMarginPercentage3',
-            ipChart: 'IndicatorPercentageChart3',
-            feeType: 'Type3',
-            product: 'Product3',
-            objectFee: 'Object3',
-            variables: 'Variables3',
-            cycle: 'SettlementCycle3',
+            settlement: 'Service Fee',
+            value: '0.1%',
         },
     ]);
     const dataParamById = data.find((param) => {
@@ -107,35 +79,7 @@ const ViewDeleteSysParam = (props) => {
         },
         {
             title: "Trade Validation Time :",
-            paramData: dataParamById.tvTime
-        },
-        {
-            title: "Initial Margin Percentage :",
-            paramData: dataParamById.initialMp
-        },
-        {
-            title: "Indicator Percentage Chart :",
-            paramData: dataParamById.ipChart
-        },
-        {
-            title: "Fee Type :",
-            paramData: dataParamById.feeType
-        },
-        {
-            title: "Product :",
-            paramData: dataParamById.product
-        },
-        {
-            title: "Object Fee :",
-            paramData: dataParamById.objectFee
-        },
-        {
-            title: "Variables :",
-            paramData: dataParamById.variables
-        },
-        {
-            title: "Settlement Cycle :",
-            paramData: dataParamById.cycle
+            paramData: dataParamById.value
         },
     ]);
 
@@ -159,12 +103,12 @@ const ViewDeleteSysParam = (props) => {
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">   
+                    <span className="icon-back">
                         <Link to="/systemparameter">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} System Parameter</Title>
+                    {action} System Parameter</Title>
             </div>
             <Form
                 {...formItemLayout}

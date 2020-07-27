@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
-const { Title } = Typography;   
+const { Title } = Typography;
 
 const ViewEditSysParam = (props) => {
     const [componentSize] = useMemo(() => 'middle');
@@ -30,51 +30,23 @@ const ViewEditSysParam = (props) => {
     const [data] = useState([
         {
             key: '0',
-            settlement: '',
-            tvTime: '',
-            initialMp: '',
-            ipChart: '',
-            feeType: '',
-            product: '',
-            objectFee: '',
-            variables: '',
-            cycle: '',
+            settlement: ' ',
+            value: ' ',
         },
         {
             key: '1',
-            settlement: 'SettlementWindow1',
-            tvTime: 'TradeValidationTime1',
-            initialMp: 'InitialMarginPercentage1',
-            ipChart: 'IndicatorPercentageChart1',
-            feeType: 'Type1',
-            product: 'Product1',
-            objectFee: 'Object1',
-            variables: 'Variables1',
-            cycle: 'SettlementCycle1',
+            settlement: 'Maintenance Fee',
+            value: '0.1%',
         },
         {
             key: '2',
-            settlement: 'SettlementWindow2',
-            tvTime: 'TradeValidationTime2',
-            initialMp: 'InitialMarginPercentage2',
-            ipChart: 'IndicatorPercentageChart2',
-            feeType: 'Type2',
-            product: 'Product2',
-            objectFee: 'Object2',
-            variables: 'Variables2',
-            cycle: 'SettlementCycle2',
+            settlement: 'Registration Fee',
+            value: '0.1%',
         },
         {
             key: '3',
-            settlement: 'SettlementWindow3',
-            tvTime: 'TradeValidationTime3',
-            initialMp: 'InitialMarginPercentage3',
-            ipChart: 'IndicatorPercentageChart3',
-            feeType: 'Type3',
-            product: 'Product3',
-            objectFee: 'Object3',
-            variables: 'Variables3',
-            cycle: 'SettlementCycle3',
+            settlement: 'Service Fee',
+            value: '0.1%',
         },
     ]);
 
@@ -89,7 +61,7 @@ const ViewEditSysParam = (props) => {
         setSixEyes(e.target.value);
     };
 
-    return(
+    return (
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
@@ -98,7 +70,7 @@ const ViewEditSysParam = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Parameter</Title>
+                    {action} Parameter</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -112,30 +84,8 @@ const ViewEditSysParam = (props) => {
                     <Input disabled={disable} defaultValue={dataParamById.settlement} />
                 </Form.Item>
                 <Form.Item label="Trade Validation Time">
-                    <Input disabled={disable} defaultValue={dataParamById.tvTime} />
+                    <Input disabled={disable} defaultValue={dataParamById.value} />
                 </Form.Item>
-                <Form.Item label="Initial Margin Percentage">
-                    <Input disabled={disable} defaultValue={dataParamById.initialMp} />
-                </Form.Item>
-                <Form.Item label="Indicator Percentage Chart">
-                    <Input disabled={disable} defaultValue={dataParamById.ipChart} />
-                </Form.Item>
-                <Form.Item label="Fee Type">
-                    <Input disabled={disable} defaultValue={dataParamById.feeType} />
-                </Form.Item>
-                <Form.Item label="Product">
-                    <Input disabled={disable} defaultValue={dataParamById.product} />
-                </Form.Item>
-                <Form.Item label="Object Fee">
-                    <Input disabled={disable} defaultValue={dataParamById.objectFee} />
-                </Form.Item>
-                <Form.Item label="Variables">
-                    <Input disabled={disable} defaultValue={dataParamById.variables} />
-                </Form.Item>
-                <Form.Item label="Settlement Cycle">
-                    <Input disabled={disable} defaultValue={dataParamById.cycle} />
-                </Form.Item>
-
                 {!disable ? (<Form.Item label="Role" >
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
