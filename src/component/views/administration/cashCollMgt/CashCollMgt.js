@@ -44,7 +44,7 @@ function CashCollMgt(){
             key: 'eligibility',
         },
         {
-            title: 'Haircut',
+            title: 'Haircut (%)',
             dataIndex: 'haircut',
             key: 'haircut',
         },

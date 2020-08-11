@@ -49,7 +49,7 @@ function SecuritiesCollMgt(){
             key: 'eligibility',
         },
         {
-            title: 'Haircut',
+            title: 'Haircut (%)',
             dataIndex: 'haircut',
             key: 'haircut',
         },
