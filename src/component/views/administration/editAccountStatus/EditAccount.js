@@ -101,9 +101,22 @@ function EditAccount(){
         },
         {
             title: 'Settlement Account',
-            width: 100,
-            dataIndex: 'settlementAcc',
-            key: 'settlementAcc',
+            // width: 100,
+            // dataIndex: 'settlementAcc',
+            // key: 'settlementAcc',
+            children: [
+                {
+                    title: 'Account No',
+                    width: 100,
+                    dataIndex: 'accNo4',
+                    key: 'accNo',
+                }, {
+                    title: 'Status',
+                    width: 100,
+                    dataIndex: 'status4',
+                    key: 'status',
+                }
+            ]
         },
         {
             title: 'Action',
@@ -154,10 +167,11 @@ function EditAccount(){
             accNo: 'D4211',
             status: 'Active',
             accNo2: 'D4211',
-            status2: 'Frozen',
+            status2: 'Active',
             accNo3: 'D4211',
-            status3: 'Close',
-            settlementAcc: 'Settlement1',
+            status3: 'Active',
+            accNo4: 'D4211',
+            status4: 'Active',
         },
         {
             key: '2',
@@ -166,12 +180,13 @@ function EditAccount(){
             name: 'Mega',
             currency: '',
             accNo: 'D4212',
-            status: 'Active',
+            status: 'Frozen',
             accNo2: 'D4212',
             status2: 'Frozen',
             accNo3: 'D4212',
             status3: 'Frozen',
-            settlementAcc: 'Settlement2',
+            accNo4: 'D4211',
+            status4: 'Frozen',
         },
         {
             key: '3',
@@ -180,12 +195,13 @@ function EditAccount(){
             name: 'Tera',
             currency: '',
             accNo: 'D4212',
-            status: 'Frozen',
+            status: 'Close',
             accNo2: 'D4212',
             status2: 'Close',
             accNo3: 'D4212',
-            status3: 'Active',
-            settlementAcc: 'Settlement3',
+            status3: 'Close',
+            accNo4: 'D4211',
+            status4: 'Close',
         },
     ]);
 

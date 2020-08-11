@@ -38,11 +38,11 @@ const ViewEditAccount = (props) => {
             name: 'Nas abah',
             accNo: 'D4211',
             status: 'Active',
-            accNo2: 'D4211',
-            status2: 'Frozen',
-            accNo3: 'D4211',
-            status3: 'Close',
-            settlementAcc: 'Settlement1',
+            // accNo2: 'D4211',
+            // status2: 'Frozen',
+            // accNo3: 'D4211',
+            // status3: 'Close',
+            // settlementAcc: 'Settlement1',
         },
         {
             key: '2',
@@ -50,12 +50,12 @@ const ViewEditAccount = (props) => {
             sidLei: 'SID1LEI2',
             name: 'Mega',
             accNo: 'D4212',
-            status: 'Active',
-            accNo2: 'D4212',
-            status2: 'Frozen',
-            accNo3: 'D4212',
-            status3: 'Frozen',
-            settlementAcc: 'Settlement2',
+            status: 'Frozen',
+            // accNo2: 'D4212',
+            // status2: 'Frozen',
+            // accNo3: 'D4212',
+            // status3: 'Frozen',
+            // settlementAcc: 'Settlement2',
         },
         {
             key: '3',
@@ -63,12 +63,12 @@ const ViewEditAccount = (props) => {
             sidLei: 'SID1LEI3',
             name: 'Tera',
             accNo: 'D4212',
-            status: 'Frozen',
-            accNo2: 'D4212',
-            status2: 'Close',
-            accNo3: 'D4212',
-            status3: 'Active',
-            settlementAcc: 'Settlement3',
+            status: 'Close',
+            // accNo2: 'D4212',
+            // status2: 'Close',
+            // accNo3: 'D4212',
+            // status3: 'Active',
+            // settlementAcc: 'Settlement3',
         },
     ]);
 
@@ -142,8 +142,22 @@ const ViewEditAccount = (props) => {
                 </Form.Item>
                 <Form.Item label="Name">
                     <Input disabled={disable} defaultValue={dataMemberById.name} />
-                </Form.Item>             
-                <Form.Item label="Cash Collateral">
+                </Form.Item>    
+                <Form.Item label="Account Number">
+                    <Input disabled={disable} defaultValue={dataMemberById.accNo} />
+                </Form.Item>    
+                <Form.Item label="Status">
+                    <Select
+                            defaultValue={dataMemberById.status}
+                            onChange={statusClick}
+                            disabled={disable}
+                            >
+                        {statusSelect.map(status => (
+                            <Option value={status}>{status}</Option>
+                        ))}
+                    </Select>
+                </Form.Item>       
+                {/* <Form.Item label="Cash Collateral">
                     <Input.Group compact >
                         <Tooltip title="Account No">
                             <Input 
@@ -212,14 +226,14 @@ const ViewEditAccount = (props) => {
                             </Select>
                         </Tooltip>
                     </Input.Group>
-                </Form.Item>
+                </Form.Item> */}
                 <Form.Item label="Default fund">
                     <Input.Group compact >
                         <Tooltip title="Account No">
                             <Input 
                                 style={{ width: '45%', textAlign: 'center' }} 
                                 placeholder="Account No" 
-                                defaultValue={dataMemberById.accNo3}/>
+                                defaultValue={dataMemberById.accNo}/>
                         </Tooltip>
                         <Input
                             className="site-input-split"
@@ -234,7 +248,7 @@ const ViewEditAccount = (props) => {
                         />
                         <Tooltip title="Status">
                             <Select
-                                defaultValue={dataMemberById.status3}
+                                defaultValue={dataMemberById.status}
                                 onChange={statusClick}
                                 disabled={disable}
                                 style={{
@@ -249,7 +263,40 @@ const ViewEditAccount = (props) => {
                     </Input.Group>
                 </Form.Item>
                 <Form.Item label="Settlement Account">
-                    <Input disabled={disable} defaultValue={dataMemberById.settlementAcc} />
+                    {/* <Input disabled={disable} defaultValue={dataMemberById.settlementAcc} /> */}
+                    <Input.Group compact >
+                        <Tooltip title="Account No">
+                            <Input 
+                                style={{ width: '45%', textAlign: 'center' }} 
+                                placeholder="Account No" 
+                                defaultValue={dataMemberById.accNo}/>
+                        </Tooltip>
+                        <Input
+                            className="site-input-split"
+                            style={{
+                                width: '10%',
+                                borderLeft: 0,
+                                borderRight: 0,
+                                pointerEvents: 'none', textAlign: 'center'
+                            }}
+                            placeholder="|"
+                            disabled
+                        />
+                        <Tooltip title="Status">
+                            <Select
+                                defaultValue={dataMemberById.status}
+                                onChange={statusClick}
+                                disabled={disable}
+                                style={{
+                                    width: '45%',
+                                    textAlign: 'center',
+                                }}>
+                            {statusSelect.map(status => (
+                                <Option value={status}>{status}</Option>
+                            ))}
+                            </Select>
+                        </Tooltip>
+                    </Input.Group>
                 </Form.Item>
 
                 {!disable ? (<Form.Item label="Role">
