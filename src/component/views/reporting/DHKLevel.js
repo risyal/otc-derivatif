@@ -4,7 +4,9 @@ import {
     Button, 
     Table,
     Input,
-    DatePicker
+    DatePicker,
+    Col,
+    Row
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
@@ -29,12 +31,18 @@ function DHKLevel(){
             dataIndex: 'memberId',
             key: 'memberId',
             width: 100,
-            fixed: 'left',
+            // fixed: 'left',
         },
         {
-            title: 'SID/LEI',
-            dataIndex: 'sidLei',
-            key: 'sidLei',
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
+            width: 100,
+        },
+        {
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
             width: 100,
         },
         {
@@ -125,6 +133,16 @@ function DHKLevel(){
         },
     ];
 
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+    icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
        <div style={{ margin: '15px 20px' }}>
             <Form
@@ -176,7 +194,22 @@ function DHKLevel(){
                 </Form.Item>
             </Form>
 
-            <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                        pathname: `#`,
+                        state: {
+                            id: '1',
+                            action: "Edit",
+                            disable: false,
+                        }
+                    }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+
+            <div style={{ margin: '15px 0px 0px 0px' }} scroll={{ x: 1300 }}>
                 <Table
                     columns={columns}
                     dataSource={data}
@@ -184,9 +217,6 @@ function DHKLevel(){
                     size="middle"
                     scroll={{ x: 'calc(700px + 50%)' }}
                 />
-                <Button type="primary" icon={<DownloadOutlined />}>
-                    Export File
-                </Button>
             </div>
         </div>
     )
