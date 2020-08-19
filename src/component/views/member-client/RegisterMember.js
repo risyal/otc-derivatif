@@ -49,9 +49,15 @@ const RegisterMember = () => {
             width: 100,
         },
         {
-            title: 'SID/LEI',
-            dataIndex: 'sidLei',
-            key: 'sidLei',
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
+            width: 100,
+        },
+        {
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
             width: 100,
         },
         {
@@ -173,7 +179,8 @@ const RegisterMember = () => {
             key: '1',
             no: '1',
             memberID: 'Member123',
-            sidLei: 'ID12',
+            sid: 'ID12',
+            lei: 'lei1',
             namaPerusahaan: 'PT Jaya Abadi',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Brown',
@@ -190,7 +197,8 @@ const RegisterMember = () => {
             key: '2',
             no: '2',
             memberID: 'Member345',
-            sidLei: 'ID23',
+            sid: 'ID23',
+            lei: 'lei2',
             namaPerusahaan: 'PT Citra Utama',
             alamat: 'New York No. 1 Lake Park',
             pic: 'Jim Green',
@@ -207,7 +215,8 @@ const RegisterMember = () => {
             key: '3',
             no: '3',
             memberID: 'Member567',
-            sidLei: 'ID34',
+            sid: 'ID34',
+            lei: 'lei3',
             namaPerusahaan: 'PT Abadi Makmur',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Black',
@@ -253,7 +262,10 @@ const RegisterMember = () => {
                             <Form.Item label="Member ID">
                                 <Input />
                             </Form.Item>
-                            <Form.Item label="SID/LEI">
+                            <Form.Item label="SID">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="LEI">
                                 <Input />
                             </Form.Item>
                             <Form.Item label="Nama Perusahaan">

@@ -33,7 +33,8 @@ const ViewEditClient = (props) => {
         {
             key: '0',
             memberID: ' ',
-            sidLei: ' ',
+            sid: ' ',
+            lei: ' ',
             namaNasabah: ' ',
             rtgsAccount: 'Auto Generate',
             ssssAccount: 'Auto Generate',
@@ -43,7 +44,8 @@ const ViewEditClient = (props) => {
 
             key: '1',
             memberID: '1',
-            sidLei: 'SID1LEI1',
+            sid: 'SID1',
+            lei: 'LEI1',
             namaNasabah: 'Nas abah',
             rtgsAccount: 'rtgs Account1',
             ssssAccount: 'ssss Account1',
@@ -52,7 +54,8 @@ const ViewEditClient = (props) => {
         {
             key: '2',
             memberID: '2',
-            sidLei: 'SID2LEI2',
+            sid: 'SID2',
+            lei: 'LEI2',
             namaNasabah: 'fulan bin fulan',
             rtgsAccount: 'rtgs Account2',
             ssssAccount: 'ssss Account2',
@@ -61,7 +64,8 @@ const ViewEditClient = (props) => {
         {
             key: '3',
             memberID: '3',
-            sidLei: 'SID3LEI3',
+            sid: 'SID3',
+            lei: 'LEI3',
             namaNasabah: 'fulanah bin fulan',
             rtgsAccount: 'rtgs Account3',
             ssssAccount: 'ssss Account3',
@@ -108,8 +112,11 @@ const ViewEditClient = (props) => {
                 <Form.Item label="Member ID">
                     <Input disabled={disable} defaultValue={dataMemberById.memberID} />
                 </Form.Item>
-                <Form.Item label="SID/LEI">
-                    <Input disabled={disable} defaultValue={dataMemberById.sidLei} />
+                <Form.Item label="SID">
+                    <Input disabled={disable} defaultValue={dataMemberById.sid} />
+                </Form.Item>
+                <Form.Item label="LEI">
+                    <Input disabled={disable} defaultValue={dataMemberById.lei} />
                 </Form.Item>
                 <Form.Item label="Client Name">
                     <Input disabled={disable} defaultValue={dataMemberById.namaNasabah} />

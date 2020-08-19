@@ -51,7 +51,8 @@ const ViewDeleteMember = (props) => {
         {
             key: '0',
             memberID: ' ',
-            sidLei: ' ',
+            sid: ' ',
+            lei: ' ',
             namaPerusahaan: ' ',
             alamat: ' ',
             pic: ' ',
@@ -68,7 +69,8 @@ const ViewDeleteMember = (props) => {
             key: '1',
             no: '1',
             memberID: 'Member123',
-            sidLei: 'ID12',
+            sid: 'ID12',
+            lei: 'lei1',
             namaPerusahaan: 'PT Jaya Abadi',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Brown',
@@ -85,7 +87,8 @@ const ViewDeleteMember = (props) => {
             key: '2',
             no: '2',
             memberID: 'Member345',
-            sidLei: 'ID23',
+            sid: 'ID23',
+            lei: 'lei2',
             namaPerusahaan: 'PT Citra Utama',
             alamat: 'New York No. 1 Lake Park',
             pic: 'Jim Green',
@@ -102,7 +105,8 @@ const ViewDeleteMember = (props) => {
             key: '3',
             no: '3',
             memberID: 'Member567',
-            sidLei: 'ID34',
+            sid: 'ID34',
+            lei: 'lei3',
             namaPerusahaan: 'PT Abadi Makmur',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Black',
@@ -176,8 +180,12 @@ const ViewDeleteMember = (props) => {
             paramData: dataMemberById.memberID
         },
         {
-            title: "SID/LEI :",
-            paramData: dataMemberById.sidLei
+            title: "SID :",
+            paramData: dataMemberById.sid
+        },
+        {
+            title: "LEI :",
+            paramData: dataMemberById.lei
         },
         {
             title: "Company Name :",

@@ -49,7 +49,8 @@ const ViewDeleteClient = (props) => {
         {
             key: '0',
             memberID: ' ',
-            sidLei: ' ',
+            sid: ' ',
+            lei: ' ',
             namaNasabah: ' ',
             rtgsAccount: 'Auto Generate',
             ssssAccount: 'Auto Generate',
@@ -59,7 +60,8 @@ const ViewDeleteClient = (props) => {
 
             key: '1',
             memberID: 'CENAIDJA',
-            sidLei: 'SID1LEI1',
+            sid: 'SID1',
+            lei: 'LEI1',
             namaNasabah: 'Nas abah',
             rtgsAccount: 'rtgs Account1',
             ssssAccount: 'ssss Account1',
@@ -68,7 +70,8 @@ const ViewDeleteClient = (props) => {
         {
             key: '2',
             memberID: 'CENAIDJA',
-            sidLei: 'SID2LEI2',
+            sid: 'SID2',
+            lei: 'LEI2',
             namaNasabah: 'fulan bin fulan',
             rtgsAccount: 'rtgs Account2',
             ssssAccount: 'ssss Account2',
@@ -77,7 +80,8 @@ const ViewDeleteClient = (props) => {
         {
             key: '3',
             memberID: 'CENAIDJA',
-            sidLei: 'SID3LEI3',
+            sid: 'SID3',
+            lei: 'LEI3',
             namaNasabah: 'fulanah bin fulan',
             rtgsAccount: 'rtgs Account3',
             ssssAccount: 'ssss Account3',
@@ -96,8 +100,12 @@ const ViewDeleteClient = (props) => {
             paramData: dataMemberById.memberID
         },
         {
-            title: "SID/LEI :",
-            paramData: dataMemberById.sidLei
+            title: "SID :",
+            paramData: dataMemberById.sid
+        },
+        {
+            title: "LEI :",
+            paramData: dataMemberById.lei
         },
         {
             title: "Client Name :",

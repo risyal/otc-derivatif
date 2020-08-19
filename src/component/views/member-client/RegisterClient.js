@@ -31,7 +31,8 @@ function RegisterClient() {
         {
             key: '1',
             memberID: 'CENAIDJA',
-            sidLei: 'SID1LEI1',
+            sid: 'SID1',
+            lei: 'LEI1',
             namaNasabah: 'Nas abah',
             rtgsAccount: 'rtgs Account1',
             ssssAccount: 'ssss Account1',
@@ -40,7 +41,8 @@ function RegisterClient() {
         {
             key: '2',
             memberID: 'CENAIDJA',
-            sidLei: 'SID2LEI2',
+            sid: 'SID2',
+            lei: 'LEI2',
             namaNasabah: 'fulan bin fulan',
             rtgsAccount: 'rtgs Account2',
             ssssAccount: 'ssss Account2',
@@ -49,7 +51,8 @@ function RegisterClient() {
         {
             key: '3',
             memberID: 'CENAIDJA',
-            sidLei: 'SID3LEI3',
+            sid: 'SID3',
+            lei: 'LEI3',
             namaNasabah: 'fulanah bin fulan',
             rtgsAccount: 'rtgs Account3',
             ssssAccount: 'ssss Account3',
@@ -66,8 +69,14 @@ function RegisterClient() {
             width: 100,
         },
         {
-            title: 'SID/LEI',
-            dataIndex: 'sidLei',
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sidLei',
+            width: 100,
+        },
+        {
+            title: 'LEI',
+            dataIndex: 'lei',
             key: 'sidLei',
             width: 100,
         },
@@ -161,7 +170,10 @@ function RegisterClient() {
                         <Form.Item label="Member ID">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="SID/LEI">
+                        <Form.Item label="SID">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="LEI">
                             <Input />
                         </Form.Item>
                         <Form.Item label="Nama Nasabah">
