@@ -38,10 +38,15 @@ function EditAccount(){
                     dataIndex: 'code',
                     key: 'code',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    dataIndex: 'sid',
+                    key: 'sid',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                 }
             ]
         },
@@ -161,7 +166,8 @@ function EditAccount(){
         {
             key: '1',
             code: 'CENAIDJA',
-            sidLei: 'SID1LEI1',
+            sid: 'SID1',
+            lei: 'LEI1',
             name: 'Nas abah',
             currency: '',
             accNo: 'D4211',
@@ -176,7 +182,8 @@ function EditAccount(){
         {
             key: '2',
             code: 'CENAIDJA',
-            sidLei: 'SID1LEI2',
+            sid: 'SID2',
+            lei: 'LEI2',
             name: 'Mega',
             currency: '',
             accNo: 'D4212',
@@ -191,7 +198,8 @@ function EditAccount(){
         {
             key: '3',
             code: 'CENAIDJA',
-            sidLei: 'SID1LEI3',
+            sid: 'SID3',
+            lei: 'LEI3',
             name: 'Tera',
             currency: '',
             accNo: 'D4212',
