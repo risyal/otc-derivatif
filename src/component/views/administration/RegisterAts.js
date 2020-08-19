@@ -32,6 +32,11 @@ function RegisterAts(){
             key:'name',
         },
         {
+            title: 'Application Name',
+            dataIndex: 'appName',
+            key:'appName',
+        },
+        {
             title: 'Address',
             dataIndex: 'address',
             key: 'address',
@@ -105,6 +110,7 @@ function RegisterAts(){
         {
             key: '1',
             name: 'PT 123',
+            appName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -113,6 +119,7 @@ function RegisterAts(){
         {
             key: '2',
             name: 'PT 123',
+            appName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -121,6 +128,7 @@ function RegisterAts(){
         {
             key: '3',
             name: 'PT 123',
+            appName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
