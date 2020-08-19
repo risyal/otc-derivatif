@@ -25,7 +25,7 @@ function BlockCollateralMember() {
 
     const columns = [
         {
-            title: 'Member / Client ID',
+            title: 'Member ID',
             children: [
                 {
                     title: 'Code',
@@ -34,10 +34,16 @@ function BlockCollateralMember() {
                     key: 'code',
                     fixed: 'left',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    dataIndex: 'sid',
+                    key: 'sid',
+                    fixed: 'left',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                     fixed: 'left',
                 }]
         },
@@ -139,11 +145,23 @@ function BlockCollateralMember() {
             >
                 <Form.Item label="Member ID" >
                     <Input.Group compact >
-                        <Input style={{ width: '45%', textAlign: 'center' }} placeholder="Code" />
+                    <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
                         <Input
                             className="site-input-split"
                             style={{
-                                width: '10%',
+                                width: '5%',
+                                borderLeft: 0,
+                                borderRight: 0,
+                                pointerEvents: 'none', textAlign: 'center'
+                            }}
+                            placeholder="|"
+                            disabled
+                        />
+                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
+                        <Input
+                            className="site-input-split"
+                            style={{
+                                width: '5%',
                                 borderLeft: 0,
                                 borderRight: 0,
                                 pointerEvents: 'none', textAlign: 'center'
@@ -154,10 +172,10 @@ function BlockCollateralMember() {
                         <Input
                             className="site-input-right"
                             style={{
-                                width: '45%',
+                                width: '30%',
                                 textAlign: 'center',
                             }}
-                            placeholder="SID/LEI"
+                            placeholder="LEI"
                         />
                     </Input.Group>
                 </Form.Item>
