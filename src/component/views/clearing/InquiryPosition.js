@@ -36,10 +36,15 @@ function InquiryPosition() {
                     dataIndex: 'code',
                     key: 'code',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    dataIndex: 'sid',
+                    key: 'sid',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                 }]
         },
         {
@@ -51,10 +56,15 @@ function InquiryPosition() {
                     dataIndex: 'code',
                     key: 'code',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLeiClient',
-                    key: 'sidLeiClient',
+                    dataIndex: 'sidClient',
+                    key: 'sidClient',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'leiClient',
+                    key: 'leiClient',
                 }]
         },
         {
@@ -153,6 +163,9 @@ function InquiryPosition() {
                 labelAlign="left"
             >
                 <Form.Item label="SID" >
+                    <Input />
+                </Form.Item>
+                <Form.Item label="LEI" >
                     <Input />
                 </Form.Item>
                 <Form.Item label="Product ">
