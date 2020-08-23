@@ -52,10 +52,15 @@ function InquiryTrade() {
                     dataIndex: 'memberId',
                     key: 'memberId',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    dataIndex: 'sid',
+                    key: 'sid',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                 }]
         },
         {
@@ -213,7 +218,10 @@ function InquiryTrade() {
                             <Form.Item label="Member ID" >
                                 <Input />
                             </Form.Item>
-                            <Form.Item label="SID/LEI" >
+                            <Form.Item label="SID" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="LEI" >
                                 <Input />
                             </Form.Item>
                             <Form.Item label="UTI" >

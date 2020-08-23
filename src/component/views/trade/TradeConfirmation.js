@@ -26,10 +26,16 @@ function TradeConfirmation() {
             fixed: 'left',
         },
         {
-            title: 'SID/LEI',
+            title: 'SID',
             width: 100,
             dataIndex: 'sid',
             key: 'sid',
+        }, 
+        {
+            title: 'LEI',
+            width: 100,
+            dataIndex: 'lei',
+            key: 'lei',
         },
         {
             title: 'Product',
@@ -141,7 +147,10 @@ function TradeConfirmation() {
                 <Form.Item label="UTI" >
                     <Input />
                 </Form.Item>
-                <Form.Item label="SID/LEI" >
+                <Form.Item label="SID" >
+                    <Input />
+                </Form.Item>
+                <Form.Item label="LEI" >
                     <Input />
                 </Form.Item>
                 <Form.Item label="Product ">

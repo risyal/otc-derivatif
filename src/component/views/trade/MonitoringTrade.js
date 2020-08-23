@@ -72,20 +72,30 @@ function MonitoringTrade() {
                     dataIndex: 'memberId',
                     key: 'memberId',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'Member SID ',
                     width: 100,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    dataIndex: 'sid',
+                    key: 'sid',
+                }, {
+                    title: 'Member LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                 }, {
                     title: ' Client ID',
                     width: 100,
                     dataIndex: ' clientId',
                     key: ' clientId',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'Client SID',
                     width: 100,
-                    dataIndex: 'sidLeiClient',
-                    key: 'sidLeiClient',
+                    dataIndex: 'sidClient',
+                    key: 'sidClient',
+                }, {
+                    title: 'Client LEI',
+                    width: 100,
+                    dataIndex: 'leiClient',
+                    key: 'leiClient',
                 }]
         },
         {
@@ -218,7 +228,10 @@ function MonitoringTrade() {
                         <Form.Item label="Member ID" >
                             <Input />
                         </Form.Item>
-                        <Form.Item label="SID/LEI" >
+                        <Form.Item label="SID" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="LEI" >
                             <Input />
                         </Form.Item>
                         <Form.Item label="UTI" >
