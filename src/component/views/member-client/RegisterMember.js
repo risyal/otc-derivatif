@@ -11,6 +11,8 @@ import {
     Col,
 } from 'antd';
 import { Link } from "react-router-dom";
+
+import axios from 'axios';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 const RegisterMember = () => {
@@ -168,6 +170,25 @@ const RegisterMember = () => {
             )
         }
     ]);
+    let [member, setMember] = useState('');
+
+    let getSchemaFromApiAsync = () => {
+        console.log("teststs");
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:8080/sysparams')
+                .then(response => resolve(response.json()))
+                .catch(error => {
+                    console.error(error);
+                    reject(error);
+                });
+        })
+    }
+
+    let main = async () => {
+        let res = await getSchemaFromApiAsync();
+        console.log("res", res);
+    };
+    main();
     const [data] = useState([
         {
             key: '1',
