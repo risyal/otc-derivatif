@@ -150,21 +150,23 @@ function SystemParameter() {
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Link to={{
-                    pathname: `/administration/ViewEditSysParam`,
-                    state: {
-                        id: '0',
-                        action: "Add New",
-                        disable: false,
-                    }
-                }}>
-                    <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                        Add New Parameter
-                        </Button>
-                </Link>
-
                 <Row justify="end">
-                    <Col span={4}>
+                    <Col span={8}>
+                        <Link to={{
+                                pathname: `/administration/ViewEditSysParam`,
+                                state: {
+                                    id: '0',
+                                    action: "Add New",
+                                    disable: false,
+                                }
+                            }}>
+                                <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                    Add New Parameter
+                                </Button>
+                        </Link>
+                    </Col>
+
+                    <Col span={8} offset={8}>
                         {/* <Link to={{
                             pathname: `#`,
                             state: {

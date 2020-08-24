@@ -22,19 +22,25 @@ function DefaultFund() {
 
     const columns = [
         {
-            title: 'Member ID',
+            title: 'Member / Client ID',
             children: [
                 {
                     title: 'Code',
-                    width: 50,
+                    width: 100,
                     dataIndex: 'code',
                     key: 'code',
                     fixed: 'left',
                 }, {
-                    title: 'SID/LEI',
-                    width: 50,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    title: 'SID',
+                    width: 100,
+                    dataIndex: 'sid',
+                    key: 'sid',
+                    fixed: 'left',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                     fixed: 'left',
                 }]
         },
@@ -83,13 +89,25 @@ function DefaultFund() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="Client ID" >
+                <Form.Item label="Member / Client ID" >
                     <Input.Group compact >
-                        <Input style={{ width: '45%', textAlign: 'center' }} placeholder="Code" />
+                    <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
                         <Input
                             className="site-input-split"
                             style={{
-                                width: '10%',
+                                width: '5%',
+                                borderLeft: 0,
+                                borderRight: 0,
+                                pointerEvents: 'none', textAlign: 'center'
+                            }}
+                            placeholder="|"
+                            disabled
+                        />
+                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
+                        <Input
+                            className="site-input-split"
+                            style={{
+                                width: '5%',
                                 borderLeft: 0,
                                 borderRight: 0,
                                 pointerEvents: 'none', textAlign: 'center'
@@ -100,10 +118,10 @@ function DefaultFund() {
                         <Input
                             className="site-input-right"
                             style={{
-                                width: '45%',
+                                width: '30%',
                                 textAlign: 'center',
                             }}
-                            placeholder="SID/LEI"
+                            placeholder="LEI"
                         />
                     </Input.Group>
                 </Form.Item>

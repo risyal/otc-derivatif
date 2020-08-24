@@ -38,10 +38,15 @@ function CashFlowIrs() {
                     dataIndex: 'code',
                     key: 'code',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    dataIndex: 'sid',
+                    key: 'sid',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                 }]
         },
         {
@@ -53,10 +58,15 @@ function CashFlowIrs() {
                     dataIndex: 'code',
                     key: 'code',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLeiClient',
-                    key: 'sidLeiClient',
+                    dataIndex: 'sidClient',
+                    key: 'sidClient',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'leiClient',
+                    key: 'leiClient',
                 }]
         },
         {
@@ -152,7 +162,10 @@ function CashFlowIrs() {
                 <Form.Item label="UTI" >
                     <Input />
                 </Form.Item>
-                <Form.Item label="SID/LEI" >
+                <Form.Item label="SID" >
+                    <Input />
+                </Form.Item>
+                <Form.Item label="LEI" >
                     <Input />
                 </Form.Item>
                 <Form.Item label="Tenor" >

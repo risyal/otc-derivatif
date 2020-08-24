@@ -39,10 +39,15 @@ function SettlementPosition() {
                     dataIndex: 'code',
                     key: 'code',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLei',
-                    key: 'sidLei',
+                    dataIndex: 'sid',
+                    key: 'sid',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
                 }]
         },
         {
@@ -54,10 +59,15 @@ function SettlementPosition() {
                     dataIndex: 'code',
                     key: 'code',
                 }, {
-                    title: 'SID/LEI',
+                    title: 'SID',
                     width: 100,
-                    dataIndex: 'sidLeiClient',
-                    key: 'sidLeiClient',
+                    dataIndex: 'sidClient',
+                    key: 'sidClient',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'leiClient',
+                    key: 'leiClient',
                 }]
         },
         {
@@ -214,12 +224,24 @@ function SettlementPosition() {
                     <Input />
                 </Form.Item>
                 <Form.Item label="Member ID" >
-                    <Input.Group compact >
-                        <Input style={{ width: '45%', textAlign: 'center' }} placeholder="Code" />
+                <Input.Group compact >
+                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
                         <Input
                             className="site-input-split"
                             style={{
-                                width: '10%',
+                                width: '5%',
+                                borderLeft: 0,
+                                borderRight: 0,
+                                pointerEvents: 'none', textAlign: 'center'
+                            }}
+                            placeholder="|"
+                            disabled
+                        />
+                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
+                        <Input
+                            className="site-input-split"
+                            style={{
+                                width: '5%',
                                 borderLeft: 0,
                                 borderRight: 0,
                                 pointerEvents: 'none', textAlign: 'center'
@@ -230,20 +252,32 @@ function SettlementPosition() {
                         <Input
                             className="site-input-right"
                             style={{
-                                width: '45%',
+                                width: '30%',
                                 textAlign: 'center',
                             }}
-                            placeholder="SID/LEI"
+                            placeholder="LEI"
                         />
                     </Input.Group>
                 </Form.Item>
                 <Form.Item label="Client" >
-                    <Input.Group compact >
-                        <Input style={{ width: '45%', textAlign: 'center' }} placeholder="Code" />
+                <Input.Group compact >
+                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
                         <Input
                             className="site-input-split"
                             style={{
-                                width: '10%',
+                                width: '5%',
+                                borderLeft: 0,
+                                borderRight: 0,
+                                pointerEvents: 'none', textAlign: 'center'
+                            }}
+                            placeholder="|"
+                            disabled
+                        />
+                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
+                        <Input
+                            className="site-input-split"
+                            style={{
+                                width: '5%',
                                 borderLeft: 0,
                                 borderRight: 0,
                                 pointerEvents: 'none', textAlign: 'center'
@@ -254,10 +288,10 @@ function SettlementPosition() {
                         <Input
                             className="site-input-right"
                             style={{
-                                width: '45%',
+                                width: '30%',
                                 textAlign: 'center',
                             }}
-                            placeholder="SID/LEI"
+                            placeholder="LEI"
                         />
                     </Input.Group>
                 </Form.Item>

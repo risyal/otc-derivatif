@@ -51,39 +51,45 @@ const ViewDeleteAccount = (props) => {
             code: 'CENAIDJA',
             sidLei: 'SID1LEI1',
             name: 'Nas abah',
+            currency: '',
             accNo: 'D4211',
             status: 'Active',
             accNo2: 'D4211',
-            status2: 'Frozen',
+            status2: 'Active',
             accNo3: 'D4211',
-            status3: 'Close',
-            settlementAcc: 'Settlement1',
+            status3: 'Active',
+            accNo4: 'D4211',
+            status4: 'Active',
         },
         {
             key: '2',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI2',
             name: 'Mega',
+            currency: '',
             accNo: 'D4212',
-            status: 'Active',
+            status: 'Frozen',
             accNo2: 'D4212',
             status2: 'Frozen',
             accNo3: 'D4212',
             status3: 'Frozen',
-            settlementAcc: 'Settlement2',
+            accNo4: 'D4211',
+            status4: 'Frozen',
         },
         {
             key: '3',
             code: 'CENAIDJA',
             sidLei: 'SID1LEI3',
             name: 'Tera',
+            currency: '',
             accNo: 'D4212',
-            status: 'Frozen',
+            status: 'Close',
             accNo2: 'D4212',
             status2: 'Close',
             accNo3: 'D4212',
-            status3: 'Active',
-            settlementAcc: 'Settlement3',
+            status3: 'Close',
+            accNo4: 'D4211',
+            status4: 'Close',
         },
     ]);
     const dataAccountById = data.find((account) => {
@@ -130,7 +136,11 @@ const ViewDeleteAccount = (props) => {
         },
         {
             title: "Settlement Account : ",
-            paramData: dataAccountById.settlementAcc
+            paramData: "Account No : " + dataAccountById.accNo4
+        },
+        {
+            title: "",
+            paramData: "Status : " + dataAccountById.status4
         },
     ]);
 

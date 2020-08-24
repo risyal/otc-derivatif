@@ -44,7 +44,7 @@ function CashCollMgt(){
             key: 'eligibility',
         },
         {
-            title: 'Haircut',
+            title: 'Haircut (%)',
             dataIndex: 'haircut',
             key: 'haircut',
         },
@@ -184,19 +184,22 @@ function CashCollMgt(){
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Link to={{
-                        pathname: `/administration/ViewEditCCMgt`,
-                        state: {
-                            id: '0',
-                            action: "Add New",
-                            disable: false,
-                        }
-                    }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                            Add New Data
-                    </Button>
-                </Link>
                 <Row justify="end">
-                    <Col span={4}>
+                    <Col span={8}>
+                        <Link to={{
+                                pathname: `/administration/ViewEditCCMgt`,
+                                state: {
+                                    id: '0',
+                                    action: "Add New",
+                                    disable: false,
+                                }
+                            }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                    Add New Data
+                            </Button>
+                        </Link>
+                    </Col>
+               
+                    <Col span={8} offset={8}>
                         {/* <Link to={{
                             pathname: `#`,
                             state: {

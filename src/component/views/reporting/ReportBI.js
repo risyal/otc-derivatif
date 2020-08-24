@@ -5,6 +5,8 @@ import {
     Table,
     Input,
     DatePicker,
+    Row,
+    Col
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
@@ -62,7 +64,18 @@ function ReportBI(){
         },
         {
         },
-    ];
+	];
+	
+	const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -115,16 +128,28 @@ function ReportBI(){
 				</Form.Item>
 			</Form>
 
-			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+			<Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                        pathname: `#`,
+                        state: {
+                            id: '1',
+                            action: "Edit",
+                            disable: false,
+                        }
+                    }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+
+			<div style={{ margin: '15px 0px 0px 0px' }} scroll={{ x: 1300 }}>
 				<Table
 					columns={columns}
 					dataSource={data}
 					bordered
 					size="middle"
 				/>
-				<Button type="primary" icon={<DownloadOutlined />}>
-                    Export File
-                </Button>
 			</div>
         </div>
     )

@@ -32,7 +32,8 @@ const ViewEditMember = (props) => {
         {
             key: '0',
             memberID: ' ',
-            sidLei: ' ',
+            sid: ' ',
+            lei: ' ',
             namaPerusahaan: ' ',
             alamat: ' ',
             pic: ' ',
@@ -49,7 +50,8 @@ const ViewEditMember = (props) => {
             key: '1',
             no: '1',
             memberID: 'Member123',
-            sidLei: 'ID12',
+            sid: 'ID12',
+            lei: 'lei1',
             namaPerusahaan: 'PT Jaya Abadi',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Brown',
@@ -66,7 +68,8 @@ const ViewEditMember = (props) => {
             key: '2',
             no: '2',
             memberID: 'Member345',
-            sidLei: 'ID23',
+            sid: 'ID23',
+            lei: 'lei2',
             namaPerusahaan: 'PT Citra Utama',
             alamat: 'New York No. 1 Lake Park',
             pic: 'Jim Green',
@@ -83,7 +86,8 @@ const ViewEditMember = (props) => {
             key: '3',
             no: '3',
             memberID: 'Member567',
-            sidLei: 'ID34',
+            sid: 'ID34',
+            lei: 'lei3',
             namaPerusahaan: 'PT Abadi Makmur',
             alamat: 'New York No. 1 Lake Park',
             pic: 'John Black',
@@ -137,8 +141,11 @@ const ViewEditMember = (props) => {
                 <Form.Item label="Member ID">
                     <Input disabled={disable} defaultValue={dataMemberById.memberID} />
                 </Form.Item>
-                <Form.Item label="SID/LEI">
-                    <Input disabled={disable} defaultValue={dataMemberById.sidLei} />
+                <Form.Item label="SID">
+                    <Input disabled={disable} defaultValue={dataMemberById.sid} />
+                </Form.Item>
+                <Form.Item label="LEI">
+                    <Input disabled={disable} defaultValue={dataMemberById.lei} />
                 </Form.Item>
                 <Form.Item label="Company Name">
                     <Input disabled={disable} defaultValue={dataMemberById.namaPerusahaan} />

@@ -211,16 +211,18 @@ function UserManagement(){
             </Form>
            
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Link to={{
-                    pathname: `/administration/AddUser`
-                }}>
-                    <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                        Add New User
-                    </Button>
-                </Link>        
-
                 <Row justify="end">
-                    <Col span={4}>
+                    <Col span={8}>
+                        <Link to={{
+                            pathname: `/administration/AddUser`
+                        }}>
+                            <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                Add New User
+                            </Button>
+                        </Link>  
+                    </Col>      
+
+                    <Col span={8} offset={8}>
                         {/* <Link to={{
                             pathname: `#`,
                             state: {
