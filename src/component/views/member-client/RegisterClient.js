@@ -221,7 +221,7 @@ function RegisterClient() {
                                 disable: false,
                             }
                         }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                                Add New Member
+                                Add New Client
                 </Button>
                         </Link>
                     </Col>
