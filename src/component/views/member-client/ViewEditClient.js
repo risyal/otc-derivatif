@@ -98,7 +98,7 @@ const ViewEditClient = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    {action} Client</Title>
+                    {action} Data Client</Title>
             </div>
             <Form
                 {...formItemLayout}
