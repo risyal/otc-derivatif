@@ -121,11 +121,8 @@ const ViewEditClient = (props) => {
                 <Form.Item label="Client Name">
                     <Input disabled={disable} defaultValue={dataMemberById.namaNasabah} />
                 </Form.Item>
-                <Form.Item label="RTGS Account">
+                <Form.Item label="Collateral Account">
                     <Input disabled='true' defaultValue={dataMemberById.rtgsAccount} />
-                </Form.Item>
-                <Form.Item label="SSSS Account">
-                    <Input disabled='true' defaultValue={dataMemberById.ssssAccount} />
                 </Form.Item>
                 <Form.Item label="Status">
                     <Select
