@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Input,
     Button,
-    Table
+    Table,
+    Row,
+    Col,
 } from 'antd';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function InquiryBeneficiaries() {
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState ({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -17,38 +20,50 @@ function InquiryBeneficiaries() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
-
-    const columns = [
+    const [columns] = useState([
         {
-            title: 'Participant ID',
-            dataIndex: 'participantId',
-            key: 'participantId',
+            title: 'Beneficiary Name',
+            dataIndex: 'beneficiaryName',
+            key: 'beneficiaryName',
             width: 50,
         }, {
-            title: 'RTGS Acc Number',
+            title: 'RTGS Account Number',
             dataIndex: 'rtgsAccNumber',
             key: 'rtgsAccNumber',
             width: 50,
         }, {
-            title: 'SSSS Acc Number',
+            title: 'SSSS Account Number',
             dataIndex: 'ssssAccNumber',
             key: 'ssssAccNumber',
             width: 50,
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
         },
         {
         },
-    ];
+    ]);
+
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
+    
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
-        <div style={{ margin: '15px 20px' }}>
+        <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -56,27 +71,62 @@ function InquiryBeneficiaries() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="Participant ID " >
-                    <Input.Group compact >
+                {expand ? (<div>
+                    <Form.Item label="Keyword">
                         <Input />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="RTGS Acc Number" >
-                    <Input.Group compact >
-                        <Input />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="SSSS Acc Number" >
-                    <Input.Group compact >
-                        <Input />
-                    </Input.Group>
-                </Form.Item>
+                    </Form.Item>
+                </div>
+                ) : (
+                        <div>
+                            <Form.Item label="Beneficiary Name " >
+                                <Input.Group compact >
+                                    <Input />
+                                </Input.Group>
+                            </Form.Item>
+                            <Form.Item label="RTGS Account Number" >
+                                <Input.Group compact >
+                                    <Input />
+                                </Input.Group>
+                            </Form.Item>
+                            <Form.Item label="SSSS Account Number" >
+                                <Input.Group compact >
+                                    <Input />
+                                </Input.Group>
+                            </Form.Item>
+                        </div>
+                    )}
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
+
             <Table
                 columns={columns}
                 dataSource={data}
