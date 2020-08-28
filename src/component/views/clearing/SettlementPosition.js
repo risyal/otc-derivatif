@@ -170,12 +170,6 @@ function SettlementPosition() {
             dataIndex: 'netSettlement',
             key: 'netSettlement',
         },
-        {
-            title: 'Initial Margin Shortage',
-            width: 100,
-            dataIndex: 'initialMargin',
-            key: 'initialMargin',
-        },
     ];
     const data = [
         {
@@ -217,9 +211,6 @@ function SettlementPosition() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="Trade ID" >
-                    <Input />
-                </Form.Item>
                 <Form.Item label="Trade ID" >
                     <Input />
                 </Form.Item>
