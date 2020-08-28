@@ -187,7 +187,7 @@ function RoutePage() {
             </Route>
             <Route path="/clearingManagement/statusSettlement">
                 <div className="head-content">
-                    <Title level={4}>Status Settlement</Title>
+                    <Title level={4}>Settlement Status</Title>
                 </div>
                 <SettlementStatus />
             </Route>
