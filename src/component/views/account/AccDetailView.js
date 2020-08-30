@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
     Form,
-    Popconfirm,
     Button,
     Radio,
     Typography,
@@ -10,17 +9,15 @@ import {
     Col,
 } from 'antd';
 import {
-    DownloadOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-
+import { DownloadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
-const ViewDeleteClient = (props) => {
-    const text = 'Are you sure to delete this task?';
+const AccDetailView = (props) => {
     const componentSize = 'middle';
-    const [formItemLayout] = useState({
+    const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -29,8 +26,7 @@ const ViewDeleteClient = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    });
-
+    };
     const [columns] = useState([
         {
             title: '',
@@ -44,89 +40,104 @@ const ViewDeleteClient = (props) => {
             key: 'paramData',
         },
     ]);
-
     const [data] = useState([
         {
-            key: '0',
-            memberID: ' ',
-            sid: ' ',
-            lei: ' ',
-            namaNasabah: ' ',
-            rtgsAccount: 'Auto Generate',
-            ssssAccount: 'Auto Generate',
-            status: 'Active',
-        },
-        {
-
             key: '1',
-            memberID: 'CENAIDJA',
-            sid: 'SID1',
-            lei: 'LEI1',
-            namaNasabah: 'Nas abah',
-            rtgsAccount: 'rtgs Account1',
-            ssssAccount: 'ssss Account1',
-            status: 'Active',
+            code: 'CODE123',
+            sid: 'SCD01020303',
+            lei: 'LEI123',
+            accType: 'Type1',
+            accNo: 'AD0010020003',
+            accName: 'OSO SEKURITAS ID, PT',
+            instrumentCode: 'IDR',
+            currentBalance: '2.123.444.788',
+            balanceType: 'Available',
+            status: 'Status1',
+            startBalance: '2.123.444.788',
         },
         {
             key: '2',
-            memberID: 'CENAIDJA',
-            sid: 'SID2',
-            lei: 'LEI2',
-            namaNasabah: 'fulan bin fulan',
-            rtgsAccount: 'rtgs Account2',
-            ssssAccount: 'ssss Account2',
-            status: 'Active',
+            code: 'CODE456',
+            sid: 'SCD111222333',
+            lei: 'LEI456',
+            accType: 'Type2',
+            accNo: 'AD004005666',
+            accName: 'Flash ID, PT',
+            instrumentCode: 'IDR',
+            currentBalance: 'IDR',
+            balanceType: 'Available',
+            status: 'Status2',
         },
         {
             key: '3',
-            memberID: 'CENAIDJA',
-            sid: 'SID3',
-            lei: 'LEI3',
-            namaNasabah: 'fulanah bin fulan',
-            rtgsAccount: 'rtgs Account3',
-            ssssAccount: 'ssss Account3',
-            status: 'Active',
+            code: 'CODE678',
+            sid: 'SCD11234556',
+            lei: 'LEI456',
+            accType: 'Type3',
+            accNo: 'AD0010011113',
+            accName: 'CJ Industry, PT',
+            instrumentCode: 'IDR',
+            currentBalance: 'IDR',
+            balanceType: 'Available',
+            status: 'Status3',
         },
     ]);
 
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
-
+    const dataParamById = data.find((param) => {
+        return param.key === props.location.state.id
     })
 
     const [dataForView] = useState([
         {
-            title: "Member ID :",
-            paramData: dataMemberById.memberID
+            title: "Code :",
+            paramData: dataParamById.code
         },
         {
             title: "SID :",
-            paramData: dataMemberById.sid
+            paramData: dataParamById.sid
         },
         {
             title: "LEI :",
-            paramData: dataMemberById.lei
+            paramData: dataParamById.lei
         },
         {
-            title: "Client Name :",
-            paramData: dataMemberById.namaNasabah
+            title: "Account Type :",
+            paramData: dataParamById.accType
         },
         {
-            title: "Collateral Account :",
-            paramData: dataMemberById.rtgsAccount
+            title: "Account Number :",
+            paramData: dataParamById.accNo
+        },
+        {
+            title: "Account Name :",
+            paramData: dataParamById.accName
+        },
+        {
+            title: "Instrument Code :",
+            paramData: dataParamById.instrumentCode
+        },
+        {
+            title: "Balance Type :",
+            paramData: dataParamById.balanceType
         },
         {
             title: "Status :",
-            paramData: dataMemberById.status
+            paramData: dataParamById.status
+        },
+        {
+            title: "Start Balance :",
+            paramData: dataParamById.startBalance
+        },
+        {
+            title: "Current Balance :",
+            paramData: dataParamById.currentBalance
         },
     ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
-    const [sixEyes, setSixEyes] = useState(1);
-    const radioOnChange = e => {
-        setSixEyes(e.target.value);
-    };
+    const linkBack = props.location.state.linkBack
+
     const [exportButtton] = useState(<Button
         type="primary"
         style={{
@@ -142,11 +153,11 @@ const ViewDeleteClient = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/memberandclientmanagement/registerclient">
+                        <Link to={linkBack}>
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                    {action} Data Client</Title>
+                    {action} Account Information</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -156,7 +167,6 @@ const ViewDeleteClient = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-
                 <Row justify="end">
                     <Col span={4}>
                         {exportButtton}
@@ -171,31 +181,12 @@ const ViewDeleteClient = (props) => {
                     size="middle"
                     pagination={false}
                 />
-
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
-
+                
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/memberandclientmanagement/registerclient">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
-                        </Popconfirm>
-                    </Link>
-                    ) : (
-                            <div></div>
-                        )}
-                    <Link to="/memberandclientmanagement/registerclient">
+                    <Link to={linkBack}>
                         <Button style={{ marginTop: '15px' }}>
-                            {!disable ? (
-                                <div>Cancel</div>
+                            {!disable ? action === "Approval" ? "Reject" : (
+                                <div>Back</div>
                             ) : (
                                     <div>Back</div>
                                 )}
@@ -203,9 +194,8 @@ const ViewDeleteClient = (props) => {
                     </Link>
                 </Form.Item>
             </Form>
-
         </div>
     )
 }
 
-export default ViewDeleteClient
+export default AccDetailView

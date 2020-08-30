@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Input,
@@ -6,8 +6,8 @@ import {
 } from 'antd';
 
 function RegisterBeneficiaries() {
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState ({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -16,7 +16,7 @@ function RegisterBeneficiaries() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -27,7 +27,7 @@ function RegisterBeneficiaries() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="Participant ID " >
+                <Form.Item label="Beneficiary Name " >
                     <Input.Group compact >
                         <Input />
                     </Input.Group>

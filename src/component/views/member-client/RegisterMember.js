@@ -289,7 +289,7 @@ const RegisterMember = () => {
                             <Form.Item label="LEI">
                                 <Input />
                             </Form.Item>
-                            <Form.Item label="Nama Perusahaan">
+                            <Form.Item label="Company Name">
                                 <Input />
                             </Form.Item>
                             <Form.Item label="RTGS Account">

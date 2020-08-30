@@ -127,7 +127,7 @@ const ViewEditMember = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Member</Title>
+                {action} Data Member</Title>
             </div>
             <Form
                 {...formItemLayout}

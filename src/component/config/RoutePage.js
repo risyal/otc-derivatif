@@ -124,6 +124,7 @@ import ViewEditIndonia from '../views/administration/editReferenceRate/ViewEditI
 import ViewDeleteSysParam from '../views/administration/systemParameter/ViewDeleteSysParam';
 import ViewEditSysParam from '../views/administration/systemParameter/ViewEditSysParam';
 import DetailApproval from '../views/administration/DetailApproval';
+import AccDetailView from '../views/account/AccDetailView';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -186,7 +187,7 @@ function RoutePage() {
             </Route>
             <Route path="/clearingManagement/statusSettlement">
                 <div className="head-content">
-                    <Title level={4}>Status Settlement</Title>
+                    <Title level={4}>Settlement Status</Title>
                 </div>
                 <SettlementStatus />
             </Route>
@@ -627,6 +628,8 @@ function RoutePage() {
             <Route exact path="/administration/ViewDeleteSysParam" component={ViewDeleteSysParam}>
             </Route>
             <Route exact path="/administration/ViewEditSysParam" component={ViewEditSysParam}>
+            </Route>
+            <Route exact path="/accountManagement/accDetailView" component={AccDetailView}>
             </Route>
         </div>
     )

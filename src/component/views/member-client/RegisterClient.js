@@ -176,7 +176,7 @@ function RegisterClient() {
                         <Form.Item label="LEI">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Nama Nasabah">
+                        <Form.Item label="Client Name">
                             <Input />
                         </Form.Item>
                         <Form.Item label="Collateral Account">
@@ -214,14 +214,14 @@ function RegisterClient() {
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                            pathname: `/registerClient/viewMember`,
+                            pathname: `/registerClient/viewClient`,
                             state: {
                                 id: '0',
                                 action: "Add New",
                                 disable: false,
                             }
                         }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                                Add New Member
+                                Add New Client
                 </Button>
                         </Link>
                     </Col>

@@ -63,7 +63,7 @@ const Menu = [
             key: 'settlementPostion',
             linkTo: '/clearingManagement/settlementPostion'
         }, {
-            name: 'Status Settlement',
+            name: 'Settlement Status',
             key: 'statusSettlement',
             linkTo: '/clearingManagement/statusSettlement'
         }, {
