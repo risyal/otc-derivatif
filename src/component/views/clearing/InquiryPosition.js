@@ -1,19 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Button,
     Input,
     Table,
     Select,
+    Row,
+    Col,
 } from 'antd';
+import {  DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+
 function InquiryPosition() {
-    const columns = [
+    const [columns] = useState([
+        {
+            title: 'Member ID/Client ID',
+            children: [
+                {
+                    title: 'Code',
+                    width: 100,
+                    dataIndex: 'code',
+                    key: 'code',
+                    fixed: 'left',
+                }, {
+                    title: 'SID',
+                    width: 100,
+                    dataIndex: 'sid',
+                    key: 'sid',
+                    fixed: 'left',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
+                    fixed: 'left',
+                }
+            ]
+        },
         {
             title: 'Trade ID',
             width: 100,
             dataIndex: 'tradeId',
             key: 'tradeId',
-            fixed: 'left',
         },
         {
             title: 'Product',
@@ -22,50 +49,10 @@ function InquiryPosition() {
             key: 'product',
         },
         {
-            title: 'Time',
+            title: 'Account Type (H/C)',
             width: 100,
-            dataIndex: 'time',
-            key: 'time',
-        },
-        {
-            title: 'Member ID',
-            children: [
-                {
-                    title: 'Code',
-                    width: 100,
-                    dataIndex: 'code',
-                    key: 'code',
-                }, {
-                    title: 'SID',
-                    width: 100,
-                    dataIndex: 'sid',
-                    key: 'sid',
-                }, {
-                    title: 'LEI',
-                    width: 100,
-                    dataIndex: 'lei',
-                    key: 'lei',
-                }]
-        },
-        {
-            title: 'Client',
-            children: [
-                {
-                    title: 'Code',
-                    width: 100,
-                    dataIndex: 'code',
-                    key: 'code',
-                }, {
-                    title: 'SID',
-                    width: 100,
-                    dataIndex: 'sidClient',
-                    key: 'sidClient',
-                }, {
-                    title: 'LEI',
-                    width: 100,
-                    dataIndex: 'leiClient',
-                    key: 'leiClient',
-                }]
+            dataIndex: 'accountType',
+            key: 'accountType',
         },
         {
             title: 'Contract',
@@ -105,7 +92,7 @@ function InquiryPosition() {
             key: 'tenor',
         },
         {
-            title: 'Payment Freq',
+            title: 'Payment Frequency',
             width: 100,
             dataIndex: 'paymentFreq',
             key: 'paymentFreq',
@@ -122,8 +109,8 @@ function InquiryPosition() {
             dataIndex: 'nextFixingDate',
             key: 'nextFixingDate',
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
@@ -136,9 +123,10 @@ function InquiryPosition() {
         },
         {
         },
-    ];
-    const componentSize = 'middle';
-    const formItemLayout = {
+    ]);
+
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -147,12 +135,25 @@ function InquiryPosition() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
     const productSelect = ['OIS', 'IRS', 'DNDF'];
     const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
     const productClick = (e) => {
         SetJenisProduct(e);
     };
+
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form
@@ -162,34 +163,68 @@ function InquiryPosition() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="SID" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="LEI" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Product ">
-                    <Select defaultValue={jenisProduct} onChange={productClick}>
-                        {productSelect.map(product => (
-                            <Select.Option key={product}>{product}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="UTI" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Member" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Reference Number" >
-                    <Input />
-                </Form.Item>
+                {expand ? (<div>
+                    <Form.Item label="Keyword">
+                        <Input />
+                    </Form.Item>
+                </div>
+                ) : (
+                        <div>
+                            <Form.Item label="SID" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="LEI" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Product ">
+                                <Select defaultValue={jenisProduct} onChange={productClick}>
+                                    {productSelect.map(product => (
+                                        <Select.Option key={product}>{product}</Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item label="UTI" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Member" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Reference Number" >
+                                <Input />
+                            </Form.Item>
+                        </div>
+                    )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
+            
             <Table
                 columns={columns}
                 dataSource={data}
