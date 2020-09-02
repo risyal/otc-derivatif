@@ -125,6 +125,9 @@ import ViewDeleteSysParam from '../views/administration/systemParameter/ViewDele
 import ViewEditSysParam from '../views/administration/systemParameter/ViewEditSysParam';
 import DetailApproval from '../views/administration/DetailApproval';
 import AccDetailView from '../views/account/AccDetailView';
+import ClearingDetailIRS from '../views/clearing/ClearingDetailIRS';
+import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
+import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -630,6 +633,15 @@ function RoutePage() {
             <Route exact path="/administration/ViewEditSysParam" component={ViewEditSysParam}>
             </Route>
             <Route exact path="/accountManagement/accDetailView" component={AccDetailView}>
+            </Route>
+            <Route path="/clearingManagement/clearingDetailIrs">
+                <ClearingDetailIRS />
+            </Route>
+            <Route path="/clearingManagement/clearingDetailOis">
+                <ClearingDetailOIS />
+            </Route>
+            <Route path="/clearingManagement/clearingDetailDndf">
+                <ClearingDetailDNDF />
             </Route>
         </div>
     )
