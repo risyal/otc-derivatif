@@ -245,7 +245,7 @@ function InquiryTrade() {
                                 <Select
                                     placeholder="Select a Status"
                                 >
-                                    <Select.Option value="diterima">Diterima</Select.Option>
+                                    <Select.Option value="accepted">Accepted</Select.Option>
                                     <Select.Option value="eligibility1">Eligibility Check 1</Select.Option>
                                     <Select.Option value="eligibility2">Eligibility Check 2</Select.Option>
                                     <Select.Option value="novasi">Novasi</Select.Option>
@@ -272,8 +272,8 @@ function InquiryTrade() {
                         onClick={() => {
                             setExpand(!expand);
                         }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>

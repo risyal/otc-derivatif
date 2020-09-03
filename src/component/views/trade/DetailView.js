@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Popconfirm,
@@ -20,8 +20,8 @@ const { Title } = Typography;
 
 const DetailView = (props) => {
     const [text] = useState('Are you sure to Cancel this ?');
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -30,7 +30,7 @@ const DetailView = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
     const [columns] = useState([
         {
             title: '',

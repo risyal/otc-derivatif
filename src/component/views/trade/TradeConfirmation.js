@@ -13,7 +13,7 @@ import {
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
-import { DownloadOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 const dateFormat = 'YYYY/MM/DD';
 
 function TradeConfirmation() {
@@ -126,6 +126,8 @@ function TradeConfirmation() {
     const productClick = (e) => {
         SetJenisProduct(e);
     };
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
     const [exportButtton] = useState(<Button
         type="primary"
         style={{
@@ -135,6 +137,7 @@ function TradeConfirmation() {
             height: '35px'
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form
@@ -144,34 +147,61 @@ function TradeConfirmation() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="UTI" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="SID" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="LEI" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Product ">
-                    <Select defaultValue={jenisProduct} onChange={productClick}>
-                        {productSelect.map(product => (
-                            <Select.Option key={product}>{product}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Counterparty" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Trade  Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
+                {expand ? (<div>
+                    <Form.Item label="Keyword">
+                        <Input />
+                    </Form.Item>
+                </div>
+                ) : (
+                        <div>
+                            <Form.Item label="UTI" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="SID" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="LEI" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Product ">
+                                <Select defaultValue={jenisProduct} onChange={productClick}>
+                                    {productSelect.map(product => (
+                                        <Select.Option key={product}>{product}</Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item label="Counterparty" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Trade  Date">
+                                <DatePicker style={{ width: '100%' }}
+                                    defaultValue={moment('2020/01/23', dateFormat)} />
+                            </Form.Item>
+                        </div>
+                    )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
-                </Form.Item>
+                </Form.Item>    
             </Form>
             <Row justify="end">
                 <Col span={4}>
