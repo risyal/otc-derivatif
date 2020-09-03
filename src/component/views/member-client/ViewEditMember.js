@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Input,
@@ -8,7 +8,6 @@ import {
     Typography
 } from 'antd';
 import {
-    CaretLeftOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
@@ -17,8 +16,8 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const ViewEditMember = (props) => {
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -27,8 +26,8 @@ const ViewEditMember = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-    const data = [
+    });
+    const [data] = useState([
         {
             key: '0',
             memberID: ' ',
@@ -100,7 +99,7 @@ const ViewEditMember = (props) => {
             ssss: 'SSSS3',
             status: 'Active',
         },
-    ];
+    ]);
     const dataMemberById = data.find((member) => {
         return member.key === props.location.state.id
 
