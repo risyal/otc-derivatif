@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
     Form,
-    Popconfirm,
+    Input,
     Button,
     Radio,
     Typography,
-    Table,
 } from 'antd';
 import {
     CaretLeftOutlined,
@@ -13,10 +12,9 @@ import {
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
-const { Title } = Typography;
+const { Title } = Typography;    
 
-const ViewDeleteRegAts = (props) => {
-    const text = 'Are you sure to delete this task?';
+const ViewEditRegAts = (props) => {
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -28,20 +26,8 @@ const ViewDeleteRegAts = (props) => {
             sm: { span: 16 },
         },
     };
-    const columns = [
-        {
-            title: '',
-            dataIndex: 'title',
-            key: 'title',
-            width: 280,
-        },
-        {
-            title: '',
-            dataIndex: 'paramData',
-            key: 'paramData',
-        },
-    ];
-    const [data] = useState([
+
+    const data = [
         {
             key: '0',
             name: '',
@@ -74,34 +60,11 @@ const ViewDeleteRegAts = (props) => {
             telp: '082221829',
             email: '123@gmail.com',
         },
-    ]);
+    ];
+
     const dataAtsById = data.find((ats) => {
         return ats.key === props.location.state.id
-
     })
-
-    const [dataForView] = useState([
-        {
-            title: "Company Name :",
-            paramData: dataAtsById.name
-        },
-        {
-            title: "Address :",
-            paramData: dataAtsById.address
-        },
-        {
-            title: "PIC Name :",
-            paramData: dataAtsById.pic
-        },
-        {
-            title: "Telephone Number :",
-            paramData: dataAtsById.telp
-        },
-        {
-            title: "Email :",
-            paramData: dataAtsById.email
-        },
-    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -110,16 +73,16 @@ const ViewDeleteRegAts = (props) => {
         setSixEyes(e.target.value);
     };
 
-    return (
+    return(
         <div>
-            <div className="head-content viewDelete">
+            <div className="head-content viewEdit">
                 <Title level={4}>
-                    <span className="icon-back">   
+                    <span className="icon-back">
                         <Link to="/registerats">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Register Ats</Title>
+                {action} ATS</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -130,17 +93,23 @@ const ViewDeleteRegAts = (props) => {
                 style={{ marginBottom: '80px' }}
             >
                 
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
+                <Form.Item label="Company name">
+                    <Input disabled={disable} defaultValue={dataAtsById.name}/>
+                </Form.Item>
+                <Form.Item label="Address">
+                    <Input disabled={disable} defaultValue={dataAtsById.address}/>
+                </Form.Item>
+                <Form.Item label="PIC Name">
+                    <Input disabled={disable} defaultValue={dataAtsById.pic}/>
+                </Form.Item>
+                <Form.Item label="Telephone Number">
+                    <Input disabled={disable} defaultValue={dataAtsById.telp}/>
+                </Form.Item>
+                <Form.Item label="Email">
+                    <Input disabled={disable} defaultValue={dataAtsById.email}/>
+                </Form.Item>
 
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -150,17 +119,18 @@ const ViewDeleteRegAts = (props) => {
                 ) : (
                         <div></div>
                     )}
+                    
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/registerats">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
-                        </Popconfirm>
+                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
+                            Submit
+                        </Button>
                     </Link>
                     ) : (
                             <div></div>
                         )}
                     <Link to="/registerats">
-                        <Button style={{ marginTop: '15px' }}>
+                        <Button >
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (
@@ -173,6 +143,8 @@ const ViewDeleteRegAts = (props) => {
 
         </div>
     )
+
 }
 
-export default ViewDeleteRegAts
+
+export default ViewEditRegAts

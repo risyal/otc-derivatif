@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Popconfirm,
@@ -10,7 +10,6 @@ import {
     Col,
 } from 'antd';
 import {
-    CaretLeftOutlined,
     ArrowLeftOutlined,
     DownloadOutlined
 } from '@ant-design/icons';
@@ -19,9 +18,9 @@ import { Link } from "react-router-dom";
 const { Title } = Typography;
 
 const ViewDeleteCCMgt = (props) => {
-    const text = 'Are you sure to delete this task?';
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [text] = useState('Are you sure to delete this task?');
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -30,8 +29,9 @@ const ViewDeleteCCMgt = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-    const columns = [
+    });
+
+    const [columns] = useState([
         {
             title: '',
             dataIndex: 'title',
@@ -43,7 +43,8 @@ const ViewDeleteCCMgt = (props) => {
             dataIndex: 'paramData',
             key: 'paramData',
         },
-    ];
+    ]);
+    
     const [data] = useState([
         {
             key: '0',

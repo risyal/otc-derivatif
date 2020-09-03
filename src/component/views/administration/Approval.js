@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     DatePicker,
@@ -14,10 +14,10 @@ import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
 
 function Approval() {
-    const componentSize = 'middle';
+    const [componentSize] = useMemo(() => 'middle');
     const dateFormat = 'YYYY/MM/DD';
     const { RangePicker } = DatePicker;
-    const formItemLayout = {
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -26,7 +26,9 @@ function Approval() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
 
     const { Option } = Select;
 
@@ -193,7 +195,7 @@ function Approval() {
     //     )
     // }
 
-    const columns = [
+    const [columns] = useState([
         {
             title: 'No',
             dataIndex: 'no',
@@ -245,10 +247,9 @@ function Approval() {
             }} style={{ marginRight: '20px' }}>Detail
             </Link>),
         },
-    ];
-    const [expand, setExpand] = useState(true);
-    const [form] = Form.useForm();
-    const data = [
+    ]);
+    
+    const [data] = useState([
         {
             no: '1',
             key: '1',
@@ -270,16 +271,18 @@ function Approval() {
             status: 'Waiting for Approver',
             linkTo: '/administration/approvaldetail',
         },
-    ];
-    const [exportButtton] = useState(<Button
-        type="primary"
-        style={{
-            marginBottom: '15px',
-            paddingBottom: '15px',
-            float: 'right',
-            height: '35px'
-        }}
-        icon={<DownloadOutlined />}>Export File</Button>);
+    ]);
+
+    const [exportButtton] = useState(
+        <Button
+            type="primary"
+            style={{
+                marginBottom: '15px',
+                paddingBottom: '15px',
+                float: 'right',
+                height: '35px'
+            }}
+            icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
@@ -344,8 +347,8 @@ function Approval() {
                         onClick={() => {
                             setExpand(!expand);
                         }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>

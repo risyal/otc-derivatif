@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react'
 import {
     Form,
-    Input,
+    Popconfirm,
     Button,
     Radio,
     Typography,
+    Table,
+    Row,
+    Col,
 } from 'antd';
 import {
-    CaretLeftOutlined,
-    ArrowLeftOutlined
+    ArrowLeftOutlined,
+    DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
-const { Title } = Typography;    
+const { Title } = Typography;
 
-const ViewEditRegAts = (props) => {
-    const componentSize = 'middle';
-    const formItemLayout = {
+const ViewDeleteRegAts = (props) => {
+    const [text] = useState('Are you sure to delete this task?');
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -25,9 +29,21 @@ const ViewEditRegAts = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-
-    const data = [
+    });
+    const [columns] = useState([
+        {
+            title: '',
+            dataIndex: 'title',
+            key: 'title',
+            width: 280,
+        },
+        {
+            title: '',
+            dataIndex: 'paramData',
+            key: 'paramData',
+        },
+    ]);
+    const [data] = useState([
         {
             key: '0',
             name: '',
@@ -60,11 +76,34 @@ const ViewEditRegAts = (props) => {
             telp: '082221829',
             email: '123@gmail.com',
         },
-    ];
-
+    ]);
     const dataAtsById = data.find((ats) => {
         return ats.key === props.location.state.id
+
     })
+
+    const [dataForView] = useState([
+        {
+            title: "Company Name :",
+            paramData: dataAtsById.name
+        },
+        {
+            title: "Address :",
+            paramData: dataAtsById.address
+        },
+        {
+            title: "PIC Name :",
+            paramData: dataAtsById.pic
+        },
+        {
+            title: "Telephone Number :",
+            paramData: dataAtsById.telp
+        },
+        {
+            title: "Email :",
+            paramData: dataAtsById.email
+        },
+    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -72,17 +111,26 @@ const ViewEditRegAts = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
-    return(
+    return (
         <div>
-            <div className="head-content viewEdit">
+            <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">
+                    <span className="icon-back">   
                         <Link to="/registerats">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Register Ats</Title>
+                {action} ATS</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -92,24 +140,32 @@ const ViewEditRegAts = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
+                <Row justify="end">
+                    <Col span={4}>
+                        {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                        {exportButtton}
+                        {/* </Link> */}
+                    </Col>
+                </Row>
                 
-                <Form.Item label="Company name">
-                    <Input disabled={disable} defaultValue={dataAtsById.name}/>
-                </Form.Item>
-                <Form.Item label="Address">
-                    <Input disabled={disable} defaultValue={dataAtsById.address}/>
-                </Form.Item>
-                <Form.Item label="PIC Name">
-                    <Input disabled={disable} defaultValue={dataAtsById.pic}/>
-                </Form.Item>
-                <Form.Item label="Telephone Number">
-                    <Input disabled={disable} defaultValue={dataAtsById.telp}/>
-                </Form.Item>
-                <Form.Item label="Email">
-                    <Input disabled={disable} defaultValue={dataAtsById.email}/>
-                </Form.Item>
+                <Table
+                    className="viewDelTable"
+                    columns={columns}
+                    dataSource={dataForView}
+                    showHeader={false}
+                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                    size="middle"
+                    pagination={false}
+                />
 
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -119,18 +175,17 @@ const ViewEditRegAts = (props) => {
                 ) : (
                         <div></div>
                     )}
-                    
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/registerats">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
-                        </Button>
+                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        </Popconfirm>
                     </Link>
                     ) : (
                             <div></div>
                         )}
                     <Link to="/registerats">
-                        <Button >
+                        <Button style={{ marginTop: '15px' }}>
                             {!disable ? (
                                 <div>Cancel</div>
                             ) : (
@@ -143,8 +198,6 @@ const ViewEditRegAts = (props) => {
 
         </div>
     )
-
 }
 
-
-export default ViewEditRegAts
+export default ViewDeleteRegAts
