@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Popconfirm,
@@ -16,9 +16,9 @@ import { Link } from "react-router-dom";
 const { Title } = Typography;
 
 const ViewDeleteCalendar= (props) => {
-    const text = 'Are you sure to delete this task?';
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [text] = useState('Are you sure to delete this task?');
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -27,8 +27,9 @@ const ViewDeleteCalendar= (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
-    const columns = [
+    });
+
+    const [columns] = useState([
         {
             title: '',
             dataIndex: 'title',
@@ -40,7 +41,7 @@ const ViewDeleteCalendar= (props) => {
             dataIndex: 'paramData',
             key: 'paramData',
         },
-    ];
+    ]);
     const [data] = useState([
         {
             key: '0',
@@ -50,20 +51,37 @@ const ViewDeleteCalendar= (props) => {
         },
         {
             key: '1',
-            date: '31-07-2020',
-            information: 'Eid Al-Adha',
+            date: '01-01-2020',
+            information: 'New Years Day',
             update: '01-07-2020',
         },
         {
             key: '2',
-            date: '17-08-2020',
-            information: 'Hari Proklamasi Indonesia',
+            date: '25-01-2020',
+            information: 'Chinese Lunar',
             update: '01-08-2020',
         },
         {
             key: '3',
-            date: '28-10-2020',
-            information: 'Cuti Bersama',
+            date: '23-03-2020',
+            information: 'Ascension of The Prophet Muhammad',
+            update: '01-08-2020',
+        },{
+            key: '4',
+            date: '25-03-2020',
+            information: 'Bali Day of Silence and Hindu New Year',
+            update: '01-08-2020',
+        },
+        {
+            key: '5',
+            date: '10-04-2020',
+            information: 'Good Friday',
+            update: '01-08-2020',
+        },
+        {
+            key: '6',
+            date: '12-04-2020',
+            information: 'Easter Sunday',
             update: '01-08-2020',
         },
     ]);
