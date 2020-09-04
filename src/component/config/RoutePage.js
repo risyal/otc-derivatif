@@ -128,6 +128,8 @@ import AccDetailView from '../views/account/AccDetailView';
 import ClearingDetailIRS from '../views/clearing/ClearingDetailIRS';
 import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
 import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
+import ApprovalAccount from '../views/account/ApprovalAccount';
+import ApprovalDetail from '../views/account/ApprovalDetail';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -241,6 +243,15 @@ function RoutePage() {
                     <Title level={4}>Inquiry Beneficiaries</Title>
                 </div>
                 <InquiryBeneficiaries />
+            </Route>
+            <Route path="/accountManagement/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalAccount />
+            </Route>
+            <Route path="/accountManagement/approvalDetail"
+                component={ApprovalDetail}>
             </Route>
             <Route path="/settlement/inquirySettlement">
                 <div className="head-content">

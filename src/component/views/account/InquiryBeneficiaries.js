@@ -42,10 +42,22 @@ function InquiryBeneficiaries() {
     ]);
     const [data] = useState([
         {
+            key: '1',
+            beneficiaryName: 'Name1',
+            rtgsAccNumber: 'I001002',
+            ssssAccNumber: 'I001002',
         },
         {
+            key: '2',
+            beneficiaryName: 'Name2',
+            rtgsAccNumber: 'I001005',
+            ssssAccNumber: 'I001005',
         },
         {
+            key: '3',
+            beneficiaryName: 'Name3',
+            rtgsAccNumber: 'I001009',
+            ssssAccNumber: 'I001009',
         },
     ]);
 

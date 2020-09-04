@@ -100,6 +100,10 @@ const Menu = [
             name: 'Inquiry Beneficiaries',
             key: 'inquiryBeneficiaries',
             linkTo: '/accountManagement/inquiryBeneficiaries'
+        },  {
+            name: 'Approval',
+            key: 'accountApproval',
+            linkTo: '/accountManagement/approval'
         }]
     },
     {
