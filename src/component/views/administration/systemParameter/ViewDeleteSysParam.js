@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
@@ -47,41 +47,17 @@ const ViewDeleteSysParam = (props) => {
 
     const [data] = useState([
         {
-            key: '0',
-            settlement: ' ',
-            value: ' ',
+            title: "Telephone Number :",
+            paramData: "asd"
         },
         {
-            key: '1',
-            settlement: 'Maintenance Fee',
-            value: '0.1%',
-        },
-        {
-            key: '2',
-            settlement: 'Registration Fee',
-            value: '0.1%',
-        },
-        {
-            key: '3',
-            settlement: 'Service Fee',
-            value: '0.1%',
+            title: "Email :",
+            paramData: "asdas"
         },
     ]);
-    const dataParamById = data.find((param) => {
-        return param.key === props.location.state.id
 
-    })
+    const [loading, setLoading] = useState(false);
 
-    const [dataForView] = useState([
-        {
-            title: "Settlement Window :",
-            paramData: dataParamById.settlement
-        },
-        {
-            title: "Trade Validation Time :",
-            paramData: dataParamById.value
-        },
-    ]);
 
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -98,7 +74,57 @@ const ViewDeleteSysParam = (props) => {
             height: '35px'
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
+    const [param, setWeather] = useState({
+        param: null,
+        value: null,
+        valueType: null,
+        note: null,
+    });
+    const dataForView = [];
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/sysparams/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            /* form.setFieldsValue({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            }); */
+            setWeather({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            })
+            dataForView.push({
 
+                title: "Email :",
+                paramData: "asdas"
+            })
+            console.log(data);
+            console.log(dataForView);
+            setLoading(false);
+        }
+
+    };
+    const [formState, setFormState] = React.useState(
+        {
+            title: "Telephone Number :",
+            paramData: "asd"
+        },
+        {
+            title: "Email :",
+            paramData: "asdas"
+        })
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
     return (
         <div>
             <div className="head-content viewDelete">
@@ -141,7 +167,10 @@ const ViewDeleteSysParam = (props) => {
                     size="middle"
                     pagination={false}
                 />
-
+                {param.param}<br />
+                {param.value}<br />
+                {param.valueType}<br />
+                {param.note}<br />
                 {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
