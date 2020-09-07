@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Popconfirm,
@@ -18,8 +18,8 @@ import { Link } from "react-router-dom";
 const { Title } = Typography;
 
 const ViewDeleteClient = (props) => {
-    const text = 'Are you sure to delete this task?';
-    const componentSize = 'middle';
+    const [text] = useState('Are you sure to delete this task?');
+    const [componentSize] = useMemo(() => 'middle');
     const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },

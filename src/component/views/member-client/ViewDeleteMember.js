@@ -20,7 +20,7 @@ const { Title } = Typography;
 
 const ViewDeleteMember = (props) => {
     const [componentSize] = useMemo(() => 'middle');
-    const text = 'Are you sure to delete this task?';
+    const [text] = useState('Are you sure to delete this task?');
 
     const [formItemLayout] = useState({
         labelCol: {
@@ -285,6 +285,17 @@ const ViewDeleteMember = (props) => {
                     size="middle"
                     pagination={false}
                 />
+
+                {/* {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                ) : (
+                        <div></div>
+                    )} */}
 
                 {action === 'Detail' ? (
                     <div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     DatePicker,
@@ -12,10 +12,10 @@ import {
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+const dateFormat = 'YYYY/MM/DD';
 
-function ApprovalMemberClient() {
-    const componentSize = 'middle';
-    const dateFormat = 'YYYY/MM/DD';
+function ApprovalAccount() {
+    const [componentSize] = useMemo(() => 'middle');
     const { RangePicker } = DatePicker;
     const [formItemLayout] = useState({
         labelCol: {
@@ -73,11 +73,12 @@ function ApprovalMemberClient() {
             width: 100,
             fixed: 'right',
             render: (text, record) => (<Link to={{
-                pathname: `/registerClient/ViewDeleteMember`,
+                pathname: `/accountManagement/approvalDetail`,
                 state: {
-                    id: record.key,
-                    action: "Detail",
+                    id: "1",
+                    action: "Approval",
                     disable: false,
+                    linkBack: "/accountManagement/approval",
                 }
             }} style={{ marginRight: '20px' }}>Detail
             </Link>),
@@ -89,23 +90,23 @@ function ApprovalMemberClient() {
         {
             no: '1',
             key: '1',
-            refNo: 'MCM200709.0001',
-            task: ["Register Member: Create", <br />, "CENAIDJA - Bank Central Asia (BCA)"],
+            refNo: 'AM200709.0001',
+            task: ["Register Beneficiaries", <br />, "CENAIDJA - Bank Central Asia (BCA)"],
             lastUpdate: '08-07-2020',
             updatedBy: 'fulan',
             status: 'Waiting for Checker',
-            linkTo: '/registerClient/ViewDeleteMember',
+            linkTo: '/accountManagement/approvalDetail',
 
         },
         {
             no: '2',
             key: '2',
-            refNo: 'MCM200709.0002',
-            task: ["Register Member: Edit", <br />, "CENAIDJA - Bank Central Asia (BCA)"],
+            refNo: 'AM200709.0002',
+            task: ["Register Beneficiaries", <br />, "CENAIDJA - Bank Central Asia (BCA)"],
             lastUpdate: '08-07-2020',
             updatedBy: 'fulan',
             status: 'Waiting for Approver',
-            linkTo: '/registerClient/ViewDeleteMember',
+            linkTo: '/accountManagement/approvalDetail',
         },
     ]);
     const [exportButtton] = useState(<Button
@@ -201,5 +202,4 @@ function ApprovalMemberClient() {
         </div>
     )
 }
-
-export default ApprovalMemberClient
+export default ApprovalAccount

@@ -40,7 +40,7 @@ import UserManagement from '../views/administration/userManagement/UserManagemen
 import SystemParameter from '../views/administration/systemParameter/SystemParameter';
 import Calendar from '../views/administration/calendar/Calendar';
 import Approval from '../views/administration/Approval';
-import RegisterAts from '../views/administration/RegisterAts';
+import RegisterAts from '../views/administration/registerAts/RegisterAts';
 import SettlementInstruction from '../views/settlement/SettlementInstruction';
 import SettlementJobExecution from '../views/settlement/SettlementJobExecution';
 import SettlementMonitoring from '../views/settlement/SettlementMonitoring';
@@ -76,8 +76,8 @@ import AddUser from '../views/administration/userManagement/AddUser';
 import ViewEditCalendar from '../views/administration/calendar/ViewEditCalendar';
 import ViewDeleteCalendar from '../views/administration/calendar/ViewDeleteCalendar';
 import DetailViewTrade from '../views/trade/DetailView';
-import ViewEditRegAts from '../views/administration/ViewEditRegAts';
-import ViewDeleteRegAts from '../views/administration/ViewDeleteRegAts';
+import ViewEditRegAts from '../views/administration/registerAts/ViewEditRegAts';
+import ViewDeleteRegAts from '../views/administration/registerAts/ViewDeleteRegAts';
 import ViewAdd from '../views/collateral/ViewAdd';
 import ViewAddColw from '../views/collateral/ViewAddColw';
 import DetailCancelCOLDP from '../views/collateral/DetailCancelCOLDP';
@@ -125,6 +125,11 @@ import ViewDeleteSysParam from '../views/administration/systemParameter/ViewDele
 import ViewEditSysParam from '../views/administration/systemParameter/ViewEditSysParam';
 import DetailApproval from '../views/administration/DetailApproval';
 import AccDetailView from '../views/account/AccDetailView';
+import ClearingDetailIRS from '../views/clearing/ClearingDetailIRS';
+import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
+import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
+import ApprovalAccount from '../views/account/ApprovalAccount';
+import ApprovalDetail from '../views/account/ApprovalDetail';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -238,6 +243,15 @@ function RoutePage() {
                     <Title level={4}>Inquiry Beneficiaries</Title>
                 </div>
                 <InquiryBeneficiaries />
+            </Route>
+            <Route path="/accountManagement/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalAccount />
+            </Route>
+            <Route path="/accountManagement/approvalDetail"
+                component={ApprovalDetail}>
             </Route>
             <Route path="/settlement/inquirySettlement">
                 <div className="head-content">
@@ -630,6 +644,15 @@ function RoutePage() {
             <Route exact path="/administration/ViewEditSysParam" component={ViewEditSysParam}>
             </Route>
             <Route exact path="/accountManagement/accDetailView" component={AccDetailView}>
+            </Route>
+            <Route path="/clearingManagement/clearingDetailIrs">
+                <ClearingDetailIRS />
+            </Route>
+            <Route path="/clearingManagement/clearingDetailOis">
+                <ClearingDetailOIS />
+            </Route>
+            <Route path="/clearingManagement/clearingDetailDndf">
+                <ClearingDetailDNDF />
             </Route>
         </div>
     )

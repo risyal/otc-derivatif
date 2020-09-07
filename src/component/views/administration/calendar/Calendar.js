@@ -6,13 +6,28 @@ import {
     Menu,
     Row,
     Col,
-    Tabs,
+    Select,
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
 
 function Calendar() {
-    const { TabPane } = Tabs;
+    const productSelect = ['2020', '2019', '2018'];
+    const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
+    const productClick = (e) => {
+        SetJenisProduct(e);
+    };
+
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     const [columns] = useState([
         {
             title: 'Date',
@@ -29,7 +44,6 @@ function Calendar() {
         {
             title: 'Action',
             key: 'action',
-            fixed: 'right',
             width: 100,
             render: (text, record) => (
                 <Dropdown
@@ -75,27 +89,44 @@ function Calendar() {
     const [data] = useState([
         {
             key: '1',
-            date: '31-07-2020',
-            information: 'Eid Al-Adha',
+            date: '01-01-2020',
+            information: 'New Years Day',
             update: '01-07-2020',
         },
         {
             key: '2',
-            date: '17-08-2020',
-            information: 'Hari Proklamasi Indonesia',
+            date: '25-01-2020',
+            information: 'Chinese Lunar',
             update: '01-08-2020',
         },
         {
             key: '3',
-            date: '28-10-2020',
-            information: 'Cuti Bersama',
+            date: '23-03-2020',
+            information: 'Ascension of The Prophet Muhammad',
+            update: '01-08-2020',
+        },{
+            key: '4',
+            date: '25-03-2020',
+            information: 'Bali Day of Silence and Hindu New Year',
+            update: '01-08-2020',
+        },
+        {
+            key: '5',
+            date: '10-04-2020',
+            information: 'Good Friday',
+            update: '01-08-2020',
+        },
+        {
+            key: '6',
+            date: '12-04-2020',
+            information: 'Easter Sunday',
             update: '01-08-2020',
         },
     ]);
     const [data19] = useState([
         {
             key: '1',
-            date: '31-07-2019',
+            date: '11-08-2019',
             information: 'Eid Al-Adha',
             update: '01-07-2019',
         },
@@ -107,42 +138,69 @@ function Calendar() {
         },
         {
             key: '3',
-            date: '28-10-2019',
-            information: 'Cuti Bersama',
+            date: '01-09-2019',
+            information: 'Muharram/Islamic New Year',
+            update: '01-08-2019',
+        },
+        {
+            key: '4',
+            date: '27-10-2019',
+            information: 'Diwali',
+            update: '01-08-2019',
+        },
+        {
+            key: '5',
+            date: '09-11-2019',
+            information: 'The Prophet Muhammad Birthday',
+            update: '01-08-2019',
+        },
+        {
+            key: '6',
+            date: '24-12-2019',
+            information: 'Christmas Eve',
             update: '01-08-2019',
         },
     ]);
     const [data18] = useState([
         {
             key: '1',
-            date: '31-07-2018',
-            information: 'Eid Al-Adha',
+            date: '01-01-2018',
+            information: 'New Years Day',
             update: '01-07-2018',
         },
         {
             key: '2',
-            date: '17-08-2018',
-            information: 'Hari Proklamasi Indonesia',
+            date: '25-01-2018',
+            information: 'Chinese Lunar',
             update: '01-08-2018',
         },
         {
             key: '3',
-            date: '28-10-2018',
-            information: 'Cuti Bersama',
+            date: '23-03-2018',
+            information: 'Ascension of The Prophet Muhammad',
+            update: '01-08-2018',
+        },{
+            key: '4',
+            date: '25-03-2018',
+            information: 'Bali Day of Silence and Hindu New Year',
+            update: '01-08-2018',
+        },
+        {
+            key: '5',
+            date: '10-04-2018',
+            information: 'Good Friday',
+            update: '01-08-2018',
+        },
+        {
+            key: '6',
+            date: '12-04-2018',
+            information: 'Easter Sunday',
             update: '01-08-2018',
         },
     ]);
-    const [exportButtton] = useState(<Button
-        type="primary"
-        style={{
-            marginBottom: '15px',
-            paddingBottom: '15px',
-            float: 'right',
-            height: '35px'
-        }}
-        icon={<DownloadOutlined />}>Export File</Button>);
+    
     return (
-        <div>
+        <div style={{ margin: '15px 20px' }}>
             <Link to={{
                 pathname: `/administration/ViewEditCalendar`,
                 state: {
@@ -156,53 +214,48 @@ function Calendar() {
                     </Button>
             </Link>
             <Button type="primary">Import</Button>
-            <Tabs type="card">
-                <TabPane tab="2020" key="1" >
-                    <Row justify="end">
-                        <Col span={4}>
-                            {exportButtton}
-                        </Col>
-                    </Row>
-                    <Table
-                        pagination={false}
-                        columns={columns}
-                        dataSource={data19}
-                        bordered
-                        size="middle"
-                    />
-                </TabPane>
+            <Select defaultValue={jenisProduct} 
+                    onChange={productClick}
+                    style= {{ float: 'right', width: '15%' }}>
+                {productSelect.map(product => (
+                    <Select.Option key={product}>{product}</Select.Option>
+                ))}
+            </Select>
 
-                <TabPane tab="2019" key="2">
-                    <Row justify="end">
-                        <Col span={4}>
-                            {exportButtton}
-                        </Col>
-                    </Row>
-                    <Table
-                        pagination={false}
-                        columns={columns}
-                        dataSource={data18}
-                        bordered
-                        size="middle"
-                    />
-                </TabPane>
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
 
-                <TabPane tab="2018" key="3">
-                    <Row justify="end">
-                        <Col span={4}>
-                            {exportButtton}
-                        </Col>
-                    </Row>
+            {jenisProduct == productSelect[0] ? (
+                <div>
                     <Table
-                        pagination={false}
                         columns={columns}
                         dataSource={data}
                         bordered
                         size="middle"
                     />
-                </TabPane>
-            </Tabs>
-
+                </div>
+            ) : jenisProduct === productSelect[1] ? (
+                <div>
+                    <Table
+                        columns={columns}
+                        dataSource={data19}
+                        bordered
+                        size="middle"
+                    />
+                </div>
+            ) : jenisProduct === productSelect[2] ? (
+                <div>
+                    <Table
+                        columns={columns}
+                        dataSource={data18}
+                        bordered
+                        size="middle"
+                    />
+                </div>
+            ) : null }
         </div>
     )
 

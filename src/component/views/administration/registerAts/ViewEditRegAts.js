@@ -82,7 +82,7 @@ const ViewEditRegAts = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Register Ats</Title>
+                {action} ATS</Title>
             </div>
             <Form
                 {...formItemLayout}

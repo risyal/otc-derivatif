@@ -68,10 +68,15 @@ function AddUser(){
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Link to={{
-                    pathname: `/usermanagement`}}>
-                        <Button type="primary" htmlType="submit">
+                    <Link to="/usermanagement">
+                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
+                        </Button>
+                    </Link>
+                    
+                    <Link to="/usermanagement">
+                        <Button >
+                            Cancel
                         </Button>
                     </Link>
                 </Form.Item>

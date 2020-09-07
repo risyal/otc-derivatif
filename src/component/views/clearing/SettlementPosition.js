@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Button,
@@ -6,17 +6,42 @@ import {
     Table,
     Select,
     DatePicker,
+    Row,
+    Col,
 } from 'antd';
 import moment from 'moment';
+import {  DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function SettlementPosition() {
-    const columns = [
+    const [columns] = useState([
+        {
+            title: 'Member ID/Client ID',
+            children: [
+                {
+                    title: 'Code',
+                    width: 100,
+                    dataIndex: 'code',
+                    key: 'code',
+                    fixed: 'left',
+                }, {
+                    title: 'SID',
+                    width: 100,
+                    dataIndex: 'sid',
+                    key: 'sid',
+                    fixed: 'left',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
+                    fixed: 'left',
+                }]
+        },
         {
             title: 'Trade ID',
             width: 100,
             dataIndex: 'tradeId',
             key: 'tradeId',
-            fixed: 'left',
         },
         {
             title: 'Settlement Date',
@@ -31,44 +56,10 @@ function SettlementPosition() {
             key: 'product',
         },
         {
-            title: 'Member ID',
-            children: [
-                {
-                    title: 'Code',
-                    width: 100,
-                    dataIndex: 'code',
-                    key: 'code',
-                }, {
-                    title: 'SID',
-                    width: 100,
-                    dataIndex: 'sid',
-                    key: 'sid',
-                }, {
-                    title: 'LEI',
-                    width: 100,
-                    dataIndex: 'lei',
-                    key: 'lei',
-                }]
-        },
-        {
-            title: 'Client',
-            children: [
-                {
-                    title: 'Code',
-                    width: 100,
-                    dataIndex: 'code',
-                    key: 'code',
-                }, {
-                    title: 'SID',
-                    width: 100,
-                    dataIndex: 'sidClient',
-                    key: 'sidClient',
-                }, {
-                    title: 'LEI',
-                    width: 100,
-                    dataIndex: 'leiClient',
-                    key: 'leiClient',
-                }]
+            title: 'Account Type (H/C)',
+            width: 100,
+            dataIndex: 'accountType',
+            key: 'accountType',
         },
         {
             title: 'Contract',
@@ -170,8 +161,8 @@ function SettlementPosition() {
             dataIndex: 'netSettlement',
             key: 'netSettlement',
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
@@ -184,9 +175,9 @@ function SettlementPosition() {
         },
         {
         },
-    ];
-    const componentSize = 'middle';
-    const formItemLayout = {
+    ]);
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -195,13 +186,25 @@ function SettlementPosition() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
     const productSelect = ['OIS', 'IRS', 'DNDF'];
     const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
     const productClick = (e) => {
         SetJenisProduct(e);
     };
     const dateFormat = 'YYYY/MM/DD';
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form
@@ -211,98 +214,69 @@ function SettlementPosition() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="Trade ID" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Member ID" >
-                <Input.Group compact >
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input
-                            className="site-input-right"
-                            style={{
-                                width: '30%',
-                                textAlign: 'center',
-                            }}
-                            placeholder="LEI"
-                        />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Client" >
-                <Input.Group compact >
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input
-                            className="site-input-right"
-                            style={{
-                                width: '30%',
-                                textAlign: 'center',
-                            }}
-                            placeholder="LEI"
-                        />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Product ">
-                    <Select defaultValue={jenisProduct} onChange={productClick}>
-                        {productSelect.map(product => (
-                            <Select.Option key={product}>{product}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Settlement  Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
+                {expand ? (<div>
+                    <Form.Item label="Keyword">
+                        <Input />
+                    </Form.Item>
+                </div>
+                ) : (
+                        <div>
+                            <Form.Item label="Trade ID" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Code" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="SID" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="LEI" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Product ">
+                                <Select defaultValue={jenisProduct} onChange={productClick}>
+                                    {productSelect.map(product => (
+                                        <Select.Option key={product}>{product}</Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item label="Settlement  Date">
+                                <DatePicker style={{ width: '100%' }}
+                                    defaultValue={moment('2020/01/23', dateFormat)} />
+                            </Form.Item>
+                        </div>
+                    )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
+
             <Table
                 columns={columns}
                 dataSource={data}

@@ -2,8 +2,8 @@ import React from 'react'
 
 export const DetailTradeConfirm = (props) => {
     const [text] = useState('Are you sure to Cancel this ?');
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState ({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -12,7 +12,7 @@ export const DetailTradeConfirm = (props) => {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
     const [columns] = useState([
         {
             title: '',

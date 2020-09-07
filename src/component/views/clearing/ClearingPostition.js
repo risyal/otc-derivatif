@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Button,
@@ -6,18 +6,52 @@ import {
     Table,
     Select,
     DatePicker,
+    Row,
+    Col,
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
+import {  DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function ClearingPostition() {
-    const columns = [
+
+    const [columns] = useState([
+        {
+            title: 'No.',
+            width: 50,
+            dataIndex: 'no',
+            key: 'no',
+            fixed: 'left',
+        },
+        {
+            title: 'Member ID/Client ID',
+            children: [
+                {
+                    title: 'Code',
+                    width: 100,
+                    dataIndex: 'code',
+                    key: 'code',
+                    fixed: 'left',
+                }, {
+                    title: 'SID',
+                    width: 100,
+                    dataIndex: 'sid',
+                    key: 'sid',
+                    fixed: 'left',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
+                    fixed: 'left',
+                }
+            ]
+        },
         {
             title: 'Trade ID',
             width: 100,
             dataIndex: 'tradeId',
             key: 'tradeId',
-            fixed: 'left',
         },
         {
             title: 'Product',
@@ -26,50 +60,10 @@ function ClearingPostition() {
             key: 'product',
         },
         {
-            title: 'Time',
+            title: 'Account Type (H/C)',
             width: 100,
-            dataIndex: 'time',
-            key: 'time',
-        },
-        {
-            title: 'Member ID',
-            children: [
-                {
-                    title: 'Code',
-                    width: 100,
-                    dataIndex: 'code',
-                    key: 'code',
-                }, {
-                    title: 'SID',
-                    width: 100,
-                    dataIndex: 'sid',
-                    key: 'sid',
-                }, {
-                    title: 'LEI',
-                    width: 100,
-                    dataIndex: 'lei',
-                    key: 'lei',
-                }]
-        },
-        {
-            title: 'Client',
-            children: [
-                {
-                    title: 'Code',
-                    width: 100,
-                    dataIndex: 'code',
-                    key: 'code',
-                }, {
-                    title: 'SID',
-                    width: 100,
-                    dataIndex: 'sidClient',
-                    key: 'sidClient',
-                }, {
-                    title: 'LEI',
-                    width: 100,
-                    dataIndex: 'leiClient',
-                    key: 'leiClient',
-                }]
+            dataIndex: 'accountType',
+            key: 'accountType',
         },
         {
             title: 'Contract',
@@ -109,7 +103,7 @@ function ClearingPostition() {
             key: 'tenor',
         },
         {
-            title: 'Payment Freq',
+            title: 'Payment Frequency',
             width: 100,
             dataIndex: 'paymentFreq',
             key: 'paymentFreq',
@@ -127,41 +121,110 @@ function ClearingPostition() {
             key: 'nextFixingDate',
         },
         {
-            title: 'Action',
-            key: 'operation',
-            fixed: 'right',
+            title: 'Currency',
             width: 100,
-            render: () =>
-                <div>
-                    <Link to={{
-                        pathname: `/clearingManagement/clearingDetail`,
-                        state: {
-                            id: "1",
-                            action: "Detail",
-                            disable: true,
-                            linkBack: "/clearingManagement/clearingPosition",
-                        }
-                    }} style={{ marginRight: '20px' }}>Detail
-                    </Link>
-                </div>,
-        },
-    ];
-    const data = [
-        {
+            dataIndex: 'currency',
+            key: 'currency',
         },
         {
+            title: 'Action',
+            key: 'action',
+            dataIndex: 'action',
+            width: 100,
+            fixed: 'right',
+            render: text => <a>{text}</a>,
+            // width: 100,
+            // render: () =>
+            //     <div>
+            //         <Link to={{
+            //             pathname: `/clearingManagement/clearingDetail`,
+            //             state: {
+            //                 id: "1",
+            //                 action: "Detail",
+            //                 disable: true,
+            //                 linkBack: "/clearingManagement/clearingPosition",
+            //             }
+            //         }} style={{ marginRight: '20px' }}>Detail
+            //         </Link>
+            //     </div>,
+        },
+    ]);
+    const [data] = useState([
+        {
+            key: '1',
+            no: '1',
+            tradeId: 'UTI1',
+            product: 'IRS',
+            code: 'Code1',
+            sid: 'SID1',
+            lei: 'LEI1',
+            accountType: 'House',
+            buy: 'Buy1',
+            sell: 'Sell1',
+            fix: '1',
+            float: '1',
+            value: 'Value1',
+            tenor: 'Tenor1',
+            paymentFreq: 'Payment1',
+            maturityDate: '23-01-2020',
+            nextFixingDate: '23-01-2020',
+            currency: 'Currency1',
+            action: 
+                <Link to={{ pathname: `/clearingManagement/clearingDetailIrs` }}>
+                    Detail
+                </Link>
         },
         {
+            key: '2',
+            no: '2',
+            tradeId: 'UTI2',
+            product: 'OIS',
+            code: 'Code2',
+            sid: 'SID2',
+            lei: 'LEI2',
+            accountType: 'Client',
+            buy: 'Buy2',
+            sell: 'Sell2',
+            fix: '2',
+            float: '2',
+            value: 'Value2',
+            tenor: 'Tenor2',
+            paymentFreq: 'Payment2',
+            maturityDate: '23-01-2020',
+            nextFixingDate: '23-01-2020',
+            currency: 'Currency2',
+            action: 
+                <Link to={{ pathname: `/clearingManagement/clearingDetailOis` }}>
+                    Detail
+                </Link>
         },
         {
+            key: '3',
+            no: '3',
+            tradeId: 'UTI3',
+            product: 'DNDF',
+            code: 'Code3',
+            sid: 'SID3',
+            lei: 'LEI3',
+            accountType: 'House',
+            buy: 'Buy3',
+            sell: 'Sell3',
+            fix: '3',
+            float: '3',
+            value: 'Value3',
+            tenor: 'Tenor3',
+            paymentFreq: 'Payment3',
+            maturityDate: '23-01-2020',
+            nextFixingDate: '23-01-2020',
+            currency: 'Currency3',
+            action: 
+                <Link to={{ pathname: `/clearingManagement/clearingDetailDndf` }}>
+                    Detail
+                </Link>
         },
-        {
-        },
-        {
-        },
-    ];
-    const componentSize = 'middle';
-    const formItemLayout = {
+    ]);
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -170,13 +233,25 @@ function ClearingPostition() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
     const productSelect = ['OIS', 'IRS', 'DNDF'];
     const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
     const productClick = (e) => {
         SetJenisProduct(e);
     };
     const dateFormat = 'YYYY/MM/DD';
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <Form
@@ -186,99 +261,70 @@ function ClearingPostition() {
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
             >
-                <Form.Item label="Member ID" >
-                <Input.Group compact >
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input
-                            className="site-input-right"
-                            style={{
-                                width: '30%',
-                                textAlign: 'center',
-                            }}
-                            placeholder="LEI"
-                        />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Client ID" >
-                <Input.Group compact >
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="Code" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input style={{ width: '30%', textAlign: 'center' }} placeholder="SID" />
-                        <Input
-                            className="site-input-split"
-                            style={{
-                                width: '5%',
-                                borderLeft: 0,
-                                borderRight: 0,
-                                pointerEvents: 'none', textAlign: 'center'
-                            }}
-                            placeholder="|"
-                            disabled
-                        />
-                        <Input
-                            className="site-input-right"
-                            style={{
-                                width: '30%',
-                                textAlign: 'center',
-                            }}
-                            placeholder="LEI"
-                        />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Product ">
-                    <Select defaultValue={jenisProduct} onChange={productClick}>
-                        {productSelect.map(product => (
-                            <Select.Option key={product}>{product}</Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-                <Form.Item label="Maturity Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
-                <Form.Item label="Next Fixing Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
+                {expand ? (<div>
+                    <Form.Item label="Keyword">
+                        <Input />
+                    </Form.Item>
+                </div>
+                ) : (
+                        <div>
+                            <Form.Item label="Code" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="SID" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="LEI" >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Product ">
+                                <Select defaultValue={jenisProduct} onChange={productClick}>
+                                    {productSelect.map(product => (
+                                        <Select.Option key={product}>{product}</Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item label="Maturity Date">
+                                <DatePicker style={{ width: '100%' }}
+                                    defaultValue={moment('2020/01/23', dateFormat)} />
+                            </Form.Item>
+                            <Form.Item label="Next Fixing Date">
+                                <DatePicker style={{ width: '100%' }}
+                                    defaultValue={moment('2020/01/23', dateFormat)} />
+                            </Form.Item>
+                        </div>
+                    )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {exportButtton}
+                </Col>
+            </Row>
+            
             <Table
                 columns={columns}
                 dataSource={data}
