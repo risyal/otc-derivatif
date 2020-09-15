@@ -279,7 +279,7 @@ function RoutePage() {
             </Route>
             <Route path="/instructionManagement/inquirySecManagement">
                 <div className="head-content">
-                    <Title level={4}>Inquiry Sec Management</Title>
+                    <Title level={4}>Inquiry Security Management</Title>
                 </div>
                 <InquirySecManagement />
             </Route>

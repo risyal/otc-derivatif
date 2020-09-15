@@ -133,7 +133,7 @@ const Menu = [
             key: 'securityManagement',
             linkTo: '/instructionManagement/securityManagement'
         }, {
-            name: 'Inquiry Sec Management',
+            name: 'Inquiry Security Management',
             key: 'inquirySecManagement',
             linkTo: '/instructionManagement/inquirySecManagement'
         }, {
@@ -241,34 +241,44 @@ const Menu = [
         key: 'reporting',
         icon: <FundProjectionScreenOutlined />,
         subMenus: [{
-            name: 'DHK Member and Client',
+            name: 'DHK Level Member',
             key: 'dhkmemberclient',
             linkTo: '/dhkmemberclient'
+        },{
+            name: 'DHK Level Client',
+            
         }, {
-            name: 'Obligation Accomplishment',
+            name: 'OAR (Obligation Accomplishment Report)',
             key: 'obligationaccomplishment',
             linkTo: '/obligationaccomplishment'
-        }, {
+        }, 
+        {
             name: 'Daily Transaction Report',
             key: 'dailytransaction',
             linkTo: '/dailytransaction'
+        },
+        {
+            name: 'Regulator Report',
+            
         }, {
             name: 'Novation Report',
             key: 'novationreport',
             linkTo: '/novationreport'
         }, {
-            name: 'Movement Balance',
+            name: 'Movement Balance Report',
             key: 'movementbalance',
             linkTo: '/movementbalance'
         }, {
             name: 'Default Fund Report',
             key: 'fundreport',
             linkTo: '/fundreport'
-        }, {
+        }, 
+        {
             name: 'Report Bank Indonesia',
             key: 'reportbankid',
             linkTo: '/reportbankid'
-        }, {
+        },
+        {
             name: 'Fee Report',
             key: 'feereport',
             linkTo: '/feereport'
