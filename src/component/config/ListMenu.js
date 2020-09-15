@@ -166,6 +166,10 @@ const Menu = [
             name: 'Instruction - COLW',
             key: 'instructionColw',
             linkTo: '/collateralManagement/instructionColw'
+        },  {
+            name: 'Approval',
+            key: 'collateralApproval',
+            linkTo: '/collateralManagement/approval'
         }]
     },
     {

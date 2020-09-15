@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     Input,
@@ -6,16 +6,18 @@ import {
     Table,
     Dropdown,
     Menu,
+    Row,
+    Col
 } from 'antd';
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
 
 function InstructionCOLW() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -24,10 +26,9 @@ function InstructionCOLW() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
-
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Participant Code',
             dataIndex: 'participantCode',
@@ -110,15 +111,25 @@ function InstructionCOLW() {
                 </Dropdown>
             ),
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
         },
         {
         },
-    ];
+    ]);
+
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -180,12 +191,29 @@ function InstructionCOLW() {
             </Form>
 
             <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Link to={{
-                    pathname: `/collateralManagement/ViewAddColw`,
-                }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                        Add New Instruction
-                </Button>
-                </Link>
+                <Row justify="end">
+                    <Col span={8}>
+                        <Link to={{
+                            pathname: `/collateralManagement/ViewAddColw`,
+                        }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                Add New Instruction
+                        </Button>
+                        </Link>
+                    </Col>
+
+                    <Col span={8} offset={8}>
+                        {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                        {exportButtton}
+                        {/* </Link> */}
+                    </Col>
+                </Row>
 
                 <Table
                     columns={columns}

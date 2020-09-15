@@ -132,6 +132,8 @@ import ApprovalAccount from '../views/account/ApprovalAccount';
 import ApprovalDetail from '../views/account/ApprovalDetail';
 import ApprovalInstruction from '../views/instruction/ApprovalInstruction';
 import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
+import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDetail';
+import ApprovalCollateral from '../views/collateral/ApprovalCollateral';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -323,6 +325,15 @@ function RoutePage() {
                     <Title level={4}>Instruction - COLW (Create, Check, Accept, Request for cancel)</Title>
                 </div>
                 <InstructionCOLW />
+            </Route>
+            <Route path="/collateralManagement/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalCollateral />
+            </Route>
+            <Route path="/collateralManagement/approvalCollateralDetail"
+                component={ApprovalCollateralDetail}>
             </Route>
             <Route path="/login">
                 <div className="head-content">

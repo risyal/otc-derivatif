@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Form,
     Input,
     Button,
     Table,
     DatePicker,
+    Row,
+    Col,
 } from 'antd';
 import moment from 'moment';
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 const { RangePicker } = DatePicker;
 
 function Inquiry() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -24,10 +26,9 @@ function Inquiry() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
-
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Instruction Type',
             dataIndex: 'instructionType',
@@ -87,16 +88,26 @@ function Inquiry() {
             key: 'remark',
             width: 100,
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
         },
         {
         },
-    ];
+    ]);
+
     const dateFormat = 'YYYY/MM/DD';
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -152,11 +163,26 @@ function Inquiry() {
                         onClick={() => {
                             setExpand(!expand);
                         }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                        pathname: `#`,
+                        state: {
+                            id: '1',
+                            action: "Edit",
+                            disable: false,
+                        }
+                    }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
 
             <Table
                 columns={columns}
