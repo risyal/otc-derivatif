@@ -130,6 +130,8 @@ import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
 import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
 import ApprovalAccount from '../views/account/ApprovalAccount';
 import ApprovalDetail from '../views/account/ApprovalDetail';
+import ApprovalInstruction from '../views/instruction/ApprovalInstruction';
+import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -294,6 +296,15 @@ function RoutePage() {
                     <Title level={4}>Inquiry Cash Management</Title>
                 </div>
                 <InquiryCashManagement />
+            </Route>
+            <Route path="/instructionManagement/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalInstruction />
+            </Route>
+            <Route path="/instructionManagement/approvalInstructionDetail"
+                component={ApprovalInstructionDetail}>
             </Route>
             <Route path="/collateralManagement/inquiry">
                 <div className="head-content">

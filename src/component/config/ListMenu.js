@@ -144,6 +144,10 @@ const Menu = [
             name: 'Inquiry Cash Management',
             key: 'inquiryCashManagement',
             linkTo: '/instructionManagement/inquiryCashManagement'
+        },  {
+            name: 'Approval',
+            key: 'instructionApproval',
+            linkTo: '/instructionManagement/approval'
         }]
     },
     {
