@@ -61,7 +61,7 @@ const columns = [
                             <Link to={{
                                 pathname: `/administration/ViewDeleteSysParam`,
                                 state: {
-                                    id: record.key,
+                                    id: record.id,
                                     action: "Delete",
                                     disable: false,
                                 }
@@ -150,7 +150,7 @@ class SystemParameter extends React.Component {
         this.setState({ loading: true });
         axios.get(`http://localhost:8080/sysparams`)
             .then(res => {
-                const data = res.data;
+                const data = res.data.content;
                 this.setState({
                     loading: false,
                     data,

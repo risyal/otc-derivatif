@@ -8,6 +8,7 @@ import {
     Table,
     Row,
     Col,
+    Descriptions,
 } from 'antd';
 import {
     ArrowLeftOutlined,
@@ -136,6 +137,28 @@ const ViewDeleteSysParam = (props) => {
                     </span>
                     {action} System Parameter</Title>
             </div>
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+            <Descriptions column={1} bordered
+                extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
+                <Descriptions.Item label="Parameter">{param.param}</Descriptions.Item>
+                <Descriptions.Item label="Value">{param.value}</Descriptions.Item>
+                <Descriptions.Item label="Value Type">{param.valueType}</Descriptions.Item>
+                <Descriptions.Item label="Note">{param.note}</Descriptions.Item>
+            </Descriptions>
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -144,33 +167,6 @@ const ViewDeleteSysParam = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Row justify="end">
-                    <Col span={4}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                        {exportButtton}
-                        {/* </Link> */}
-                    </Col>
-                </Row>
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
-                {param.param}<br />
-                {param.value}<br />
-                {param.valueType}<br />
-                {param.note}<br />
                 {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
