@@ -30,32 +30,32 @@ function DefaultFundReport(){
             title: 'Member ID',
             dataIndex: 'memberID',
             key: 'memberID',
-          },
-          {
-            title: 'Generate Date',
-            dataIndex: 'generateDate',
-            key: 'generateDate',
-          },
-          {
+		},
+		{
             title: 'Settlement Date',
             dataIndex: 'settlementDate',
             key: 'settlementDate',
-          },
-          {
+		},
+		{
+            title: 'Minimum Requirement',
+            dataIndex: 'minimumRequirement',
+            key: 'minimumRequirement',
+		},
+		{
+            title: 'DF Account Balance',
+            dataIndex: 'dfAccountBalance',
+            key: 'dfAccountBalance',
+		},
+		{
             title: 'DF Usage Value',
             dataIndex: 'dfUsageValue',
             key: 'dfUsageValue',
-          },
-          {
-            title: 'Remaining Balance',
-            dataIndex: 'remainingBalance',
-            key: 'remainingBalance',
-          },
-          {
-            title: 'Accomplishment Value',
-            dataIndex: 'accomplishmentValue',
-            key: 'accomplishmentValue',
-          },
+		},
+		{
+            title: 'Shortage',
+            dataIndex: 'Shortage',
+            key: 'Shortage',
+		},
     ];
     const data = [
         {
@@ -94,7 +94,7 @@ function DefaultFundReport(){
 						<Form.Item label="Member ID">
 							<Input />
 						</Form.Item>
-						<Form.Item label="Accomplishment Value">
+						<Form.Item label="DF Usage Value">
 							<Input />
 						</Form.Item>
 						<Form.Item label="Settlement Date">
@@ -121,8 +121,8 @@ function DefaultFundReport(){
 						onClick={() => {
 							setExpand(!expand);
 						}}>
-						{expand ? (<div><DownOutlined />Advance Search</div>) :
-							(<div><UpOutlined />Simple Search</div>)}
+						{expand ? (<div><DownOutlined /> Advance Search</div>) :
+							(<div><UpOutlined /> Simple Search</div>)}
 					</Button>
 				</Form.Item>
 			</Form>

@@ -27,29 +27,59 @@ function NovationReport(){
     
     const columns = [
         {
-            title: 'Member ID I',
-            dataIndex: 'memberIdI',
-            key: 'memberIdI',
+            title: 'Member ID',
+            dataIndex: 'memberId',
+            key: 'memberId',
         },
         {
-            title: 'Member ID II',
-            dataIndex: 'memberIdII',
-            key: 'memberIdII',
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
         },
         {
-            title: 'Novation Date and Time',
-            dataIndex: 'dateTime',
-            key: 'dateTime',
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
         },
         {
-            title: 'First Trading ID',
-            dataIndex: 'firstTradingId',
-            key: 'firstTradingId',
+            title: 'Product',
+            dataIndex: 'product',
+            key: 'product',
         },
         {
-            title: 'Previous Position',
-            dataIndex: 'previousPosition',
-            key: 'previousPosition',
+            title: 'Counterparty',
+            children: [
+                {
+                    title: 'Member ID',
+                    dataIndex: 'memberIdC',
+                    key: 'memberIdC',
+                },
+                {
+                    title: 'SID',
+                    dataIndex: 'sidC',
+                    key: 'sidC',
+                },
+                {
+                    title: 'LEI',
+                    dataIndex: 'leiC',
+                    key: 'leiC',
+                },
+            ]
+        },
+        {
+            title: 'Original UTI',
+            dataIndex: 'originalUti',
+            key: 'originalUti',
+        },
+        {
+            title: 'Member Position',
+            dataIndex: 'memberPosition',
+            key: 'memberPosition',
+        },
+        {
+            title: 'KPEI Position',
+            dataIndex: 'kpeiPosition',
+            key: 'kpeiPosition',
         },
         {
             title: 'New UTI',
@@ -127,8 +157,8 @@ function NovationReport(){
                         onClick={() => {
                             setExpand(!expand);
                         }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>

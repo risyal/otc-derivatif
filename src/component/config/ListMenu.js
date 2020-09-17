@@ -250,11 +250,12 @@ const Menu = [
         icon: <FundProjectionScreenOutlined />,
         subMenus: [{
             name: 'DHK Level Member',
-            key: 'dhkmemberclient',
-            linkTo: '/dhkmemberclient'
+            key: 'dhkmember',
+            linkTo: '/dhkmember'
         },{
             name: 'DHK Level Client',
-            
+            key: 'dhkclient',
+            linkTo: '/dhkclient'
         }, {
             name: 'OAR (Obligation Accomplishment Report)',
             key: 'obligationaccomplishment',
@@ -267,7 +268,8 @@ const Menu = [
         },
         {
             name: 'Regulator Report',
-            
+            key: 'regulatorreport',
+            linkTo: '/regulatorreport'
         }, {
             name: 'Novation Report',
             key: 'novationreport',

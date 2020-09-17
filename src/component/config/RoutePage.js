@@ -14,7 +14,7 @@ import InquiryPosition from '../views/clearing/InquiryPosition';
 import SettlementPosition from '../views/clearing/SettlementPosition';
 import CashFlowIrs from '../views/clearing/CashFlowIrs';
 import ObligationAccomplishment from '../views/reporting/ObligationAccomplishment';
-import DHKLevel from '../views/reporting/DHKLevel';
+import DHKLevelMember from '../views/reporting/DHKLevelMember';
 import DailyTransactionReport from '../views/reporting/DailyTransactionReport';
 import NovationReport from '../views/reporting/NovationReport';
 import MovementBalance from '../views/reporting/MovementBalance';
@@ -134,6 +134,8 @@ import ApprovalInstruction from '../views/instruction/ApprovalInstruction';
 import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
 import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDetail';
 import ApprovalCollateral from '../views/collateral/ApprovalCollateral';
+import DHKLevelClient from '../views/reporting/DHKLevelClient';
+import RegulatorReport from '../views/reporting/RegulatorReport';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -343,7 +345,7 @@ function RoutePage() {
             </Route>
             <Route path="/obligationaccomplishment">
                 <div className="head-content">
-                    <Title level={4}>Obligation Accomplishment</Title>
+                    <Title level={4}>Obligation Accomplishment Report</Title>
                 </div>
                 <ObligationAccomplishment />
             </Route>
@@ -352,6 +354,12 @@ function RoutePage() {
                     <Title level={4}>Daily Transaction Report</Title>
                 </div>
                 <DailyTransactionReport />
+            </Route>
+            <Route path="/regulatorreport">
+                <div className="head-content">
+                    <Title level={4}>Regulator Report</Title>
+                </div>
+                <RegulatorReport />
             </Route>
             <Route path="/novationreport">
                 <div className="head-content">
@@ -383,11 +391,17 @@ function RoutePage() {
                 </div>
                 <FeeReport />
             </Route>
-            <Route path="/dhkmemberclient">
+            <Route path="/dhkmember">
                 <div className="head-content">
-                    <Title level={4}>DHK level member dan client</Title>
+                    <Title level={4}>DHK Level Member</Title>
                 </div>
-                <DHKLevel />
+                <DHKLevelMember />
+            </Route>
+            <Route path="/dhkclient">
+                <div className="head-content">
+                    <Title level={4}>DHK Level Client</Title>
+                </div>
+                <DHKLevelClient />
             </Route>
             <Route path="/memberandclientmanagement/registerclient">
                 <div className="head-content">

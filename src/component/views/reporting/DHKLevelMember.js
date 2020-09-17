@@ -5,12 +5,12 @@ import {
     Table,
     Input,
     DatePicker,
-    Row,
     Col,
+    Row
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function ObligationAccomplishment(){
+function DHKLevelMember(){
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -30,36 +30,91 @@ function ObligationAccomplishment(){
             title: 'Member ID',
             dataIndex: 'memberId',
             key: 'memberId',
+            width: 100,
+            // fixed: 'left',
         },
         {
-            title: 'Member Name',
-            dataIndex: 'memberName',
-            key: 'memberName',
-        },
-        // {
-        //     title: 'AK Code',
-        //     dataIndex: 'akCode',
-        //     key: 'akCode',
-        //   },
-        {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
+            width: 100,
         },
         {
-            title: 'Settlement Value',
-            dataIndex: 'settlementValue',
-            key: 'settlementValue',
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
+            width: 100,
         },
         {
-            title: 'Accomplisment Value',
-            dataIndex: 'accomplishValue',
-            key: 'accomplishValue',
+            title: 'Client ID',
+            dataIndex: 'clientId',
+            key: 'clientId',
+            width: 100,
         },
         {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
+            title: 'Product',
+            dataIndex: 'product',
+            key: 'product',
+            width: 100,
+        },
+        {
+            title: 'UTI',
+            dataIndex: 'uti',
+            key: 'uti',
+            width: 100,
+        },
+        {
+            title: 'Market Side',
+            dataIndex: 'marketSide',
+            key: 'marketSide',
+            width: 150,
+        },
+        {
+            title: 'Notional Amount',
+            dataIndex: 'notionalAmount',
+            key: 'notionalAmount',
+            width: 150,
+        },
+        {
+            title: 'Variation Margin',
+            dataIndex: 'variationMargin',
+            key: 'variationMargin',
+            width: 100,
+        },
+        {
+            title: 'PAA',
+            dataIndex: 'paa',
+            key: 'paa',
+            width: 150,
+        },
+        {
+            title: 'Net Coupon Payment',
+            dataIndex: 'netCouponPayment',
+            key: 'netCouponPayment',
+            width: 100,
+        },
+        {
+            title: 'Trade Right/Obligation',
+            dataIndex: 'tradeRightObligation',
+            key: 'tradeRightObligation',
+            width: 100,
+        },
+        {
+            title: 'Fee',
+            dataIndex: 'fee',
+            key: 'fee',
+            width: 100,
+        },
+        {
+            title: 'Default Fund',
+            dataIndex: 'defaultFund',
+            key: 'defaultFund',
+            width: 100,
+        },
+        {
+            title: 'Penalty',
+            dataIndex: 'penalty',
+            key: 'penalty',
             width: 100,
         },
     ];
@@ -86,10 +141,10 @@ function ObligationAccomplishment(){
             float: 'right',
             height: '35px'
         }}
-        icon={<DownloadOutlined />}>Export File</Button>);
+    icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
-        <div style={{ margin: '15px 20px' }}>
+       <div style={{ margin: '15px 20px' }}>
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -103,11 +158,17 @@ function ObligationAccomplishment(){
             </div>
             ) : (
                     <div>
-                        <Form.Item label="Settlement Date">
-                            <DatePicker style={{ width: '100%' }} />
-                        </Form.Item>
-                        <Form.Item label="Status">
+                        <Form.Item label="Member ID">
                             <Input />
+                        </Form.Item>
+                        <Form.Item label="SID">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="LEI">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Date">
+                            <DatePicker style={{ width: '100%' }} />
                         </Form.Item>
                     </div>
                 )}
@@ -157,10 +218,11 @@ function ObligationAccomplishment(){
                     dataSource={data}
                     bordered
                     size="middle"
+                    scroll={{ x: 'calc(700px + 50%)' }}
                 />
             </div>
         </div>
     )
 }
 
-export default ObligationAccomplishment
+export default DHKLevelMember
