@@ -17,11 +17,11 @@ import axios from 'axios';
 const columns = [
     {
         title: 'Currency Code',
-        dataIndex: 'code',
+        dataIndex: 'currencyCode',
     },
     {
         title: 'Currency Name',
-        dataIndex: 'name',
+        dataIndex: 'currencyName',
     },
     {
         title: 'Eligibility',

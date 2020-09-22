@@ -60,7 +60,6 @@ const ViewDeleteSysParam = (props) => {
 
     const [loading, setLoading] = useState(false);
 
-
     const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable

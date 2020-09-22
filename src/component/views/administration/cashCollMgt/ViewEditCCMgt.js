@@ -32,10 +32,16 @@ const ViewEditCCMgt = (props) => {
             }
             : null;
     const onFinish = values => {
+        var egl=false;
+        if(form.getFieldValue("eligibility")=="1"){
+            egl=true;
+        }
+        console.log("eg"+form.getFieldValue("eligibility"));
+        console.log("eg"+form.getFieldValue("haircut"));
         axios.post(`http://localhost:8080/cashcollateralmanagements`, {
-            currencyCode: form.getFieldValue("code"),
-            currencyName: form.getFieldValue("name"),
-            eligibility: form.getFieldValue("eligibility"),
+            currencyCode: form.getFieldValue("currencyCode"),
+            currencyName: form.getFieldValue("currencyName"),
+            eligibility: egl,
             haircut: form.getFieldValue("haircut"),
             status: "active",
             lastUpdate: null
@@ -60,8 +66,8 @@ const ViewEditCCMgt = (props) => {
     };
     const submitEdit = () => {
         axios.put(`http://localhost:8080/cashcollateralmanagements/${idx}`, {
-            currencyCode: form.getFieldValue("code"),
-            currencyName: form.getFieldValue("name"),
+            currencyCode: form.getFieldValue("currencyCode"),
+            currencyName: form.getFieldValue("currencyName"),
             eligibility: form.getFieldValue("eligibility"),
             haircut: form.getFieldValue("haircut"),
             status: "active",
@@ -84,10 +90,10 @@ const ViewEditCCMgt = (props) => {
                 `http://localhost:8080/cashcollateralmanagements/${q}`
             );
             const resJSON = await apiRes.json();
-            console.log(resJSON);
+            console.log("asdasd"+resJSON.currencyCode);
             form.setFieldsValue({
-                currencyCode: resJSON.code,
-                currencyName: resJSON.name,
+                currencyCode: resJSON.currencyCode,
+                currencyName: resJSON.currencyName,
                 eligibility: resJSON.eligibility,
                 haircut: resJSON.haircut,
             });
@@ -117,19 +123,20 @@ const ViewEditCCMgt = (props) => {
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                <Form.Item label="Currency Code" name="code">
+                <Form.Item label="Currency Code" name="currencyCode">
                     <Input placeholder="Insert Code" />
                 </Form.Item>
-                <Form.Item label="Currency Name" name="name">
+                <Form.Item label="Currency Name" name="currencyName">
                     <Input placeholder="Insert Name" />
                 </Form.Item>
-                <Form.Item label="Eligibity" name="eligibility">
+                <Form.Item label="Eligibity" 
+                defaultValue="1" name="eligibility">
                     <select style= {{width: '100%'}}>
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
+                        <option value="1" >Yes</option>
+                        <option value="0">No</option>
                     </select>
                 </Form.Item>
-                <Form.Item label="Haircut">
+                <Form.Item label="Haircut"name="haircut">
                     <Input placeholder="Insert Haircut" />
                 </Form.Item>
 
