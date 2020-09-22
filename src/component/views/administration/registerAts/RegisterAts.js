@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function RegisterAts(){
+function RegisterAts() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const [componentSize] = useMemo(() => 'middle');
@@ -31,12 +31,17 @@ function RegisterAts(){
         {
             title: 'Company Name',
             dataIndex: 'name',
-            key:'name',
+            key: 'name',
+        },
+        {
+            title: 'Application Name',
+            dataIndex: 'applicationName',
+            key: 'applicationName',
         },
         {
             title: 'Application Name',
             dataIndex: 'appName',
-            key:'appName',
+            key: 'appName',
         },
         {
             title: 'Address',
@@ -170,7 +175,7 @@ function RegisterAts(){
                             <Input />
                         </Form.Item>
                         <Form.Item label="PIC Name">
-                        <Input />
+                            <Input />
                         </Form.Item>
                         <Form.Item label="Telephone Number">
                             <Input />
@@ -186,14 +191,14 @@ function RegisterAts(){
                         type="primary"
                         htmlType="submit"
                         tyle={{ marginRight: '15px' }}>
-                            Search
+                        Search
                     </Button>
                     <Button
                         style={{ margin: '0 8px' }}
                         onClick={() => {
                             form.resetFields();
                         }}>
-                            Clear
+                        Clear
                     </Button>
                     <Button
                         htmlType="submit"
@@ -210,18 +215,18 @@ function RegisterAts(){
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                                pathname: `/administration/ViewEditRegAts`,
-                                state: {
-                                    id: '0',
-                                    action: "Add New",
-                                    disable: false,
-                                }
-                            }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                                    Add New Data
+                            pathname: `/administration/ViewEditRegAts`,
+                            state: {
+                                id: '0',
+                                action: "Add New",
+                                disable: false,
+                            }
+                        }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                Add New Data
                             </Button>
                         </Link>
                     </Col>
-               
+
                     <Col span={8} offset={8}>
                         {/* <Link to={{
                             pathname: `#`,
@@ -235,7 +240,7 @@ function RegisterAts(){
                         {/* </Link> */}
                     </Col>
                 </Row>
-                
+
                 <Table
                     columns={columns}
                     dataSource={data}
@@ -244,7 +249,7 @@ function RegisterAts(){
                 />
             </div>
         </div>
-        
+
     )
 
 }

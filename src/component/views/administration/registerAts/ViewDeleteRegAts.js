@@ -47,6 +47,7 @@ const ViewDeleteRegAts = (props) => {
         {
             key: '0',
             name: '',
+            applicationName: ' ',
             address: '',
             pic: '',
             telp: '',
@@ -55,6 +56,7 @@ const ViewDeleteRegAts = (props) => {
         {
             key: '1',
             name: 'PT 123',
+            applicationName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -63,6 +65,7 @@ const ViewDeleteRegAts = (props) => {
         {
             key: '2',
             name: 'PT 123',
+            applicationName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -71,6 +74,7 @@ const ViewDeleteRegAts = (props) => {
         {
             key: '3',
             name: 'PT 123',
+            applicationName: 'App Name',
             address: 'Jl. Kenanga',
             pic: 'Jihan',
             telp: '082221829',
@@ -86,6 +90,10 @@ const ViewDeleteRegAts = (props) => {
         {
             title: "Company Name :",
             paramData: dataAtsById.name
+        },
+        {
+            title: "Application Name :",
+            paramData: dataAtsById.applicationName
         },
         {
             title: "Address :",
@@ -125,12 +133,12 @@ const ViewDeleteRegAts = (props) => {
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">   
+                    <span className="icon-back">
                         <Link to="/registerats">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} ATS</Title>
+                    {action} ATS</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -154,7 +162,7 @@ const ViewDeleteRegAts = (props) => {
                         {/* </Link> */}
                     </Col>
                 </Row>
-                
+
                 <Table
                     className="viewDelTable"
                     columns={columns}

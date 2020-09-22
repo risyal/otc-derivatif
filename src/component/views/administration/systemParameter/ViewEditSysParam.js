@@ -92,7 +92,7 @@ const ViewEditSysParam = (props) => {
     }, []);
     return (
         <div>
-             {/* <div className="head-content viewEdit">
+            {/*  <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/systemparameter">
@@ -122,9 +122,10 @@ const ViewEditSysParam = (props) => {
                 </Form.Item>
                 <Form.Item {...tailLayout}>
 
+
                     {action == "Edit" ? (
                         <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
-                            Submit edit
+                            Submitedit
                         </Button>
                     ) : (
                             <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>

@@ -116,14 +116,15 @@ const ViewDeleteSysParam = (props) => {
         }
 
     };
-    const submitDelete = () => {
-        axios.delete(`http://localhost:8080/sysparams/${idx}`, {
+    const [formState, setFormState] = React.useState(
+        {
+            title: "Telephone Number :",
+            paramData: "asd"
+        },
+        {
+            title: "Email :",
+            paramData: "asdas"
         })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
-    };
     useEffect(() => {
         setParams(props.location.state.id);
     }, []);
