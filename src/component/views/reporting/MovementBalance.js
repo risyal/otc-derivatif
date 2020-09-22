@@ -30,27 +30,47 @@ function MovementBalance(){
             title: 'Member ID',
             dataIndex: 'memberID',
             key: 'memberID',
-          },
-          {
-            title: 'Source Acc',
-            dataIndex: 'sourceAcc',
-            key: 'sourceAcc',
-          },
-          {
-            title: 'Dest Acc',
-            dataIndex: 'destAcc',
-            key: 'destAcc',
-          },
-          {
-            title: 'Value',
-            dataIndex: 'value',
-            key: 'value',
-          },
-          {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
-          },
+        },
+        {
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
+        },
+        {
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
+        },
+        {
+            title: 'Account Number',
+            dataIndex: 'accountNumber',
+            key: 'accountNumber',
+        },
+        {
+            title: 'Account Type',
+            dataIndex: 'accountType',
+            key: 'accountType',
+        },
+        {
+            title: 'Transaction Date',
+            dataIndex: 'transactionDate',
+            key: 'transactionDate',
+        },
+        {
+            title: 'Activity Detail',
+            dataIndex: 'activityDetail',
+            key: 'activityDetail',
+        },
+        {
+            title: 'Amount',
+            dataIndex: 'amount',
+            key: 'amount',
+        },
+        {
+            title: 'Balance',
+            dataIndex: 'balance',
+            key: 'balance',
+        },
     ];
     const data = [
         {
@@ -89,10 +109,7 @@ function MovementBalance(){
 						<Form.Item label="Member ID">
 							<Input />
 						</Form.Item>
-						<Form.Item label="Value">
-							<Input />
-						</Form.Item>
-						<Form.Item label="Settlement Date">
+						<Form.Item label="Transaction Date">
 							<DatePicker style={{ width: '100%' }} />
 						</Form.Item>
 					</div>
@@ -116,8 +133,8 @@ function MovementBalance(){
 						onClick={() => {
 							setExpand(!expand);
 						}}>
-						{expand ? (<div><DownOutlined />Advance Search</div>) :
-							(<div><UpOutlined />Simple Search</div>)}
+						{expand ? (<div><DownOutlined /> Advance Search</div>) :
+							(<div><UpOutlined /> Simple Search</div>)}
 					</Button>
 				</Form.Item>
 			</Form>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Input,
@@ -8,85 +8,106 @@ import {
     DatePicker,
 } from 'antd';
 import {
-    CaretLeftOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
+import axios from 'axios';
+
 const { Title } = Typography;
 
 const ViewEditCalendar = (props) => {
     const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
+    const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('horizontal');
 
-    const [data] = useState([
-        {
-            key: '0',
-            date: '',
-            information: '',
-            update: '',
-        },
-        {
-            key: '1',
-            date: '01-01-2020',
-            information: 'New Years Day',
-            update: '01-07-2020',
-        },
-        {
-            key: '2',
-            date: '25-01-2020',
-            information: 'Chinese Lunar',
-            update: '01-08-2020',
-        },
-        {
-            key: '3',
-            date: '23-03-2020',
-            information: 'Ascension of The Prophet Muhammad',
-            update: '01-08-2020',
-        },{
-            key: '4',
-            date: '25-03-2020',
-            information: 'Bali Day of Silence and Hindu New Year',
-            update: '01-08-2020',
-        },
-        {
-            key: '5',
-            date: '10-04-2020',
-            information: 'Good Friday',
-            update: '01-08-2020',
-        },
-        {
-            key: '6',
-            date: '12-04-2020',
-            information: 'Easter Sunday',
-            update: '01-08-2020',
-        }
-    ]);
-    const dataCalendarById = data.find((calendar) => {
-        return calendar.key === props.location.state.id
-    })
-
-    const action = props.location.state.action
-    const disable = props.location.state.disable
-    const [sixEyes, setSixEyes] = useState(1);
-    const radioOnChange = e => {
-        setSixEyes(e.target.value);
+    const onFormLayoutChange = ({ layout }) => {
+        setFormLayout(layout);
     };
+
+    const formItemLayout =
+        formLayout === 'horizontal'
+            ? {
+                labelCol: { span: 4 },
+                wrapperCol: { span: 14 },
+            }
+            : null;
+
+    const onFinish = values => {
+        axios.post(`http://localhost:8080/calendarmarketholidays`, {
+            date: form.getFieldValue("date"),
+            information: form.getFieldValue("information"),
+            update: form.getFieldValue("update"),
+            note: form.getFieldValue("note"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                form.resetFields();
+            })
+    };
+
+    const [action] = useState(props.location.state.action);
+    const [idx] = useState(props.location.state.id);
+    const [loading, setLoading] = useState(false);
+    const [sysparam, setSysParam] = useState({
+        date: "test",
+        information: null,
+        update: null,
+        note: null,
+    });
+    const tailLayout = {
+        wrapperCol: { offset: 8, span: 16 },
+    };
+
+    const submitEdit = () => {
+        axios.put(`http://localhost:8080/calendarmarketholidays/${idx}`, {
+            date: form.getFieldValue("date"),
+            information: form.getFieldValue("information"),
+            update: form.getFieldValue("update"),
+            note: form.getFieldValue("note"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                form.resetFields();
+            })
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/calendarmarketholidays/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            form.setFieldsValue({
+                date: resJSON.date,
+                information: resJSON.information,
+                update: resJSON.update,
+                note: resJSON.note,
+            });
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
+
     const dateFormat = 'YYYY/MM/DD';
 
     return (
         <div>
-            <div className="head-content viewEdit">
+            {/* <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/calendar">
@@ -94,51 +115,42 @@ const ViewEditCalendar = (props) => {
                         </Link>
                     </span>
                     {action} Calendar</Title>
-            </div>
+            </div> */}
             <Form
                 {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-                labelAlign="left"
-                style={{ marginBottom: '80px' }}
+                // size={componentSize}
+                layout={formLayout}
+                form={form}
+                initialValues={{ layout: formLayout }}
+                onFinish={onFinish}
             >
                 
-                <Form.Item label="Date">
+                <Form.Item name="date" label="Date">
                     <DatePicker style={{ width: '100%' }}
                         defaultValue={moment('2020/07/31', dateFormat)}/>
                 </Form.Item>
-                <Form.Item label="Information">
-                    <Input disabled={disable} defaultValue={dataCalendarById.information}/>
+                <Form.Item name="information" label="Information">
+                    <Input placeholder="Information"/>
                 </Form.Item>
 
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
-                    
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/calendar">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
+                <Form.Item {...tailLayout}>
+
+                    {action == "Edit" ? (
+                        <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
+                            Submit edit
                         </Button>
-                    </Link>
                     ) : (
-                            <div></div>
-                        )}
+                            <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                                Submit
+                            </Button>
+                        )
+                    }
+                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                        Reset
+        </Button>
                     <Link to="/calendar">
                         <Button >
-                            {!disable ? (
-                                <div>Cancel</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
+                            <div>Back</div>
                         </Button>
                     </Link>
                 </Form.Item>

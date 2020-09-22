@@ -124,8 +124,8 @@ function DailyTransactionReport(){
 						onClick={() => {
 							setExpand(!expand);
 						}}>
-						{expand ? (<div><DownOutlined />Advance Search</div>) :
-							(<div><UpOutlined />Simple Search</div>)}
+						{expand ? (<div><DownOutlined /> Advance Search</div>) :
+							(<div><UpOutlined /> Simple Search</div>)}
 					</Button>
 				</Form.Item>
 			</Form>

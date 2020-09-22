@@ -87,7 +87,6 @@ const getRandomuserParams = params => {
     };
 };
 
-
 const componentSize = () => 'middle';
 const formItemLayout = {
     labelCol: {

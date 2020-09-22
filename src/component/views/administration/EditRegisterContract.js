@@ -10,7 +10,6 @@ import {
     InputNumber
 } from 'antd';
 import {
-    CaretLeftOutlined,
     ArrowLeftOutlined,
     PlusOutlined
 } from '@ant-design/icons';

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 import axios from 'axios';
 
-
 const { Title } = Typography;
 const ViewEditSysParam = (props) => {
     const [form] = Form.useForm();
@@ -149,6 +148,5 @@ const ViewEditSysParam = (props) => {
     )
 
 }
-
 
 export default ViewEditSysParam

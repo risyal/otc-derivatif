@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
@@ -6,12 +6,16 @@ import {
     Radio,
     Typography,
     Table,
+    Row,
+    Col,
+    Descriptions,
 } from 'antd';
 import {
-    CaretLeftOutlined,
-    ArrowLeftOutlined
+    ArrowLeftOutlined, DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -42,70 +46,85 @@ const ViewDeleteCalendar= (props) => {
             key: 'paramData',
         },
     ]);
+
     const [data] = useState([
         {
-            key: '0',
-            date: '',
-            information: '',
-            update: '',
+            title: "Telephone Number :",
+            paramData: "asd"
         },
         {
-            key: '1',
-            date: '01-01-2020',
-            information: 'New Years Day',
-            update: '01-07-2020',
-        },
-        {
-            key: '2',
-            date: '25-01-2020',
-            information: 'Chinese Lunar',
-            update: '01-08-2020',
-        },
-        {
-            key: '3',
-            date: '23-03-2020',
-            information: 'Ascension of The Prophet Muhammad',
-            update: '01-08-2020',
-        },{
-            key: '4',
-            date: '25-03-2020',
-            information: 'Bali Day of Silence and Hindu New Year',
-            update: '01-08-2020',
-        },
-        {
-            key: '5',
-            date: '10-04-2020',
-            information: 'Good Friday',
-            update: '01-08-2020',
-        },
-        {
-            key: '6',
-            date: '12-04-2020',
-            information: 'Easter Sunday',
-            update: '01-08-2020',
-        },
-    ]);
-    const dataUserById = data.find((user) => {
-        return user.key === props.location.state.id
-    })
-
-    const [dataForView] = useState([
-        {
-            title: "Date :",
-            paramData: dataUserById.date
-        },
-        {
-            title: "Information :",
-            paramData: dataUserById.information
+            title: "Email :",
+            paramData: "asdas"
         },
     ]);
 
+    const [loading, setLoading] = useState(false);
+
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+    const [calendar, setCalendar] = useState({
+        date: "test",
+        information: null,
+        update: null,
+        note: null,
+    });
+    const dataForView = [];
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/calendarmarketholidays/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            /* form.setFieldsValue({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            }); */
+            setCalendar({
+                date: resJSON.date,
+                information: resJSON.information,
+                update: resJSON.update,
+                note: resJSON.note,
+            })
+            dataForView.push({
+                title: "Email :",
+                paramData: "asdas"
+            })
+            console.log(data);
+            console.log(dataForView);
+            setLoading(false);
+        }
+
+    };
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/calendarmarketholidays/${idx}`, {
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
 
     return (
         <div>
@@ -118,6 +137,28 @@ const ViewDeleteCalendar= (props) => {
                     </span>
                 {action} Calendar</Title>
             </div>
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+            <Descriptions column={1} bordered
+                extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
+                <Descriptions.Item label="Date">{calendar.date}</Descriptions.Item>
+                <Descriptions.Item label="Information">{calendar.information}</Descriptions.Item>
+                <Descriptions.Item label="Last Update">{calendar.update}</Descriptions.Item>
+                <Descriptions.Item label="Note">{calendar.note}</Descriptions.Item>
+            </Descriptions>
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -126,17 +167,6 @@ const ViewDeleteCalendar= (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
-
                 {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>

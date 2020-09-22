@@ -1,21 +1,20 @@
-import React, { useState, useMemo } from 'react';
-import {
-    Form,
-    Input,
-    Button,
+import React, { useState } from 'react';
+import { 
+    Form,  
+    Button, 
     Table,
+    Input,
     DatePicker,
-    Row,
     Col,
+    Row
 } from 'antd';
-import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function InquirySecManagement() {
+function DHKLevelMember(){
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
+    const componentSize = 'middle';
+    const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -24,78 +23,116 @@ function InquirySecManagement() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    });
+    };
 
-    const [columns] = useState([
+    const columns = [
         {
-            title: 'Instruction Type',
-            dataIndex: 'instructionType',
-            key: 'instructionType',
+            title: 'Member ID',
+            dataIndex: 'memberId',
+            key: 'memberId',
             width: 100,
-        }, {
-            title: 'Participant Code',
-            dataIndex: 'participantCode',
-            key: 'participantCode',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.participantCode - b.participantCode,
-            sortDirections: ['ascend'],
-        }, {
-            title: 'Source Acc',
-            dataIndex: 'sourceAcc',
-            key: 'sourceAcc',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.sourceAcc - b.sourceAcc,
-        }, {
-            title: 'Dest Account',
-            dataIndex: 'destAccount',
-            key: 'destAccount',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.destAccount - b.destAccount,
-        }, {
-            title: 'Security Code',
-            dataIndex: 'securityCode',
-            key: 'securityCode',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.securityCode - b.securityCode,
-        }, {
-            title: 'Value',
-            dataIndex: 'value',
-            key: 'value',
-            width: 100,
-        }, {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.settlementDate - b.settlementDate,
-        }, {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.settlementDate - b.settlementDate,
-        }, {
-            title: 'Remark',
-            dataIndex: 'remark',
-            key: 'remark',
-            width: 100,
-        },
-    ]);
-    const [data] = useState([
-        {
+            // fixed: 'left',
         },
         {
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
+            width: 100,
+        },
+        {
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
+            width: 100,
+        },
+        {
+            title: 'Client ID',
+            dataIndex: 'clientId',
+            key: 'clientId',
+            width: 100,
+        },
+        {
+            title: 'Product',
+            dataIndex: 'product',
+            key: 'product',
+            width: 100,
+        },
+        {
+            title: 'UTI',
+            dataIndex: 'uti',
+            key: 'uti',
+            width: 100,
+        },
+        {
+            title: 'Market Side',
+            dataIndex: 'marketSide',
+            key: 'marketSide',
+            width: 150,
+        },
+        {
+            title: 'Notional Amount',
+            dataIndex: 'notionalAmount',
+            key: 'notionalAmount',
+            width: 150,
+        },
+        {
+            title: 'Variation Margin',
+            dataIndex: 'variationMargin',
+            key: 'variationMargin',
+            width: 100,
+        },
+        {
+            title: 'PAA',
+            dataIndex: 'paa',
+            key: 'paa',
+            width: 150,
+        },
+        {
+            title: 'Net Coupon Payment',
+            dataIndex: 'netCouponPayment',
+            key: 'netCouponPayment',
+            width: 100,
+        },
+        {
+            title: 'Trade Right/Obligation',
+            dataIndex: 'tradeRightObligation',
+            key: 'tradeRightObligation',
+            width: 100,
+        },
+        {
+            title: 'Fee',
+            dataIndex: 'fee',
+            key: 'fee',
+            width: 100,
+        },
+        {
+            title: 'Default Fund',
+            dataIndex: 'defaultFund',
+            key: 'defaultFund',
+            width: 100,
+        },
+        {
+            title: 'Penalty',
+            dataIndex: 'penalty',
+            key: 'penalty',
+            width: 100,
+        },
+    ];
+    const data = [
+        {
         },
         {
         },
-    ]);
-    const dateFormat = 'YYYY/MM/DD';
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+    ];
+
     const [exportButtton] = useState(<Button
         type="primary"
         style={{
@@ -104,10 +141,10 @@ function InquirySecManagement() {
             float: 'right',
             height: '35px'
         }}
-        icon={<DownloadOutlined />}>Export File</Button>);
+    icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
-        <div style={{ margin: '15px 20px' }}>
+       <div style={{ margin: '15px 20px' }}>
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -121,24 +158,17 @@ function InquirySecManagement() {
             </div>
             ) : (
                     <div>
-                        <Form.Item label="Participant Code" >
+                        <Form.Item label="Member ID">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Source Acc" >
+                        <Form.Item label="SID">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Dest Account" >
+                        <Form.Item label="LEI">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Security Code" >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item label="Settlement Date" >
-                            <DatePicker style={{ width: '100%' }}
-                                defaultValue={moment('2020/01/23', dateFormat)} />
-                        </Form.Item>
-                        <Form.Item label="Status" >
-                            <Input />
+                        <Form.Item label="Date">
+                            <DatePicker style={{ width: '100%' }} />
                         </Form.Item>
                     </div>
                 )}
@@ -181,17 +211,18 @@ function InquirySecManagement() {
                     {/* </Link> */}
                 </Col>
             </Row>
-            
-            <Table
-                columns={columns}
-                dataSource={data}
-                bordered
-                size="middle"
-            />
+
+            <div style={{ margin: '15px 0px 0px 0px' }} scroll={{ x: 1300 }}>
+                <Table
+                    columns={columns}
+                    dataSource={data}
+                    bordered
+                    size="middle"
+                    scroll={{ x: 'calc(700px + 50%)' }}
+                />
+            </div>
         </div>
-
     )
-
 }
 
-export default InquirySecManagement
+export default DHKLevelMember

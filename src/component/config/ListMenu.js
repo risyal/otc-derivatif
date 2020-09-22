@@ -133,7 +133,7 @@ const Menu = [
             key: 'securityManagement',
             linkTo: '/instructionManagement/securityManagement'
         }, {
-            name: 'Inquiry Sec Management',
+            name: 'Inquiry Security Management',
             key: 'inquirySecManagement',
             linkTo: '/instructionManagement/inquirySecManagement'
         }, {
@@ -144,6 +144,10 @@ const Menu = [
             name: 'Inquiry Cash Management',
             key: 'inquiryCashManagement',
             linkTo: '/instructionManagement/inquiryCashManagement'
+        },  {
+            name: 'Approval',
+            key: 'instructionApproval',
+            linkTo: '/instructionManagement/approval'
         }]
     },
     {
@@ -162,6 +166,10 @@ const Menu = [
             name: 'Instruction - COLW',
             key: 'instructionColw',
             linkTo: '/collateralManagement/instructionColw'
+        },  {
+            name: 'Approval',
+            key: 'collateralApproval',
+            linkTo: '/collateralManagement/approval'
         }]
     },
     {
@@ -241,34 +249,46 @@ const Menu = [
         key: 'reporting',
         icon: <FundProjectionScreenOutlined />,
         subMenus: [{
-            name: 'DHK Member and Client',
-            key: 'dhkmemberclient',
-            linkTo: '/dhkmemberclient'
+            name: 'DHK Level Member',
+            key: 'dhkmember',
+            linkTo: '/dhkmember'
+        },{
+            name: 'DHK Level Client',
+            key: 'dhkclient',
+            linkTo: '/dhkclient'
         }, {
-            name: 'Obligation Accomplishment',
+            name: 'OAR (Obligation Accomplishment Report)',
             key: 'obligationaccomplishment',
             linkTo: '/obligationaccomplishment'
-        }, {
+        }, 
+        {
             name: 'Daily Transaction Report',
             key: 'dailytransaction',
             linkTo: '/dailytransaction'
+        },
+        {
+            name: 'Regulator Report',
+            key: 'regulatorreport',
+            linkTo: '/regulatorreport'
         }, {
             name: 'Novation Report',
             key: 'novationreport',
             linkTo: '/novationreport'
         }, {
-            name: 'Movement Balance',
+            name: 'Movement Balance Report',
             key: 'movementbalance',
             linkTo: '/movementbalance'
         }, {
             name: 'Default Fund Report',
             key: 'fundreport',
             linkTo: '/fundreport'
-        }, {
+        }, 
+        {
             name: 'Report Bank Indonesia',
             key: 'reportbankid',
             linkTo: '/reportbankid'
-        }, {
+        },
+        {
             name: 'Fee Report',
             key: 'feereport',
             linkTo: '/feereport'

@@ -4,13 +4,13 @@ import {
     Button, 
     Table,
     Input,
-    DatePicker,
-    Row,
-    Col
+	DatePicker,
+	Row,
+	Col
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function FeeReport(){
+function RegulatorReport(){
 	const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -24,37 +24,57 @@ function FeeReport(){
             sm: { span: 16 },
         },
 	};
-
+	
     const columns = [
-        {
-            title: 'No',
-            dataIndex: 'no',
-            key: 'no',
-        },
         {
             title: 'Member ID',
             dataIndex: 'memberID',
             key: 'memberID',
         },
         {
-            title: 'Transaction Date',
-            dataIndex: 'transactionDate',
-            key: 'transactionDate',
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
         },
         {
-            title: 'Description',
-            dataIndex: 'description',
-            key: 'description',
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
         },
         {
-            title: 'Fee Type',
-            dataIndex: 'feeType',
-            key: 'feeType',
+            title: 'Product',
+            dataIndex: 'product',
+            key: 'product',
         },
         {
-            title: 'Amount',
-            dataIndex: 'amount',
-            key: 'amount',
+            title: 'UTI',
+            dataIndex: 'uti',
+            key: 'uti',
+        },
+        {
+            title: 'Market Side',
+            dataIndex: 'marketSide',
+            key: 'marketSide',
+        },
+        {
+            title: 'Notional Amount',
+            dataIndex: 'notionalAmount',
+            key: 'notionalAmount',
+        },
+        {
+            title: 'Tenor',
+            dataIndex: 'tenor',
+            key: 'tenor',
+        },
+        {
+            title: 'Rate',
+            dataIndex: 'rate',
+            key: 'rate',
+        },
+        {
+            title: 'Netting (Y/N)',
+            dataIndex: 'netting',
+            key: 'netting',
         },
     ];
     const data = [
@@ -64,9 +84,9 @@ function FeeReport(){
         },
         {
         },
-    ];
-
-    const [exportButtton] = useState(<Button
+	];
+	
+	const [exportButtton] = useState(<Button
         type="primary"
         style={{
             marginBottom: '15px',
@@ -76,9 +96,8 @@ function FeeReport(){
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
 
-
     return (
-        <div style={{ margin: '15px 20px' }}>
+		<div style={{ margin: '15px 20px' }}>
 			<Form
 				{...formItemLayout}
 				size={componentSize}
@@ -95,8 +114,11 @@ function FeeReport(){
 						<Form.Item label="Member ID">
 							<Input />
 						</Form.Item>
-						<Form.Item label="Transaction Date">
-							<DatePicker style={{ width: '100%' }} />
+						<Form.Item label="SID">
+							<Input />
+						</Form.Item>
+						<Form.Item label="LEI">
+							<Input />
 						</Form.Item>
 					</div>
 				)}
@@ -125,7 +147,7 @@ function FeeReport(){
 				</Form.Item>
 			</Form>
 
-            <Row justify="end">
+			<Row justify="end">
                 <Col span={4}>
                     {/* <Link to={{
                         pathname: `#`,
@@ -152,4 +174,4 @@ function FeeReport(){
     )
 }
 
-export default FeeReport
+export default RegulatorReport
