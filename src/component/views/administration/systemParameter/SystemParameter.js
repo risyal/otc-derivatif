@@ -19,6 +19,7 @@ const columns = [
     {
         title: 'System Paramater',
         dataIndex: 'param',
+        sorter: true,
     },
     {
         title: 'Value',
@@ -115,6 +116,7 @@ const tailLayout = {
         span: 16,
     },
 };
+
 class SystemParameter extends React.Component {
     formRef = React.createRef();
     state = {
@@ -123,7 +125,14 @@ class SystemParameter extends React.Component {
             current: 1,
             pageSize: 5,
         },
-        loading: true
+        search: {
+            param: null,
+            value: null,
+            valueType: null,
+            note: null,
+        },
+        loading: true,
+        cobadata: "test",
     }
     componentDidMount() {
         const { pagination } = this.state;
@@ -139,16 +148,29 @@ class SystemParameter extends React.Component {
                  console.log(data)
              }) */
     }
-    handleTableChange = (pagination) => {
+    handleTableChange = (pagination, filters, sorter, extra) => {
+        console.log('paramasdasds', pagination, filters, sorter, extra);
         this.fetch({
             pagination,
         });
-        console.log(pagination);
     };
 
     fetch = (params = {}) => {
+        const paramSearch = new URLSearchParams([['param', 'ical']]);
+        /*  {
+             param: this.formRef.current.getFieldValue("keyword"),
+             value: this.formRef.current.getFieldValue("keyword"),
+             valueType: this.formRef.current.getFieldValue("keyword"),
+             note: this.formRef.current.getFieldValue("keyword")
+         }; */
+        console.log("params " + paramSearch.get);
         this.setState({ loading: true });
-        axios.get(`http://localhost:8080/sysparams`)
+        axios.get(`http://localhost:8080/sysparams`, {
+            params: {
+                param: this.formRef.current.getFieldValue("keyword"),
+                value: this.formRef.current.getFieldValue("keyword"),
+            }
+        })
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -164,7 +186,22 @@ class SystemParameter extends React.Component {
     onReset = () => {
         this.formRef.current.resetFields();
     };
-
+    handleSearch = (e) => {
+        e.preventDefault();
+        this.setState({
+            search: {
+                param: this.formRef.current.getFieldValue("keyword"),
+                value: this.formRef.current.getFieldValue("keyword"),
+                valueType: this.formRef.current.getFieldValue("keyword"),
+                note: this.formRef.current.getFieldValue("keyword"),
+            }
+        });
+        const { pagination } = this.state;
+        console.log("value" + this.formRef.current.getFieldValue("keyword"));
+        this.setState({ cobadata: "asdasdas test" });
+        console.log("valuecoba " + this.state.cobadata);
+        this.fetch({ pagination });
+    };
     render() {
         const { data, pagination, loading } = this.state;
         return (
@@ -181,7 +218,7 @@ class SystemParameter extends React.Component {
                         <Input />
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" style={{ marginRight: '10px' }} htmlType="submit">
+                        <Button type="primary" onClick={(e) => this.handleSearch(e)} style={{ marginRight: '10px' }} htmlType="submit">
                             Submit
                         </Button>
                         <Button htmlType="button" onClick={this.onReset}>

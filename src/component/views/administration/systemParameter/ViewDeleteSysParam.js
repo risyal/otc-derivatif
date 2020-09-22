@@ -15,6 +15,7 @@ import {
     DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -60,6 +61,7 @@ const ViewDeleteSysParam = (props) => {
     const [loading, setLoading] = useState(false);
 
 
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -114,15 +116,14 @@ const ViewDeleteSysParam = (props) => {
         }
 
     };
-    const [formState, setFormState] = React.useState(
-        {
-            title: "Telephone Number :",
-            paramData: "asd"
-        },
-        {
-            title: "Email :",
-            paramData: "asdas"
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/sysparams/${idx}`, {
         })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
     useEffect(() => {
         setParams(props.location.state.id);
     }, []);
@@ -181,7 +182,9 @@ const ViewDeleteSysParam = (props) => {
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/systemparameter">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                            <Button type="primary"
+                                onClick={submitDelete}
+                                style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (
