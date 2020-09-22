@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
@@ -8,12 +8,14 @@ import {
     Table,
     Row,
     Col,
+    Descriptions,
 } from 'antd';
 import {
     ArrowLeftOutlined,
     DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -44,101 +46,22 @@ const ViewDeleteSysParam = (props) => {
             key: 'paramData',
         },
     ]);
-    
+
     const [data] = useState([
         {
-            key: '0',
-            settlement: '',
-            tvTime: '',
-            initialMp: '',
-            ipChart: '',
-            feeType: '',
-            product: '',
-            objectFee: '',
-            variables: '',
-            cycle: '',
+            title: "Telephone Number :",
+            paramData: "asd"
         },
         {
-            key: '1',
-            settlement: 'SettlementWindow1',
-            tvTime: 'TradeValidationTime1',
-            initialMp: 'InitialMarginPercentage1',
-            ipChart: 'IndicatorPercentageChart1',
-            feeType: 'Type1',
-            product: 'Product1',
-            objectFee: 'Object1',
-            variables: 'Variables1',
-            cycle: 'SettlementCycle1',
-        },
-        {
-            key: '2',
-            settlement: 'SettlementWindow2',
-            tvTime: 'TradeValidationTime2',
-            initialMp: 'InitialMarginPercentage2',
-            ipChart: 'IndicatorPercentageChart2',
-            feeType: 'Type2',
-            product: 'Product2',
-            objectFee: 'Object2',
-            variables: 'Variables2',
-            cycle: 'SettlementCycle2',
-        },
-        {
-            key: '3',
-            settlement: 'SettlementWindow3',
-            tvTime: 'TradeValidationTime3',
-            initialMp: 'InitialMarginPercentage3',
-            ipChart: 'IndicatorPercentageChart3',
-            feeType: 'Type3',
-            product: 'Product3',
-            objectFee: 'Object3',
-            variables: 'Variables3',
-            cycle: 'SettlementCycle3',
-        },
-    ]);
-    const dataParamById = data.find((param) => {
-        return param.key === props.location.state.id
-
-    })
-
-    const [dataForView] = useState([
-        {
-            title: "Settlement Window :",
-            paramData: dataParamById.settlement
-        },
-        {
-            title: "Trade Validation Time :",
-            paramData: dataParamById.tvTime
-        },
-        {
-            title: "Initial Margin Percentage :",
-            paramData: dataParamById.initialMp
-        },
-        {
-            title: "Indicator Percentage Chart :",
-            paramData: dataParamById.ipChart
-        },
-        {
-            title: "Fee Type :",
-            paramData: dataParamById.feeType
-        },
-        {
-            title: "Product :",
-            paramData: dataParamById.product
-        },
-        {
-            title: "Object Fee :",
-            paramData: dataParamById.objectFee
-        },
-        {
-            title: "Variables :",
-            paramData: dataParamById.variables
-        },
-        {
-            title: "Settlement Cycle :",
-            paramData: dataParamById.cycle
+            title: "Email :",
+            paramData: "asdas"
         },
     ]);
 
+    const [loading, setLoading] = useState(false);
+
+
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -154,18 +77,89 @@ const ViewDeleteSysParam = (props) => {
             height: '35px'
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
+    const [param, setWeather] = useState({
+        param: null,
+        value: null,
+        valueType: null,
+        note: null,
+    });
+    const dataForView = [];
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/sysparams/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            /* form.setFieldsValue({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            }); */
+            setWeather({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            })
+            dataForView.push({
 
+                title: "Email :",
+                paramData: "asdas"
+            })
+            console.log(data);
+            console.log(dataForView);
+            setLoading(false);
+        }
+
+    };
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/sysparams/${idx}`, {
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
     return (
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
-                    <span className="icon-back">   
+                    <span className="icon-back">
                         <Link to="/systemparameter">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} System Parameter</Title>
+                    {action} System Parameter</Title>
             </div>
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+            <Descriptions column={1} bordered
+                extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
+                <Descriptions.Item label="Parameter">{param.param}</Descriptions.Item>
+                <Descriptions.Item label="Value">{param.value}</Descriptions.Item>
+                <Descriptions.Item label="Value Type">{param.valueType}</Descriptions.Item>
+                <Descriptions.Item label="Note">{param.note}</Descriptions.Item>
+            </Descriptions>
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -174,30 +168,6 @@ const ViewDeleteSysParam = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Row justify="end">
-                    <Col span={4}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                        {exportButtton}
-                        {/* </Link> */}
-                    </Col>
-                </Row>
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
-
                 {!disable ? (<Form.Item label="Role" className="roleViewDel">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
@@ -212,7 +182,9 @@ const ViewDeleteSysParam = (props) => {
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/systemparameter">
                         <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                            <Button type="primary"
+                                onClick={submitDelete}
+                                style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (

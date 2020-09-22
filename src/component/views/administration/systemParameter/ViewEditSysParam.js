@@ -1,168 +1,143 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
-    Form,
-    Input,
-    Button,
-    Radio,
-    Typography
+    Form, Input, Button,
+    Typography, Radio
 } from 'antd';
-import {
-    ArrowLeftOutlined
-} from '@ant-design/icons';
 import { Link } from "react-router-dom";
-import moment from 'moment';
 
-const { Title } = Typography;   
+import axios from 'axios';
 
+const { Title } = Typography;
 const ViewEditSysParam = (props) => {
-    const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
+    const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('horizontal');
 
-    const [data] = useState([
-        {
-            key: '0',
-            settlement: '',
-            tvTime: '',
-            initialMp: '',
-            ipChart: '',
-            feeType: '',
-            product: '',
-            objectFee: '',
-            variables: '',
-            cycle: '',
-        },
-        {
-            key: '1',
-            settlement: 'SettlementWindow1',
-            tvTime: 'TradeValidationTime1',
-            initialMp: 'InitialMarginPercentage1',
-            ipChart: 'IndicatorPercentageChart1',
-            feeType: 'Type1',
-            product: 'Product1',
-            objectFee: 'Object1',
-            variables: 'Variables1',
-            cycle: 'SettlementCycle1',
-        },
-        {
-            key: '2',
-            settlement: 'SettlementWindow2',
-            tvTime: 'TradeValidationTime2',
-            initialMp: 'InitialMarginPercentage2',
-            ipChart: 'IndicatorPercentageChart2',
-            feeType: 'Type2',
-            product: 'Product2',
-            objectFee: 'Object2',
-            variables: 'Variables2',
-            cycle: 'SettlementCycle2',
-        },
-        {
-            key: '3',
-            settlement: 'SettlementWindow3',
-            tvTime: 'TradeValidationTime3',
-            initialMp: 'InitialMarginPercentage3',
-            ipChart: 'IndicatorPercentageChart3',
-            feeType: 'Type3',
-            product: 'Product3',
-            objectFee: 'Object3',
-            variables: 'Variables3',
-            cycle: 'SettlementCycle3',
-        },
-    ]);
-
-    const dataParamById = data.find((param) => {
-        return param.key === props.location.state.id
-    })
-
-    const action = props.location.state.action
-    const disable = props.location.state.disable
-    const [sixEyes, setSixEyes] = useState(1);
-    const radioOnChange = e => {
-        setSixEyes(e.target.value);
+    const onFormLayoutChange = ({ layout }) => {
+        setFormLayout(layout);
     };
 
-    return(
+    const formItemLayout =
+        formLayout === 'horizontal'
+            ? {
+                labelCol: { span: 4 },
+                wrapperCol: { span: 14 },
+            }
+            : null;
+    const onFinish = values => {
+        axios.post(`http://localhost:8080/sysparams`, {
+            param: form.getFieldValue("param"),
+            value: form.getFieldValue("value"),
+            valueType: form.getFieldValue("valueType"),
+            note: form.getFieldValue("note"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                form.resetFields();
+            })
+    };
+    const [action] = useState(props.location.state.action);
+    const [idx] = useState(props.location.state.id);
+    const [loading, setLoading] = useState(false);
+    const [sysparam, setSysParam] = useState({
+        param: "test",
+        value: null,
+        valueType: null,
+        note: null,
+    });
+    const tailLayout = {
+        wrapperCol: { offset: 8, span: 16 },
+    };
+    const submitEdit = () => {
+        axios.put(`http://localhost:8080/sysparams/${idx}`, {
+            param: form.getFieldValue("param"),
+            value: form.getFieldValue("value"),
+            valueType: form.getFieldValue("valueType"),
+            note: form.getFieldValue("note"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                form.resetFields();
+            })
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/sysparams/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            form.setFieldsValue({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            });
+            setLoading(false);
+        }
+
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
+    return (
         <div>
-            <div className="head-content viewEdit">
+             {/* <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/systemparameter">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Parameter</Title>
-            </div>
+                    {action} Parameter</Title>
+            </div> */}
             <Form
                 {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-                labelAlign="left"
-                style={{ marginBottom: '80px' }}
+                layout={formLayout}
+                form={form}
+                initialValues={{ layout: formLayout }}
+                onFinish={onFinish}
             >
-                <Form.Item label="Settlement Window">
-                    <Input disabled={disable} defaultValue={dataParamById.settlement} />
+                <Form.Item name="param" label="System Paramater">
+                    <Input placeholder="System Paramater" />
                 </Form.Item>
-                <Form.Item label="Trade Validation Time">
-                    <Input disabled={disable} defaultValue={dataParamById.tvTime} />
+                <Form.Item name="value" label="Value">
+                    <Input placeholder="Value" />
                 </Form.Item>
-                <Form.Item label="Initial Margin Percentage">
-                    <Input disabled={disable} defaultValue={dataParamById.initialMp} />
+                <Form.Item name="valueType" label="Value Type">
+                    <Input placeholder="Value Type" />
                 </Form.Item>
-                <Form.Item label="Indicator Percentage Chart">
-                    <Input disabled={disable} defaultValue={dataParamById.ipChart} />
+                <Form.Item name="note" label="Note">
+                    <Input placeholder="Note" />
                 </Form.Item>
-                <Form.Item label="Fee Type">
-                    <Input disabled={disable} defaultValue={dataParamById.feeType} />
-                </Form.Item>
-                <Form.Item label="Product">
-                    <Input disabled={disable} defaultValue={dataParamById.product} />
-                </Form.Item>
-                <Form.Item label="Object Fee">
-                    <Input disabled={disable} defaultValue={dataParamById.objectFee} />
-                </Form.Item>
-                <Form.Item label="Variables">
-                    <Input disabled={disable} defaultValue={dataParamById.variables} />
-                </Form.Item>
-                <Form.Item label="Settlement Cycle">
-                    <Input disabled={disable} defaultValue={dataParamById.cycle} />
-                </Form.Item>
+                <Form.Item {...tailLayout}>
 
-                {!disable ? (<Form.Item label="Role" >
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
-
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/systemparameter">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
+                    {action == "Edit" ? (
+                        <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
+                            Submit edit
                         </Button>
-                    </Link>
                     ) : (
-                            <div></div>
-                        )}
+                            <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                                Submit
+                            </Button>
+                        )
+                    }
+                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                        Reset
+        </Button>
                     <Link to="/systemparameter">
                         <Button >
-                            {!disable ? (
-                                <div>Cancel</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
+                            <div>Back</div>
                         </Button>
                     </Link>
                 </Form.Item>
@@ -172,6 +147,5 @@ const ViewEditSysParam = (props) => {
     )
 
 }
-
 
 export default ViewEditSysParam
