@@ -126,8 +126,9 @@ const ViewEditCCMgt = (props) => {
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                <Form.Item label="Currency Code" name="currencyCode"
-                    rules={[{ required: true, message: 'Currency Code is required' }]}>
+                <Form.Item label="Currency Code" 
+                            name="currencyCode"
+                            rules={[{ required: true, message: 'Currency Code is required' }]}>
                     <Input placeholder="Insert Code" />
                 </Form.Item>
                 <Form.Item label="Currency Name" name="currencyName"
