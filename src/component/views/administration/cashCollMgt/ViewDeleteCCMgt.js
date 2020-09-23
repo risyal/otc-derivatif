@@ -152,7 +152,7 @@ const ViewDeleteCCMgt = (props) => {
             </Row>
 
             <Descriptions column={1} bordered
-                extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
+                extra={<Button type="primary"><DownloadOutlined /> Edit</Button>}>
                 <Descriptions.Item label="Currency Code">{cashcoll.currencyCode}</Descriptions.Item>
                 <Descriptions.Item label="Currency Name">{cashcoll.currencyName}</Descriptions.Item>
                 <Descriptions.Item label="Eligibility">{cashcoll.eligibility}</Descriptions.Item>
@@ -165,9 +165,9 @@ const ViewDeleteCCMgt = (props) => {
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-                style={{ marginBottom: '80px' }}
+                style={{ marginBottom: '80px', marginLeft: '10px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" style={{ marginLeft: '15px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>

@@ -17,6 +17,7 @@ import axios from 'axios';
 const { Title } = Typography;
 const { Option } = Select;
 
+const { Option } = Select;
 const ViewEditCCMgt = (props) => {
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
@@ -28,8 +29,14 @@ const ViewEditCCMgt = (props) => {
     const formItemLayout =
         formLayout === 'horizontal'
             ? {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 14 },
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
             }
             : null;
     const onFinish = values => {
@@ -62,7 +69,7 @@ const ViewEditCCMgt = (props) => {
         haircut: null,
     });
     const tailLayout = {
-        wrapperCol: { offset: 8, span: 16 },
+        wrapperCol: { offset: 6, span: 12 },
     };
     const submitEdit = () => {
         axios.put(`http://localhost:8080/cashcollateralmanagements/${idx}`, {
@@ -107,19 +114,20 @@ const ViewEditCCMgt = (props) => {
 
     return (
         <div>
-            {/* <div className="head-content viewEdit">
+            <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/cashcollmgt">
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Data Currency</Title>
-            </div> */}
+                    {action} Data Currency</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 layout={formLayout}
                 form={form}
+                labelAlign="left"
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
@@ -152,7 +160,6 @@ const ViewEditCCMgt = (props) => {
                 </Form.Item>
 
                 <Form.Item {...tailLayout}>
-
                     {action == "Edit" ? (
                         <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
                             Submit edit
@@ -165,7 +172,7 @@ const ViewEditCCMgt = (props) => {
                     }
                     <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
                         Reset
-        </Button>
+                    </Button>
                     <Link to="/cashcollmgt">
                         <Button >
                             <div>Back</div>
