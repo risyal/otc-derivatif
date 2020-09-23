@@ -13,6 +13,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
 
+const { Option } = Select;
 const columns = [
     {
         title: 'Date',
@@ -61,7 +62,7 @@ const columns = [
     },
     {
         title: 'Last Update Calendar',
-        dataIndex: 'update',
+        dataIndex: 'lastUpdate',
     },
 ];
 
@@ -102,14 +103,8 @@ const tailLayout = {
     },
 };
 
-// const productSelect = ['2020', '2019', '2018'];
-// const [jenisProduct, SetJenisProduct] = useState(productSelect[0]);
-// const productClick = (e) => {
-//     SetJenisProduct(e);
-// };
-
 class Calendar extends React.Component {
-    ormRef = React.createRef();
+    formRef = React.createRef();
     state = {
         data: [],
         pagination: {
@@ -119,7 +114,7 @@ class Calendar extends React.Component {
         search: {
             date: null,
             information: null,
-            update: null,
+            lastUpdate: null,
             note: null,
         },
         loading: true,
@@ -199,13 +194,11 @@ class Calendar extends React.Component {
                         </Button>
                 </Link>
                 <Button type="primary">Import</Button>
-                {/* <Select defaultValue={jenisProduct} 
-                        onChange={productClick}
-                        style= {{ float: 'right', width: '15%' }}>
-                    {productSelect.map(product => (
-                        <Select.Option key={product}>{product}</Select.Option>
-                    ))}
-                </Select> */}
+                <Select style= {{ float: 'right', width: '15%' }} placeholder="Select a year">
+                    <Option value="2020">2020</Option>
+                    <Option value="2019">2019</Option>
+                    <Option value="2018">2018</Option>
+                </Select>
                 
     
                 <Row justify="end">
@@ -220,6 +213,8 @@ class Calendar extends React.Component {
                     pagination={pagination}
                     loading={loading}
                     onChange={this.handleTableChange}
+                    bordered
+                    size="middle"
                 />
             </div>
         )  

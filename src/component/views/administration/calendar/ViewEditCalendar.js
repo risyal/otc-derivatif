@@ -18,9 +18,13 @@ import axios from 'axios';
 const { Title } = Typography;
 
 const ViewEditCalendar = (props) => {
+    
+    const dateFormat = 'YYYY/MM/DD';
     const [componentSize] = useMemo(() => 'middle');
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
+    const [todayDate] = useState(moment(new Date(), dateFormat));
+    const [fieldDate, setFieldDate] = useState(todayDate);
 
     const onFormLayoutChange = ({ layout }) => {
         setFormLayout(layout);
@@ -29,16 +33,24 @@ const ViewEditCalendar = (props) => {
     const formItemLayout =
         formLayout === 'horizontal'
             ? {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 14 },
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
             }
             : null;
 
     const onFinish = values => {
-        axios.post(`http://localhost:8080/calendarmarketholidays`, {
+        console.log('test==',form.getFieldValue("date"))
+        console.log('date==',fieldDate)
+        if (idx > 0) {
+            axios.put(`http://localhost:8080/calendarmarketholidays/${idx}`, {
             date: form.getFieldValue("date"),
             information: form.getFieldValue("information"),
-            update: form.getFieldValue("update"),
             note: form.getFieldValue("note"),
             status: "active",
             lastUpdate: null
@@ -46,8 +58,22 @@ const ViewEditCalendar = (props) => {
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-                form.resetFields();
+                // form.resetFields();
             })
+        } else {
+            axios.post(`http://localhost:8080/calendarmarketholidays`, {
+                date: fieldDate,
+                information: form.getFieldValue("information"),
+                note: form.getFieldValue("note"),
+                status: "active",
+                lastUpdate: null
+            })
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    // form.resetFields();
+                })
+            }
     };
 
     const [action] = useState(props.location.state.action);
@@ -56,18 +82,17 @@ const ViewEditCalendar = (props) => {
     const [sysparam, setSysParam] = useState({
         date: "test",
         information: null,
-        update: null,
+        lastUpdate: null,
         note: null,
     });
     const tailLayout = {
-        wrapperCol: { offset: 8, span: 16 },
+        wrapperCol: { offset: 6, span: 12 },
     };
 
     const submitEdit = () => {
         axios.put(`http://localhost:8080/calendarmarketholidays/${idx}`, {
             date: form.getFieldValue("date"),
             information: form.getFieldValue("information"),
-            update: form.getFieldValue("update"),
             note: form.getFieldValue("note"),
             status: "active",
             lastUpdate: null
@@ -90,24 +115,25 @@ const ViewEditCalendar = (props) => {
             );
             const resJSON = await apiRes.json();
             console.log(resJSON);
+            setFieldDate(resJSON.date);
             form.setFieldsValue({
-                date: resJSON.date,
                 information: resJSON.information,
-                update: resJSON.update,
+                lastUpdate: resJSON.lastUpdate,
                 note: resJSON.note,
             });
             setLoading(false);
+        }else{
+            setFieldDate(moment(new Date(), dateFormat));
         }
     };
     useEffect(() => {
         setParams(props.location.state.id);
     }, []);
 
-    const dateFormat = 'YYYY/MM/DD';
 
     return (
         <div>
-            {/* <div className="head-content viewEdit">
+            <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/calendar">
@@ -115,39 +141,37 @@ const ViewEditCalendar = (props) => {
                         </Link>
                     </span>
                     {action} Calendar</Title>
-            </div> */}
+            </div>
             <Form
                 {...formItemLayout}
                 // size={componentSize}
                 layout={formLayout}
                 form={form}
+                labelAlign="left"
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
                 
                 <Form.Item name="date" label="Date">
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/07/31', dateFormat)}/>
+                    <DatePicker
+                        onChange={(date, dateString) => setFieldDate(dateString)} 
+                        style={{ width: '100%' }}
+                        defaultValue={fieldDate}/>
                 </Form.Item>
                 <Form.Item name="information" label="Information">
                     <Input placeholder="Information"/>
                 </Form.Item>
+                <Form.Item name="note" label="Note">
+                    <Input placeholder="Note"/>
+                </Form.Item>
 
                 <Form.Item {...tailLayout}>
-
-                    {action == "Edit" ? (
-                        <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
-                            Submit edit
-                        </Button>
-                    ) : (
-                            <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
                                 Submit
                             </Button>
-                        )
-                    }
                     <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
                         Reset
-        </Button>
+                    </Button>
                     <Link to="/calendar">
                         <Button >
                             <div>Back</div>

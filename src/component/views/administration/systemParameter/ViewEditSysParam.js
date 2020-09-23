@@ -4,6 +4,9 @@ import {
     Typography, Radio
 } from 'antd';
 import { Link } from "react-router-dom";
+import {
+    ArrowLeftOutlined
+} from '@ant-design/icons';
 
 import axios from 'axios';
 
@@ -19,8 +22,14 @@ const ViewEditSysParam = (props) => {
     const formItemLayout =
         formLayout === 'horizontal'
             ? {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 14 },
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
             }
             : null;
     const onFinish = values => {
@@ -48,7 +57,7 @@ const ViewEditSysParam = (props) => {
         note: null,
     });
     const tailLayout = {
-        wrapperCol: { offset: 8, span: 16 },
+        wrapperCol: { offset: 6, span: 12 },
     };
     const submitEdit = () => {
         axios.put(`http://localhost:8080/sysparams/${idx}`, {
@@ -92,7 +101,7 @@ const ViewEditSysParam = (props) => {
     }, []);
     return (
         <div>
-            {/*  <div className="head-content viewEdit">
+             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/systemparameter">
@@ -100,11 +109,12 @@ const ViewEditSysParam = (props) => {
                         </Link>
                     </span>
                     {action} Parameter</Title>
-            </div> */}
+            </div>
             <Form
                 {...formItemLayout}
                 layout={formLayout}
                 form={form}
+                labelAlign="left"
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
