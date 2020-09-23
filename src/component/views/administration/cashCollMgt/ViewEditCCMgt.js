@@ -17,7 +17,6 @@ import axios from 'axios';
 const { Title } = Typography;
 const { Option } = Select;
 
-const { Option } = Select;
 const ViewEditCCMgt = (props) => {
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
