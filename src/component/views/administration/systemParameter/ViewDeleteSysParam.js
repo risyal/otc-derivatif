@@ -165,9 +165,9 @@ const ViewDeleteSysParam = (props) => {
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-                style={{ marginBottom: '80px' }}
+                style={{ marginBottom: '80px', marginLeft: '10px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ marginLeft: '15px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>

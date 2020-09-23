@@ -111,8 +111,8 @@ const exportButtton = <Button
 
 const tailLayout = {
     wrapperCol: {
-        offset: 8,
-        span: 16,
+        offset: 6,
+        span: 12,
     },
 };
 
@@ -262,6 +262,8 @@ class SystemParameter extends React.Component {
                         pagination={pagination}
                         loading={loading}
                         onChange={this.handleTableChange}
+                        bordered
+                        size="middle"
                     />
                 </div>
             </div>

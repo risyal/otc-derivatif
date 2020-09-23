@@ -82,7 +82,9 @@ const ViewDeleteCalendar= (props) => {
         update: null,
         note: null,
     });
+
     const dataForView = [];
+
     const setParams = async (q) => {
         if (q > 0) {
             console.log("edit" + q)
@@ -101,15 +103,15 @@ const ViewDeleteCalendar= (props) => {
             setCalendar({
                 date: resJSON.date,
                 information: resJSON.information,
-                update: resJSON.update,
+                lastUpdate: resJSON.lastUpdate,
                 note: resJSON.note,
             })
-            dataForView.push({
-                title: "Email :",
-                paramData: "asdas"
-            })
-            console.log(data);
-            console.log(dataForView);
+            // dataForView.push({
+            //     title: "Email :",
+            //     paramData: "asdas"
+            // })
+            // console.log(data);
+            // console.log(dataForView);
             setLoading(false);
         }
 
@@ -137,6 +139,7 @@ const ViewDeleteCalendar= (props) => {
                     </span>
                 {action} Calendar</Title>
             </div>
+
             <Row justify="end">
                 <Col span={4}>
                     {/* <Link to={{
@@ -151,11 +154,12 @@ const ViewDeleteCalendar= (props) => {
                     {/* </Link> */}
                 </Col>
             </Row>
+
             <Descriptions column={1} bordered
                 extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
                 <Descriptions.Item label="Date">{calendar.date}</Descriptions.Item>
                 <Descriptions.Item label="Information">{calendar.information}</Descriptions.Item>
-                <Descriptions.Item label="Last Update">{calendar.update}</Descriptions.Item>
+                <Descriptions.Item label="Last Update">{calendar.lastUpdate}</Descriptions.Item>
                 <Descriptions.Item label="Note">{calendar.note}</Descriptions.Item>
             </Descriptions>
 
@@ -167,7 +171,7 @@ const ViewDeleteCalendar= (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" style={{ marginLeft: '15px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -180,8 +184,13 @@ const ViewDeleteCalendar= (props) => {
 
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/calendar">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        <Popconfirm placement="leftTop" 
+                                    title={text} 
+                                    okText="Yes" 
+                                    cancelText="No">
+                            <Button type="primary" 
+                                    onClick={submitDelete}
+                                    style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (
