@@ -35,11 +35,6 @@ function RegisterAts() {
         },
         {
             title: 'Application Name',
-            dataIndex: 'applicationName',
-            key: 'applicationName',
-        },
-        {
-            title: 'Application Name',
             dataIndex: 'appName',
             key: 'appName',
         },
