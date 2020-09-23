@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const { Title } = Typography;
+const { Option } = Select;
 
 const ViewEditCCMgt = (props) => {
     const [form] = Form.useForm();
@@ -32,16 +33,11 @@ const ViewEditCCMgt = (props) => {
             }
             : null;
     const onFinish = values => {
-        var egl=false;
-        if(form.getFieldValue("eligibility")=="1"){
-            egl=true;
-        }
-        console.log("eg"+form.getFieldValue("eligibility"));
-        console.log("eg"+form.getFieldValue("haircut"));
+
         axios.post(`http://localhost:8080/cashcollateralmanagements`, {
             currencyCode: form.getFieldValue("currencyCode"),
             currencyName: form.getFieldValue("currencyName"),
-            eligibility: egl,
+            eligibility: values.eligibility,
             haircut: form.getFieldValue("haircut"),
             status: "active",
             lastUpdate: null
@@ -90,7 +86,7 @@ const ViewEditCCMgt = (props) => {
                 `http://localhost:8080/cashcollateralmanagements/${q}`
             );
             const resJSON = await apiRes.json();
-            console.log("asdasd"+resJSON.currencyCode);
+            console.log("asdasd" + resJSON.currencyCode);
             form.setFieldsValue({
                 currencyCode: resJSON.currencyCode,
                 currencyName: resJSON.currencyName,
@@ -105,7 +101,7 @@ const ViewEditCCMgt = (props) => {
         setParams(props.location.state.id);
     }, []);
 
-    return(
+    return (
         <div>
             {/* <div className="head-content viewEdit">
                 <Title level={4}>
@@ -129,14 +125,14 @@ const ViewEditCCMgt = (props) => {
                 <Form.Item label="Currency Name" name="currencyName">
                     <Input placeholder="Insert Name" />
                 </Form.Item>
-                <Form.Item label="Eligibity" 
-                defaultValue="1" name="eligibility">
-                    <select style= {{width: '100%'}}>
-                        <option value="1" >Yes</option>
-                        <option value="0">No</option>
-                    </select>
+                <Form.Item label="Eligibity"
+                    name="eligibility">
+                    <Select defaultValue="true" style={{ width: '100%' }}>
+                        <Option value="true" >Yes</Option>
+                        <Option value="false">No</Option>
+                    </Select>
                 </Form.Item>
-                <Form.Item label="Haircut"name="haircut">
+                <Form.Item label="Haircut" name="haircut">
                     <Input placeholder="Insert Haircut" />
                 </Form.Item>
 
