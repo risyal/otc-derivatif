@@ -180,7 +180,10 @@ const ViewDeleteSysParam = (props) => {
 
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/systemparameter">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                        <Popconfirm placement="leftTop" 
+                                    title={text} 
+                                    okText="Yes" 
+                                    cancelText="No">
                             <Button type="primary"
                                 onClick={submitDelete}
                                 style={{ marginRight: '15px' }}>Delete</Button>

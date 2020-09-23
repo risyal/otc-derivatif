@@ -16,6 +16,7 @@ import axios from 'axios';
 
 const { Title } = Typography;
 
+const { Option } = Select;
 const ViewEditCCMgt = (props) => {
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
@@ -27,8 +28,14 @@ const ViewEditCCMgt = (props) => {
     const formItemLayout =
         formLayout === 'horizontal'
             ? {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 14 },
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
             }
             : null;
     const onFinish = values => {
@@ -62,7 +69,7 @@ const ViewEditCCMgt = (props) => {
         haircut: null,
     });
     const tailLayout = {
-        wrapperCol: { offset: 8, span: 16 },
+        wrapperCol: { offset: 6, span: 12 },
     };
     const submitEdit = () => {
         axios.put(`http://localhost:8080/cashcollateralmanagements/${idx}`, {
@@ -107,7 +114,7 @@ const ViewEditCCMgt = (props) => {
 
     return(
         <div>
-            {/* <div className="head-content viewEdit">
+            <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/cashcollmgt">
@@ -115,11 +122,12 @@ const ViewEditCCMgt = (props) => {
                         </Link>
                     </span>
                 {action} Data Currency</Title>
-            </div> */}
+            </div>
             <Form
                 {...formItemLayout}
                 layout={formLayout}
                 form={form}
+                labelAlign="left"
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
@@ -129,19 +137,17 @@ const ViewEditCCMgt = (props) => {
                 <Form.Item label="Currency Name" name="currencyName">
                     <Input placeholder="Insert Name" />
                 </Form.Item>
-                <Form.Item label="Eligibity" 
-                defaultValue="1" name="eligibility">
-                    <select style= {{width: '100%'}}>
-                        <option value="1" >Yes</option>
-                        <option value="0">No</option>
-                    </select>
+                <Form.Item label="Eligibility" name="eligibility">
+                    <Select style= {{width: '100%'}} defaultValue="true">
+                        <Option value="true" >Yes</Option>
+                        <Option value="false">No</Option>
+                    </Select>
                 </Form.Item>
                 <Form.Item label="Haircut"name="haircut">
                     <Input placeholder="Insert Haircut" />
                 </Form.Item>
 
                 <Form.Item {...tailLayout}>
-
                     {action == "Edit" ? (
                         <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
                             Submit edit
@@ -154,7 +160,7 @@ const ViewEditCCMgt = (props) => {
                     }
                     <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
                         Reset
-        </Button>
+                    </Button>
                     <Link to="/cashcollmgt">
                         <Button >
                             <div>Back</div>
