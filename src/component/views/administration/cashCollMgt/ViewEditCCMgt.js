@@ -20,6 +20,7 @@ const { Option } = Select;
 const ViewEditCCMgt = (props) => {
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
+    const [elig, setElig] = useState('true');
 
     const onFormLayoutChange = ({ layout }) => {
         setFormLayout(layout);
@@ -41,49 +42,44 @@ const ViewEditCCMgt = (props) => {
     const onFinish = values => {
 
         console.log('Received values of form: ', values);
+        console.log('idnya: ', idx);
         console.log('Received eli of form: ', values.eligibility);
         var egl = "true";
         console.log("eg" + egl);
-        axios.post(`http://localhost:8080/cashcollateralmanagements`, {
-            currencyCode: form.getFieldValue("currencyCode"),
-            currencyName: form.getFieldValue("currencyName"),
-            eligibility: values.eligibility,
-            haircut: form.getFieldValue("haircut"),
-            status: "active",
-            lastUpdate: null
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                form.resetFields();
+        console.log('asd', form.getFieldValue("eligibility"));
+        if (idx > 0) {
+            axios.put(`http://localhost:8080/cashcollateralmanagements/${idx}`, {
+                currencyCode: form.getFieldValue("currencyCode"),
+                currencyName: form.getFieldValue("currencyName"),
+                eligibility: form.getFieldValue("eligibility"),
+                haircut: form.getFieldValue("haircut"),
+                status: "active",
+                lastUpdate: null
             })
+                .then(res => {
+                    form.resetFields();
+                })
+
+        } else {
+            axios.post(`http://localhost:8080/cashcollateralmanagements`, {
+                currencyCode: form.getFieldValue("currencyCode"),
+                currencyName: form.getFieldValue("currencyName"),
+                eligibility: values.eligibility,
+                haircut: form.getFieldValue("haircut"),
+                status: "active",
+                lastUpdate: null
+            })
+                .then(res => {
+                    form.resetFields();
+                })
+        }
+
     };
     const [action] = useState(props.location.state.action);
     const [idx] = useState(props.location.state.id);
     const [loading, setLoading] = useState(false);
-    const [cashcoll, setCashcoll] = useState({
-        code: "test",
-        name: null,
-        eligibility: null,
-        haircut: null,
-    });
     const tailLayout = {
         wrapperCol: { offset: 6, span: 12 },
-    };
-    const submitEdit = () => {
-        axios.put(`http://localhost:8080/cashcollateralmanagements/${idx}`, {
-            currencyCode: form.getFieldValue("currencyCode"),
-            currencyName: form.getFieldValue("currencyName"),
-            eligibility: form.getFieldValue("eligibility"),
-            haircut: form.getFieldValue("haircut"),
-            status: "active",
-            lastUpdate: null
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                form.resetFields();
-            })
     };
     const onReset = () => {
         form.resetFields();
@@ -159,16 +155,9 @@ const ViewEditCCMgt = (props) => {
                 </Form.Item>
 
                 <Form.Item {...tailLayout}>
-                    {action == "Edit" ? (
-                        <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
-                            Submit edit
-                        </Button>
-                    ) : (
-                            <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
-                                Submit
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                        Submit
                             </Button>
-                        )
-                    }
                     <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
                         Reset
                     </Button>
