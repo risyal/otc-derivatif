@@ -34,6 +34,10 @@ const ViewEditCCMgt = (props) => {
             : null;
     const onFinish = values => {
 
+        console.log('Received values of form: ', values);
+        console.log('Received eli of form: ', values.eligibility);
+        var egl = "true";
+        console.log("eg" + egl);
         axios.post(`http://localhost:8080/cashcollateralmanagements`, {
             currencyCode: form.getFieldValue("currencyCode"),
             currencyName: form.getFieldValue("currencyName"),
@@ -119,20 +123,31 @@ const ViewEditCCMgt = (props) => {
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                <Form.Item label="Currency Code" name="currencyCode">
+                <Form.Item label="Currency Code" name="currencyCode"
+                    rules={[{ required: true, message: 'Currency Code is required' }]}>
                     <Input placeholder="Insert Code" />
                 </Form.Item>
-                <Form.Item label="Currency Name" name="currencyName">
+                <Form.Item label="Currency Name" name="currencyName"
+                    rules={[{ required: true, message: 'Currency Name is required' }]}>
                     <Input placeholder="Insert Name" />
                 </Form.Item>
-                <Form.Item label="Eligibity"
-                    name="eligibility">
-                    <Select defaultValue="true" style={{ width: '100%' }}>
-                        <Option value="true" >Yes</Option>
-                        <Option value="false">No</Option>
-                    </Select>
+                <Form.Item label="Eligibility">
+                    <Input.Group compact>
+                        <Form.Item
+                            name={['eligibility']}
+                            noStyle
+                            rules={[{ required: true, message: 'Eligibility is required' }]}
+                        >
+                            <Select placeholder="Select Eligibility" style={{ width: '100%' }}
+                            >
+                                <Option value="true">Yes</Option>
+                                <Option value="false">No</Option>
+                            </Select>
+                        </Form.Item>
+                    </Input.Group>
                 </Form.Item>
-                <Form.Item label="Haircut" name="haircut">
+                <Form.Item label="Haircut" name="haircut"
+                    rules={[{ required: true, message: 'Haircut is required' }]}>
                     <Input placeholder="Insert Haircut" />
                 </Form.Item>
 
