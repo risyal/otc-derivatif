@@ -32,19 +32,9 @@ function ObligationAccomplishment(){
             key: 'memberId',
         },
         {
-            title: 'Member Name',
-            dataIndex: 'memberName',
-            key: 'memberName',
-        },
-        // {
-        //     title: 'AK Code',
-        //     dataIndex: 'akCode',
-        //     key: 'akCode',
-        //   },
-        {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
+            title: 'Position Settlement Right/Obligation',
+            dataIndex: 'positionSettlement',
+            key: 'positionSettlement',
         },
         {
             title: 'Settlement Value',

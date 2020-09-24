@@ -99,24 +99,6 @@ function DHKLevelMember(){
             key: 'tradeRightObligation',
             width: 100,
         },
-        {
-            title: 'Fee',
-            dataIndex: 'fee',
-            key: 'fee',
-            width: 100,
-        },
-        {
-            title: 'Default Fund',
-            dataIndex: 'defaultFund',
-            key: 'defaultFund',
-            width: 100,
-        },
-        {
-            title: 'Penalty',
-            dataIndex: 'penalty',
-            key: 'penalty',
-            width: 100,
-        },
     ];
     const data = [
         {

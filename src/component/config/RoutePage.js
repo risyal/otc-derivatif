@@ -136,6 +136,10 @@ import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDeta
 import ApprovalCollateral from '../views/collateral/ApprovalCollateral';
 import DHKLevelClient from '../views/reporting/DHKLevelClient';
 import RegulatorReport from '../views/reporting/RegulatorReport';
+import ClearingSummary from '../views/reporting/ClearingSummary';
+import ClientAccomplishment from '../views/reporting/ClientAccomplishment';
+import MarginReport from '../views/reporting/MarginReport';
+import DefaultReport from '../views/reporting/DefaultReport';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -369,7 +373,7 @@ function RoutePage() {
             </Route>
             <Route path="/movementbalance">
                 <div className="head-content">
-                    <Title level={4}>Movement Balance</Title>
+                    <Title level={4}>Movement Balance Report</Title>
                 </div>
                 <MovementBalance />
             </Route>
@@ -390,6 +394,30 @@ function RoutePage() {
                     <Title level={4}>Fee Report</Title>
                 </div>
                 <FeeReport />
+            </Route>
+            <Route path="/marginreport">
+                <div className="head-content">
+                    <Title level={4}>Margin Report</Title>
+                </div>
+                <MarginReport />
+            </Route>
+            <Route path="/defaultreport">
+                <div className="head-content">
+                    <Title level={4}>Default Report</Title>
+                </div>
+                <DefaultReport />
+            </Route>
+            <Route path="/clientaccomplishment">
+                <div className="head-content">
+                    <Title level={4}>Client Accomplishment Report</Title>
+                </div>
+                <ClientAccomplishment />
+            </Route>
+            <Route path="/clearingsummary">
+                <div className="head-content">
+                    <Title level={4}>Clearing Summary Report</Title>
+                </div>
+                <ClearingSummary />
             </Route>
             <Route path="/dhkmember">
                 <div className="head-content">

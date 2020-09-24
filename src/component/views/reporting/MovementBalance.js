@@ -160,6 +160,7 @@ function MovementBalance(){
                     dataSource={data}
                     bordered
                     size="middle"
+                    scroll={{ x: 'calc(700px + 50%)' }}
                 />
             </div>
         </div>
