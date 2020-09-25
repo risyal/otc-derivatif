@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function DefaultFundReport(){
+function ClientAccomplishment(){
 	const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -24,35 +24,45 @@ function DefaultFundReport(){
             sm: { span: 16 },
         },
 	};
-	
+
     const columns = [
         {
-            title: 'Member ID',
-            dataIndex: 'memberID',
-            key: 'memberID',
-		},
-		{
-            title: 'Minimum Requirement',
-            dataIndex: 'minimumRequirement',
-            key: 'minimumRequirement',
-		},
-		{
-            title: 'DF Account Balance',
-            dataIndex: 'dfAccountBalance',
-            key: 'dfAccountBalance',
-		},
-		{
-            title: 'DF Usage Value',
-            dataIndex: 'dfUsageValue',
-            key: 'dfUsageValue',
-		},
-		{
-            title: 'Shortage',
-            dataIndex: 'Shortage',
-            key: 'Shortage',
-		},
+            title: 'SID',
+            dataIndex: 'sid',
+        },
+        {
+            title: 'LEI',
+            dataIndex: 'lei',
+        },
+        {
+            title: 'Settlement Value',
+            dataIndex: 'settlementValue',
+        },
+        {
+            title: 'Total Accomplishment',
+            children: [
+                {
+                    title: 'Delivered',
+                    dataIndex: 'delivered',
+                },
+                {
+                    title: 'Received',
+                    dataIndex: 'received',
+                },
+            ]
+        },
+        {
+            title: 'Accomplishment by Member',
+            dataIndex: 'accomplishmentMember',
+        },
     ];
     const data = [
+        {
+        },
+        {
+        },
+        {
+        },
         {
         },
         {
@@ -62,15 +72,16 @@ function DefaultFundReport(){
     ];
 
     const [exportButtton] = useState(<Button
-      type="primary"
-      style={{
-          marginBottom: '15px',
-          paddingBottom: '15px',
-          float: 'right',
-          height: '35px'
-      }}
-      icon={<DownloadOutlined />}>Export File</Button>);
-   
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
+
+
     return (
         <div style={{ margin: '15px 20px' }}>
 			<Form
@@ -89,10 +100,7 @@ function DefaultFundReport(){
 						<Form.Item label="Member ID">
 							<Input />
 						</Form.Item>
-						<Form.Item label="DF Usage Value">
-							<Input />
-						</Form.Item>
-						<Form.Item label="Settlement Date">
+						<Form.Item label="Transaction Date">
 							<DatePicker style={{ width: '100%' }} />
 						</Form.Item>
 					</div>
@@ -122,7 +130,7 @@ function DefaultFundReport(){
 				</Form.Item>
 			</Form>
 
-      		<Row justify="end">
+            <Row justify="end">
                 <Col span={4}>
                     {/* <Link to={{
                         pathname: `#`,
@@ -149,4 +157,4 @@ function DefaultFundReport(){
     )
 }
 
-export default DefaultFundReport
+export default ClientAccomplishment

@@ -27,35 +27,49 @@ function DailyTransactionReport(){
 	
     const columns = [
         {
-            title: 'Member ID',
-            dataIndex: 'memberID',
-            key: 'memberID',
-          },
-          {
-            title: 'Company Name',
-            dataIndex: 'companyName',
-            key: 'companyName',
-          },
-          {
-            title: 'Trade Contract',
-            dataIndex: 'tradeContract',
-            key: 'tradeContract',
-          },
-          {
-            title: 'Detail of Economic Term',
-            dataIndex: 'detailOfEconomicTerm',
-            key: 'detailOfEconomicTerm',
-          },
-          {
-            title: 'Notional Value',
-            dataIndex: 'notionalValue',
-            key: 'notionalValue',
-          },
-          {
-            title: 'Netting of New Contracts',
-            dataIndex: 'nettingOfNewContracts',
-            key: 'nettingOfNewContracts',
-          },
+            title: 'UTI',
+            dataIndex: 'uti',
+        },
+        {
+            title: 'CM Code',
+            dataIndex: 'cMCode',
+        },
+        {
+            title: 'Counterparty Code',
+            dataIndex: 'counterpartyCode',
+        },
+        {
+            title: 'Product',
+            dataIndex: 'product',
+        },
+        {
+            title: 'Position',
+            dataIndex: 'position',
+        },
+        {
+            title: 'Rate',
+            dataIndex: 'rate',
+        },
+        {
+            title: 'Value',
+            dataIndex: 'value',
+        },
+        {
+            title: 'Tenor',
+            dataIndex: 'tenor',
+        },
+        {
+            title: 'Effective Date',
+            dataIndex: 'effectiveDate',
+        },
+        {
+            title: 'Payment Frequency',
+            dataIndex: 'effectiveDate',
+        },
+        {
+            title: 'Maturity Date',
+            dataIndex: 'maturityDate',
+        },
     ];
     const data = [
         {
@@ -151,6 +165,7 @@ function DailyTransactionReport(){
 					dataSource={data}
 					bordered
 					size="middle"
+                    scroll={{ x: 'calc(700px + 50%)' }}
 				/>
 			</div>
         </div>

@@ -260,13 +260,7 @@ const Menu = [
             name: 'OAR (Obligation Accomplishment Report)',
             key: 'obligationaccomplishment',
             linkTo: '/obligationaccomplishment'
-        }, 
-        {
-            name: 'Daily Transaction Report',
-            key: 'dailytransaction',
-            linkTo: '/dailytransaction'
-        },
-        {
+        }, {
             name: 'Regulator Report',
             key: 'regulatorreport',
             linkTo: '/regulatorreport'
@@ -283,15 +277,35 @@ const Menu = [
             key: 'fundreport',
             linkTo: '/fundreport'
         }, 
-        {
-            name: 'Report Bank Indonesia',
-            key: 'reportbankid',
-            linkTo: '/reportbankid'
-        },
+        // {
+        //     name: 'Report Bank Indonesia',
+        //     key: 'reportbankid',
+        //     linkTo: '/reportbankid'
+        // },
         {
             name: 'Fee Report',
             key: 'feereport',
             linkTo: '/feereport'
+        }, {
+            name: 'Margin Report',
+            key: 'marginreport',
+            linkTo: '/marginreport'
+        }, {
+            name: 'Default Report',
+            key: 'defaultreport',
+            linkTo: '/defaultreport'
+        }, {
+            name: 'Client Accomplishment Report',
+            key: 'clientaccomplishment',
+            linkTo: '/clientaccomplishment'
+        }, {
+            name: 'Daily Transaction Report',
+            key: 'dailytransaction',
+            linkTo: '/dailytransaction'
+        }, {
+            name: 'Clearing Summary',
+            key: 'clearingsummary',
+            linkTo: '/clearingsummary'
         }]
     },
     {
