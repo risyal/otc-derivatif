@@ -7,152 +7,32 @@ import CancelTradePage from '../views/trade/CancelTrade';
 import {
     Route
 } from "react-router-dom";
-import MonitoringTrade from '../views/trade/MonitoringTrade';
-import TradeSummary from '../views/trade/TradeSummary';
-import ClearingPostition from '../views/clearing/ClearingPostition';
-import InquiryPosition from '../views/clearing/InquiryPosition';
-import SettlementPosition from '../views/clearing/SettlementPosition';
-import CashFlowIrs from '../views/clearing/CashFlowIrs';
-import ObligationAccomplishment from '../views/reporting/ObligationAccomplishment';
-import DHKLevelMember from '../views/reporting/DHKLevelMember';
-import DailyTransactionReport from '../views/reporting/DailyTransactionReport';
-import NovationReport from '../views/reporting/NovationReport';
-import MovementBalance from '../views/reporting/MovementBalance';
-import DefaultFundReport from '../views/reporting/DefaultFundReport';
-import ReportBI from '../views/reporting/ReportBI';
-import FeeReport from '../views/reporting/FeeReport';
-import RegisterClient from '../views/member-client/RegisterClient';
-import RegisterMember from '../views/member-client/RegisterMember';
-import AccountDetail from '../views/account/AccountDetail';
-import BlockCollateralMember from '../views/account/BlockCollateralMember';
-import BlockCollateralClient from '../views/account/BlockCollateralClient';
-import DefaultFund from '../views/account/DefaultFund';
-import RegisterBeneficiaries from '../views/account/RegisterBeneficiaries';
-import InquiryBeneficiaries from '../views/account/InquiryBeneficiaries';
-import RegisterContract from '../views/administration/registerContract/RegisterContract';
-import EditAccount from '../views/administration/editAccountStatus/EditAccount';
-import SecuritiesCollMgt from '../views/administration/securitiesCollMgt/SecuritiesCollMgt';
-import CashCollMgt from '../views/administration/cashCollMgt/CashCollMgt';
-import EditReferenceRate from '../views/administration/editReferenceRate/EditReferenceRate';
-import EditParameter from '../views/administration/editParameter/EditParameter';
-import AuditTrail from '../views/administration/AuditTrail';
-import UserManagement from '../views/administration/userManagement/UserManagement';
-import SystemParameter from '../views/administration/systemParameter/SystemParameter';
-import Calendar from '../views/administration/calendar/Calendar';
-import Approval from '../views/administration/Approval';
-import RegisterAts from '../views/administration/registerAts/RegisterAts';
-import SettlementInstruction from '../views/settlement/SettlementInstruction';
-import SettlementJobExecution from '../views/settlement/SettlementJobExecution';
-import SettlementMonitoring from '../views/settlement/SettlementMonitoring';
-import SecurityManagement from '../views/instruction/SecurityManagement';
-import InquirySecManagement from '../views/instruction/InquirySecManagement';
-import CashInquiryManagement from '../views/instruction/CashInquiryManagement';
-import InquiryCashManagement from '../views/instruction/InquiryCashManagement';
-import Inquiry from '../views/collateral/Inquiry';
-import InstructionCOLDP from '../views/collateral/InstructionCOLDP';
-import InstructionCOLW from '../views/collateral/InstructionCOLW';
-import TradeConfirmation from '../views/trade/TradeConfirmation';
-import SettlementStatus from '../views/settlement/SettlementStatus';
-import ViewEditMember from '../views/member-client/ViewEditMember';
-import ViewEditClient from '../views/member-client/ViewEditClient';
-import ViewDeleteMember from '../views/member-client/ViewDeleteMember';
-import ViewDeleteClient from '../views/member-client/ViewDeleteClient';
-import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
-import EditRegisterContract from '../views/administration/EditRegisterContract';
-import ApprovalTrade from '../views/trade/ApprovalTrade';
-import ViewDeleteAccount from '../views/administration/editAccountStatus/ViewDeleteAccount';
-import ViewEditAccount from '../views/administration/editAccountStatus/ViewEditAccount';
-import ViewEditSCMgt from '../views/administration/securitiesCollMgt/ViewEditSCMgt';
-import ViewDeleteSCMgt from '../views/administration/securitiesCollMgt/ViewDeleteSCMgt';
-import ViewEditCCMgt from '../views/administration/cashCollMgt/ViewEditCCMgt';
-import ViewDeleteCCMgt from '../views/administration/cashCollMgt/ViewDeleteCCMgt';
-import ViewDeleteJibor from '../views/administration/editReferenceRate/ViewDeleteJibor';
-import ViewEditJibor from '../views/administration/editReferenceRate/ViewEditJibor';
-import ViewDeleteParam from '../views/administration/editParameter/ViewDeleteParam';
-import ViewEditParam from '../views/administration/editParameter/ViewEditParam';
-import ViewEditUser from '../views/administration/userManagement/ViewEditUser';
-import ViewDeleteUser from '../views/administration/userManagement/ViewDeleteUser';
-import AddUser from '../views/administration/userManagement/AddUser';
-import ViewEditCalendar from '../views/administration/calendar/ViewEditCalendar';
-import ViewDeleteCalendar from '../views/administration/calendar/ViewDeleteCalendar';
-import DetailViewTrade from '../views/trade/DetailView';
-import ViewEditRegAts from '../views/administration/registerAts/ViewEditRegAts';
-import ViewDeleteRegAts from '../views/administration/registerAts/ViewDeleteRegAts';
-import ViewAdd from '../views/collateral/ViewAdd';
-import ViewAddColw from '../views/collateral/ViewAddColw';
-import DetailCancelCOLDP from '../views/collateral/DetailCancelCOLDP';
-import DetailCancelCOLW from '../views/collateral/DetailCancelCOLW';
-import ViewAddSM from '../views/instruction/ViewAddSM';
-import DetailCancelSM from '../views/instruction/DetailCancelSM';
-import ViewAddCM from '../views/instruction/ViewAddCM';
-import DetailCancelCM from '../views/instruction/DetailCancelCM';
-import ClearingDetailView from '../views/clearing/ClearingDetail';
-import IrsEditCurrency from '../views/administration/registerContract/IrsEditCurrency';
-import IrsEditLegType from '../views/administration/registerContract/IrsEditLegType';
-import IrsEffectiveDate from '../views/administration/registerContract/IrsEffectiveDate';
-import IrsEditContractTerm from '../views/administration/registerContract/IrsEditContractTerm';
-import IrsEditNotionalAmount from '../views/administration/registerContract/IrsEditNotionalAmount';
-import IrsEditPaymentFreq from '../views/administration/registerContract/IrsEditPaymentFreq';
-import IrsEditFixingDate from '../views/administration/registerContract/IrsEditFixingDate';
-import IrsEditSpread from '../views/administration/registerContract/IrsEditSpread';
-import IrsEditDayCountF from '../views/administration/registerContract/IrsEditDayCountF';
-import IrsFloatingRatrRFreq from '../views/administration/registerContract/IrsFloatingRateRFreq';
-import IrsFloatingRIndex from '../views/administration/registerContract/IrsFloatingRIndex';
-import IrsBDC from '../views/administration/registerContract/IrsBDC';
-import IrsEditRoundingP from '../views/administration/registerContract/IrsEditRoundingP';
-import IrsEditStubPayment from '../views/administration/registerContract/IrsEditStubPayment';
-import IrsEditForwardStart from '../views/administration/registerContract/IrsEditForwardStart';
-import IrsEditCashPaymentC from '../views/administration/registerContract/IrsEditCashPaymentC';
-import OisEditCurrency from '../views/administration/registerContract/OisEditCurrenct';
-import OisEditLegType from '../views/administration/registerContract/OisEditLegType';
-import OisEffectiveDate from '../views/administration/registerContract/OisEffectiveDate';
-import OisEditContractTerm from '../views/administration/registerContract/OisEditContractTerm';
-import OisEditNotionalAmount from '../views/administration/registerContract/OisEditNotionalAmount';
-import OisEditDayCountF from '../views/administration/registerContract/OisEditDayCountF';
-import OisBDC from '../views/administration/registerContract/OisBDC';
-import OisEditRoundingP from '../views/administration/registerContract/OisEditRoundingP';
-import OisEditForwardStart from '../views/administration/registerContract/OisEditForwardS';
-import OisEditSpread from '../views/administration/registerContract/OisEditSpread';
-import DndfEditCurrency from '../views/administration/registerContract/DndfEditCurrency';
-import DndfEditFixingDate from '../views/administration/registerContract/DndfEditFixingDate';
-import DndfTenor from '../views/administration/registerContract/DndfTenor';
-import DndfEditNotionalAmount from '../views/administration/registerContract/DndfEditNotionalAmount';
-import ViewDeleteJisdor from '../views/administration/editReferenceRate/ViewDeleteJisdor';
-import ViewEditJisdor from '../views/administration/editReferenceRate/ViewEditJisdor';
-import ViewDeleteIndonia from '../views/administration/editReferenceRate/ViewDeleteIndonia';
-import ViewEditIndonia from '../views/administration/editReferenceRate/ViewEditIndonia';
-import ViewDeleteSysParam from '../views/administration/systemParameter/ViewDeleteSysParam';
-import ViewEditSysParam from '../views/administration/systemParameter/ViewEditSysParam';
-import DetailApproval from '../views/administration/DetailApproval';
-import AccDetailView from '../views/account/AccDetailView';
-import ClearingDetailIRS from '../views/clearing/ClearingDetailIRS';
-import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
-import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
-import ApprovalAccount from '../views/account/ApprovalAccount';
-import ApprovalDetail from '../views/account/ApprovalDetail';
-import ApprovalInstruction from '../views/instruction/ApprovalInstruction';
-import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
-import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDetail';
-import ApprovalCollateral from '../views/collateral/ApprovalCollateral';
-import DHKLevelClient from '../views/reporting/DHKLevelClient';
-import RegulatorReport from '../views/reporting/RegulatorReport';
-import ClearingSummary from '../views/reporting/ClearingSummary';
-import ClientAccomplishment from '../views/reporting/ClientAccomplishment';
-import MarginReport from '../views/reporting/MarginReport';
-import DefaultReport from '../views/reporting/DefaultReport';
+
+import ListMenu from '../config/ListMenu';
 
 function RoutePage() {
     const { Title } = Typography;
+    let rootWithNavLink = "/otcder";
+    const routeComp = ListMenu.map(
+        menuItem =>
+            menuItem.subMenus !== undefined ?
+                menuItem.subMenus.map(subMenu =>
+                    <Route exact path={rootWithNavLink + subMenu.linkTo}
+                        component={subMenu.component} key={subMenu.key}>
+                    </Route>
+                )
+                :
+                <Route exact path={rootWithNavLink + menuItem.linkTo}
+                    component={menuItem.component} key={menuItem.key}>
+                </Route>
 
+
+    )
     return (
         <div>
-            <Route path="/inquerytrade">
-                <div className="head-content">
-                    <Title level={4}>Inquiry Input Trade</Title>
-                </div>
-                <InquiryTradePage />
-            </Route>
-            <Route path="/newtrade">
+            {routeComp}
+            {/* 
+            <Route path="/otcder/newtrade">
                 <div className="head-content">
                     <Title level={4}>Input Trade</Title>
                 </div>
@@ -717,7 +597,7 @@ function RoutePage() {
             </Route>
             <Route path="/clearingManagement/clearingDetailDndf">
                 <ClearingDetailDNDF />
-            </Route>
+            </Route> */}
         </div>
     )
 }

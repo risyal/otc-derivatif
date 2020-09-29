@@ -13,6 +13,8 @@ function Navigation(props) {
             console.log('click ', e.key);
             SetSelectedKey(e.key);
         }; */
+
+    let rootWithNavLink = "/otcder";
     return (
         <Sider theme="light" trigger={null} collapsible collapsed={props.collapsed}
             width="280"
@@ -31,7 +33,7 @@ function Navigation(props) {
                                     menuItem.subMenus.map(function (subMenu) {
                                         return (
                                             <Menu.Item key={subMenu.key}>
-                                                <Link to={subMenu.linkTo}>{subMenu.name}
+                                                <Link to={rootWithNavLink + subMenu.linkTo}>{subMenu.name}
                                                 </Link>
                                             </Menu.Item>
                                         )
@@ -43,7 +45,7 @@ function Navigation(props) {
                         return (
                             <Menu.Item key={menuItem.key} icon={menuItem.icon}>
 
-                                <Link to={menuItem.linkTo}>{menuItem.name}
+                                <Link to={rootWithNavLink + menuItem.linkTo}>{menuItem.name}
                                 </Link></Menu.Item>
                         )
                     }
