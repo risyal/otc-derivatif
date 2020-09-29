@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Input,
@@ -13,59 +13,111 @@ import {
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
+import axios from 'axios';
+
 const { Title } = Typography;
 
 const ViewEditJisdor = (props) => {
-    const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
-
-    const [data] = useState([
-        {
-			key: '0',
-			no: '',
-			date: '',
-			value: '',
-		},
-        {
-			key: '1',
-			no: '1',
-			date: '20-07-2020',
-			value: '14,832.00',
-		},
-		{
-			key: '2',
-			no: '2',
-			date: '19-07-2020',
-			value: '14,780.00',     
-		},
-		{
-			key: '3',
-			no: '3',
-			date: '18-07-2020',
-			value: '14,632.00',       
-		},
-    ]);
-
-    const dataJisdorById = data.find((jisdor) => {
-        return jisdor.key === props.location.state.id
-    })
-
-    const action = props.location.state.action
-    const disable = props.location.state.disable
-    const [sixEyes, setSixEyes] = useState(1);
-    const radioOnChange = e => {
-        setSixEyes(e.target.value);
-    };
     const dateFormat = 'YYYY/MM/DD';
+    const [componentSize] = useMemo(() => 'middle');
+    const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('horizontal');
+    const [todayDate] = useState(moment(new Date(), dateFormat));
+    const [fieldDate, setFieldDate] = useState(todayDate);
+
+    const onFormLayoutChange = ({ layout }) => {
+        setFormLayout(layout);
+    };
+
+    const formItemLayout =
+    formLayout === 'horizontal'
+        ? {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 6 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 16 },
+            },
+        }
+        : null;
+
+    const onFinish = values => {
+        console.log('test==',form.getFieldValue("date"))
+        console.log('date==',fieldDate)
+        if (idx > 0) {
+            axios.put(`http://localhost:8080/referencejisdors/${idx}`, {
+            date: form.getFieldValue("date"),
+            value: form.getFieldValue("value"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                // form.resetFields();
+            })
+        } else {
+            axios.post(`http://localhost:8080/referencejisdors`, {
+                date: fieldDate,
+                value: form.getFieldValue("value"),
+                status: "active",
+                lastUpdate: null
+            })
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    // form.resetFields();
+                })
+            }
+    };
+
+    const [action] = useState(props.location.state.action);
+    const [idx] = useState(props.location.state.id);
+    const [loading, setLoading] = useState(false);
+    const tailLayout = {
+        wrapperCol: { offset: 6, span: 12 },
+    };
+
+    const submitEdit = () => {
+        axios.put(`http://localhost:8080/referencejisdors/${idx}`, {
+            date: form.getFieldValue("date"),
+            value: form.getFieldValue("value"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                form.resetFields();
+            })
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/referencejisdors/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            setFieldDate(resJSON.date);
+            form.setFieldsValue({
+                value: resJSON.value,
+                lastUpdate: resJSON.lastUpdate,
+            });
+            setLoading(false);
+        }else{
+            setFieldDate(moment(new Date(), dateFormat));
+        }
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
 
     return (
         <div>
@@ -80,21 +132,24 @@ const ViewEditJisdor = (props) => {
             </div>
             <Form
                 {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
+                // size={componentSize}
+                layout={formLayout}
+                form={form}
                 labelAlign="left"
-                style={{ marginBottom: '80px' }}
+                initialValues={{ layout: formLayout }}
+                onFinish={onFinish}
             >
-                <Form.Item label="Date">
-                    <DatePicker style={{ width: '100%'}} 
-                        defaultValue={moment('2020/07/20', dateFormat)}/>   
+                <Form.Item label="Date" name="date">
+                    <DatePicker 
+                        onChange={(date, dateString) => setFieldDate(dateString)} 
+                        style={{ width: '100%' }}
+                        defaultValue={fieldDate}/>   
                 </Form.Item>
-                <Form.Item label="Value">
-                    <Input disabled={disable} defaultValue={dataJisdorById.value} />
+                <Form.Item label="Value" name="value">
+                    <Input placeholder="Insert Value" />
                 </Form.Item>
                 
-                {!disable ? (<Form.Item label="Role">
+                {/* {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -103,24 +158,18 @@ const ViewEditJisdor = (props) => {
                 </Form.Item>
                 ) : (
                         <div></div>
-                    )}
+                    )} */}
                     
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/editreferencerate">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
-                        </Button>
-                    </Link>
-                    ) : (
-                            <div></div>
-                        )}
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                                Submit
+                            </Button>
+                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                        Reset
+                    </Button>
                     <Link to="/editreferencerate">
                         <Button >
-                            {!disable ? (
-                                <div>Cancel</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
+                            <div>Back</div>
                         </Button>
                     </Link>
                 </Form.Item>
