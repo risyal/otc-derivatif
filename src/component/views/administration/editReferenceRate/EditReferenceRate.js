@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 import axios from 'axios';
 
-const componentSize = () => 'middle';
+const componentSize = 'middle';
 const formItemLayout = {
 	labelCol: {
 		xs: { span: 24 },
@@ -38,23 +38,23 @@ const columnsJibor = [
 	},
 	{
 		title: '1 Week',
-		dataIndex: 'week1',
+		dataIndex: 'rate1w',
 	},
 	{
 		title: '1 Month',
-		dataIndex: 'month1',
+		dataIndex: 'rate1m',
 	},
 	{
 		title: '3 Months',
-		dataIndex: 'months3',
+		dataIndex: 'rate3m',
 	},
 	{
 		title: '6 Months',
-		dataIndex: 'months6',
+		dataIndex: 'rate6m',
 	},
 	{
 		title: '12 Months',
-		dataIndex: 'months12',
+		dataIndex: 'rate12m',
 	},
 	{
 		title: 'Action',
@@ -253,19 +253,10 @@ class EditReferenceRate extends React.Component {
 		activeKeyTab: "1",
 	}
 	componentDidMount() {
+		this._isMounted = true;
 		const { pagination } = this.state;
 		const valueTab = this.state.activeKeyTab;
 		this.fetch({ pagination, valueTab });
-		/*  axios.get(`http://localhost:8080/`)
-			 .then(res => {
-				 const data = res.data;
-				 this.setState({
-					 loading: false,
-					 data,
- 
-				 });
-				 console.log(data)
-			 }) */
 	}
 
 	handleChange(e) {
@@ -282,19 +273,20 @@ class EditReferenceRate extends React.Component {
 	};
 
 	fetch = (params = {}) => {
-		console.log("params", params);
 		this.setState({ loading: true });
 		if (params.valueTab == "1") {
 			axios.get(`http://localhost:8080/referencejibors`)
 				.then(res => {
 					const dataReference = res.data.content;
-					this.setState({
-						loading: false,
-						dataReference,
-						pagination: {
-							...params.pagination,
-						},
-					})
+					if (this._isMounted) {
+						this.setState({
+							loading: false,
+							dataReference,
+							pagination: {
+								...params.pagination,
+							},
+						})
+					}
 				})
 		}
 		if (params.valueTab == "2") {
@@ -324,6 +316,10 @@ class EditReferenceRate extends React.Component {
 				})
 		}
 	};
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
 	onReset = () => {
 		this.formRef.current.resetFields();
 	};
@@ -388,7 +384,8 @@ class EditReferenceRate extends React.Component {
 									loading={loading}
 									onChange={this.handleTableChange}
 									bordered
-									size="middle" />
+									size="middle"
+									rowKey='id' />
 							</TabPane>
 					)
 					}
