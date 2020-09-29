@@ -323,32 +323,6 @@ class EditReferenceRate extends React.Component {
 					})
 				})
 		}
-
-		//,
-		// axios.get(`http://localhost:8080/referencejidors`)
-		// 	.then(res => {
-		// 		const dataJidor = res.data.content;
-		// 		this.setState({
-		// 			loading: false,
-		// 			dataJidor,
-		// 			pagination: {
-		// 				...params.pagination,
-		// 			},
-		// 		})
-		// 		console.log(dataJidor)
-		// 	}),
-		// axios.get(`http://localhost:8080/referenceindonias`)
-		//     .then(res => {
-		//         const dataIndonia = res.data.content;
-		//         this.setState({
-		//             loading: false,
-		//             dataIndonia,
-		//             pagination: {
-		//                 ...params.pagination,
-		//             },
-		//         })
-		//         console.log(dataIndonia)
-		//     })
 	};
 	onReset = () => {
 		this.formRef.current.resetFields();
@@ -360,7 +334,7 @@ class EditReferenceRate extends React.Component {
 		this.fetch({ pagination, activeKeyTab });
 	};
 	render() {
-		const { dataJibor, dataJisdor, dataIndonia, pagination, loading } = this.state;
+		const { pagination, loading } = this.state;
 		return (
 			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
 				<Tabs onChange={(e) => { this.handleChange(e) }
