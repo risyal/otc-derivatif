@@ -1,17 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import {
-    Form,
-    Button,
-    Table,
-    Dropdown,
-    Menu,
+	Form,
+	Button,
+	Table,
+	Dropdown,
+	Menu,
 	Tabs,
 	DatePicker,
 	Row,
 	Col,
 } from 'antd';
 import {
-    DownloadOutlined
+	DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
@@ -19,26 +19,19 @@ import axios from 'axios';
 
 const componentSize = () => 'middle';
 const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-    },
+	labelCol: {
+		xs: { span: 24 },
+		sm: { span: 6 },
+	},
+	wrapperCol: {
+		xs: { span: 24 },
+		sm: { span: 16 },
+	},
 };
 
 const { TabPane } = Tabs;
-function callback(key) {
-	console.log(key);
-}
 
 const columnsJibor = [
-	{
-		title: 'No.',
-		dataIndex: 'no',
-	},
 	{
 		title: 'Date',
 		dataIndex: 'date',
@@ -102,11 +95,7 @@ const columnsJibor = [
 	},
 ];
 
-const columnsJisdor= [
-	{
-		title: 'No.',
-		dataIndex: 'no',
-	},
+const columnsJisdor = [
 	{
 		title: 'Date',
 		dataIndex: 'date',
@@ -156,16 +145,12 @@ const columnsJisdor= [
 
 const columnsIndonia = [
 	{
-		title: 'No.',
-		dataIndex: 'no',
-	},
-	{
 		title: 'Date',
 		dataIndex: 'date',
 	},
 	{
 		title: 'IndONIA (%)',
-		dataIndex: 'indonia',
+		dataIndex: 'value',
 	},
 	{
 		title: 'Action',
@@ -206,147 +191,139 @@ const columnsIndonia = [
 	},
 ];
 
-const dataJibor = [
-	{
-		key: '1',
-		no: '1',
-		date: '20-07-2020',
-		week1: '4.35000',
-		month1: '4.55769',
-		months3: '4.65000',
-		months6: '4.85577',
-		months12: '5.05769',
-	},
-	{
-		key: '2',
-		no: '2',
-		date: '19-07-2020',
-		week1: '0.00000',
-		month1: '0.00000',
-		months3: '0.00000',
-		months6: '0.00000',
-		months12: '0.00000',      
-	},
-	{
-		key: '3',
-		no: '3',
-		date: '18-07-2020',
-		week1: '4.10000',
-		month1: '4.30385',
-		months3: '4.39798',
-		months6: '4.57981',
-		months12: '4.10000',        
-	},			
-];
-
-const dataIndonia = [
-	{
-		key: '1',
-		no: '1',
-		date: '20-07-2020',
-		indonia: '0.00000',
-	},
-	{
-		key: '2',
-		no: '2',
-		date: '19-07-2020',
-		indonia: '1.08760',     
-	},
-	{
-		key: '3',
-		no: '3',
-		date: '18-07-2020',
-		indonia: '4.63200',       
-	},			
-];
-
 const getRandomuserParams = params => {
-    return {
-        results: params.pagination.pageSize,
-        page: params.pagination.current,
-        ...params,
-    };
+	return {
+		results: params.pagination.pageSize,
+		page: params.pagination.current,
+		...params,
+	};
 };
 
 const exportButtton = <Button
-    type="primary"
-    style={{
-        marginBottom: '15px',
-        paddingBottom: '15px',
-        float: 'right',
-        height: '35px'
-    }}
-    icon={<DownloadOutlined />}>Export File</Button>;
+	type="primary"
+	style={{
+		marginBottom: '15px',
+		paddingBottom: '15px',
+		float: 'right',
+		height: '35px'
+	}}
+	icon={<DownloadOutlined />}>Export File</Button>;
 
 const tailLayout = {
-    wrapperCol: {
-        offset: 8,
-        span: 16,
-    },
+	wrapperCol: {
+		offset: 8,
+		span: 16,
+	},
 };
 
 class EditReferenceRate extends React.Component {
 	formRef = React.createRef();
-    state = {
-		dataJibor: [],
-		dataJisdor: [],
-		dataIndonia: [],
-        pagination: {
-            current: 1,
-            pageSize: 5,
-        },
-        search: {
-            date: null,
-            information: null,
-            lastUpdate: null,
-            note: null,
-        },
-        loading: true,
-        cobadata: "test",
+	state = {
+		tab: [
+			{
+				key: "1",
+				nameTab: "JIBOR",
+				tableColumn: columnsJibor,
+				pathAddNew: "/administration/ViewEditJibor",
+			}, {
+				key: "2",
+				nameTab: "JISDOR",
+				tableColumn: columnsJisdor,
+				pathAddNew: "/administration/ViewEditJisdor",
+			}, {
+				key: "3",
+				nameTab: "INDONIA",
+				tableColumn: columnsIndonia,
+				pathAddNew: "/administration/ViewEditIndonia",
+			},
+		],
+		pagination: {
+			current: 1,
+			pageSize: 5,
+		},
+		search: {
+			date: null,
+			information: null,
+			lastUpdate: null,
+			note: null,
+		},
+		dataReference: [],
+		loading: true,
+		cobadata: "test",
+		activeKeyTab: "1",
 	}
 	componentDidMount() {
-        const { pagination } = this.state;
-        this.fetch({ pagination });
-        /*  axios.get(`http://localhost:8080/`)
-             .then(res => {
-                 const data = res.data;
-                 this.setState({
-                     loading: false,
-                     data,
+		const { pagination } = this.state;
+		const valueTab = this.state.activeKeyTab;
+		this.fetch({ pagination, valueTab });
+		/*  axios.get(`http://localhost:8080/`)
+			 .then(res => {
+				 const data = res.data;
+				 this.setState({
+					 loading: false,
+					 data,
  
-                 });
-                 console.log(data)
-             }) */
-    }
-    handleTableChange = (pagination, filters, sorter, extra) => {
-        console.log('paramasdasds', pagination, filters, sorter, extra);
-        this.fetch({
-            pagination,
-        });
+				 });
+				 console.log(data)
+			 }) */
+	}
+
+	handleChange(e) {
+		this.setState({ activeKeyTab: e });
+		const { pagination } = this.state;
+		const valueTab = e;
+		this.fetch({ pagination, valueTab });
+	}
+	handleTableChange = (pagination, filters, sorter, extra) => {
+		console.log('paramasdasds', pagination, filters, sorter, extra);
+		this.fetch({
+			pagination,
+		});
 	};
-	
+
 	fetch = (params = {}) => {
-        const paramSearch = new URLSearchParams([['param', 'ical']]);
-        /*  {
-             param: this.formRef.current.getFieldValue("keyword"),
-             value: this.formRef.current.getFieldValue("keyword"),
-             valueType: this.formRef.current.getFieldValue("keyword"),
-             note: this.formRef.current.getFieldValue("keyword")
-         }; */
-        console.log("params " + paramSearch.get);
-        this.setState({ loading: true });
-        axios.get(`http://localhost:8080/referencejisdors`)
-            .then(res => {
-                const dataJisdor = res.data.content;
-                this.setState({
-                    loading: false,
-                    dataJisdor,
-                    pagination: {
-                        ...params.pagination,
-                    },
-                })
-                console.log(dataJisdor)
-		})
+		console.log("params", params);
+		this.setState({ loading: true });
+		if (params.valueTab == "1") {
+			axios.get(`http://localhost:8080/referencejibors`)
+				.then(res => {
+					const dataReference = res.data.content;
+					this.setState({
+						loading: false,
+						dataReference,
+						pagination: {
+							...params.pagination,
+						},
+					})
+				})
+		}
+		if (params.valueTab == "2") {
+			axios.get(`http://localhost:8080/referencejisdors`)
+				.then(res => {
+					const dataReference = res.data.content;
+					this.setState({
+						loading: false,
+						dataReference,
+						pagination: {
+							...params.pagination,
+						},
+					})
+				})
+		}
+		if (params.valueTab == "3") {
+			axios.get(`http://localhost:8080/referenceindonias`)
+				.then(res => {
+					const dataReference = res.data.content;
+					this.setState({
+						loading: false,
+						dataReference,
+						pagination: {
+							...params.pagination,
+						},
+					})
+				})
+		}
+
 		//,
 		// axios.get(`http://localhost:8080/referencejidors`)
 		// 	.then(res => {
@@ -361,225 +338,88 @@ class EditReferenceRate extends React.Component {
 		// 		console.log(dataJidor)
 		// 	}),
 		// axios.get(`http://localhost:8080/referenceindonias`)
-        //     .then(res => {
-        //         const dataIndonia = res.data.content;
-        //         this.setState({
-        //             loading: false,
-        //             dataIndonia,
-        //             pagination: {
-        //                 ...params.pagination,
-        //             },
-        //         })
-        //         console.log(dataIndonia)
-        //     })
+		//     .then(res => {
+		//         const dataIndonia = res.data.content;
+		//         this.setState({
+		//             loading: false,
+		//             dataIndonia,
+		//             pagination: {
+		//                 ...params.pagination,
+		//             },
+		//         })
+		//         console.log(dataIndonia)
+		//     })
 	};
 	onReset = () => {
-        this.formRef.current.resetFields();
+		this.formRef.current.resetFields();
 	};
 	handleSearch = (e) => {
-        e.preventDefault();
-        this.setState({
-           
-        });
-        const { pagination } = this.state;
-        this.setState({ cobadata: "asdasdas test" });
-        console.log("valuecoba " + this.state.cobadata);
-        this.fetch({ pagination });
-    };
-    render() {
+		e.preventDefault();
+		const { pagination } = this.state;
+		const { activeKeyTab } = this.state;
+		this.fetch({ pagination, activeKeyTab });
+	};
+	render() {
 		const { dataJibor, dataJisdor, dataIndonia, pagination, loading } = this.state;
-        return (
+		return (
 			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-				<Tabs onChange={callback} type="card">
-                 <TabPane tab="JIBOR" key="1" >
-                     <Form
-						{...formItemLayout}
-						size={componentSize}
-						layout="horizontal"
-						ref={this.formRef} name="control-ref"
-						initialValues={{ size: componentSize }}
-						labelAlign="left"
-					>
-						<Form.Item label="Date" name="keyword">
-							<DatePicker style={{ width: '100%' }}/>
-						</Form.Item>
-						<Form.Item {...tailLayout}>
-							<Button type="primary" onClick={(e) => this.handleSearch(e)} style={{ marginRight: '10px' }} htmlType="submit">
-								Submit
-							</Button>
-							<Button htmlType="button" onClick={this.onReset}>
-								Reset
-						</Button>
-						</Form.Item>
-					</Form>
-
-					<Row justify="end">
-                    	<Col span={8}>
-							<Link to={{
-								pathname: `/administration/ViewEditJibor`,
-								state: {
-									id: '0',
-									action: "Add New",
-									disable: false,
-								}
-							}}>
-								<Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-									Add New Data
+				<Tabs onChange={(e) => { this.handleChange(e) }
+				}
+					type="card" activeKey={this.state.activeKeyTab} >
+					{this.state.tab.map(
+						item =>
+							<TabPane tab={item.nameTab} key={item.key} >
+								<Form
+									{...formItemLayout}
+									size={componentSize}
+									layout="horizontal"
+									ref={this.formRef} name="control-ref"
+									initialValues={{ size: componentSize }}
+									labelAlign="left">
+									<Form.Item label="Date" name="keyword">
+										<DatePicker style={{ width: '100%' }} />
+									</Form.Item>						<Form.Item {...tailLayout}>
+										<Button type="primary" onClick={(e) => this.handleSearch(e)} style={{ marginRight: '10px' }} htmlType="submit">
+											Submit
+										</Button>
+										<Button htmlType="button" onClick={this.onReset}>
+											Reset
+										</Button>
+									</Form.Item>
+								</Form>
+								<Row justify="end">
+									<Col span={8}>
+										<Link to={{
+											pathname: item.pathAddNew,
+											state: {
+												id: '0',
+												action: "Add New",
+												disable: false,
+											}
+										}}>
+											<Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+												Add New Data
 								</Button>
-							</Link>
-						</Col>
-				
-						<Col span={8} offset={8}>
-							{/* <Link to={{
-								pathname: `#`,
-								state: {
-									id: '1',
-									action: "Edit",
-									disable: false,
-								}
-							}} > */}
-							{exportButtton}
-							{/* </Link> */}
-						</Col>
-					</Row>
+										</Link>
+									</Col>
 
-                    <Table
-                        pagination={pagination}
-                        columns={columnsJibor}
-                        dataSource={dataJibor}
-						onChange={this.handleTableChange}
-                        bordered
-                        size="middle"
-                    />
-                </TabPane>
-
-                <TabPane tab="JISDOR" key="2">
-					<Form
-						{...formItemLayout}
-						size={componentSize}
-						layout="horizontal"
-						ref={this.formRef} name="control-ref"
-						initialValues={{ size: componentSize }}
-						labelAlign="left"
-					>
-						<Form.Item label="Date" name="keyword">
-							<DatePicker style={{ width: '100%' }}/>
-						</Form.Item>
-						<Form.Item {...tailLayout}>
-							<Button type="primary" onClick={(e) => this.handleSearch(e)} style={{ marginRight: '10px' }} htmlType="submit">
-								Submit
-							</Button>
-							<Button htmlType="button" onClick={this.onReset}>
-								Reset
-							</Button>
-						</Form.Item>
-					</Form>
-
-					<Row justify="end">
-                    	<Col span={8}>
-							<Link to={{
-								pathname: `/administration/ViewEditJisdor`,
-								state: {
-									id: '0',
-									action: "Add New",
-									disable: false,
-								}
-							}}>
-								<Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-									Add New Data
-								</Button>
-							</Link>
-						</Col>
-
-						<Col span={8} offset={8}>
-							{/* <Link to={{
-								pathname: `#`,
-								state: {
-									id: '1',
-									action: "Edit",
-									disable: false,
-								}
-							}} > */}
-							{exportButtton}
-							{/* </Link> */}
-						</Col>
-					</Row>
-
-					<Table
-						pagination={pagination}
-						columns={columnsJisdor}
-						dataSource={dataJisdor}
-						loading={loading}
-                        onChange={this.handleTableChange}
-						bordered
-						size="middle"
-					/>
-                </TabPane>
-
-                <TabPane tab="INDONIA" key="3">
-					<Form
-						{...formItemLayout}
-						size={componentSize}
-						layout="horizontal"
-						ref={this.formRef} name="control-ref"
-						initialValues={{ size: componentSize }}
-						labelAlign="left"
-					>
-						<Form.Item label="Date" name="keyword">
-							<DatePicker style={{ width: '100%' }}/>
-						</Form.Item>
-						<Form.Item {...tailLayout}>
-							<Button type="primary" onClick={(e) => this.handleSearch(e)} style={{ marginRight: '10px' }} htmlType="submit">
-								Submit
-							</Button>
-							<Button htmlType="button" onClick={this.onReset}>
-								Reset
-							</Button>
-						</Form.Item>
-					</Form>
-
-					<Row justify="end">
-                    	<Col span={8}>
-							<Link to={{
-								pathname: `/administration/ViewEditIndonia`,
-								state: {
-									id: '0',
-									action: "Add New",
-									disable: false,
-								}
-							}}>
-								<Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-									Add New Data
-								</Button>
-							</Link>
-						</Col>
-
-						<Col span={8} offset={8}>
-							{/* <Link to={{
-								pathname: `#`,
-								state: {
-									id: '1',
-									action: "Edit",
-									disable: false,
-								}
-							}} > */}
-							{exportButtton}
-							{/* </Link> */}
-						</Col>
-					</Row>
-
-					<Table
-						pagination={pagination}
-						columns={columnsIndonia}
-						dataSource={dataIndonia}
-						loading={loading}
-                        onChange={this.handleTableChange}
-						bordered
-						size="middle"
-					/>
-                </TabPane>
-            </Tabs>
-			</div>
+									<Col span={8} offset={8}>
+										{exportButtton}
+									</Col>
+								</Row>
+								<Table
+									pagination={pagination}
+									columns={item.tableColumn}
+									dataSource={this.state.dataReference}
+									loading={loading}
+									onChange={this.handleTableChange}
+									bordered
+									size="middle" />
+							</TabPane>
+					)
+					}
+				</Tabs>
+			</div >
 		)
 	}
 
