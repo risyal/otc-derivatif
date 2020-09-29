@@ -27,20 +27,31 @@ function ObligationAccomplishment(){
 
     const columns = [
         {
-            title: 'AK Code',
-            dataIndex: 'akCode',
-            key: 'akCode',
-          },
-          {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
-          },
-          {
-            title: 'Accomplished Value',
+            title: 'Member ID',
+            dataIndex: 'memberId',
+            key: 'memberId',
+        },
+        {
+            title: 'Position Settlement Right/Obligation',
+            dataIndex: 'positionSettlement',
+            key: 'positionSettlement',
+        },
+        {
+            title: 'Settlement Value',
+            dataIndex: 'settlementValue',
+            key: 'settlementValue',
+        },
+        {
+            title: 'Accomplisment Value',
             dataIndex: 'accomplishValue',
             key: 'accomplishValue',
-          },
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
+            width: 100,
+        },
     ];
     const data = [
         {
@@ -82,13 +93,10 @@ function ObligationAccomplishment(){
             </div>
             ) : (
                     <div>
-                        <Form.Item label="AK Code">
-                            <Input />
-                        </Form.Item>
                         <Form.Item label="Settlement Date">
                             <DatePicker style={{ width: '100%' }} />
                         </Form.Item>
-                        <Form.Item label="Accomplished Value">
+                        <Form.Item label="Status">
                             <Input />
                         </Form.Item>
                     </div>
@@ -112,8 +120,8 @@ function ObligationAccomplishment(){
                         onClick={() => {
                             setExpand(!expand);
                         }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>

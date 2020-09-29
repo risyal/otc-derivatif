@@ -4,13 +4,13 @@ import {
     Button, 
     Table,
     Input,
-    DatePicker,
-    Row,
-    Col
+	DatePicker,
+	Row,
+	Col
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function DefaultFundReport(){
+function RegulatorReport(){
 	const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -30,27 +30,52 @@ function DefaultFundReport(){
             title: 'Member ID',
             dataIndex: 'memberID',
             key: 'memberID',
-		},
-		{
-            title: 'Minimum Requirement',
-            dataIndex: 'minimumRequirement',
-            key: 'minimumRequirement',
-		},
-		{
-            title: 'DF Account Balance',
-            dataIndex: 'dfAccountBalance',
-            key: 'dfAccountBalance',
-		},
-		{
-            title: 'DF Usage Value',
-            dataIndex: 'dfUsageValue',
-            key: 'dfUsageValue',
-		},
-		{
-            title: 'Shortage',
-            dataIndex: 'Shortage',
-            key: 'Shortage',
-		},
+        },
+        {
+            title: 'SID',
+            dataIndex: 'sid',
+            key: 'sid',
+        },
+        {
+            title: 'LEI',
+            dataIndex: 'lei',
+            key: 'lei',
+        },
+        {
+            title: 'Product',
+            dataIndex: 'product',
+            key: 'product',
+        },
+        {
+            title: 'UTI',
+            dataIndex: 'uti',
+            key: 'uti',
+        },
+        {
+            title: 'Market Side',
+            dataIndex: 'marketSide',
+            key: 'marketSide',
+        },
+        {
+            title: 'Notional Amount',
+            dataIndex: 'notionalAmount',
+            key: 'notionalAmount',
+        },
+        {
+            title: 'Tenor',
+            dataIndex: 'tenor',
+            key: 'tenor',
+        },
+        {
+            title: 'Rate',
+            dataIndex: 'rate',
+            key: 'rate',
+        },
+        {
+            title: 'Netting (Y/N)',
+            dataIndex: 'netting',
+            key: 'netting',
+        },
     ];
     const data = [
         {
@@ -59,20 +84,20 @@ function DefaultFundReport(){
         },
         {
         },
-    ];
+	];
+	
+	const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
-    const [exportButtton] = useState(<Button
-      type="primary"
-      style={{
-          marginBottom: '15px',
-          paddingBottom: '15px',
-          float: 'right',
-          height: '35px'
-      }}
-      icon={<DownloadOutlined />}>Export File</Button>);
-   
     return (
-        <div style={{ margin: '15px 20px' }}>
+		<div style={{ margin: '15px 20px' }}>
 			<Form
 				{...formItemLayout}
 				size={componentSize}
@@ -89,11 +114,11 @@ function DefaultFundReport(){
 						<Form.Item label="Member ID">
 							<Input />
 						</Form.Item>
-						<Form.Item label="DF Usage Value">
+						<Form.Item label="SID">
 							<Input />
 						</Form.Item>
-						<Form.Item label="Settlement Date">
-							<DatePicker style={{ width: '100%' }} />
+						<Form.Item label="LEI">
+							<Input />
 						</Form.Item>
 					</div>
 				)}
@@ -122,7 +147,7 @@ function DefaultFundReport(){
 				</Form.Item>
 			</Form>
 
-      		<Row justify="end">
+			<Row justify="end">
                 <Col span={4}>
                     {/* <Link to={{
                         pathname: `#`,
@@ -143,10 +168,11 @@ function DefaultFundReport(){
 					dataSource={data}
 					bordered
 					size="middle"
+                    scroll={{ x: 'calc(700px + 50%)' }}
 				/>
 			</div>
         </div>
     )
 }
 
-export default DefaultFundReport
+export default RegulatorReport

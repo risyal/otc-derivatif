@@ -5,12 +5,12 @@ import {
     Table,
     Input,
     DatePicker,
-    Row, 
-    Col
+    Col,
+    Row
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function NovationReport(){
+function DHKLevelMember(){
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -24,67 +24,80 @@ function NovationReport(){
             sm: { span: 16 },
         },
     };
-    
+
     const columns = [
         {
             title: 'Member ID',
             dataIndex: 'memberId',
             key: 'memberId',
+            width: 100,
+            // fixed: 'left',
         },
         {
             title: 'SID',
             dataIndex: 'sid',
             key: 'sid',
+            width: 100,
         },
         {
             title: 'LEI',
             dataIndex: 'lei',
             key: 'lei',
+            width: 100,
+        },
+        {
+            title: 'Client ID',
+            dataIndex: 'clientId',
+            key: 'clientId',
+            width: 100,
         },
         {
             title: 'Product',
             dataIndex: 'product',
             key: 'product',
+            width: 100,
         },
         {
-            title: 'Counterparty',
-            children: [
-                {
-                    title: 'Member ID',
-                    dataIndex: 'memberIdC',
-                    key: 'memberIdC',
-                },
-                {
-                    title: 'SID',
-                    dataIndex: 'sidC',
-                    key: 'sidC',
-                },
-                {
-                    title: 'LEI',
-                    dataIndex: 'leiC',
-                    key: 'leiC',
-                },
-            ]
+            title: 'UTI',
+            dataIndex: 'uti',
+            key: 'uti',
+            width: 100,
         },
         {
-            title: 'Original UTI',
-            dataIndex: 'originalUti',
-            key: 'originalUti',
+            title: 'Market Side',
+            dataIndex: 'marketSide',
+            key: 'marketSide',
+            width: 150,
         },
         {
-            title: 'Member Position',
-            dataIndex: 'memberPosition',
-            key: 'memberPosition',
+            title: 'Notional Amount',
+            dataIndex: 'notionalAmount',
+            key: 'notionalAmount',
+            width: 150,
         },
         {
-            title: 'KPEI Position',
-            dataIndex: 'kpeiPosition',
-            key: 'kpeiPosition',
+            title: 'Variation Margin',
+            dataIndex: 'variationMargin',
+            key: 'variationMargin',
+            width: 100,
         },
         {
-            title: 'New UTI',
-            dataIndex: 'newUti',
-            key: 'newUti',
+            title: 'PAA',
+            dataIndex: 'paa',
+            key: 'paa',
+            width: 150,
+        },
+        {
+            title: 'Net Coupon Payment',
+            dataIndex: 'netCouponPayment',
+            key: 'netCouponPayment',
+            width: 100,
+        },
+        {
+            title: 'Trade Right/Obligation',
+            dataIndex: 'tradeRightObligation',
+            key: 'tradeRightObligation',
+            width: 100,
         },
     ];
     const data = [
@@ -110,10 +123,10 @@ function NovationReport(){
             float: 'right',
             height: '35px'
         }}
-        icon={<DownloadOutlined />}>Export File</Button>);
+    icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
-        <div style={{ margin: '15px 20px' }}>
+       <div style={{ margin: '15px 20px' }}>
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -126,18 +139,21 @@ function NovationReport(){
                 </Form.Item>
             </div>
             ) : (
-				<div>
-					<Form.Item label="Member ID I">
-						<Input />
-					</Form.Item>
-					<Form.Item label="Member ID II">
-						<Input />
-					</Form.Item>
-					<Form.Item label="Novation Date and Time">
-						<DatePicker showTime style={{ width: '100%' }} />
-					</Form.Item>
-				</div>
-			)}
+                    <div>
+                        <Form.Item label="Member ID">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="SID">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="LEI">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Date">
+                            <DatePicker style={{ width: '100%' }} />
+                        </Form.Item>
+                    </div>
+                )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button
                         type="primary"
@@ -178,8 +194,8 @@ function NovationReport(){
                 </Col>
             </Row>
 
-			<div style={{ margin: '15px 0px 0px 0px' }} scroll={{ x: 1300 }}>
-				<Table
+            <div style={{ margin: '15px 0px 0px 0px' }} scroll={{ x: 1300 }}>
+                <Table
                     columns={columns}
                     dataSource={data}
                     bordered
@@ -191,4 +207,4 @@ function NovationReport(){
     )
 }
 
-export default NovationReport
+export default DHKLevelMember

@@ -14,7 +14,7 @@ import InquiryPosition from '../views/clearing/InquiryPosition';
 import SettlementPosition from '../views/clearing/SettlementPosition';
 import CashFlowIrs from '../views/clearing/CashFlowIrs';
 import ObligationAccomplishment from '../views/reporting/ObligationAccomplishment';
-import DHKLevel from '../views/reporting/DHKLevel';
+import DHKLevelMember from '../views/reporting/DHKLevelMember';
 import DailyTransactionReport from '../views/reporting/DailyTransactionReport';
 import NovationReport from '../views/reporting/NovationReport';
 import MovementBalance from '../views/reporting/MovementBalance';
@@ -130,6 +130,16 @@ import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
 import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
 import ApprovalAccount from '../views/account/ApprovalAccount';
 import ApprovalDetail from '../views/account/ApprovalDetail';
+import ApprovalInstruction from '../views/instruction/ApprovalInstruction';
+import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
+import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDetail';
+import ApprovalCollateral from '../views/collateral/ApprovalCollateral';
+import DHKLevelClient from '../views/reporting/DHKLevelClient';
+import RegulatorReport from '../views/reporting/RegulatorReport';
+import ClearingSummary from '../views/reporting/ClearingSummary';
+import ClientAccomplishment from '../views/reporting/ClientAccomplishment';
+import MarginReport from '../views/reporting/MarginReport';
+import DefaultReport from '../views/reporting/DefaultReport';
 
 function RoutePage() {
     const { Title } = Typography;
@@ -279,7 +289,7 @@ function RoutePage() {
             </Route>
             <Route path="/instructionManagement/inquirySecManagement">
                 <div className="head-content">
-                    <Title level={4}>Inquiry Sec Management</Title>
+                    <Title level={4}>Inquiry Security Management</Title>
                 </div>
                 <InquirySecManagement />
             </Route>
@@ -294,6 +304,15 @@ function RoutePage() {
                     <Title level={4}>Inquiry Cash Management</Title>
                 </div>
                 <InquiryCashManagement />
+            </Route>
+            <Route path="/instructionManagement/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalInstruction />
+            </Route>
+            <Route path="/instructionManagement/approvalInstructionDetail"
+                component={ApprovalInstructionDetail}>
             </Route>
             <Route path="/collateralManagement/inquiry">
                 <div className="head-content">
@@ -313,6 +332,15 @@ function RoutePage() {
                 </div>
                 <InstructionCOLW />
             </Route>
+            <Route path="/collateralManagement/approval">
+                <div className="head-content">
+                    <Title level={4}>Approval</Title>
+                </div>
+                <ApprovalCollateral />
+            </Route>
+            <Route path="/collateralManagement/approvalCollateralDetail"
+                component={ApprovalCollateralDetail}>
+            </Route>
             <Route path="/login">
                 <div className="head-content">
                     <h1>Header Content</h1>
@@ -321,7 +349,7 @@ function RoutePage() {
             </Route>
             <Route path="/obligationaccomplishment">
                 <div className="head-content">
-                    <Title level={4}>Obligation Accomplishment</Title>
+                    <Title level={4}>Obligation Accomplishment Report</Title>
                 </div>
                 <ObligationAccomplishment />
             </Route>
@@ -331,6 +359,12 @@ function RoutePage() {
                 </div>
                 <DailyTransactionReport />
             </Route>
+            <Route path="/regulatorreport">
+                <div className="head-content">
+                    <Title level={4}>Regulator Report</Title>
+                </div>
+                <RegulatorReport />
+            </Route>
             <Route path="/novationreport">
                 <div className="head-content">
                     <Title level={4}>Novation Report</Title>
@@ -339,7 +373,7 @@ function RoutePage() {
             </Route>
             <Route path="/movementbalance">
                 <div className="head-content">
-                    <Title level={4}>Movement Balance</Title>
+                    <Title level={4}>Movement Balance Report</Title>
                 </div>
                 <MovementBalance />
             </Route>
@@ -361,11 +395,41 @@ function RoutePage() {
                 </div>
                 <FeeReport />
             </Route>
-            <Route path="/dhkmemberclient">
+            <Route path="/marginreport">
                 <div className="head-content">
-                    <Title level={4}>DHK level member dan client</Title>
+                    <Title level={4}>Margin Report</Title>
                 </div>
-                <DHKLevel />
+                <MarginReport />
+            </Route>
+            <Route path="/defaultreport">
+                <div className="head-content">
+                    <Title level={4}>Default Report</Title>
+                </div>
+                <DefaultReport />
+            </Route>
+            <Route path="/clientaccomplishment">
+                <div className="head-content">
+                    <Title level={4}>Client Accomplishment Report</Title>
+                </div>
+                <ClientAccomplishment />
+            </Route>
+            <Route path="/clearingsummary">
+                <div className="head-content">
+                    <Title level={4}>Clearing Summary Report</Title>
+                </div>
+                <ClearingSummary />
+            </Route>
+            <Route path="/dhkmember">
+                <div className="head-content">
+                    <Title level={4}>DHK Level Member</Title>
+                </div>
+                <DHKLevelMember />
+            </Route>
+            <Route path="/dhkclient">
+                <div className="head-content">
+                    <Title level={4}>DHK Level Client</Title>
+                </div>
+                <DHKLevelClient />
             </Route>
             <Route path="/memberandclientmanagement/registerclient">
                 <div className="head-content">
