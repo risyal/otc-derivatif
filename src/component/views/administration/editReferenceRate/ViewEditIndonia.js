@@ -118,6 +118,12 @@ const ViewEditIndonia = (props) => {
         setParams(props.location.state.id);
     }, []);
 
+    const disable = props.location.state.disable
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
+
     return (
         <div>
             <div className="head-content viewEdit">
@@ -137,17 +143,19 @@ const ViewEditIndonia = (props) => {
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                <Form.Item label="Date" name="date">
+                <Form.Item label="Date" name="date"
+                            rules={[{ required: true, message: 'Date is required' }]}>
                     <DatePicker 
                         onChange={(date, dateString) => setFieldDate(dateString)} 
                         style={{ width: '100%' }}
                         defaultValue={fieldDate}/>   
                 </Form.Item>
-                <Form.Item label="IndONIA (%)" name="value">
+                <Form.Item label="IndONIA (%)" name="value"
+                            rules={[{ required: true, message: 'Value is required' }]}>
                     <Input placeholder="Insert Value" />
                 </Form.Item>
                 
-                {/* {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -156,7 +164,7 @@ const ViewEditIndonia = (props) => {
                 </Form.Item>
                 ) : (
                         <div></div>
-                    )} */}
+                    )}
                     
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>

@@ -170,7 +170,7 @@ const ViewDeleteIndonia = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" style={{ marginLeft: '15px'}}>
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -181,7 +181,8 @@ const ViewDeleteIndonia = (props) => {
                         <div></div>
                     )}
 
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}
+                            style={{ marginLeft: '20px' }}>
                     {!disable ? (<Link to="/editreferencerate">
                         <Popconfirm placement="leftTop" 
                                     title={text} 

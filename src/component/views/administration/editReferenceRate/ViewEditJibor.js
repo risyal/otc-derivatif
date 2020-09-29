@@ -135,6 +135,12 @@ const ViewEditJibor = (props) => {
         setParams(props.location.state.id);
     }, []);
 
+    const disable = props.location.state.disable
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
+
     return (
         <div>
             <div className="head-content viewEdit">
@@ -154,39 +160,46 @@ const ViewEditJibor = (props) => {
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                <Form.Item label="Date" name="date">
+                <Form.Item label="Date" name="date"
+                            rules={[{ required: true, message: 'Date is required' }]}>
                     <DatePicker 
                         onChange={(date, dateString) => setFieldDate(dateString)} 
                         style={{ width: '100%' }}
                         defaultValue={fieldDate}
                     />   
                 </Form.Item>
-                <Form.Item label="1 Week" name="rate1w">
+                <Form.Item label="1 Week" name="rate1w"
+                            rules={[{ required: true, message: 'Value 1 Week is required' }]}>
                     <Input placeholder="Insert Value" />
                 </Form.Item>
-                <Form.Item label="1 Month" name="rate1m">
+                <Form.Item label="1 Month" name="rate1m"
+                            rules={[{ required: true, message: 'Value 1 Month is required' }]}>
                     <Input placeholder="Insert Value" />
                 </Form.Item>
-                <Form.Item label="3 Months" name="rate3m">
+                <Form.Item label="3 Months" name="rate3m"
+                            rules={[{ required: true, message: 'Value 3 Months is required' }]}>
                     <Input placeholder="Insert Value" />
                 </Form.Item>
-                <Form.Item label="6 Months" name="rate6m">
+                <Form.Item label="6 Months" name="rate6m"
+                            rules={[{ required: true, message: 'Value 6 Months is required' }]}>
                     <Input placeholder="Insert Value" />
                 </Form.Item>
-                <Form.Item label="12 Months" name="rate12m">
+                <Form.Item label="12 Months" name="rate12m"
+                            rules={[{ required: true, message: 'Value 12 Months is required' }]}>
                     <Input placeholder="Insert Value" />
                 </Form.Item>
                 
-                {/* {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
                         <Radio value={3}>Direct Approver</Radio>
                     </Radio.Group>
                 </Form.Item>
+
                 ) : (
                         <div></div>
-                    )} */}
+                    )}
                     
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>

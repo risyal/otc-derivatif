@@ -126,6 +126,7 @@ const ViewDeleteSysParam = (props) => {
     useEffect(() => {
         setParams(props.location.state.id);
     }, []);
+
     return (
         <div>
             <div className="head-content viewDelete">
@@ -151,6 +152,7 @@ const ViewDeleteSysParam = (props) => {
                     {/* </Link> */}
                 </Col>
             </Row>
+
             <Descriptions column={1} bordered
                 extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
                 <Descriptions.Item label="Parameter">{param.param}</Descriptions.Item>
@@ -165,9 +167,9 @@ const ViewDeleteSysParam = (props) => {
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-                style={{ marginBottom: '80px', marginLeft: '10px' }}
+                style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ marginLeft: '15px'}}>
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -178,7 +180,8 @@ const ViewDeleteSysParam = (props) => {
                         <div></div>
                     )}
 
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}
+                            style={{ marginLeft: '20px' }}>
                     {!disable ? (<Link to="/systemparameter">
                         <Popconfirm placement="leftTop" 
                                     title={text} 

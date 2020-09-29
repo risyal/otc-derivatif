@@ -120,6 +120,12 @@ const ViewEditSCMgt = (props) => {
         setParams(props.location.state.id);
     }, []);
 
+    const disable = props.location.state.disable
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
+
     return(
         <div>
             <div className="head-content viewEdit">
@@ -177,7 +183,7 @@ const ViewEditSCMgt = (props) => {
                         defaultValue={fieldDate}/>
                 </Form.Item>
 
-                {/* {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -186,7 +192,7 @@ const ViewEditSCMgt = (props) => {
                 </Form.Item>
                 ) : (
                         <div></div>
-                    )} */}
+                    )}
 
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>

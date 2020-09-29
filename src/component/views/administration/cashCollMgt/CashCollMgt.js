@@ -132,6 +132,7 @@ class CashCollMgt extends React.Component {
         },
         loading: true,
         cobadata: "test",
+        expand: true,
     }
     componentDidMount() {
         const { pagination } = this.state;
@@ -203,7 +204,7 @@ class CashCollMgt extends React.Component {
     render() {
         const { data, pagination, loading } = this.state;
         return (
-            <div>
+            <div style={{ margin: '15px 20px' }}>
                 <Form
                     {...formItemLayout}
                     size={componentSize}
@@ -212,16 +213,44 @@ class CashCollMgt extends React.Component {
                     initialValues={{ size: componentSize }}
                     labelAlign="left"
                 >
-                    <Form.Item name="keyword" label="Keyword">
-                        <Input />
-                    </Form.Item>
+                    {this.state.expand ? (<div>
+                        <Form.Item label="Keyword">
+                            <Input />
+                        </Form.Item>
+                    </div>
+                    ) : (
+                        <div>
+                            <Form.Item label="Currency Code">
+								<Input />
+							</Form.Item>
+                            <Form.Item label="Currency Name">
+								<Input />
+							</Form.Item>
+                        </div>
+                    )}
+
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" onClick={(e) => this.handleSearch(e)} style={{ marginRight: '10px' }} htmlType="submit">
-                            Submit
+                        <Button
+							type="primary"
+							htmlType="submit"
+							tyle={{ marginRight: '15px' }}>
+							Search
                         </Button>
-                        <Button htmlType="button" onClick={this.onReset}>
-                            Reset
-                    </Button>
+						<Button
+							style={{ margin: '0 8px' }}
+							onClick={this.onReset}>
+							Clear
+                        </Button>
+						<Button
+							htmlType="submit"
+							onClick={() => {
+								this.setState({
+									expand: !this.state.expand
+								});
+							}}>
+							{this.state.expand ? (<div><DownOutlined /> Advance Search</div>) :
+								(<div><UpOutlined /> Simple Search</div>)}
+						</Button>
                     </Form.Item> 
                 </Form>
 

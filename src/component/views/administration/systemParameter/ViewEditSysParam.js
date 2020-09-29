@@ -99,6 +99,13 @@ const ViewEditSysParam = (props) => {
     useEffect(() => {
         setParams(props.location.state.id);
     }, []);
+
+    const disable = props.location.state.disable
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
+    
     return (
         <div>
              <div className="head-content viewEdit">
@@ -118,21 +125,36 @@ const ViewEditSysParam = (props) => {
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                <Form.Item name="param" label="System Paramater">
+                <Form.Item name="param" label="System Paramater"
+                            rules={[{ required: true, message: 'System Paramater is required' }]}>
                     <Input placeholder="System Paramater" />
                 </Form.Item>
-                <Form.Item name="value" label="Value">
+                <Form.Item name="value" label="Value"
+                            rules={[{ required: true, message: 'Value is required' }]}>
                     <Input placeholder="Value" />
                 </Form.Item>
-                <Form.Item name="valueType" label="Value Type">
+                <Form.Item name="valueType" label="Value Type"
+                            rules={[{ required: true, message: 'Value Type is required' }]}>
                     <Input placeholder="Value Type" />
                 </Form.Item>
-                <Form.Item name="note" label="Note">
+                <Form.Item name="note" label="Note"
+                            rules={[{ required: true, message: 'Note is required' }]}>
                     <Input placeholder="Note" />
                 </Form.Item>
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item {...tailLayout}>
-
-
                     {action == "Edit" ? (
                         <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
                             Submitedit
@@ -143,9 +165,9 @@ const ViewEditSysParam = (props) => {
                             </Button>
                         )
                     }
-                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
-                        Reset
-        </Button>
+                        <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                            Reset
+                        </Button>
                     <Link to="/systemparameter">
                         <Button >
                             <div>Back</div>

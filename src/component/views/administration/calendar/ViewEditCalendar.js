@@ -130,6 +130,11 @@ const ViewEditCalendar = (props) => {
         setParams(props.location.state.id);
     }, []);
 
+    const disable = props.location.state.disable
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
 
     return (
         <div>
@@ -151,19 +156,33 @@ const ViewEditCalendar = (props) => {
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                
-                <Form.Item name="date" label="Date">
+                <Form.Item name="date" label="Date"
+                            rules={[{ required: true, message: 'Date is required' }]}>
                     <DatePicker
                         onChange={(date, dateString) => setFieldDate(dateString)} 
                         style={{ width: '100%' }}
                         defaultValue={fieldDate}/>
                 </Form.Item>
-                <Form.Item name="information" label="Information">
+                <Form.Item name="information" label="Information"
+                            rules={[{ required: true, message: 'Information is required' }]}>
                     <Input placeholder="Information"/>
                 </Form.Item>
-                <Form.Item name="note" label="Note">
+                <Form.Item name="note" label="Note"
+                            rules={[{ required: true, message: 'Note is required' }]}>
                     <Input placeholder="Note"/>
                 </Form.Item>
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+
+                ) : (
+                        <div></div>
+                    )}
 
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
