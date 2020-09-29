@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Input,
     Button,
     Table,
+    Row,
+    Col
 } from 'antd';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function SettlementMonitoring() {
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -17,10 +20,10 @@ function SettlementMonitoring() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
 
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Member ID',
             dataIndex: 'memberId',
@@ -43,15 +46,25 @@ function SettlementMonitoring() {
             key: 'remainingBalance',
             width: 100,
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
         },
         {
         },
-    ];
+    ]);
+
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -73,6 +86,22 @@ function SettlementMonitoring() {
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                        pathname: `#`,
+                        state: {
+                            id: '1',
+                            action: "Edit",
+                            disable: false,
+                        }
+                    }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+            
             <Table
                 columns={columns}
                 dataSource={data}

@@ -27,83 +27,34 @@ function FeeReport(){
 
     const columns = [
         {
-            title: 'Trade Date',
-            dataIndex: 'tradeDate',
-            key: 'tradeDate',
-            width: 100,
+            title: 'No',
+            dataIndex: 'no',
+            key: 'no',
         },
         {
             title: 'Member ID',
             dataIndex: 'memberID',
             key: 'memberID',
-            width: 100,
         },
         {
-            title: 'Member Name',
-            dataIndex: 'memberName',
-            key: 'memberName',
-            width: 100,
+            title: 'Transaction Date',
+            dataIndex: 'transactionDate',
+            key: 'transactionDate',
         },
         {
-            title: 'Contract ID',
-            dataIndex: 'contractID',
-            key: 'contractID',
-            width: 100,
+            title: 'Description',
+            dataIndex: 'description',
+            key: 'description',
         },
         {
-            title: 'Contract Volume',
-            children: [
-                {
-                    title: 'Receiver (Sell)',
-                    width: 100,
-                    dataIndex: 'receiver',
-                    key: 'receiver',
-                }, {
-                    title: 'Payer (Buy)',
-                    width: 100,
-                    dataIndex: 'payer',
-                    key: 'payer',
-                }
-            ]
+            title: 'Fee Type',
+            dataIndex: 'feeType',
+            key: 'feeType',
         },
         {
-            title: 'Maturity',
-            dataIndex: 'maturity',
-            key: 'maturity',
-            width: 100,
-        },
-        {
-            title: 'Notional Value',
-            dataIndex: 'notionalValue',
-            key: 'notionalValue',
-            width: 100,
-        },
-        {
-            title: 'Fee',
-            children: [
-                {
-                    title: 'Maintenance',
-                    width: 100,
-                    dataIndex: 'maintenance',
-                    key: 'maintenance',
-                }, {
-                    title: 'Registration',
-                    width: 100,
-                    dataIndex: 'registration',
-                    key: 'registration',
-                }, {
-                    title: 'Ancillary Services',
-                    width: 100,
-                    dataIndex: 'ancillaryServices',
-                    key: 'ancillaryServices',
-                }
-            ]
-        },
-        {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
-            width: 100,
+            title: 'Amount',
+            dataIndex: 'amount',
+            key: 'amount',
         },
     ];
     const data = [
@@ -144,10 +95,7 @@ function FeeReport(){
 						<Form.Item label="Member ID">
 							<Input />
 						</Form.Item>
-						<Form.Item label="Member Name">
-							<Input />
-						</Form.Item>
-						<Form.Item label="Date">
+						<Form.Item label="Transaction Date">
 							<DatePicker style={{ width: '100%' }} />
 						</Form.Item>
 					</div>
@@ -171,8 +119,8 @@ function FeeReport(){
 						onClick={() => {
 							setExpand(!expand);
 						}}>
-						{expand ? (<div><DownOutlined />Advance Search</div>) :
-							(<div><UpOutlined />Simple Search</div>)}
+						{expand ? (<div><DownOutlined /> Advance Search</div>) :
+							(<div><UpOutlined /> Simple Search</div>)}
 					</Button>
 				</Form.Item>
 			</Form>

@@ -86,10 +86,6 @@ const ViewEditIndonia = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                
-                <Form.Item label="No">
-                    <Input disabled={disable} defaultValue={dataIndoniaById.no} />
-                </Form.Item>
                 <Form.Item label="Date">
                     <DatePicker style={{ width: '100%'}} 
                         defaultValue={moment('2020/07/20', dateFormat)}/>   

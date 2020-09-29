@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import {
     Form,
     Input,
     Button,
     Table,
-    DatePicker
+    DatePicker,
+    Row,
+    Col
 } from 'antd';
 import moment from 'moment';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 function SettlementInstruction() {
-    const componentSize = 'middle';
-    const formItemLayout = {
+    const [componentSize] = useMemo(() => 'middle');
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -19,10 +22,9 @@ function SettlementInstruction() {
             xs: { span: 24 },
             sm: { span: 16 },
         },
-    };
+    });
 
-
-    const columns = [
+    const [columns] = useState([
         {
             title: 'Reference',
             dataIndex: 'reference',
@@ -31,9 +33,21 @@ function SettlementInstruction() {
             fixed: 'left',
         }, {
             title: 'Member ID',
-            dataIndex: 'memberId',
-            key: 'memberId',
-            width: 100,
+            // dataIndex: 'memberId',
+            // key: 'memberId',
+            children: [
+                {
+                    title: 'SID',
+                    width: 100,
+                    dataIndex: 'sid',
+                    key: 'sid',
+                }, {
+                    title: 'LEI',
+                    width: 100,
+                    dataIndex: 'lei',
+                    key: 'lei',
+                }
+            ]
         }, {
             title: 'Instruction Type',
             dataIndex: 'instructionType',
@@ -75,16 +89,28 @@ function SettlementInstruction() {
             key: 'status',
             width: 100,
         },
-    ];
-    const data = [
+    ]);
+    const [data] = useState([
         {
         },
         {
         },
         {
         },
-    ];
+    ]);
+
     const dateFormat = 'YYYY/MM/DD';
+    const [expand, setExpand] = useState(true);
+    const [form] = Form.useForm();
+    const [exportButtton] = useState(<Button
+        type="primary"
+        style={{
+            marginBottom: '15px',
+            paddingBottom: '15px',
+            float: 'right',
+            height: '35px'
+        }}
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
         <div style={{ margin: '15px 20px' }}>
@@ -94,27 +120,75 @@ function SettlementInstruction() {
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-            >
-                <Form.Item label="Settlement Instruction Type" >
-                    <Input.Group compact >
-                        <Input />
-                    </Input.Group>
+            > {expand ? (<div>
+                <Form.Item label="Keyword">
+                    <Input />
                 </Form.Item>
-                <Form.Item label="Status" >
-                    <Input.Group compact >
-                        <Input />
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Date Generated" >
-                    <DatePicker style={{ width: '100%' }}
-                        defaultValue={moment('2020/01/23', dateFormat)} />
-                </Form.Item>
+            </div>
+            ) : (
+                    <div>
+                        <Form.Item label="Settlement Instruction Type" >
+                            <Input.Group compact >
+                                <Input />
+                            </Input.Group>
+                        </Form.Item>
+                        <Form.Item label="Status" >
+                            <Input.Group compact >
+                                <Input />
+                            </Input.Group>
+                        </Form.Item>
+                        <Form.Item label="Date Generated" >
+                            <DatePicker style={{ width: '100%' }}
+                                defaultValue={moment('2020/01/23', dateFormat)} />
+                        </Form.Item>
+                        <Form.Item label="SID">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="LEI">
+                            <Input />
+                        </Form.Item>
+                    </div>
+                )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                        pathname: `#`,
+                        state: {
+                            id: '1',
+                            action: "Edit",
+                            disable: false,
+                        }
+                    }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+
             <Table
                 columns={columns}
                 dataSource={data}

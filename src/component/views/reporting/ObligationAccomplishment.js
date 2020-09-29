@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { 
-    Form,  
-    Button, 
+import {
+    Form,
+    Button,
     Table,
     Input,
     DatePicker,
@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function ObligationAccomplishment(){
+function ObligationAccomplishment() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';

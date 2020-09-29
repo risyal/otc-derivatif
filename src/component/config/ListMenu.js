@@ -100,7 +100,7 @@ const Menu = [
             name: 'Inquiry Beneficiaries',
             key: 'inquiryBeneficiaries',
             linkTo: '/accountManagement/inquiryBeneficiaries'
-        },  {
+        }, {
             name: 'Approval',
             key: 'accountApproval',
             linkTo: '/accountManagement/approval'
@@ -144,7 +144,7 @@ const Menu = [
             name: 'Inquiry Cash Management',
             key: 'inquiryCashManagement',
             linkTo: '/instructionManagement/inquiryCashManagement'
-        },  {
+        }, {
             name: 'Approval',
             key: 'instructionApproval',
             linkTo: '/instructionManagement/approval'
@@ -166,7 +166,7 @@ const Menu = [
             name: 'Instruction - COLW',
             key: 'instructionColw',
             linkTo: '/collateralManagement/instructionColw'
-        },  {
+        }, {
             name: 'Approval',
             key: 'collateralApproval',
             linkTo: '/collateralManagement/approval'
@@ -252,7 +252,7 @@ const Menu = [
             name: 'DHK Level Member',
             key: 'dhkmember',
             linkTo: '/dhkmember'
-        },{
+        }, {
             name: 'DHK Level Client',
             key: 'dhkclient',
             linkTo: '/dhkclient'
@@ -276,7 +276,7 @@ const Menu = [
             name: 'Default Fund Report',
             key: 'fundreport',
             linkTo: '/fundreport'
-        }, 
+        },
         // {
         //     name: 'Report Bank Indonesia',
         //     key: 'reportbankid',

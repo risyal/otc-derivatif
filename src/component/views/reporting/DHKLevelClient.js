@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function DHKLevel(){
+function DHKLevelClient(){
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -27,11 +27,10 @@ function DHKLevel(){
 
     const columns = [
         {
-            title: 'Member ID',
-            dataIndex: 'memberId',
-            key: 'memberId',
+            title: 'Client ID',
+            dataIndex: 'clientId',
+            key: 'clientId',
             width: 100,
-            // fixed: 'left',
         },
         {
             title: 'SID',
@@ -46,75 +45,51 @@ function DHKLevel(){
             width: 100,
         },
         {
-            title: 'Client ID',
-            dataIndex: 'clientId',
-            key: 'clientId',
+            title: 'Product',
+            dataIndex: 'product',
+            key: 'product',
             width: 100,
         },
         {
-            title: 'Contract',
-            dataIndex: 'contract',
-            key: 'contract',
+            title: 'UTI',
+            dataIndex: 'uti',
+            key: 'uti',
             width: 100,
         },
         {
-            title: 'Previous Position',
-            dataIndex: 'previousPosition',
-            key: 'previousPosition',
+            title: 'Market Side',
+            dataIndex: 'marketSide',
+            key: 'marketSide',
             width: 150,
         },
         {
-            title: 'New Position',
-            dataIndex: 'newPosition',
-            key: 'newPosition',
+            title: 'Notional Amount',
+            dataIndex: 'notionalAmount',
+            key: 'notionalAmount',
             width: 150,
         },
         {
-            title: 'Net Position',
-            dataIndex: 'netPosition',
-            key: 'netPosition',
-            width: 100,
-        },
-        {
-            title: 'Cash Right/Obligation',
-            dataIndex: 'cashRightObligation',
-            key: 'cashRightObligation',
-            width: 150,
-        },
-        {
-            title: 'Fee',
-            dataIndex: 'fee',
-            key: 'fee',
-            width: 100,
-        },
-        {
-            title: 'DF Fund Billing',
-            dataIndex: 'dfFundBilling',
-            key: 'dfFundBilling',
-            width: 100,
-        },
-        {
-            title: 'Initial Margin Billing',
-            dataIndex: 'initialMarginBilling',
-            key: 'initialMarginBilling',
+            title: 'Variation Margin',
+            dataIndex: 'variationMargin',
+            key: 'variationMargin',
             width: 100,
         },
         {
             title: 'PAA',
             dataIndex: 'paa',
             key: 'paa',
+            width: 150,
+        },
+        {
+            title: 'Net Coupon Payment',
+            dataIndex: 'netCouponPayment',
+            key: 'netCouponPayment',
             width: 100,
         },
         {
-            title: 'Free Collateral',
-            dataIndex: 'freeCollateral',
-            key: 'freeCollateral',
-            width: 100,
-        },
-        {
-            title: 'Blocked Collateral',
-            dataIndex: 'blockedCollateral',
-            key: 'blockedCollateral',
+            title: 'Trade Right/Obligation',
+            dataIndex: 'tradeRightObligation',
+            key: 'tradeRightObligation',
             width: 100,
         },
     ];
@@ -158,10 +133,13 @@ function DHKLevel(){
             </div>
             ) : (
                     <div>
-                        <Form.Item label="Member ID">
+                        <Form.Item label="Client ID">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="SID/LEI">
+                        <Form.Item label="SID">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="LEI">
                             <Input />
                         </Form.Item>
                         <Form.Item label="Date">
@@ -188,8 +166,8 @@ function DHKLevel(){
                         onClick={() => {
                             setExpand(!expand);
                         }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
             </Form>
@@ -222,4 +200,4 @@ function DHKLevel(){
     )
 }
 
-export default DHKLevel
+export default DHKLevelClient
