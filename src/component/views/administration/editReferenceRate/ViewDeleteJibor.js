@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
@@ -8,12 +8,15 @@ import {
     Table,
     Row,
     Col,
+    Descriptions
 } from 'antd';
 import {
     ArrowLeftOutlined,
     DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -47,81 +50,18 @@ const ViewDeleteJibor = (props) => {
 
     const [data] = useState([
         {
-			key: '0',
-			no: '',
-			date: '',
-			week1: '',
-			month1: '',
-			months3: '',
-			months6: '',
-			months12: '',
-		},
-        {
-			key: '1',
-			no: '1',
-			date: '20-07-2020',
-			week1: '4.35000',
-			month1: '4.55769',
-			months3: '4.65000',
-			months6: '4.85577',
-			months12: '5.05769',
-		},
-		{
-			key: '2',
-			no: '2',
-			date: '19-07-2020',
-			week1: '0.00000',
-			month1: '0.00000',
-			months3: '0.00000',
-			months6: '0.00000',
-			months12: '0.00000',      
-		},
-		{
-			key: '3',
-			no: '3',
-			date: '18-07-2020',
-			week1: '4.10000',
-			month1: '4.30385',
-			months3: '4.39798',
-			months6: '4.57981',
-			months12: '4.10000',        
-		},
-    ]);
-    const dataJiborById = data.find((jibor) => {
-        return jibor.key === props.location.state.id
-    })
-
-    const [dataForView] = useState([
-        {
-            title: "No :",
-            paramData: dataJiborById.no
+            title: "Telephone Number :",
+            paramData: "asd"
         },
         {
-            title: "Date :",
-            paramData: dataJiborById.date
-        },
-        {
-            title: "1 Week :",
-            paramData: dataJiborById.week1
-        },
-        {
-            title: "1 Month :",
-            paramData: dataJiborById.month1
-        },
-        {
-            title: "3 Months :",
-            paramData: dataJiborById.months3
-        },
-        {
-            title: "6 Months :",
-            paramData: dataJiborById.months6
-        },
-        {
-            title: "12 Months :",
-            paramData: dataJiborById.months12
+            title: "Email :",
+            paramData: "asdas"
         },
     ]);
 
+    const [loading, setLoading] = useState(false);
+
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -137,6 +77,65 @@ const ViewDeleteJibor = (props) => {
             height: '35px'
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
+    const [jibor, setJibor] = useState({
+        date: "test",
+        rate1w: null,
+        rate1m: null,
+        rate3m: null,
+        rate6m: null,
+        rate12m: null,
+        update: null,
+        note: null,
+    });
+
+    const dataForView = [];
+
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/referencejibors/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            /* form.setFieldsValue({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            }); */
+            setJibor({
+                date: resJSON.date,
+                rate1w: resJSON.rate1w,
+                rate1m: resJSON.rate1m,
+                rate3m: resJSON.rate3m,
+                rate6m: resJSON.rate6m,
+                rate12m: resJSON.rate12m,
+                // status: resJSON.status,
+                // lastUpdate: resJSON.lastUpdate,
+            })
+            // dataForView.push({
+            //     title: "Email :",
+            //     paramData: "asdas"
+            // })
+            // console.log(data);
+            // console.log(dataForView);
+            setLoading(false);
+        }
+
+    };
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/referencejibors/${idx}`, {
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
 
 
     return (
@@ -150,6 +149,32 @@ const ViewDeleteJibor = (props) => {
                     </span>
                 {action} Reference Rate - Jibor </Title>
             </div>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+
+            <Descriptions column={1} bordered
+                extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
+                <Descriptions.Item label="Date">{jibor.date}</Descriptions.Item>
+                <Descriptions.Item label="1 Week">{jibor.rate1w}</Descriptions.Item>
+                <Descriptions.Item label="1 Month">{jibor.rate1m}</Descriptions.Item>
+                <Descriptions.Item label="3 Months">{jibor.rate3m}</Descriptions.Item>
+                <Descriptions.Item label="6 Months">{jibor.rate6m}</Descriptions.Item>
+                <Descriptions.Item label="12 Months">{jibor.rate12m}</Descriptions.Item>
+            </Descriptions>
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -158,31 +183,7 @@ const ViewDeleteJibor = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Row justify="end">
-                    <Col span={4}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                        {exportButtton}
-                        {/* </Link> */}
-                    </Col>
-                </Row>
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
-
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                {!disable ? (<Form.Item label="Role" style={{ marginLeft: '15px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -193,10 +194,15 @@ const ViewDeleteJibor = (props) => {
                         <div></div>
                     )}
 
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                    <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     {!disable ? (<Link to="/editreferencerate">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        <Popconfirm placement="leftTop" 
+                                    title={text} 
+                                    okText="Yes" 
+                                    cancelText="No">
+                            <Button type="primary" 
+                                    onClick={submitDelete}
+                                    style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (
