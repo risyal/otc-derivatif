@@ -212,8 +212,8 @@ const exportButtton = <Button
 
 const tailLayout = {
 	wrapperCol: {
-		offset: 8,
-		span: 16,
+		offset: 6,
+		span: 12,
 	},
 };
 
@@ -320,7 +320,6 @@ class EditReferenceRate extends React.Component {
 					})
 				})
 		}
-
 	};
 
 	componentWillUnmount() {
@@ -336,7 +335,7 @@ class EditReferenceRate extends React.Component {
 		this.fetch({ pagination, activeKeyTab });
 	};
 	render() {
-		const { dataJibor, dataJisdor, dataIndonia, pagination, loading } = this.state;
+		const { pagination, loading } = this.state;
 		return (
 			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
 				<Tabs onChange={(e) => { this.handleChange(e) }
