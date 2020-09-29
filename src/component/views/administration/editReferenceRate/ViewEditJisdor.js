@@ -10,7 +10,7 @@ import {
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import moment from 'moment';
 
 import axios from 'axios';
@@ -18,7 +18,9 @@ import axios from 'axios';
 const { Title } = Typography;
 
 const ViewEditJisdor = (props) => {
-    const dateFormat = 'YYYY/MM/DD';
+    let dateFormat = 'YYYY/MM/DD';
+    let history = useHistory();
+    const [submitLoading, setSubmitLoading] = useState(false);
     const [componentSize] = useMemo(() => 'middle');
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
@@ -30,34 +32,35 @@ const ViewEditJisdor = (props) => {
     };
 
     const formItemLayout =
-    formLayout === 'horizontal'
-        ? {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 6 },
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 16 },
-            },
-        }
-        : null;
+        formLayout === 'horizontal'
+            ? {
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
+            }
+            : null;
 
-    const onFinish = values => {
-        console.log('test==',form.getFieldValue("date"))
-        console.log('date==',fieldDate)
+    const onFinish = async values => {
+        console.log('test==', form.getFieldValue("date"))
+        console.log('date==', fieldDate)
         if (idx > 0) {
-            axios.put(`http://localhost:8080/referencejisdors/${idx}`, {
-            date: form.getFieldValue("date"),
-            value: form.getFieldValue("value"),
-            status: "active",
-            lastUpdate: null
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                // form.resetFields();
+            await axios.put(`http://localhost:8080/referencejisdors/${idx}`, {
+                date: form.getFieldValue("date"),
+                value: form.getFieldValue("value"),
+                status: "active",
+                lastUpdate: null
             })
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    // form.resetFields();
+                });
+            history.push('/editreferencerate');
         } else {
             axios.post(`http://localhost:8080/referencejisdors`, {
                 date: fieldDate,
@@ -70,7 +73,7 @@ const ViewEditJisdor = (props) => {
                     console.log(res.data);
                     // form.resetFields();
                 })
-            }
+        }
     };
 
     const [action] = useState(props.location.state.action);
@@ -111,7 +114,7 @@ const ViewEditJisdor = (props) => {
                 lastUpdate: resJSON.lastUpdate,
             });
             setLoading(false);
-        }else{
+        } else {
             setFieldDate(moment(new Date(), dateFormat));
         }
     };
@@ -128,7 +131,7 @@ const ViewEditJisdor = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Reference Rate - Jisdor </Title>
+                    {action} Reference Rate - Jisdor </Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -140,15 +143,15 @@ const ViewEditJisdor = (props) => {
                 onFinish={onFinish}
             >
                 <Form.Item label="Date" name="date">
-                    <DatePicker 
-                        onChange={(date, dateString) => setFieldDate(dateString)} 
+                    <DatePicker
+                        onChange={(date, dateString) => setFieldDate(dateString)}
                         style={{ width: '100%' }}
-                        defaultValue={fieldDate}/>   
+                        defaultValue={fieldDate} />
                 </Form.Item>
                 <Form.Item label="Value" name="value">
                     <Input placeholder="Insert Value" />
                 </Form.Item>
-                
+
                 {/* {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
@@ -159,10 +162,13 @@ const ViewEditJisdor = (props) => {
                 ) : (
                         <div></div>
                     )} */}
-                    
+
                 <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
-                                Submit
+                    <Button type="primary" htmlType="submit"
+                        loading={submitLoading}
+                        onClick={() => setSubmitLoading(true)}
+                        style={{ marginRight: '10px' }}>
+                        Submit
                             </Button>
                     <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
                         Reset

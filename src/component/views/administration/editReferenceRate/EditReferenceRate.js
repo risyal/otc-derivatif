@@ -118,6 +118,7 @@ const columnsJisdor = [
 									id: record.id,
 									action: "Edit",
 									disable: false,
+									activeKeyTab: "2",
 								}
 							}} style={{ marginRight: '20px' }}>Edit
 							</Link>
@@ -239,7 +240,9 @@ class EditReferenceRate extends React.Component {
 		],
 		pagination: {
 			current: 1,
-			pageSize: 5,
+			pageSize: 10,
+			showSizeChanger: true,
+			pageSizeOptions: ['10', '20', '30']
 		},
 		search: {
 			date: null,
@@ -267,15 +270,17 @@ class EditReferenceRate extends React.Component {
 	}
 	handleTableChange = (pagination, filters, sorter, extra) => {
 		console.log('paramasdasds', pagination, filters, sorter, extra);
+		const valueTab = this.state.activeKeyTab;
 		this.fetch({
 			pagination,
+			valueTab,
 		});
 	};
 
-	fetch = (params = {}) => {
+	fetch = async (params = {}) => {
 		this.setState({ loading: true });
 		if (params.valueTab == "1") {
-			axios.get(`http://localhost:8080/referencejibors`)
+			await axios.get(`http://localhost:8080/referencejibors`)
 				.then(res => {
 					const dataReference = res.data.content;
 					if (this._isMounted) {
@@ -290,7 +295,7 @@ class EditReferenceRate extends React.Component {
 				})
 		}
 		if (params.valueTab == "2") {
-			axios.get(`http://localhost:8080/referencejisdors`)
+			await axios.get(`http://localhost:8080/referencejisdors`)
 				.then(res => {
 					const dataReference = res.data.content;
 					this.setState({
@@ -303,7 +308,7 @@ class EditReferenceRate extends React.Component {
 				})
 		}
 		if (params.valueTab == "3") {
-			axios.get(`http://localhost:8080/referenceindonias`)
+			await axios.get(`http://localhost:8080/referenceindonias`)
 				.then(res => {
 					const dataReference = res.data.content;
 					this.setState({
