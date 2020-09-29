@@ -211,8 +211,8 @@ const exportButtton = <Button
 
 const tailLayout = {
 	wrapperCol: {
-		offset: 8,
-		span: 16,
+		offset: 6,
+		span: 12,
 	},
 };
 
