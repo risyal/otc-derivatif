@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Form,
     Input,
@@ -11,8 +11,8 @@ import {
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
-
 import axios from 'axios';
+
 const columns = [
     {
         title: 'Company Name',
@@ -254,8 +254,6 @@ class RegisterAts extends React.Component {
                                 this.setState({
                                     expand: !this.state.expand
                                 });
-                                console.log(this.state.data[0].companyInfo);
-                                console.log(this.state.data[0].companyInfo.address);
                             }}>
                             {this.state.expand ? (<div><DownOutlined /> Advance Search</div>) :
                                 (<div><UpOutlined /> Simple Search</div>)}
