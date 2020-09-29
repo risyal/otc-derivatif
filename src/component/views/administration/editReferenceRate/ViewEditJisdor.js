@@ -62,7 +62,7 @@ const ViewEditJisdor = (props) => {
                 });
             history.push('/editreferencerate');
         } else {
-            axios.post(`http://localhost:8080/referencejisdors`, {
+            await axios.post(`http://localhost:8080/referencejisdors`, {
                 date: fieldDate,
                 value: form.getFieldValue("value"),
                 status: "active",
@@ -73,6 +73,7 @@ const ViewEditJisdor = (props) => {
                     console.log(res.data);
                     // form.resetFields();
                 })
+            history.push('/editreferencerate');
         }
     };
 
@@ -83,19 +84,6 @@ const ViewEditJisdor = (props) => {
         wrapperCol: { offset: 6, span: 12 },
     };
 
-    const submitEdit = () => {
-        axios.put(`http://localhost:8080/referencejisdors/${idx}`, {
-            date: form.getFieldValue("date"),
-            value: form.getFieldValue("value"),
-            status: "active",
-            lastUpdate: null
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                form.resetFields();
-            })
-    };
     const onReset = () => {
         form.resetFields();
     };

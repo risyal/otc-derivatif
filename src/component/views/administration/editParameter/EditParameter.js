@@ -187,8 +187,6 @@ class EditParameter extends React.Component {
 								this.setState({
 									expand: !this.state.expand
 								});
-								console.log(this.state.data[0].companyInfo);
-								console.log(this.state.data[0].companyInfo.address);
 							}}>
 							{this.state.expand ? (<div><DownOutlined /> Advance Search</div>) :
 								(<div><UpOutlined /> Simple Search</div>)}
