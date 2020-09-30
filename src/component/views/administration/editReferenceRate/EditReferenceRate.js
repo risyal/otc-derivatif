@@ -9,6 +9,7 @@ import {
 	DatePicker,
 	Row,
 	Col,
+	Typography
 } from 'antd';
 import {
 	DownloadOutlined
@@ -16,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 
 import axios from 'axios';
+const { Title } = Typography;
 
 const componentSize = 'middle';
 const formItemLayout = {
@@ -338,6 +340,9 @@ class EditReferenceRate extends React.Component {
 		const { pagination, loading } = this.state;
 		return (
 			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+				<div className="head-content">
+                	<Title level={4}>Edit Reference Rate</Title>
+            	</div>
 				<Tabs onChange={(e) => { this.handleChange(e) }
 				}
 					type="card" activeKey={this.state.activeKeyTab} >

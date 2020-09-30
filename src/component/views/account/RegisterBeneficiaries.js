@@ -3,7 +3,9 @@ import {
     Form,
     Input,
     Button,
+    Typography
 } from 'antd';
+const { Title } = Typography;
 
 function RegisterBeneficiaries() {
     const [componentSize] = useMemo(() => 'middle');
@@ -20,6 +22,9 @@ function RegisterBeneficiaries() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Register Beneficiaries</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

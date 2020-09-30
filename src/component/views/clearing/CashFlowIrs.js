@@ -6,9 +6,11 @@ import {
     Table,
     Row,
     Col,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+const { Title } = Typography;
 
 function CashFlowIrs() {
     const [columns] = useState([
@@ -200,6 +202,9 @@ function CashFlowIrs() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Cash Flow IRS Calculation</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

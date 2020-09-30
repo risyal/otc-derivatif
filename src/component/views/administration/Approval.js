@@ -8,10 +8,12 @@ import {
     Table,
     Row,
     Col,
+    Typography
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function Approval() {
     const [componentSize] = useMemo(() => 'middle');
@@ -286,6 +288,9 @@ function Approval() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Approval</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

@@ -8,12 +8,14 @@ import {
     Col,
     Dropdown,
     Menu,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { FormInstance } from 'antd/lib/form';
 
 import axios from 'axios';
+const { Title } = Typography;
 
 const columns = [
     {
@@ -207,6 +209,9 @@ class SystemParameter extends React.Component {
         const { data, pagination, loading } = this.state;
         return (
             <div style={{ margin: '15px 20px' }}>
+                <div className="head-content">
+                    <Title level={4}>System Parameter</Title>
+                </div>
                 <Form
                     {...formItemLayout}
                     size={componentSize}

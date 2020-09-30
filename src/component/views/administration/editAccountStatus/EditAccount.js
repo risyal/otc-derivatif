@@ -9,9 +9,11 @@ import {
     Menu,
     Row,
     Col,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function EditAccount(){
     const [expand, setExpand] = useState(true);
@@ -226,6 +228,9 @@ function EditAccount(){
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Edit Account Status</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

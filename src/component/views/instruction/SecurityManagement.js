@@ -8,11 +8,13 @@ import {
     Menu,
     DatePicker,
     Row,
-    Col
+    Col,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import moment from 'moment';
+const { Title } = Typography;
 
 function SecurityManagement() {
     const [expand, setExpand] = useState(true);
@@ -129,6 +131,9 @@ function SecurityManagement() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Security Management</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

@@ -8,12 +8,14 @@ import {
     Dropdown,
     Menu,
     Row,
-    Col
+    Col,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
+const { Title } = Typography;
 
 function UserManagement(){
     const [expand, setExpand] = useState(true);
@@ -156,6 +158,9 @@ function UserManagement(){
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>User Management</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

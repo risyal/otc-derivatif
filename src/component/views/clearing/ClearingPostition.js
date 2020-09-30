@@ -8,10 +8,12 @@ import {
     DatePicker,
     Row,
     Col,
+    Typography,
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import {  DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function ClearingPostition() {
 
@@ -254,6 +256,9 @@ function ClearingPostition() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Clearing Position</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

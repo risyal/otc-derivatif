@@ -8,8 +8,10 @@ import {
     InputNumber,
     Row,
     Col,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function BlockCollateralClient() {
     const [componentSize] = useMemo(() => 'middle');
@@ -143,6 +145,9 @@ function BlockCollateralClient() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Detail Blocked Collateral - Client</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

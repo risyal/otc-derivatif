@@ -9,9 +9,11 @@ import {
     Menu,
     Row,
     Col,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function RegisterClient() {
     const [expand, setExpand] = useState(true);
@@ -154,6 +156,9 @@ function RegisterClient() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Register Client</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

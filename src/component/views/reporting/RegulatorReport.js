@@ -6,9 +6,11 @@ import {
     Input,
     DatePicker,
     Row,
-    Col
+    Col,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function RegulatorReport() {
     const [expand, setExpand] = useState(true);
@@ -98,6 +100,9 @@ function RegulatorReport() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Regulator Report</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

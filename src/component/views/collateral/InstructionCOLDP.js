@@ -7,10 +7,12 @@ import {
     Dropdown,
     Menu,
     Row,
-    Col
+    Col,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+const { Title } = Typography;
 
 function InstructionCOLDP() {
     const [expand, setExpand] = useState(true);
@@ -133,6 +135,9 @@ function InstructionCOLDP() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Instruction - COLDP</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

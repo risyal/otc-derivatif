@@ -7,11 +7,13 @@ import {
     Row,
     Col,
     Select,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
+const { Title } = Typography;
 
 const { Option } = Select;
 const columns = [
@@ -181,6 +183,9 @@ class Calendar extends React.Component {
         const { data, pagination, loading } = this.state;
         return (
             <div>
+                <div className="head-content">
+                    <Title level={4}>Calendar</Title>
+                </div>
                 <Link to={{
                     pathname: `/administration/ViewEditCalendar`,
                     state: {

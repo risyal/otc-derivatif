@@ -7,10 +7,12 @@ import {
     DatePicker,
     Progress,
     Row,
-    Col
+    Col,
+    Typography
 } from 'antd';
 import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function SettlementJobExecution() {
     const [componentSize] = useMemo(() => 'middle');
@@ -75,6 +77,9 @@ function SettlementJobExecution() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Settlement Job Execution</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

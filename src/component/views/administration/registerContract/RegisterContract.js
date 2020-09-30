@@ -4,9 +4,11 @@ import {
     Tabs,
     Button,
     Row, Col,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function RegisterContract() {
     const { TabPane } = Tabs;
@@ -384,6 +386,9 @@ function RegisterContract() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Register Contract</Title>
+            </div>
             <Tabs onChange={callback} type="card">
                 <TabPane tab="Interest Rate Swap (IRS)" key="1" >
                     <Row justify="end">

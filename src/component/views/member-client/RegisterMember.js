@@ -9,11 +9,13 @@ import {
     Menu,
     Row,
     Col,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 
 import axios from 'axios';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 const RegisterMember = () => {
     const [expand, setExpand] = useState(true);
@@ -263,6 +265,9 @@ const RegisterMember = () => {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Register Member</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 form={form}

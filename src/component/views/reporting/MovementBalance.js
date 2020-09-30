@@ -6,9 +6,11 @@ import {
     Input,
     DatePicker,
     Row,
-    Col
+    Col,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function MovementBalance(){
     const [expand, setExpand] = useState(true);
@@ -93,6 +95,9 @@ function MovementBalance(){
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Movement Balance Report</Title>
+            </div>
 			<Form
 				{...formItemLayout}
 				size={componentSize}

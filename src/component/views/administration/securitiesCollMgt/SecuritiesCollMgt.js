@@ -8,11 +8,13 @@ import {
     Menu,
     Row,
     Col,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
+const { Title } = Typography;
 
 const columns = [
     {
@@ -217,6 +219,9 @@ class SecuritiesCollMgt extends React.Component {
         const { data, pagination, loading } = this.state;
         return (
             <div style={{ margin: '15px 20px' }}>
+                <div className="head-content">
+                    <Title level={4}>Securities Collateral Management</Title>
+                </div>
                 <Form
                     {...formItemLayout}
                     size={componentSize}
