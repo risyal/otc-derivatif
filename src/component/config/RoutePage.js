@@ -24,12 +24,24 @@ function RoutePage() {
                     path={rootWithNavLink + menuItem.linkTo}
                     component={menuItem.component} key={menuItem.key}>
                 </Route>
-
-
+    )
+    const routeOther = ListMenu.map(
+        menuItem =>
+            menuItem.other !== undefined ?
+                menuItem.other.map(other =>
+                    <Route
+                        exact
+                        path={rootWithNavLink + other.linkTo}
+                        component={other.component} key={other.key}>
+                    </Route>
+                )
+                :
+                null
     )
     return (
         <div>
             {routeComp}
+            {routeOther}
             {/* 
             <Route path="/otcder/newtrade">
                 <div className="head-content">

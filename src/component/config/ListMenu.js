@@ -188,14 +188,7 @@ const Menu = [
             key: 'tradeApproval',
             linkTo: '/trade/approval',
             component: ApprovalTrade,
-        }],
-        other: [{
-            name: 'Trade Detail View',
-            key: 'detailView',
-            linkTo: '/trade/detailView',
-            component: DetailViewTrade,
-        },
-        ],
+        }]
     },
     {
         name: 'Clearing Management',
