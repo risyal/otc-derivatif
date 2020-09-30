@@ -8,11 +8,13 @@ import {
     DatePicker,
     Row,
     Col,
+    Typography,
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 const dateFormat = 'YYYY/MM/DD';
+const { Title } = Typography;
 
 function MonitoringTrade() {
     const [columns] = useState([
@@ -212,6 +214,9 @@ function MonitoringTrade() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Monitoring Trade</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

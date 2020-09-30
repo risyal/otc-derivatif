@@ -4,6 +4,9 @@ import Navigation from './common/Navigation';
 import HeaderHalaman from './common/TopHeader';
 import RoutePage from './config/RoutePage';
 import { BackTop } from 'antd';
+import {
+    Switch
+} from "react-router-dom";
 
 const { Footer, Content } = Layout;
 
@@ -42,18 +45,20 @@ function ViewEngine() {
                         minHeight: 500,
                     }}
                 >
-                    <RoutePage />
+                    <Switch>
+                        <RoutePage />
+                    </Switch>
                 </Content>
                 <BackTop>
                     <div style={style}>UP</div>
                 </BackTop>
-                <Footer style={{ 
+                <Footer style={{
                     textAlign: 'center',
                     backgroundColor: '#7cb305',
                     color: '#fff',
                     fontSize: '14px',
                 }}>
-                 PT Kliring Penjaminan Efek Indonesia</Footer>
+                    PT Kliring Penjaminan Efek Indonesia</Footer>
             </Layout>
 
         </Layout>

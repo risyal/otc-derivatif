@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { 
-    Form,  
-    Button, 
+import {
+    Form,
+    Button,
     Table,
     Input,
     DatePicker,
@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function DHKLevelMember(){
+function DHKLevelMember() {
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
     const componentSize = 'middle';
@@ -123,10 +123,10 @@ function DHKLevelMember(){
             float: 'right',
             height: '35px'
         }}
-    icon={<DownloadOutlined />}>Export File</Button>);
+        icon={<DownloadOutlined />}>Export File</Button>);
 
     return (
-       <div style={{ margin: '15px 20px' }}>
+        <div style={{ margin: '15px 20px' }}>
             <Form
                 {...formItemLayout}
                 size={componentSize}

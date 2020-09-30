@@ -7,10 +7,12 @@ import {
     DatePicker,
     InputNumber,
     Radio,
+    Typography,
 } from 'antd';
 
 import moment from 'moment';
 const dateFormat = 'YYYY/MM/DD';
+const { Title } = Typography;
 
 
 
@@ -168,6 +170,9 @@ function NewTrade() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Input Trade</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

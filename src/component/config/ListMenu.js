@@ -11,6 +11,143 @@ import {
     FundProjectionScreenOutlined
 } from '@ant-design/icons';
 
+import MonitoringTrade from '../views/trade/MonitoringTrade';
+import TradeSummary from '../views/trade/TradeSummary';
+import ClearingPostition from '../views/clearing/ClearingPostition';
+import InquiryPosition from '../views/clearing/InquiryPosition';
+import SettlementPosition from '../views/clearing/SettlementPosition';
+import CashFlowIrs from '../views/clearing/CashFlowIrs';
+import ObligationAccomplishment from '../views/reporting/ObligationAccomplishment';
+import DHKLevelMember from '../views/reporting/DHKLevelMember';
+import DailyTransactionReport from '../views/reporting/DailyTransactionReport';
+import NovationReport from '../views/reporting/NovationReport';
+import MovementBalance from '../views/reporting/MovementBalance';
+import DefaultFundReport from '../views/reporting/DefaultFundReport';
+import FeeReport from '../views/reporting/FeeReport';
+import RegisterClient from '../views/member-client/RegisterClient';
+import RegisterMember from '../views/member-client/RegisterMember';
+import AccountDetail from '../views/account/AccountDetail';
+import BlockCollateralMember from '../views/account/BlockCollateralMember';
+import BlockCollateralClient from '../views/account/BlockCollateralClient';
+import DefaultFund from '../views/account/DefaultFund';
+import RegisterBeneficiaries from '../views/account/RegisterBeneficiaries';
+import InquiryBeneficiaries from '../views/account/InquiryBeneficiaries';
+import RegisterContract from '../views/administration/registerContract/RegisterContract';
+import EditAccount from '../views/administration/editAccountStatus/EditAccount';
+import SecuritiesCollMgt from '../views/administration/securitiesCollMgt/SecuritiesCollMgt';
+import CashCollMgt from '../views/administration/cashCollMgt/CashCollMgt';
+import EditReferenceRate from '../views/administration/editReferenceRate/EditReferenceRate';
+import EditParameter from '../views/administration/editParameter/EditParameter';
+import AuditTrail from '../views/administration/AuditTrail';
+import UserManagement from '../views/administration/userManagement/UserManagement';
+import SystemParameter from '../views/administration/systemParameter/SystemParameter';
+import Calendar from '../views/administration/calendar/Calendar';
+import ApprovalAdministration from '../views/administration/Approval';
+import RegisterAts from '../views/administration/registerAts/RegisterAts';
+import SettlementInstruction from '../views/settlement/SettlementInstruction';
+import SettlementJobExecution from '../views/settlement/SettlementJobExecution';
+import SettlementMonitoring from '../views/settlement/SettlementMonitoring';
+import SecurityManagement from '../views/instruction/SecurityManagement';
+import InquirySecManagement from '../views/instruction/InquirySecManagement';
+import CashInquiryManagement from '../views/instruction/CashInquiryManagement';
+import InquiryCashManagement from '../views/instruction/InquiryCashManagement';
+import Inquiry from '../views/collateral/Inquiry';
+import InstructionCOLDP from '../views/collateral/InstructionCOLDP';
+import InstructionCOLW from '../views/collateral/InstructionCOLW';
+import TradeConfirmation from '../views/trade/TradeConfirmation';
+import SettlementStatus from '../views/settlement/SettlementStatus';
+import ApprovalCollateral from '../views/collateral/ApprovalCollateral';
+import DHKLevelClient from '../views/reporting/DHKLevelClient';
+import RegulatorReport from '../views/reporting/RegulatorReport';
+import ClearingSummary from '../views/reporting/ClearingSummary';
+import ClientAccomplishment from '../views/reporting/ClientAccomplishment';
+import MarginReport from '../views/reporting/MarginReport';
+import DefaultReport from '../views/reporting/DefaultReport';
+import NewTrade from '../views/trade/NewTrade';
+import InquiryTrade from '../views/trade/InquiryTrade';
+import CancelTrade from '../views/trade/CancelTrade';
+import ApprovalMemberClient from '../views/member-client/ApprovalMemberClient';
+import ApprovalTrade from '../views/trade/ApprovalTrade';
+import ApprovalAccount from '../views/account/ApprovalAccount';
+import ApprovalInstruction from '../views/instruction/ApprovalInstruction';
+import EditRegisterContract from '../views/administration/EditRegisterContract';
+import ViewEditMember from '../views/member-client/ViewEditMember';
+import ViewEditClient from '../views/member-client/ViewEditClient';
+import ViewDeleteMember from '../views/member-client/ViewDeleteMember';
+import ViewDeleteClient from '../views/member-client/ViewDeleteClient';
+import ViewDeleteAccount from '../views/administration/editAccountStatus/ViewDeleteAccount';
+import ViewEditAccount from '../views/administration/editAccountStatus/ViewEditAccount';
+import ViewEditSCMgt from '../views/administration/securitiesCollMgt/ViewEditSCMgt';
+import ViewDeleteSCMgt from '../views/administration/securitiesCollMgt/ViewDeleteSCMgt';
+import ViewEditCCMgt from '../views/administration/cashCollMgt/ViewEditCCMgt';
+import ViewDeleteCCMgt from '../views/administration/cashCollMgt/ViewDeleteCCMgt';
+import ViewDeleteJibor from '../views/administration/editReferenceRate/ViewDeleteJibor';
+import ViewEditJibor from '../views/administration/editReferenceRate/ViewEditJibor';
+import ViewDeleteParam from '../views/administration/editParameter/ViewDeleteParam';
+import ViewEditParam from '../views/administration/editParameter/ViewEditParam';
+import ViewEditUser from '../views/administration/userManagement/ViewEditUser';
+import ViewDeleteUser from '../views/administration/userManagement/ViewDeleteUser';
+import AddUser from '../views/administration/userManagement/AddUser';
+import ViewEditCalendar from '../views/administration/calendar/ViewEditCalendar';
+import ViewDeleteCalendar from '../views/administration/calendar/ViewDeleteCalendar';
+import DetailViewTrade from '../views/trade/DetailView';
+import ViewEditRegAts from '../views/administration/registerAts/ViewEditRegAts';
+import ViewDeleteRegAts from '../views/administration/registerAts/ViewDeleteRegAts';
+import ViewAdd from '../views/collateral/ViewAdd';
+import ViewAddColw from '../views/collateral/ViewAddColw';
+import DetailCancelCOLDP from '../views/collateral/DetailCancelCOLDP';
+import DetailCancelCOLW from '../views/collateral/DetailCancelCOLW';
+import ViewAddSM from '../views/instruction/ViewAddSM';
+import DetailCancelSM from '../views/instruction/DetailCancelSM';
+import ViewAddCM from '../views/instruction/ViewAddCM';
+import DetailCancelCM from '../views/instruction/DetailCancelCM';
+import ClearingDetailView from '../views/clearing/ClearingDetail';
+import IrsEditCurrency from '../views/administration/registerContract/IrsEditCurrency';
+import IrsEditLegType from '../views/administration/registerContract/IrsEditLegType';
+import IrsEffectiveDate from '../views/administration/registerContract/IrsEffectiveDate';
+import IrsEditContractTerm from '../views/administration/registerContract/IrsEditContractTerm';
+import IrsEditNotionalAmount from '../views/administration/registerContract/IrsEditNotionalAmount';
+import IrsEditPaymentFreq from '../views/administration/registerContract/IrsEditPaymentFreq';
+import IrsEditFixingDate from '../views/administration/registerContract/IrsEditFixingDate';
+import IrsEditSpread from '../views/administration/registerContract/IrsEditSpread';
+import IrsEditDayCountF from '../views/administration/registerContract/IrsEditDayCountF';
+import IrsFloatingRatrRFreq from '../views/administration/registerContract/IrsFloatingRateRFreq';
+import IrsFloatingRIndex from '../views/administration/registerContract/IrsFloatingRIndex';
+import IrsBDC from '../views/administration/registerContract/IrsBDC';
+import IrsEditRoundingP from '../views/administration/registerContract/IrsEditRoundingP';
+import IrsEditStubPayment from '../views/administration/registerContract/IrsEditStubPayment';
+import IrsEditForwardStart from '../views/administration/registerContract/IrsEditForwardStart';
+import IrsEditCashPaymentC from '../views/administration/registerContract/IrsEditCashPaymentC';
+import OisEditCurrency from '../views/administration/registerContract/OisEditCurrenct';
+import OisEditLegType from '../views/administration/registerContract/OisEditLegType';
+import OisEffectiveDate from '../views/administration/registerContract/OisEffectiveDate';
+import OisEditContractTerm from '../views/administration/registerContract/OisEditContractTerm';
+import OisEditNotionalAmount from '../views/administration/registerContract/OisEditNotionalAmount';
+import OisEditDayCountF from '../views/administration/registerContract/OisEditDayCountF';
+import OisBDC from '../views/administration/registerContract/OisBDC';
+import OisEditRoundingP from '../views/administration/registerContract/OisEditRoundingP';
+import OisEditForwardStart from '../views/administration/registerContract/OisEditForwardS';
+import OisEditSpread from '../views/administration/registerContract/OisEditSpread';
+import DndfEditCurrency from '../views/administration/registerContract/DndfEditCurrency';
+import DndfEditFixingDate from '../views/administration/registerContract/DndfEditFixingDate';
+import DndfTenor from '../views/administration/registerContract/DndfTenor';
+import DndfEditNotionalAmount from '../views/administration/registerContract/DndfEditNotionalAmount';
+import ViewDeleteJisdor from '../views/administration/editReferenceRate/ViewDeleteJisdor';
+import ViewEditJisdor from '../views/administration/editReferenceRate/ViewEditJisdor';
+import ViewDeleteIndonia from '../views/administration/editReferenceRate/ViewDeleteIndonia';
+import ViewEditIndonia from '../views/administration/editReferenceRate/ViewEditIndonia';
+import ViewDeleteSysParam from '../views/administration/systemParameter/ViewDeleteSysParam';
+import ViewEditSysParam from '../views/administration/systemParameter/ViewEditSysParam';
+import DetailApproval from '../views/administration/DetailApproval';
+import AccDetailView from '../views/account/AccDetailView';
+import ClearingDetailIRS from '../views/clearing/ClearingDetailIRS';
+import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
+import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
+import ApprovalDetail from '../views/account/ApprovalDetail';
+import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
+import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDetail';
+import ReportBI from '../views/reporting/ReportBI';
+
 const Menu = [
     {
         name: 'Trade Management',
@@ -19,32 +156,46 @@ const Menu = [
         subMenus: [{
             name: 'Input Trade',
             key: 'newtrade',
-            linkTo: '/newtrade'
+            linkTo: '/trade/newtrade',
+            component: NewTrade,
         }, {
             name: 'Inquiry Input Trade',
             key: 'inquerytrade',
-            linkTo: '/inquerytrade'
+            linkTo: '/trade/inquerytrade',
+            component: InquiryTrade,
         }, {
             name: 'Trade Confirmation',
             key: 'tradeConfirmation',
-            linkTo: '/tradeConfirmation'
+            linkTo: '/trade/tradeConfirmation',
+            component: TradeConfirmation,
         }, {
             name: 'Cancel Trade',
             key: 'canceltrade',
-            linkTo: '/canceltrade'
+            linkTo: '/trade/canceltrade',
+            component: CancelTrade,
         }, {
             name: 'Monitoring Trade',
             key: 'monitoringtrade',
-            linkTo: '/monitoringtrade'
+            linkTo: '/trade/monitoringtrade',
+            component: MonitoringTrade,
         }, {
             name: 'Trade Summary',
             key: 'tradesummary',
-            linkTo: '/tradesummary'
+            linkTo: '/trade/tradesummary',
+            component: TradeSummary,
         }, {
             name: 'Approval',
             key: 'tradeApproval',
-            linkTo: '/trade/approval'
-        }]
+            linkTo: '/trade/approval',
+            component: ApprovalTrade,
+        }],
+        other: [{
+            name: 'Trade Detail View',
+            key: 'detailView',
+            linkTo: '/trade/detailView',
+            component: DetailViewTrade,
+        },
+        ],
     },
     {
         name: 'Clearing Management',
@@ -53,23 +204,28 @@ const Menu = [
         subMenus: [{
             name: 'Clearing Position',
             key: 'clearingPosition',
-            linkTo: '/clearingManagement/clearingPosition'
+            linkTo: '/clearingManagement/clearingPosition',
+            component: ClearingPostition,
         }, {
             name: 'Inquiry Position',
             key: 'inquiryPostition',
-            linkTo: '/clearingManagement/inquiryPostition'
+            linkTo: '/clearingManagement/inquiryPostition',
+            component: InquiryPosition,
         }, {
             name: 'Settlement Position',
             key: 'settlementPostion',
-            linkTo: '/clearingManagement/settlementPostion'
+            linkTo: '/clearingManagement/settlementPostion',
+            component: SettlementPosition,
         }, {
             name: 'Settlement Status',
             key: 'statusSettlement',
-            linkTo: '/clearingManagement/statusSettlement'
+            linkTo: '/clearingManagement/statusSettlement',
+            component: SettlementStatus,
         }, {
             name: 'Cash Flow IRS Calculation',
             key: 'cashFlowIrs',
-            linkTo: '/clearingManagement/cashFlowIrs'
+            linkTo: '/clearingManagement/cashFlowIrs',
+            component: CashFlowIrs,
         }]
     },
     {
@@ -79,31 +235,38 @@ const Menu = [
         subMenus: [{
             name: 'Account Detail Information',
             key: 'detailinformation',
-            linkTo: '/accountManagement/detailinformation'
+            linkTo: '/accountManagement/detailinformation',
+            component: AccountDetail,
         }, {
             name: 'Detail Blocked Collateral - Member',
             key: 'detailMember',
-            linkTo: '/accountManagement/collateralMember'
+            linkTo: '/accountManagement/collateralMember',
+            component: BlockCollateralMember,
         }, {
             name: 'Detail Blocked Collateral - Client',
             key: 'detailClient',
-            linkTo: '/accountManagement/collateralClient'
+            linkTo: '/accountManagement/collateralClient',
+            component: BlockCollateralClient,
         }, {
             name: 'Detail Default Fund',
             key: 'detailFund',
-            linkTo: '/accountManagement/detailFund'
+            linkTo: '/accountManagement/detailFund',
+            component: DefaultFund,
         }, {
             name: 'Register Beneficiaries',
             key: 'registerBeneficiaries',
-            linkTo: '/accountManagement/registerBeneficiaries'
+            linkTo: '/accountManagement/registerBeneficiaries',
+            component: RegisterBeneficiaries,
         }, {
             name: 'Inquiry Beneficiaries',
             key: 'inquiryBeneficiaries',
-            linkTo: '/accountManagement/inquiryBeneficiaries'
-        },  {
+            linkTo: '/accountManagement/inquiryBeneficiaries',
+            component: InquiryBeneficiaries,
+        }, {
             name: 'Approval',
             key: 'accountApproval',
-            linkTo: '/accountManagement/approval'
+            linkTo: '/accountManagement/approval',
+            component: ApprovalAccount,
         }]
     },
     {
@@ -113,15 +276,18 @@ const Menu = [
         subMenus: [{
             name: 'Inquiry Settlement Instruction',
             key: 'inquirySettlement',
-            linkTo: '/settlement/inquirySettlement'
+            linkTo: '/settlement/inquirySettlement',
+            component: SettlementInstruction,
         }, {
             name: 'Settlement Job Execution',
             key: 'settlementExecution',
-            linkTo: '/settlement/settlementExecution'
+            linkTo: '/settlement/settlementExecution',
+            component: SettlementJobExecution,
         }, {
             name: 'Monitoring Clearing Pos vs Balance',
             key: 'monitoringClearing',
-            linkTo: '/settlement/monitoringClearing'
+            linkTo: '/settlement/monitoringClearing',
+            component: SettlementMonitoring,
         }]
     },
     {
@@ -131,23 +297,28 @@ const Menu = [
         subMenus: [{
             name: 'Security Management',
             key: 'securityManagement',
-            linkTo: '/instructionManagement/securityManagement'
+            linkTo: '/instructionManagement/securityManagement',
+            component: SecurityManagement,
         }, {
             name: 'Inquiry Security Management',
             key: 'inquirySecManagement',
-            linkTo: '/instructionManagement/inquirySecManagement'
+            linkTo: '/instructionManagement/inquirySecManagement',
+            component: InquirySecManagement,
         }, {
             name: 'Cash Management',
             key: 'cashManagement',
-            linkTo: '/instructionManagement/cashManagement'
+            linkTo: '/instructionManagement/cashManagement',
+            component: CashInquiryManagement,
         }, {
             name: 'Inquiry Cash Management',
             key: 'inquiryCashManagement',
-            linkTo: '/instructionManagement/inquiryCashManagement'
-        },  {
+            linkTo: '/instructionManagement/inquiryCashManagement',
+            component: InquiryCashManagement,
+        }, {
             name: 'Approval',
             key: 'instructionApproval',
-            linkTo: '/instructionManagement/approval'
+            linkTo: '/instructionManagement/approval',
+            component: ApprovalInstruction,
         }]
     },
     {
@@ -157,19 +328,23 @@ const Menu = [
         subMenus: [{
             name: 'Inquiry',
             key: 'inquiry',
-            linkTo: '/collateralManagement/inquiry'
+            linkTo: '/collateralManagement/inquiry',
+            component: Inquiry,
         }, {
             name: 'Instruction - COLDP',
             key: 'instructionColdp',
-            linkTo: '/collateralManagement/instructionColdp'
+            linkTo: '/collateralManagement/instructionColdp',
+            component: InstructionCOLDP,
         }, {
             name: 'Instruction - COLW',
             key: 'instructionColw',
-            linkTo: '/collateralManagement/instructionColw'
-        },  {
+            linkTo: '/collateralManagement/instructionColw',
+            component: InstructionCOLW,
+        }, {
             name: 'Approval',
             key: 'collateralApproval',
-            linkTo: '/collateralManagement/approval'
+            linkTo: '/collateralManagement/approval',
+            component: ApprovalCollateral,
         }]
     },
     {
@@ -179,15 +354,18 @@ const Menu = [
         subMenus: [{
             name: 'Register Member',
             key: 'registermember',
-            linkTo: '/memberandclientmanagement/registermember'
+            linkTo: '/memberandclientmanagement/registermember',
+            component: RegisterMember,
         }, {
             name: 'Register Client',
             key: 'registerclient',
-            linkTo: '/memberandclientmanagement/registerclient'
+            linkTo: '/memberandclientmanagement/registerclient',
+            component: RegisterClient,
         }, {
             name: 'Approval',
             key: 'memberclientapproval',
-            linkTo: '/memberandclientmanagement/approval'
+            linkTo: '/memberandclientmanagement/approval',
+            component: ApprovalMemberClient,
         }]
     },
     {
@@ -197,51 +375,63 @@ const Menu = [
         subMenus: [{
             name: 'Register Contract',
             key: 'registerContract',
-            linkTo: '/registercontract'
+            linkTo: '/administration/registercontract',
+            component: RegisterContract,
         }, {
             name: 'Edit Account Status',
             key: 'editAccount',
-            linkTo: '/editaccount'
+            linkTo: '/administration/editaccount',
+            component: EditAccount,
         }, {
             name: 'Securities Collateral Management',
             key: 'securitiesCollMgt',
-            linkTo: '/securitiescollmgt'
+            linkTo: '/administration/securitiescollmgt',
+            component: SecuritiesCollMgt,
         }, {
             name: 'Cash Collateral Management',
             key: 'cashCollMgt',
-            linkTo: '/cashcollmgt'
+            linkTo: '/administration/cashcollmgt',
+            component: CashCollMgt,
         }, {
             name: 'Edit Reference Rate',
             key: 'editReferenceRate',
-            linkTo: '/editreferencerate'
+            linkTo: '/administration/editreferencerate',
+            component: EditReferenceRate,
         }, {
             name: 'Edit Time Parameter',
             key: 'editParameter',
-            linkTo: '/editparameter'
+            linkTo: '/administration/editparameter',
+            component: EditParameter,
         }, {
             name: 'Audit Trail',
             key: 'auditTrail',
-            linkTo: '/audittrail'
+            linkTo: '/administration/audittrail',
+            component: AuditTrail,
         }, {
             name: 'User Management',
             key: 'userManagement',
-            linkTo: '/usermanagement'
+            linkTo: '/administration/usermanagement',
+            component: UserManagement,
         }, {
             name: 'System Parameter',
             key: 'systemParameter',
-            linkTo: '/systemparameter'
+            linkTo: '/administration/systemparameter',
+            component: SystemParameter,
         }, {
             name: 'Calendar',
             key: 'calendar',
-            linkTo: '/calendar'
+            linkTo: '/administration/calendar',
+            component: Calendar,
         }, {
             name: 'Register ATS',
             key: 'registerAts',
-            linkTo: '/registerats'
+            linkTo: '/administration/registerats',
+            component: RegisterAts,
         }, {
             name: 'Approval',
             key: 'administrationApproval',
-            linkTo: '/approval'
+            linkTo: '/administration/approval',
+            component: ApprovalAdministration,
         }]
     },
     {
@@ -251,68 +441,545 @@ const Menu = [
         subMenus: [{
             name: 'DHK Level Member',
             key: 'dhkmember',
-            linkTo: '/dhkmember'
-        },{
+            linkTo: '/reporting/dhkmember',
+            component: DHKLevelMember,
+        }, {
             name: 'DHK Level Client',
             key: 'dhkclient',
-            linkTo: '/dhkclient'
+            linkTo: '/reporting/dhkclient',
+            component: DHKLevelClient,
         }, {
             name: 'OAR (Obligation Accomplishment Report)',
             key: 'obligationaccomplishment',
-            linkTo: '/obligationaccomplishment'
+            linkTo: '/reporting/obligationaccomplishment',
+            component: ObligationAccomplishment,
         }, {
             name: 'Regulator Report',
             key: 'regulatorreport',
-            linkTo: '/regulatorreport'
+            linkTo: '/reporting/regulatorreport',
+            component: RegulatorReport,
         }, {
             name: 'Novation Report',
             key: 'novationreport',
-            linkTo: '/novationreport'
+            linkTo: '/reporting/novationreport',
+            component: NovationReport,
         }, {
             name: 'Movement Balance Report',
             key: 'movementbalance',
-            linkTo: '/movementbalance'
+            linkTo: '/reporting/movementbalance',
+            component: MovementBalance,
         }, {
             name: 'Default Fund Report',
             key: 'fundreport',
-            linkTo: '/fundreport'
-        }, 
+            linkTo: '/reporting/fundreport',
+            component: DefaultFundReport,
+        },
+        {
+            name: 'Fee Report',
+            key: 'feereport',
+            linkTo: '/reporting/feereport',
+            component: FeeReport,
+        },
         // {
         //     name: 'Report Bank Indonesia',
         //     key: 'reportbankid',
         //     linkTo: '/reportbankid'
-        // },
+        // }, 
         {
-            name: 'Fee Report',
-            key: 'feereport',
-            linkTo: '/feereport'
-        }, {
             name: 'Margin Report',
             key: 'marginreport',
-            linkTo: '/marginreport'
+            linkTo: '/reporting/marginreport',
+            component: MarginReport,
         }, {
             name: 'Default Report',
             key: 'defaultreport',
-            linkTo: '/defaultreport'
+            linkTo: '/reporting/defaultreport',
+            component: DefaultReport,
         }, {
             name: 'Client Accomplishment Report',
             key: 'clientaccomplishment',
-            linkTo: '/clientaccomplishment'
+            linkTo: '/reporting/clientaccomplishment',
+            component: ClientAccomplishment,
         }, {
             name: 'Daily Transaction Report',
             key: 'dailytransaction',
-            linkTo: '/dailytransaction'
+            linkTo: '/reporting/dailytransaction',
+            component: DailyTransactionReport,
         }, {
             name: 'Clearing Summary',
             key: 'clearingsummary',
-            linkTo: '/clearingsummary'
+            linkTo: '/reporting/clearingsummary',
+            component: ClearingSummary,
         }]
     },
     {
         name: 'Rekonsiliasi Rekening',
         key: 'rekonsiliasirekening',
         icon: <FileDoneOutlined />,
-        linkTo: '/rekonsiliasi'
+        linkTo: '/rekonsiliasi',
+    }, {
+        other: [{
+            name: 'EditRegisterContract',
+            key: 'EditRegisterContract',
+            linkTo: '/EditRegisterContract',
+            component: EditRegisterContract,
+        },
+        {
+            name: 'ViewEditMember',
+            key: 'ViewEditMember',
+            linkTo: '/ViewEditMember',
+            component: ViewEditMember,
+        },
+        {
+            name: 'ViewEditClient',
+            key: 'ViewEditClient',
+            linkTo: '/ViewEditClient',
+            component: ViewEditClient,
+        },
+        {
+            name: 'ViewDeleteMember',
+            key: 'ViewDeleteMember',
+            linkTo: '/ViewDeleteMember',
+            component: ViewDeleteMember,
+        },
+        {
+            name: 'ViewDeleteClient',
+            key: 'ViewDeleteClient',
+            linkTo: '/ViewDeleteClient',
+            component: ViewDeleteClient,
+        },
+        {
+            name: 'ViewDeleteAccount',
+            key: 'ViewDeleteAccount',
+            linkTo: '/ViewDeleteAccount',
+            component: ViewDeleteAccount,
+        },
+        {
+            name: 'ViewEditAccount',
+            key: 'ViewEditAccount',
+            linkTo: '/ViewEditAccount',
+            component: ViewEditAccount,
+        },
+        {
+            name: 'ViewEditSCMgt',
+            key: 'ViewEditSCMgt',
+            linkTo: '/ViewEditSCMgt',
+            component: ViewEditSCMgt,
+        },
+        {
+            name: 'ViewDeleteSCMgt',
+            key: 'ViewDeleteSCMgt',
+            linkTo: '/ViewDeleteSCMgt',
+            component: ViewDeleteSCMgt,
+        },
+        {
+            name: 'ViewEditCCMgt',
+            key: 'ViewEditCCMgt',
+            linkTo: '/ViewEditCCMgt',
+            component: ViewEditCCMgt,
+        },
+        {
+            name: 'ViewDeleteCCMgt',
+            key: 'ViewDeleteCCMgt',
+            linkTo: '/ViewDeleteCCMgt',
+            component: ViewDeleteCCMgt,
+        },
+        {
+            name: 'ViewDeleteJibor',
+            key: 'ViewDeleteJibor',
+            linkTo: '/ViewDeleteJibor',
+            component: ViewDeleteJibor,
+        },
+        {
+            name: 'ViewEditJibor',
+            key: 'ViewEditJibor',
+            linkTo: '/ViewEditJibor',
+            component: ViewEditJibor,
+        },
+        {
+            name: 'ViewDeleteParam',
+            key: 'ViewDeleteParam',
+            linkTo: '/ViewDeleteParam',
+            component: ViewDeleteParam,
+        },
+        {
+            name: 'ViewEditParam',
+            key: 'ViewEditParam',
+            linkTo: '/ViewEditParam',
+            component: ViewEditParam,
+        },
+        {
+            name: 'ViewEditUser',
+            key: 'ViewEditUser',
+            linkTo: '/ViewEditUser',
+            component: ViewEditUser,
+        },
+        {
+            name: 'ViewDeleteUser',
+            key: 'ViewDeleteUser',
+            linkTo: '/ViewDeleteUser',
+            component: ViewDeleteUser,
+        },
+        {
+            name: 'AddUser',
+            key: 'AddUser',
+            linkTo: '/AddUser',
+            component: AddUser,
+        },
+        {
+            name: 'ViewEditCalendar',
+            key: 'ViewEditCalendar',
+            linkTo: '/ViewEditCalendar',
+            component: ViewEditCalendar,
+        },
+        {
+            name: 'ViewDeleteCalendar',
+            key: 'ViewDeleteCalendar',
+            linkTo: '/ViewDeleteCalendar',
+            component: ViewDeleteCalendar,
+        },
+        {
+            name: 'DetailViewTrade',
+            key: 'DetailViewTrade',
+            linkTo: '/DetailViewTrade',
+            component: DetailViewTrade,
+        },
+        {
+            name: 'ViewEditRegAts',
+            key: 'ViewEditRegAts',
+            linkTo: '/ViewEditRegAts',
+            component: ViewEditRegAts,
+        },
+        {
+            name: 'ViewDeleteRegAts',
+            key: 'ViewDeleteRegAts',
+            linkTo: '/ViewDeleteRegAts',
+            component: ViewDeleteRegAts,
+        },
+        {
+            name: 'ViewAdd',
+            key: 'ViewAdd',
+            linkTo: '/ViewAdd',
+            component: ViewAdd,
+        },
+        {
+            name: 'ViewAddColw',
+            key: 'ViewAddColw',
+            linkTo: '/ViewAddColw',
+            component: ViewAddColw,
+        },
+        {
+            name: 'DetailCancelCOLDP',
+            key: 'DetailCancelCOLDP',
+            linkTo: '/DetailCancelCOLDP',
+            component: DetailCancelCOLDP,
+        },
+        {
+            name: 'DetailCancelCOLW',
+            key: 'DetailCancelCOLW',
+            linkTo: '/DetailCancelCOLW',
+            component: DetailCancelCOLW,
+        },
+        {
+            name: 'ViewAddSM',
+            key: 'ViewAddSM',
+            linkTo: '/ViewAddSM',
+            component: ViewAddSM,
+        },
+        {
+            name: 'DetailCancelSM',
+            key: 'DetailCancelSM',
+            linkTo: '/DetailCancelSM',
+            component: DetailCancelSM,
+        },
+        {
+            name: 'ViewAddCM',
+            key: 'ViewAddCM',
+            linkTo: '/ViewAddCM',
+            component: ViewAddCM,
+        },
+        {
+            name: 'DetailCancelCM',
+            key: 'DetailCancelCM',
+            linkTo: '/DetailCancelCM',
+            component: DetailCancelCM,
+        },
+        {
+            name: 'ClearingDetailView',
+            key: 'ClearingDetailView',
+            linkTo: '/ClearingDetailView',
+            component: ClearingDetailView,
+        },
+        {
+            name: 'IrsEditCurrency',
+            key: 'IrsEditCurrency',
+            linkTo: '/IrsEditCurrency',
+            component: IrsEditCurrency,
+        },
+        {
+            name: 'IrsEditLegType',
+            key: 'IrsEditLegType',
+            linkTo: '/IrsEditLegType',
+            component: IrsEditLegType,
+        },
+        {
+            name: 'IrsEffectiveDate',
+            key: 'IrsEffectiveDate',
+            linkTo: '/IrsEffectiveDate',
+            component: IrsEffectiveDate,
+        },
+        {
+            name: 'IrsEditContractTerm',
+            key: 'IrsEditContractTerm',
+            linkTo: '/IrsEditContractTerm',
+            component: IrsEditContractTerm,
+        },
+        {
+            name: 'IrsEditNotionalAmount',
+            key: 'IrsEditNotionalAmount',
+            linkTo: '/IrsEditNotionalAmount',
+            component: IrsEditNotionalAmount,
+        },
+        {
+            name: 'IrsEditPaymentFreq',
+            key: 'IrsEditPaymentFreq',
+            linkTo: '/IrsEditPaymentFreq',
+            component: IrsEditPaymentFreq,
+        },
+        {
+            name: 'IrsEditFixingDate',
+            key: 'IrsEditFixingDate',
+            linkTo: '/IrsEditFixingDate',
+            component: IrsEditFixingDate,
+        },
+        {
+            name: 'IrsEditSpread',
+            key: 'IrsEditSpread',
+            linkTo: '/IrsEditSpread',
+            component: IrsEditSpread,
+        },
+        {
+            name: 'IrsEditDayCountF',
+            key: 'IrsEditDayCountF',
+            linkTo: '/IrsEditDayCountF',
+            component: IrsEditDayCountF,
+        },
+        {
+            name: 'IrsFloatingRatrRFreq',
+            key: 'IrsFloatingRatrRFreq',
+            linkTo: '/IrsFloatingRatrRFreq',
+            component: IrsFloatingRatrRFreq,
+        },
+        {
+            name: 'IrsFloatingRIndex',
+            key: 'IrsFloatingRIndex',
+            linkTo: '/IrsFloatingRIndex',
+            component: IrsFloatingRIndex,
+        },
+        {
+            name: 'IrsBDC',
+            key: 'IrsBDC',
+            linkTo: '/IrsBDC',
+            component: IrsBDC,
+        },
+        {
+            name: 'IrsEditRoundingP',
+            key: 'IrsEditRoundingP',
+            linkTo: '/IrsEditRoundingP',
+            component: IrsEditRoundingP,
+        },
+        {
+            name: 'IrsEditStubPayment',
+            key: 'IrsEditStubPayment',
+            linkTo: '/IrsEditStubPayment',
+            component: IrsEditStubPayment,
+        },
+        {
+            name: 'IrsEditForwardStart',
+            key: 'IrsEditForwardStart',
+            linkTo: '/IrsEditForwardStart',
+            component: IrsEditForwardStart,
+        },
+        {
+            name: 'IrsEditCashPaymentC',
+            key: 'IrsEditCashPaymentC',
+            linkTo: '/IrsEditCashPaymentC',
+            component: IrsEditCashPaymentC,
+        },
+        {
+            name: 'OisEditCurrency',
+            key: 'OisEditCurrency',
+            linkTo: '/OisEditCurrency',
+            component: OisEditCurrency,
+        },
+        {
+            name: 'OisEditLegType',
+            key: 'OisEditLegType',
+            linkTo: '/OisEditLegType',
+            component: OisEditLegType,
+        },
+        {
+            name: 'OisEffectiveDate',
+            key: 'OisEffectiveDate',
+            linkTo: '/OisEffectiveDate',
+            component: OisEffectiveDate,
+        },
+        {
+            name: 'OisEditContractTerm',
+            key: 'OisEditContractTerm',
+            linkTo: '/OisEditContractTerm',
+            component: OisEditContractTerm,
+        },
+        {
+            name: 'OisEditNotionalAmount',
+            key: 'OisEditNotionalAmount',
+            linkTo: '/OisEditNotionalAmount',
+            component: OisEditNotionalAmount,
+        },
+        {
+            name: 'OisEditDayCountF',
+            key: 'OisEditDayCountF',
+            linkTo: '/OisEditDayCountF',
+            component: OisEditDayCountF,
+        },
+        {
+            name: 'OisBDC',
+            key: 'OisBDC',
+            linkTo: '/OisBDC',
+            component: OisBDC,
+        },
+        {
+            name: 'OisEditRoundingP',
+            key: 'OisEditRoundingP',
+            linkTo: '/OisEditRoundingP',
+            component: OisEditRoundingP,
+        },
+        {
+            name: 'OisEditForwardStart',
+            key: 'OisEditForwardStart',
+            linkTo: '/OisEditForwardStart',
+            component: OisEditForwardStart,
+        },
+        {
+            name: 'OisEditSpread',
+            key: 'OisEditSpread',
+            linkTo: '/OisEditSpread',
+            component: OisEditSpread,
+        },
+        {
+            name: 'DndfEditCurrency',
+            key: 'DndfEditCurrency',
+            linkTo: '/DndfEditCurrency',
+            component: DndfEditCurrency,
+        },
+        {
+            name: 'DndfEditFixingDate',
+            key: 'DndfEditFixingDate',
+            linkTo: '/DndfEditFixingDate',
+            component: DndfEditFixingDate,
+        },
+        {
+            name: 'DndfTenor',
+            key: 'DndfTenor',
+            linkTo: '/DndfTenor',
+            component: DndfTenor,
+        },
+        {
+            name: 'DndfEditNotionalAmount',
+            key: 'DndfEditNotionalAmount',
+            linkTo: '/DndfEditNotionalAmount',
+            component: DndfEditNotionalAmount,
+        },
+        {
+            name: 'ViewDeleteJisdor',
+            key: 'ViewDeleteJisdor',
+            linkTo: '/ViewDeleteJisdor',
+            component: ViewDeleteJisdor,
+        },
+        {
+            name: 'ViewEditJisdor',
+            key: 'ViewEditJisdor',
+            linkTo: '/ViewEditJisdor',
+            component: ViewEditJisdor,
+        },
+        {
+            name: 'ViewDeleteIndonia',
+            key: 'ViewDeleteIndonia',
+            linkTo: '/ViewDeleteIndonia',
+            component: ViewDeleteIndonia,
+        },
+        {
+            name: 'ViewEditIndonia',
+            key: 'ViewEditIndonia',
+            linkTo: '/ViewEditIndonia',
+            component: ViewEditIndonia,
+        },
+        {
+            name: 'ViewDeleteSysParam',
+            key: 'ViewDeleteSysParam',
+            linkTo: '/ViewDeleteSysParam',
+            component: ViewDeleteSysParam,
+        },
+        {
+            name: 'ViewEditSysParam',
+            key: 'ViewEditSysParam',
+            linkTo: '/ViewEditSysParam',
+            component: ViewEditSysParam,
+        },
+        {
+            name: 'DetailApproval',
+            key: 'DetailApproval',
+            linkTo: '/DetailApproval',
+            component: DetailApproval,
+        },
+        {
+            name: 'AccDetailView',
+            key: 'AccDetailView',
+            linkTo: '/AccDetailView',
+            component: AccDetailView,
+        },
+        {
+            name: 'ClearingDetailIRS',
+            key: 'ClearingDetailIRS',
+            linkTo: '/ClearingDetailIRS',
+            component: ClearingDetailIRS,
+        },
+        {
+            name: 'ClearingDetailOIS',
+            key: 'ClearingDetailOIS',
+            linkTo: '/ClearingDetailOIS',
+            component: ClearingDetailOIS,
+        },
+        {
+            name: 'ClearingDetailDNDF',
+            key: 'ClearingDetailDNDF',
+            linkTo: '/ClearingDetailDNDF',
+            component: ClearingDetailDNDF,
+        },
+        {
+            name: 'ApprovalDetail',
+            key: 'ApprovalDetail',
+            linkTo: '/ApprovalDetail',
+            component: ApprovalDetail,
+        },
+        {
+            name: 'ApprovalInstructionDetail',
+            key: 'ApprovalInstructionDetail',
+            linkTo: '/ApprovalInstructionDetail',
+            component: ApprovalInstructionDetail,
+        },
+        {
+            name: 'ApprovalCollateralDetail',
+            key: 'ApprovalCollateralDetail',
+            linkTo: '/ApprovalCollateralDetail',
+            component: ApprovalCollateralDetail,
+        },
+        {
+            name: 'ReportBI',
+            key: 'ReportBI',
+            linkTo: '/ReportBI',
+            component: ReportBI,
+        },]
     }
 ]
 

@@ -12,11 +12,12 @@ import ViewEngine from './component/ViewEngine';
 
 
 function App() {
+  //let HideHeader = window.location.pathname === '/Login' && '/Reset' && '/Confirm' && '/Signup' ? null : <Head />
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/">
+        <Route path="/otc-derivatif/login" component={Login} />
+        <Route path="/otc-derivatif">
           <ViewEngine />
         </Route>
       </Switch>

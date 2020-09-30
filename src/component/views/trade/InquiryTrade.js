@@ -6,8 +6,7 @@ import {
     Table,
     Select,
     DatePicker,
-    Dropdown,
-    Menu,
+    Typography,
     Row,
     Col,
 } from 'antd';
@@ -15,6 +14,7 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 const dateFormat = 'YYYY/MM/DD';
+const { Title } = Typography;
 
 function InquiryTrade() {
     const [columns] = useState([
@@ -198,6 +198,9 @@ function InquiryTrade() {
         icon={<DownloadOutlined />}>Export File</Button>);
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Inquiry Trade</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}
