@@ -6,9 +6,11 @@ import {
     Input,
     DatePicker,
     Col,
-    Row
+    Row,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function DHKLevelMember() {
     const [expand, setExpand] = useState(true);
@@ -127,6 +129,9 @@ function DHKLevelMember() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>DHK Level Member</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

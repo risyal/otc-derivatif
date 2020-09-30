@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
@@ -8,12 +8,15 @@ import {
     Table,
     Row,
     Col,
+    Descriptions
 } from 'antd';
 import {
     ArrowLeftOutlined,
     DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -47,74 +50,18 @@ const ViewDeleteSCMgt = (props) => {
     
     const [data] = useState([
         {
-            key: '0',
-            code: '',
-            name: '',
-            type: '',
-            eligibility: '',
-            haircut: '',
-            maturityDate: '',
+            title: "Telephone Number :",
+            paramData: "asd"
         },
         {
-            key: '1',
-            code: 'CENAIDJA',
-            name: 'Instrument1',
-            type: 'Type1',
-            eligibility: 'Yes',
-            haircut: 'Haircut1',
-            maturityDate: '09-07-2020',
-        },
-        {
-            key: '2',
-            code: 'CENAIDJA',
-            name: 'Instrument2',
-            type: 'Type2',
-            eligibility: 'No',
-            haircut: 'Haircut2',
-            maturityDate: '09-07-2020',
-        },
-        {
-            key: '3',
-            code: 'CENAIDJA',
-            name: 'Instrument3',
-            type: 'Type3',
-            eligibility: 'Yes',
-            haircut: 'Haircut3',
-            maturityDate: '09-07-2020',
+            title: "Email :",
+            paramData: "asdas"
         },
     ]);
-    const dataInstrumentById = data.find((instrument) => {
-        return instrument.key === props.location.state.id
+   
+    const [loading, setLoading] = useState(false);
 
-    })
-
-    const [dataForView] = useState([
-        {
-            title: "Instrument Code :",
-            paramData: dataInstrumentById.code
-        },
-        {
-            title: "Instrument Name :",
-            paramData: dataInstrumentById.name
-        },
-        {
-            title: "Instrument Type :",
-            paramData: dataInstrumentById.type
-        },
-        {
-            title: "Eligibility :",
-            paramData: dataInstrumentById.eligibility
-        },
-        {
-            title: "Haircut :",
-            paramData: dataInstrumentById.haircut
-        },
-        {
-            title: "Maturity Date :",
-            paramData: dataInstrumentById.maturityDate
-        },
-    ]);
-
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -130,6 +77,56 @@ const ViewDeleteSCMgt = (props) => {
             height: '35px'
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
+    const [sccoll, setSCcoll] = useState({
+        instrumentCode: "test",
+        instrumentName: null,
+        instrumentType: null,
+        eligibility: null,
+        haircut: null,
+        maturityDate: null,
+    });
+
+    const dataForView = [];
+
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/securitiescollateralmanagements/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            /* form.setFieldsValue({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            }); */
+            setSCcoll({
+                instrumentCode: resJSON.instrumentCode,
+                instrumentName: resJSON.instrumentName,
+                instrumentType: resJSON.instrumentType,
+                eligibility: resJSON.eligibility,
+                haircut: resJSON.haircut,
+                maturityDate: resJSON.maturityDate,
+            })
+            setLoading(false);
+        }
+
+    };
+
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/securitiescollateralmanagements/${idx}`, {
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
 
     return (
         <div>
@@ -142,6 +139,32 @@ const ViewDeleteSCMgt = (props) => {
                     </span>
                 {action} Instrument</Title>
             </div>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+
+            <Descriptions column={1} bordered
+                extra={<Button type="primary"><DownloadOutlined /> Edit</Button>}>
+                <Descriptions.Item label="Instrument Code">{sccoll.instrumentCode}</Descriptions.Item>
+                <Descriptions.Item label="Instrument Name">{sccoll.instrumentName}</Descriptions.Item>
+                <Descriptions.Item label="Instrument Type">{sccoll.instrumentType}</Descriptions.Item>
+                <Descriptions.Item label="Eligibility">{sccoll.eligibility}</Descriptions.Item>
+                <Descriptions.Item label="Haircut">{sccoll.haircut}</Descriptions.Item>
+                <Descriptions.Item label="Maturity Date">{sccoll.maturityDate}</Descriptions.Item>
+            </Descriptions>
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -150,31 +173,7 @@ const ViewDeleteSCMgt = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Row justify="end">
-                    <Col span={4}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                        {exportButtton}
-                        {/* </Link> */}
-                    </Col>
-                </Row>
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
-
-                {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -185,10 +184,16 @@ const ViewDeleteSCMgt = (props) => {
                         <div></div>
                     )}
 
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}
+                            style={{ marginLeft: '20px' }}>
                     {!disable ? (<Link to="/securitiescollmgt">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        <Popconfirm placement="leftTop" 
+                                    title={text} 
+                                    okText="Yes"
+                                    cancelText="No">
+                            <Button type="primary" 
+                                    onClick={submitDelete}
+                                    style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (

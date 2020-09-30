@@ -8,17 +8,20 @@ import {
     Col,
     Dropdown,
     Menu,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { FormInstance } from 'antd/lib/form';
 
 import axios from 'axios';
+const { Title } = Typography;
 
 const columns = [
     {
         title: 'System Paramater',
         dataIndex: 'param',
+        sorter: true,
     },
     {
         title: 'Value',
@@ -86,7 +89,6 @@ const getRandomuserParams = params => {
     };
 };
 
-
 const componentSize = () => 'middle';
 const formItemLayout = {
     labelCol: {
@@ -111,10 +113,11 @@ const exportButtton = <Button
 
 const tailLayout = {
     wrapperCol: {
-        offset: 8,
-        span: 16,
+        offset: 6,
+        span: 12,
     },
 };
+
 class SystemParameter extends React.Component {
     formRef = React.createRef();
     state = {
@@ -123,7 +126,15 @@ class SystemParameter extends React.Component {
             current: 1,
             pageSize: 5,
         },
-        loading: true
+        search: {
+            param: null,
+            value: null,
+            valueType: null,
+            note: null,
+        },
+        loading: true,
+        cobadata: "test",
+        expand: true,
     }
     componentDidMount() {
         const { pagination } = this.state;
@@ -139,16 +150,29 @@ class SystemParameter extends React.Component {
                  console.log(data)
              }) */
     }
-    handleTableChange = (pagination) => {
+    handleTableChange = (pagination, filters, sorter, extra) => {
+        console.log('paramasdasds', pagination, filters, sorter, extra);
         this.fetch({
             pagination,
         });
-        console.log(pagination);
     };
 
     fetch = (params = {}) => {
+        const paramSearch = new URLSearchParams([['param', 'ical']]);
+        /*  {
+             param: this.formRef.current.getFieldValue("keyword"),
+             value: this.formRef.current.getFieldValue("keyword"),
+             valueType: this.formRef.current.getFieldValue("keyword"),
+             note: this.formRef.current.getFieldValue("keyword")
+         }; */
+        console.log("params " + paramSearch.get);
         this.setState({ loading: true });
-        axios.get(`http://localhost:8080/sysparams`)
+        axios.get(`http://localhost:8080/sysparams`, {
+            params: {
+                param: this.formRef.current.getFieldValue("keyword"),
+                value: this.formRef.current.getFieldValue("keyword"),
+            }
+        })
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -164,11 +188,30 @@ class SystemParameter extends React.Component {
     onReset = () => {
         this.formRef.current.resetFields();
     };
+    handleSearch = (e) => {
+        e.preventDefault();
+        this.setState({
+            search: {
+                param: this.formRef.current.getFieldValue("keyword"),
+                value: this.formRef.current.getFieldValue("keyword"),
+                valueType: this.formRef.current.getFieldValue("keyword"),
+                note: this.formRef.current.getFieldValue("keyword"),
+            }
+        });
+        const { pagination } = this.state;
+        console.log("value" + this.formRef.current.getFieldValue("keyword"));
+        this.setState({ cobadata: "asdasdas test" });
+        console.log("valuecoba " + this.state.cobadata);
+        this.fetch({ pagination });
+    };
 
     render() {
         const { data, pagination, loading } = this.state;
         return (
-            <div>
+            <div style={{ margin: '15px 20px' }}>
+                <div className="head-content">
+                    <Title level={4}>System Parameter</Title>
+                </div>
                 <Form
                     {...formItemLayout}
                     size={componentSize}
@@ -177,18 +220,47 @@ class SystemParameter extends React.Component {
                     initialValues={{ size: componentSize }}
                     labelAlign="left"
                 >
-                    <Form.Item name="keyword" label="Keyword">
-                        <Input />
-                    </Form.Item>
+                    {this.state.expand ? (<div>
+                        <Form.Item label="Keyword">
+                            <Input />
+                        </Form.Item>
+                    </div>
+                    ) : (
+                        <div>
+                            <Form.Item label="System Parameter">
+								<Input />
+							</Form.Item>
+                            <Form.Item label="Value">
+								<Input />
+							</Form.Item>
+                        </div>
+                    )}
+
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" style={{ marginRight: '10px' }} htmlType="submit">
-                            Submit
+                        <Button
+							type="primary"
+							htmlType="submit"
+							tyle={{ marginRight: '15px' }}>
+							Search
                         </Button>
-                        <Button htmlType="button" onClick={this.onReset}>
-                            Reset
-                    </Button>
+						<Button
+							style={{ margin: '0 8px' }}
+							onClick={this.onReset}>
+							Clear
+                        </Button>
+						<Button
+							htmlType="submit"
+							onClick={() => {
+								this.setState({
+									expand: !this.state.expand
+								});
+							}}>
+							{this.state.expand ? (<div><DownOutlined /> Advance Search</div>) :
+								(<div><UpOutlined /> Simple Search</div>)}
+						</Button>
                     </Form.Item>
                 </Form>
+                
                 <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
                     <Row justify="end">
                         <Col span={8}>
@@ -226,6 +298,8 @@ class SystemParameter extends React.Component {
                         pagination={pagination}
                         loading={loading}
                         onChange={this.handleTableChange}
+                        bordered
+                        size="middle"
                     />
                 </div>
             </div>

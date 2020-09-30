@@ -5,9 +5,11 @@ import {
     Button,
     Table,
     Row,
-    Col
+    Col,
+    Typography
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function SettlementMonitoring() {
     const [componentSize] = useMemo(() => 'middle');
@@ -68,6 +70,9 @@ function SettlementMonitoring() {
 
     return (
         <div style={{ margin: '15px 20px' }}>
+            <div className="head-content">
+                <Title level={4}>Monitoring Clearing Pos vs Balance</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Input,
@@ -13,59 +13,116 @@ import {
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
+import axios from 'axios';
+
 const { Title } = Typography;
 
 const ViewEditIndonia = (props) => {
     const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
+    const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('horizontal');
+    const onFormLayoutChange = ({ layout }) => {
+        setFormLayout(layout);
+    };
 
-    const [data] = useState([
-        {
-			key: '0',
-			no: '',
-			date: '',
-			indonia: '',
-		},
-        {
-			key: '1',
-			no: '1',
-			date: '20-07-2020',
-			indonia: '0.00000',
-		},
-		{
-			key: '2',
-			no: '2',
-			date: '19-07-2020',
-			indonia: '1.08760',     
-		},
-		{
-			key: '3',
-			no: '3',
-			date: '18-07-2020',
-			indonia: '4.63200',       
-		},
-    ]);
+    const formItemLayout =
+    formLayout === 'horizontal'
+        ? {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 6 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 16 },
+            },
+        }
+        : null;
 
-    const dataIndoniaById = data.find((indonia) => {
-        return indonia.key === props.location.state.id
-    })
+    const onFinish = values => {
+        console.log('test==',form.getFieldValue("date"))
+        console.log('date==',fieldDate)
+        if (idx > 0) {
+            axios.put(`http://localhost:8080/referenceindonias/${idx}`, {
+            date: form.getFieldValue("date"),
+            value: form.getFieldValue("value"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                // form.resetFields();
+            })
+        } else {
+            axios.post(`http://localhost:8080/referenceindonias`, {
+                date: fieldDate,
+                value: form.getFieldValue("value"),
+                status: "active",
+                lastUpdate: null
+            })
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    // form.resetFields();
+                })
+            }
+    };
 
-    const action = props.location.state.action
+    const [action] = useState(props.location.state.action);
+    const [idx] = useState(props.location.state.id);
+    const [loading, setLoading] = useState(false);
+    const tailLayout = {
+        wrapperCol: { offset: 6, span: 12 },
+    };
+    const dateFormat = 'YYYY/MM/DD';
+    const [todayDate] = useState(moment(new Date(), dateFormat));
+    const [fieldDate, setFieldDate] = useState(todayDate);
+
+    const submitEdit = () => {
+        axios.put(`http://localhost:8080/referenceindonias/${idx}`, {
+            date: form.getFieldValue("date"),
+            value: form.getFieldValue("value"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                form.resetFields();
+            })
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/referenceindonias/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            setFieldDate(resJSON.date);
+            form.setFieldsValue({
+                value: resJSON.value,
+                lastUpdate: resJSON.lastUpdate,
+            });
+            setLoading(false);
+        }else{
+            setFieldDate(moment(new Date(), dateFormat));
+        }
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
+
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
-    const dateFormat = 'YYYY/MM/DD';
 
     return (
         <div>
@@ -80,18 +137,22 @@ const ViewEditIndonia = (props) => {
             </div>
             <Form
                 {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
+                layout={formLayout}
+                form={form}
                 labelAlign="left"
-                style={{ marginBottom: '80px' }}
+                initialValues={{ layout: formLayout }}
+                onFinish={onFinish}
             >
-                <Form.Item label="Date">
-                    <DatePicker style={{ width: '100%'}} 
-                        defaultValue={moment('2020/07/20', dateFormat)}/>   
+                <Form.Item label="Date" name="date"
+                            rules={[{ required: true, message: 'Date is required' }]}>
+                    <DatePicker 
+                        onChange={(date, dateString) => setFieldDate(dateString)} 
+                        style={{ width: '100%' }}
+                        defaultValue={fieldDate}/>   
                 </Form.Item>
-                <Form.Item label="IndONIA (%)">
-                    <Input disabled={disable} defaultValue={dataIndoniaById.indonia} />
+                <Form.Item label="IndONIA (%)" name="value"
+                            rules={[{ required: true, message: 'Value is required' }]}>
+                    <Input placeholder="Insert Value" />
                 </Form.Item>
                 
                 {!disable ? (<Form.Item label="Role">
@@ -105,22 +166,16 @@ const ViewEditIndonia = (props) => {
                         <div></div>
                     )}
                     
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/editreferencerate">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
-                        </Button>
-                    </Link>
-                    ) : (
-                            <div></div>
-                        )}
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                                Submit
+                            </Button>
+                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                        Reset
+                    </Button>
                     <Link to="/editreferencerate">
                         <Button >
-                            {!disable ? (
-                                <div>Cancel</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
+                            <div>Back</div>
                         </Button>
                     </Link>
                 </Form.Item>

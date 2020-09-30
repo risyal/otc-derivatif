@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
     Form,
     Input,
@@ -12,70 +12,108 @@ import {
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
+import axios from 'axios';
+
 const { Title } = Typography;
 const { Option } = Select;
 
 const ViewEditCCMgt = (props) => {
-    const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
+    const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('horizontal');
+    const [elig, setElig] = useState('true');
 
-    const [data] = useState([
-        {
-            key: '0',
-            code: '',
-            name: '',
-            eligibility: '',
-            haircut: '',
-        },
-        {
-            key: '1',
-            code: 'CENAIDJA',
-            name: 'Instrument1',
-            eligibility: 'No',
-            haircut: 'Haircut1',
-        },
-        {
-            key: '2',
-            code: 'CENAIDJA',
-            name: 'Instrument2',
-            eligibility: 'Yes',
-            haircut: 'Haircut2',
-        },
-        {
-            key: '3',
-            code: 'CENAIDJA',
-            name: 'Instrument3',
-            eligibility: 'No',
-            haircut: 'Haircut3',
-        },
-    ]);
+    const onFormLayoutChange = ({ layout }) => {
+        setFormLayout(layout);
+    };
 
-    const dataMemberById = data.find((member) => {
-        return member.key === props.location.state.id
-    })
+    const formItemLayout =
+        formLayout === 'horizontal'
+            ? {
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
+            }
+            : null;
+    const onFinish = values => {
 
-    const typeSelect = ['Yes', 'No'];
-    const [selectedType, setSelectedType] = useState(typeSelect[0]);
-    const typeClick = (e) => {
-        setSelectedType(e);
-    }
-    const action = props.location.state.action
+        console.log('Received values of form: ', values);
+        console.log('idnya: ', idx);
+        console.log('Received eli of form: ', values.eligibility);
+        var egl = "true";
+        console.log("eg" + egl);
+        console.log('asd', form.getFieldValue("eligibility"));
+        if (idx > 0) {
+            axios.put(`http://localhost:8080/cashcollateralmanagements/${idx}`, {
+                currencyCode: form.getFieldValue("currencyCode"),
+                currencyName: form.getFieldValue("currencyName"),
+                eligibility: form.getFieldValue("eligibility"),
+                haircut: form.getFieldValue("haircut"),
+                status: "active",
+                lastUpdate: null
+            })
+                .then(res => {
+                    form.resetFields();
+                })
+
+        } else {
+            axios.post(`http://localhost:8080/cashcollateralmanagements`, {
+                currencyCode: form.getFieldValue("currencyCode"),
+                currencyName: form.getFieldValue("currencyName"),
+                eligibility: values.eligibility,
+                haircut: form.getFieldValue("haircut"),
+                status: "active",
+                lastUpdate: null
+            })
+                .then(res => {
+                    form.resetFields();
+                })
+        }
+
+    };
+    const [action] = useState(props.location.state.action);
+    const [idx] = useState(props.location.state.id);
+    const [loading, setLoading] = useState(false);
+    const tailLayout = {
+        wrapperCol: { offset: 6, span: 12 },
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/cashcollateralmanagements/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log("asdasd" + resJSON.currencyCode);
+            form.setFieldsValue({
+                currencyCode: resJSON.currencyCode,
+                currencyName: resJSON.currencyName,
+                eligibility: resJSON.eligibility,
+                haircut: resJSON.haircut,
+            });
+            setLoading(false);
+        }
+
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
+
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
 
-    return(
+    return (
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
@@ -84,36 +122,43 @@ const ViewEditCCMgt = (props) => {
                             <ArrowLeftOutlined />
                         </Link>
                     </span>
-                {action} Data Currency</Title>
+                    {action} Data Currency</Title>
             </div>
             <Form
                 {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
+                layout={formLayout}
+                form={form}
                 labelAlign="left"
-                style={{ marginBottom: '80px' }}
+                initialValues={{ layout: formLayout }}
+                onFinish={onFinish}
             >
-                
-                <Form.Item label="Currency Code">
-                    <Input disabled={disable} defaultValue={dataMemberById.code} />
+                <Form.Item label="Currency Code" 
+                            name="currencyCode"
+                            rules={[{ required: true, message: 'Currency Code is required' }]}>
+                    <Input placeholder="Insert Code" />
                 </Form.Item>
-                <Form.Item label="Currency Name">
-                    <Input disabled={disable} defaultValue={dataMemberById.name} />
+                <Form.Item label="Currency Name" name="currencyName"
+                    rules={[{ required: true, message: 'Currency Name is required' }]}>
+                    <Input placeholder="Insert Name" />
                 </Form.Item>
-                <Form.Item label="Eligibity">
-                    <Select
-                        defaultValue={dataMemberById.eligibility}
-                        onChange={typeClick}
-                        disabled={disable}
+                <Form.Item label="Eligibility">
+                    <Input.Group compact>
+                        <Form.Item
+                            name={['eligibility']}
+                            noStyle
+                            rules={[{ required: true, message: 'Eligibility is required' }]}
                         >
-                        {typeSelect.map(type => (
-                            <Option value={type}>{type}</Option>
-                        ))}
-                    </Select>
+                            <Select placeholder="Select Eligibility" style={{ width: '100%' }}
+                            >
+                                <Option value="true">Yes</Option>
+                                <Option value="false">No</Option>
+                            </Select>
+                        </Form.Item>
+                    </Input.Group>
                 </Form.Item>
-                <Form.Item label="Haircut">
-                    <Input disabled={disable} defaultValue={dataMemberById.haircut} />
+                <Form.Item label="Haircut" name="haircut"
+                    rules={[{ required: true, message: 'Haircut is required' }]}>
+                    <Input placeholder="Insert Haircut" />
                 </Form.Item>
 
                 {!disable ? (<Form.Item label="Role">
@@ -123,26 +168,21 @@ const ViewEditCCMgt = (props) => {
                         <Radio value={3}>Direct Approver</Radio>
                     </Radio.Group>
                 </Form.Item>
+
                 ) : (
                         <div></div>
                     )}
-                    
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/cashcollmgt">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
-                            Submit
-                        </Button>
-                    </Link>
-                    ) : (
-                            <div></div>
-                        )}
+
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                        Submit
+                            </Button>
+                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                        Reset
+                    </Button>
                     <Link to="/cashcollmgt">
                         <Button >
-                            {!disable ? (
-                                <div>Cancel</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
+                            <div>Back</div>
                         </Button>
                     </Link>
                 </Form.Item>

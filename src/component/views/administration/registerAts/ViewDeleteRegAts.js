@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
@@ -8,6 +8,7 @@ import {
     Table,
     Row,
     Col,
+    Descriptions
 } from 'antd';
 import {
     ArrowLeftOutlined,
@@ -15,8 +16,9 @@ import {
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
-const { Title } = Typography;
+import axios from 'axios';
 
+const { Title } = Typography;
 const ViewDeleteRegAts = (props) => {
     const [text] = useState('Are you sure to delete this task?');
     const [componentSize] = useMemo(() => 'middle');
@@ -30,89 +32,9 @@ const ViewDeleteRegAts = (props) => {
             sm: { span: 16 },
         },
     });
-    const [columns] = useState([
-        {
-            title: '',
-            dataIndex: 'title',
-            key: 'title',
-            width: 280,
-        },
-        {
-            title: '',
-            dataIndex: 'paramData',
-            key: 'paramData',
-        },
-    ]);
-    const [data] = useState([
-        {
-            key: '0',
-            name: '',
-            applicationName: ' ',
-            address: '',
-            pic: '',
-            telp: '',
-            email: '',
-        },
-        {
-            key: '1',
-            name: 'PT 123',
-            applicationName: 'App Name',
-            address: 'Jl. Kenanga',
-            pic: 'Jihan',
-            telp: '082221829',
-            email: '123@gmail.com',
-        },
-        {
-            key: '2',
-            name: 'PT 123',
-            applicationName: 'App Name',
-            address: 'Jl. Kenanga',
-            pic: 'Jihan',
-            telp: '082221829',
-            email: '123@gmail.com',
-        },
-        {
-            key: '3',
-            name: 'PT 123',
-            applicationName: 'App Name',
-            address: 'Jl. Kenanga',
-            pic: 'Jihan',
-            telp: '082221829',
-            email: '123@gmail.com',
-        },
-    ]);
-    const dataAtsById = data.find((ats) => {
-        return ats.key === props.location.state.id
 
-    })
-
-    const [dataForView] = useState([
-        {
-            title: "Company Name :",
-            paramData: dataAtsById.name
-        },
-        {
-            title: "Application Name :",
-            paramData: dataAtsById.applicationName
-        },
-        {
-            title: "Address :",
-            paramData: dataAtsById.address
-        },
-        {
-            title: "PIC Name :",
-            paramData: dataAtsById.pic
-        },
-        {
-            title: "Telephone Number :",
-            paramData: dataAtsById.telp
-        },
-        {
-            title: "Email :",
-            paramData: dataAtsById.email
-        },
-    ]);
-
+    const [loading, setLoading] = useState(false);
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -129,6 +51,47 @@ const ViewDeleteRegAts = (props) => {
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
 
+    const [fieldsValue, setFieldsValue] = useState({
+        companyName: null,
+        applicationName: null,
+        address: null,
+        picName: null,
+        phoneNumber: null,
+        email: null,
+    });
+    const setRegAts = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/registeratss/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            setFieldsValue({
+                companyName: resJSON.companyName,
+                applicationName: resJSON.applicationName,
+                address: resJSON.companyInfo.address,
+                picName: resJSON.companyInfo.picName,
+                phoneNumber: resJSON.companyInfo.phoneNumber,
+                email: resJSON.companyInfo.email,
+            })
+            setLoading(false);
+        }
+
+    };
+
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/registeratss/${idx}`, {
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
+    useEffect(() => {
+        setRegAts(props.location.state.id);
+    }, []);
     return (
         <div>
             <div className="head-content viewDelete">
@@ -140,6 +103,31 @@ const ViewDeleteRegAts = (props) => {
                     </span>
                     {action} ATS</Title>
             </div>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+            <Descriptions column={1} bordered
+                extra={<Button type="primary"><DownloadOutlined /> Edit</Button>}>
+                <Descriptions.Item label="Company Name">{fieldsValue.companyName}</Descriptions.Item>
+                <Descriptions.Item label="Application Name">{fieldsValue.applicationName}</Descriptions.Item>
+                <Descriptions.Item label="Address">{fieldsValue.address}</Descriptions.Item>
+                <Descriptions.Item label="PicName">{fieldsValue.picName}</Descriptions.Item>
+                <Descriptions.Item label="PhoneNumber">{fieldsValue.phoneNumber}</Descriptions.Item>
+                <Descriptions.Item label="Email">{fieldsValue.email}</Descriptions.Item>
+            </Descriptions>
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -148,45 +136,24 @@ const ViewDeleteRegAts = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Row justify="end">
-                    <Col span={4}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                        {exportButtton}
-                        {/* </Link> */}
-                    </Col>
-                </Row>
-
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
-
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
                         <Radio value={3}>Direct Approver</Radio>
                     </Radio.Group>
                 </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                ) : null}
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}
+                            style={{ marginLeft: '20px' }}>
                     {!disable ? (<Link to="/registerats">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        <Popconfirm placement="leftTop"
+                            title={text}
+                            okText="Yes"
+                            cancelText="No">
+                            <Button type="primary"
+                                onClick={submitDelete}
+                                style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (
@@ -194,11 +161,7 @@ const ViewDeleteRegAts = (props) => {
                         )}
                     <Link to="/registerats">
                         <Button style={{ marginTop: '15px' }}>
-                            {!disable ? (
-                                <div>Cancel</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
+                            <div>Back</div>
                         </Button>
                     </Link>
                 </Form.Item>

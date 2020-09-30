@@ -199,7 +199,7 @@ function InquiryTrade() {
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
             <div className="head-content">
-                <Title level={4}>Inquiry Trade</Title>
+                <Title level={4}>Inquiry Input Trade</Title>
             </div>
             <Form
                 {...formItemLayout}

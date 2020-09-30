@@ -10,11 +10,13 @@ import {
     Menu,
     Row,
     Col,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 const dateFormat = 'YYYY/MM/DD';
+const { Title } = Typography;
 
 function CancelTrade() {
     const [columns] = useState([
@@ -221,6 +223,9 @@ function CancelTrade() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Cancel Trade</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

@@ -6,9 +6,11 @@ import {
     Table,
     Row,
     Col,
+    Typography
 } from 'antd';
 
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function DefaultFund() {
     const [componentSize] = useMemo(() => 'middle');
@@ -97,6 +99,9 @@ function DefaultFund() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Detail Default Fund</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

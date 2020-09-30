@@ -15,6 +15,7 @@ import {
     DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -59,7 +60,7 @@ const ViewDeleteSysParam = (props) => {
 
     const [loading, setLoading] = useState(false);
 
-
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -114,18 +115,18 @@ const ViewDeleteSysParam = (props) => {
         }
 
     };
-    const [formState, setFormState] = React.useState(
-        {
-            title: "Telephone Number :",
-            paramData: "asd"
-        },
-        {
-            title: "Email :",
-            paramData: "asdas"
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/sysparams/${idx}`, {
         })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
     useEffect(() => {
         setParams(props.location.state.id);
     }, []);
+
     return (
         <div>
             <div className="head-content viewDelete">
@@ -151,6 +152,7 @@ const ViewDeleteSysParam = (props) => {
                     {/* </Link> */}
                 </Col>
             </Row>
+
             <Descriptions column={1} bordered
                 extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
                 <Descriptions.Item label="Parameter">{param.param}</Descriptions.Item>
@@ -167,7 +169,7 @@ const ViewDeleteSysParam = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -178,10 +180,16 @@ const ViewDeleteSysParam = (props) => {
                         <div></div>
                     )}
 
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}
+                            style={{ marginLeft: '20px' }}>
                     {!disable ? (<Link to="/systemparameter">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        <Popconfirm placement="leftTop" 
+                                    title={text} 
+                                    okText="Yes" 
+                                    cancelText="No">
+                            <Button type="primary"
+                                onClick={submitDelete}
+                                style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
@@ -8,12 +8,15 @@ import {
     Table,
     Row,
     Col,
+    Descriptions
 } from 'antd';
 import {
     ArrowLeftOutlined,
     DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -47,49 +50,18 @@ const ViewDeleteJisdor = (props) => {
 
     const [data] = useState([
         {
-			key: '0',
-			no: '',
-			date: '',
-			value: '',
-		},
-        {
-			key: '1',
-			no: '1',
-			date: '20-07-2020',
-			value: '14,832.00',
-		},
-		{
-			key: '2',
-			no: '2',
-			date: '19-07-2020',
-			value: '14,780.00',     
-		},
-		{
-			key: '3',
-			no: '3',
-			date: '18-07-2020',
-			value: '14,632.00',       
-		},
-    ]);
-    const dataJisdorById = data.find((jisdor) => {
-        return jisdor.key === props.location.state.id
-    })
-
-    const [dataForView] = useState([
-        {
-            title: "No :",
-            paramData: dataJisdorById.no
+            title: "Telephone Number :",
+            paramData: "asd"
         },
         {
-            title: "Date :",
-            paramData: dataJisdorById.date
-        },
-        {
-            title: "Value :",
-            paramData: dataJisdorById.value
+            title: "Email :",
+            paramData: "asdas"
         },
     ]);
 
+    const [loading, setLoading] = useState(false);
+
+    const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
@@ -105,6 +77,57 @@ const ViewDeleteJisdor = (props) => {
             height: '35px'
         }}
         icon={<DownloadOutlined />}>Export File</Button>);
+    const [jisdor, setJisdor] = useState({
+        date: "test",
+        value: null,
+        update: null,
+        note: null,
+    });
+
+    const dataForView = [];
+
+    const setParams = async (q) => {
+        if (q > 0) {
+            console.log("edit" + q)
+            setLoading(true);
+            const apiRes = await fetch(
+                `http://localhost:8080/referencejisdors/${q}`
+            );
+            const resJSON = await apiRes.json();
+            console.log(resJSON);
+            /* form.setFieldsValue({
+                param: resJSON.param,
+                value: resJSON.value,
+                valueType: resJSON.valueType,
+                note: resJSON.note,
+            }); */
+            setJisdor({
+                date: resJSON.date,
+                value: resJSON.value,
+                // status: resJSON.status,
+                // lastUpdate: resJSON.lastUpdate,
+            })
+            // dataForView.push({
+            //     title: "Email :",
+            //     paramData: "asdas"
+            // })
+            // console.log(data);
+            // console.log(dataForView);
+            setLoading(false);
+        }
+
+    };
+    const submitDelete = () => {
+        axios.delete(`http://localhost:8080/referencejisdors/${idx}`, {
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    };
+    useEffect(() => {
+        setParams(props.location.state.id);
+    }, []);
 
 
     return (
@@ -118,6 +141,28 @@ const ViewDeleteJisdor = (props) => {
                     </span>
                 {action} Reference Rate - Jisdor </Title>
             </div>
+
+            <Row justify="end">
+                <Col span={4}>
+                    {/* <Link to={{
+                            pathname: `#`,
+                            state: {
+                                id: '1',
+                                action: "Edit",
+                                disable: false,
+                            }
+                        }} > */}
+                    {exportButtton}
+                    {/* </Link> */}
+                </Col>
+            </Row>
+
+            <Descriptions column={1} bordered
+                extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
+                <Descriptions.Item label="Date">{jisdor.date}</Descriptions.Item>
+                <Descriptions.Item label="Value">{jisdor.value}</Descriptions.Item>
+            </Descriptions>
+
             <Form
                 {...formItemLayout}
                 size={componentSize}
@@ -126,31 +171,7 @@ const ViewDeleteJisdor = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                <Row justify="end">
-                    <Col span={4}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                        {exportButtton}
-                        {/* </Link> */}
-                    </Col>
-                </Row>
-                <Table
-                    className="viewDelTable"
-                    columns={columns}
-                    dataSource={dataForView}
-                    showHeader={false}
-                    rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
-                    size="middle"
-                    pagination={false}
-                />
-
-                {!disable ? (<Form.Item label="Role" className="roleViewDel">
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px'}}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -161,10 +182,16 @@ const ViewDeleteJisdor = (props) => {
                         <div></div>
                     )}
 
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                    <Form.Item wrapperCol={{ span: 12, offset: 6 }}
+                                style={{ marginLeft: '20px' }}>
                     {!disable ? (<Link to="/editreferencerate">
-                        <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                        <Popconfirm placement="leftTop" 
+                                    title={text} 
+                                    okText="Yes" 
+                                    cancelText="No">
+                            <Button type="primary" 
+                                    onClick={submitDelete}
+                                    style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
                     </Link>
                     ) : (

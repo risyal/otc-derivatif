@@ -9,11 +9,13 @@ import {
     Dropdown,
     Row,
     Col,
-    Menu
+    Menu,
+    Typography
 } from 'antd';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function AccountDetail() {
     const [componentSize] = useMemo(() => 'middle');
@@ -171,6 +173,9 @@ function AccountDetail() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Account Detail Information</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

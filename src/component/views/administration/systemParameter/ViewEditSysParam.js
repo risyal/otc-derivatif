@@ -4,9 +4,11 @@ import {
     Typography, Radio
 } from 'antd';
 import { Link } from "react-router-dom";
+import {
+    ArrowLeftOutlined
+} from '@ant-design/icons';
 
 import axios from 'axios';
-
 
 const { Title } = Typography;
 const ViewEditSysParam = (props) => {
@@ -20,8 +22,14 @@ const ViewEditSysParam = (props) => {
     const formItemLayout =
         formLayout === 'horizontal'
             ? {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 14 },
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
             }
             : null;
     const onFinish = values => {
@@ -49,7 +57,7 @@ const ViewEditSysParam = (props) => {
         note: null,
     });
     const tailLayout = {
-        wrapperCol: { offset: 8, span: 16 },
+        wrapperCol: { offset: 6, span: 12 },
     };
     const submitEdit = () => {
         axios.put(`http://localhost:8080/sysparams/${idx}`, {
@@ -91,9 +99,16 @@ const ViewEditSysParam = (props) => {
     useEffect(() => {
         setParams(props.location.state.id);
     }, []);
+
+    const disable = props.location.state.disable
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
+    
     return (
         <div>
-            {/*  <div className="head-content viewEdit">
+             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
                         <Link to="/systemparameter">
@@ -101,29 +116,45 @@ const ViewEditSysParam = (props) => {
                         </Link>
                     </span>
                     {action} Parameter</Title>
-            </div> */}
+            </div>
             <Form
                 {...formItemLayout}
                 layout={formLayout}
                 form={form}
+                labelAlign="left"
                 initialValues={{ layout: formLayout }}
                 onFinish={onFinish}
             >
-                <Form.Item name="param" label="System Paramater">
+                <Form.Item name="param" label="System Paramater"
+                            rules={[{ required: true, message: 'System Paramater is required' }]}>
                     <Input placeholder="System Paramater" />
                 </Form.Item>
-                <Form.Item name="value" label="Value">
+                <Form.Item name="value" label="Value"
+                            rules={[{ required: true, message: 'Value is required' }]}>
                     <Input placeholder="Value" />
                 </Form.Item>
-                <Form.Item name="valueType" label="Value Type">
+                <Form.Item name="valueType" label="Value Type"
+                            rules={[{ required: true, message: 'Value Type is required' }]}>
                     <Input placeholder="Value Type" />
                 </Form.Item>
-                <Form.Item name="note" label="Note">
+                <Form.Item name="note" label="Note"
+                            rules={[{ required: true, message: 'Note is required' }]}>
                     <Input placeholder="Note" />
                 </Form.Item>
+
+                {!disable ? (<Form.Item label="Role">
+                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                        <Radio value={1}>Maker</Radio>
+                        <Radio value={2}>Direct Checker</Radio>
+                        <Radio value={3}>Direct Approver</Radio>
+                    </Radio.Group>
+                </Form.Item>
+
+                ) : (
+                        <div></div>
+                    )}
+
                 <Form.Item {...tailLayout}>
-
-
                     {action == "Edit" ? (
                         <Button type="primary" onClick={submitEdit} style={{ marginRight: '10px' }}>
                             Submitedit
@@ -134,9 +165,9 @@ const ViewEditSysParam = (props) => {
                             </Button>
                         )
                     }
-                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
-                        Reset
-        </Button>
+                        <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                            Reset
+                        </Button>
                     <Link to="/systemparameter">
                         <Button >
                             <div>Back</div>
@@ -149,6 +180,5 @@ const ViewEditSysParam = (props) => {
     )
 
 }
-
 
 export default ViewEditSysParam

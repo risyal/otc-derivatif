@@ -7,8 +7,10 @@ import {
     Select,
     Row,
     Col,
+    Typography
 } from 'antd';
 import {  DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+const { Title } = Typography;
 
 function InquiryPosition() {
     const [columns] = useState([
@@ -156,6 +158,9 @@ function InquiryPosition() {
 
     return (
         <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+            <div className="head-content">
+                <Title level={4}>Inquiry Position</Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}
