@@ -3,7 +3,7 @@ import {
     LeftSquareOutlined,
     RightSquareOutlined,
     MenuUnfoldOutlined,
-    MenuFoldOutlined 
+    MenuFoldOutlined
 } from '@ant-design/icons';
 
 const TopHeader = ({ collapsed, siderClick, header }) => {

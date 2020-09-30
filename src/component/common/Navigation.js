@@ -14,7 +14,7 @@ function Navigation(props) {
             SetSelectedKey(e.key);
         }; */
 
-    let rootWithNavLink = "/otcder";
+    let rootWithNavLink = "/otc-derivatif";
     return (
         <Sider theme="light" trigger={null} collapsible collapsed={props.collapsed}
             width="280"

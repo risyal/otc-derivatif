@@ -1,9 +1,5 @@
 import React from 'react'
 import { Typography } from 'antd';
-import LoginPage from '../views/Login';
-import NewTradePage from '../views/trade/NewTrade';
-import InquiryTradePage from '../views/trade/InquiryTrade';
-import CancelTradePage from '../views/trade/CancelTrade';
 import {
     Route
 } from "react-router-dom";
@@ -11,18 +7,21 @@ import {
 import ListMenu from '../config/ListMenu';
 
 function RoutePage() {
-    const { Title } = Typography;
-    let rootWithNavLink = "/otcder";
+    let rootWithNavLink = "/otc-derivatif";
     const routeComp = ListMenu.map(
         menuItem =>
             menuItem.subMenus !== undefined ?
                 menuItem.subMenus.map(subMenu =>
-                    <Route exact path={rootWithNavLink + subMenu.linkTo}
+                    <Route
+                        exact
+                        path={rootWithNavLink + subMenu.linkTo}
                         component={subMenu.component} key={subMenu.key}>
                     </Route>
                 )
                 :
-                <Route exact path={rootWithNavLink + menuItem.linkTo}
+                <Route
+                    exact
+                    path={rootWithNavLink + menuItem.linkTo}
                     component={menuItem.component} key={menuItem.key}>
                 </Route>
 

@@ -16,8 +16,8 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/otcder">
+        <Route path="/otc-derivatif/login" component={Login} />
+        <Route path="/otc-derivatif">
           <ViewEngine />
         </Route>
       </Switch>
