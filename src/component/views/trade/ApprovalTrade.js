@@ -13,8 +13,13 @@ import {
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const dateFormat = 'YYYY/MM/DD';
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "trade"
+});
 
 function ApprovalTrade() {
     const [componentSize] = useMemo(() => 'middle');
@@ -75,7 +80,10 @@ function ApprovalTrade() {
             width: 100,
             fixed: 'right',
             render: (text, record) => (<Link to={{
-                pathname: `/trade/detailView`,
+                pathname:
+                    ListLink.find((pathLink) => {
+                        return pathLink.useIn === 'approval'
+                    }).linkTo,
                 state: {
                     id: "1",
                     action: "Approval",

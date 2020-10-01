@@ -15,8 +15,13 @@ import {
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const dateFormat = 'YYYY/MM/DD';
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "trade"
+});
 
 function CancelTrade() {
     const [columns] = useState([
@@ -148,7 +153,9 @@ function CancelTrade() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/trade/detailView`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'detail'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "View",
@@ -160,7 +167,9 @@ function CancelTrade() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/trade/detailView`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'cancel'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "Cancel",

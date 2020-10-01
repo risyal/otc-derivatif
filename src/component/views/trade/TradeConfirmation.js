@@ -15,8 +15,13 @@ import {
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const dateFormat = 'YYYY/MM/DD';
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "trade"
+});
 
 function TradeConfirmation() {
     const [columns] = useState([
@@ -32,7 +37,7 @@ function TradeConfirmation() {
             width: 100,
             dataIndex: 'sid',
             key: 'sid',
-        }, 
+        },
         {
             title: 'LEI',
             width: 100,
@@ -68,7 +73,9 @@ function TradeConfirmation() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/trade/detailView`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'detail'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "Detail",
@@ -80,7 +87,9 @@ function TradeConfirmation() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/trade/detailView`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'confirmation'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "Confirmation",
@@ -206,7 +215,7 @@ function TradeConfirmation() {
                         {expand ? (<div><DownOutlined /> Advance Search</div>) :
                             (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
-                </Form.Item>    
+                </Form.Item>
             </Form>
             <Row justify="end">
                 <Col span={4}>

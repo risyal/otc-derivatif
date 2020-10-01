@@ -1,4 +1,3 @@
-import React from 'react'
 import EditRegisterContract from '../views/administration/EditRegisterContract';
 import ViewEditMember from '../views/member-client/ViewEditMember';
 import ViewEditClient from '../views/member-client/ViewEditClient';
@@ -80,19 +79,42 @@ const rootWithNavLink = "/otc-derivatif";
 const OtherLink = [
     {
         useFor: 'trade',
-        name: 'EditRegisterContract',
-        key: 'editregistercontract',
-        useIn: 'other',
-        linkTo: rootWithNavLink + '/trade/edit-register-contract',
-        component: EditRegisterContract,
-
+        name: 'Detail View Trade',
+        key: 'detailViewTrade',
+        useIn: 'detail',
+        linkTo: rootWithNavLink + '/trade/detail-trade-page',
+        component: DetailViewTrade,
     },
     {
         useFor: 'trade',
-        name: 'DetailViewTrade',
-        key: 'detailViewTrade',
-        useIn: 'detail',
-        linkTo: rootWithNavLink + '/trade/detail-trade',
+        name: 'Confirmation Trade',
+        key: 'confirmationTrade',
+        useIn: 'confirmation',
+        linkTo: rootWithNavLink + '/trade/confirmation-trade-page',
+        component: DetailViewTrade,
+    },
+    {
+        useFor: 'trade',
+        name: 'Confirmation Trade',
+        key: 'confirmationTrade',
+        useIn: 'cancel',
+        linkTo: rootWithNavLink + '/trade/cancel-trade-page',
+        component: DetailViewTrade,
+    },
+    {
+        useFor: 'trade',
+        name: 'Confirmation Trade',
+        key: 'confirmationTrade',
+        useIn: 'monitoring',
+        linkTo: rootWithNavLink + '/trade/monitoring-trade-page',
+        component: DetailViewTrade,
+    },
+    {
+        useFor: 'trade',
+        name: 'Confirmation Trade',
+        key: 'confirmationTrade',
+        useIn: 'approval',
+        linkTo: rootWithNavLink + '/trade/approval-trade-page',
         component: DetailViewTrade,
     },
     {
@@ -100,6 +122,15 @@ const OtherLink = [
         key: 'ViewEditMember',
         linkTo: '/ViewEditMember',
         component: ViewEditMember,
+    },
+    {
+        useFor: 'trade',
+        name: 'EditRegisterContract',
+        key: 'editregistercontract',
+        useIn: 'other',
+        linkTo: rootWithNavLink + '/trade/edit-register-contract',
+        component: EditRegisterContract,
+
     },
     {
         name: 'ViewEditClient',

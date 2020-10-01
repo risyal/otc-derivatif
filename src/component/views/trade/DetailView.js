@@ -14,11 +14,17 @@ import {
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
 const DetailView = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
+
     const [text] = useState('Are you sure to Cancel this ?');
     const [componentSize] = useMemo(() => 'middle');
     const [formItemLayout] = useState({
@@ -254,7 +260,6 @@ const DetailView = (props) => {
     ]);
     const action = props.location.state.action
     const disable = props.location.state.disable
-    const linkBack = props.location.state.linkBack
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
@@ -287,9 +292,7 @@ const DetailView = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to={linkBack}>
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} Trade</Title>
             </div>
@@ -358,22 +361,19 @@ const DetailView = (props) => {
                             </Form.Item>
                             )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to={linkBack}>
+                    {!disable ? (
                         <Popconfirm placement="leftTop" title={action === "Cancel" ? text : null} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>{action === "Cancel" ? action + " Trade" :
+                            <Button onClick={goBack} type="primary" style={{ marginRight: '15px' }}>{action === "Cancel" ? action + " Trade" :
                                 (action === "Confirmation" ? "Confirm" : action === "Approval" ? "Approve" : "Delete")}</Button>
                         </Popconfirm>
-                    </Link>
                     ) : null}
-                    <Link to={linkBack}>
-                        <Button style={{ marginTop: '15px' }}>
-                            {!disable ? action === "Approval" ? "Reject" : (
+                    <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                        {!disable ? action === "Approval" ? "Reject" : (
+                            <div>Back</div>
+                        ) : (
                                 <div>Back</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
-                        </Button>
-                    </Link>
+                            )}
+                    </Button>
                 </Form.Item>
             </Form>
         </div>
