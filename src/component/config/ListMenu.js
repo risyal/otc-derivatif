@@ -121,27 +121,27 @@ const Menu = [
         subMenus: [{
             name: 'Clearing Position',
             key: 'clearingPosition',
-            linkTo: '/clearingManagement/clearingposition',
+            linkTo: '/clearing-management/clearing-position',
             component: ClearingPostition,
         }, {
             name: 'Inquiry Position',
             key: 'inquiryPostition',
-            linkTo: '/clearingManagement/inquiryPostition',
+            linkTo: '/clearing-management/inquiry-postition',
             component: InquiryPosition,
         }, {
             name: 'Settlement Position',
             key: 'settlementPostion',
-            linkTo: '/clearingManagement/settlementPostion',
+            linkTo: '/clearing-management/settlement-postion',
             component: SettlementPosition,
         }, {
             name: 'Settlement Status',
             key: 'statusSettlement',
-            linkTo: '/clearingManagement/statusSettlement',
+            linkTo: '/clearing-management/status-settlement',
             component: SettlementStatus,
         }, {
             name: 'Cash Flow IRS Calculation',
             key: 'cashFlowIrs',
-            linkTo: '/clearingManagement/cashFlowIrs',
+            linkTo: '/clearing-management/cash-flow-irs',
             component: CashFlowIrs,
         }]
     },
@@ -152,37 +152,37 @@ const Menu = [
         subMenus: [{
             name: 'Account Detail Information',
             key: 'detailinformation',
-            linkTo: '/accountManagement/detailinformation',
+            linkTo: '/account-management/detail-information',
             component: AccountDetail,
         }, {
             name: 'Detail Blocked Collateral - Member',
             key: 'detailMember',
-            linkTo: '/accountManagement/collateralMember',
+            linkTo: '/account-management/collateral-member',
             component: BlockCollateralMember,
         }, {
             name: 'Detail Blocked Collateral - Client',
             key: 'detailClient',
-            linkTo: '/accountManagement/collateralClient',
+            linkTo: '/account-management/collateral-client',
             component: BlockCollateralClient,
         }, {
             name: 'Detail Default Fund',
             key: 'detailFund',
-            linkTo: '/accountManagement/detailFund',
+            linkTo: '/account-management/detail-fund',
             component: DefaultFund,
         }, {
             name: 'Register Beneficiaries',
             key: 'registerBeneficiaries',
-            linkTo: '/accountManagement/registerBeneficiaries',
+            linkTo: '/account-management/register-beneficiaries',
             component: RegisterBeneficiaries,
         }, {
             name: 'Inquiry Beneficiaries',
             key: 'inquiryBeneficiaries',
-            linkTo: '/accountManagement/inquiryBeneficiaries',
+            linkTo: '/account-management/inquiry-beneficiaries',
             component: InquiryBeneficiaries,
         }, {
             name: 'Approval',
             key: 'accountApproval',
-            linkTo: '/accountManagement/approval',
+            linkTo: '/account-management/approval',
             component: ApprovalAccount,
         }]
     },
@@ -193,17 +193,17 @@ const Menu = [
         subMenus: [{
             name: 'Inquiry Settlement Instruction',
             key: 'inquirySettlement',
-            linkTo: '/settlement/inquirySettlement',
+            linkTo: '/settlement/inquiry-settlement',
             component: SettlementInstruction,
         }, {
             name: 'Settlement Job Execution',
             key: 'settlementExecution',
-            linkTo: '/settlement/settlementExecution',
+            linkTo: '/settlement/settlement-execution',
             component: SettlementJobExecution,
         }, {
             name: 'Monitoring Clearing Pos vs Balance',
             key: 'monitoringClearing',
-            linkTo: '/settlement/monitoringClearing',
+            linkTo: '/settlement/monitoring-clearing',
             component: SettlementMonitoring,
         }]
     },
@@ -214,27 +214,27 @@ const Menu = [
         subMenus: [{
             name: 'Security Management',
             key: 'securityManagement',
-            linkTo: '/instructionManagement/securityManagement',
+            linkTo: '/instruction-management/security-management',
             component: SecurityManagement,
         }, {
             name: 'Inquiry Security Management',
             key: 'inquirySecManagement',
-            linkTo: '/instructionManagement/inquirySecManagement',
+            linkTo: '/instruction-management/inquiry-sec-management',
             component: InquirySecManagement,
         }, {
             name: 'Cash Management',
             key: 'cashManagement',
-            linkTo: '/instructionManagement/cashManagement',
+            linkTo: '/instruction-management/cash-management',
             component: CashInquiryManagement,
         }, {
             name: 'Inquiry Cash Management',
             key: 'inquiryCashManagement',
-            linkTo: '/instructionManagement/inquiryCashManagement',
+            linkTo: '/instruction-management/inquiry-cash-management',
             component: InquiryCashManagement,
         }, {
             name: 'Approval',
             key: 'instructionApproval',
-            linkTo: '/instructionManagement/approval',
+            linkTo: '/instruction-management/approval',
             component: ApprovalInstruction,
         }]
     },
@@ -245,22 +245,22 @@ const Menu = [
         subMenus: [{
             name: 'Inquiry',
             key: 'inquiry',
-            linkTo: '/collateralManagement/inquiry',
+            linkTo: '/collateral-management/inquiry',
             component: Inquiry,
         }, {
             name: 'Instruction - COLDP',
             key: 'instructionColdp',
-            linkTo: '/collateralManagement/instructionColdp',
+            linkTo: '/collateral-management/instruction-coldp',
             component: InstructionCOLDP,
         }, {
             name: 'Instruction - COLW',
             key: 'instructionColw',
-            linkTo: '/collateralManagement/instructionColw',
+            linkTo: '/collateral-management/instruction-colw',
             component: InstructionCOLW,
         }, {
             name: 'Approval',
             key: 'collateralApproval',
-            linkTo: '/collateralManagement/approval',
+            linkTo: '/collateral-management/approval',
             component: ApprovalCollateral,
         }]
     },
@@ -271,17 +271,17 @@ const Menu = [
         subMenus: [{
             name: 'Register Member',
             key: 'registermember',
-            linkTo: '/memberandclientmanagement/registermember',
+            linkTo: '/member-and-client-management/register-member',
             component: RegisterMember,
         }, {
             name: 'Register Client',
             key: 'registerclient',
-            linkTo: '/memberandclientmanagement/registerclient',
+            linkTo: '/member-and-client-management/register-client',
             component: RegisterClient,
         }, {
             name: 'Approval',
             key: 'memberclientapproval',
-            linkTo: '/memberandclientmanagement/approval',
+            linkTo: '/member-and-client-management/approval',
             component: ApprovalMemberClient,
         }]
     },
@@ -292,47 +292,47 @@ const Menu = [
         subMenus: [{
             name: 'Register Contract',
             key: 'registerContract',
-            linkTo: '/administration/registercontract',
+            linkTo: '/administration/register-contract',
             component: RegisterContract,
         }, {
             name: 'Edit Account Status',
             key: 'editAccount',
-            linkTo: '/administration/editaccount',
+            linkTo: '/administration/edit-account',
             component: EditAccount,
         }, {
             name: 'Securities Collateral Management',
             key: 'securitiesCollMgt',
-            linkTo: '/administration/securitiescollmgt',
+            linkTo: '/administration/securities-coll-mgt',
             component: SecuritiesCollMgt,
         }, {
             name: 'Cash Collateral Management',
             key: 'cashCollMgt',
-            linkTo: '/administration/cashcollmgt',
+            linkTo: '/administration/cash-coll-mgt',
             component: CashCollMgt,
         }, {
             name: 'Edit Reference Rate',
             key: 'editReferenceRate',
-            linkTo: '/administration/editreferencerate',
+            linkTo: '/administration/edit-reference-rate',
             component: EditReferenceRate,
         }, {
             name: 'Edit Time Parameter',
             key: 'editParameter',
-            linkTo: '/administration/editparameter',
+            linkTo: '/administration/edit-parameter',
             component: EditParameter,
         }, {
             name: 'Audit Trail',
             key: 'auditTrail',
-            linkTo: '/administration/audittrail',
+            linkTo: '/administration/audit-trail',
             component: AuditTrail,
         }, {
             name: 'User Management',
             key: 'userManagement',
-            linkTo: '/administration/usermanagement',
+            linkTo: '/administration/user-management',
             component: UserManagement,
         }, {
             name: 'System Parameter',
             key: 'systemParameter',
-            linkTo: '/administration/systemparameter',
+            linkTo: '/administration/system-parameter',
             component: SystemParameter,
         }, {
             name: 'Calendar',
@@ -342,7 +342,7 @@ const Menu = [
         }, {
             name: 'Register ATS',
             key: 'registerAts',
-            linkTo: '/administration/registerats',
+            linkTo: '/administration/register-ats',
             component: RegisterAts,
         }, {
             name: 'Approval',
@@ -358,43 +358,43 @@ const Menu = [
         subMenus: [{
             name: 'DHK Level Member',
             key: 'dhkmember',
-            linkTo: '/reporting/dhkmember',
+            linkTo: '/reporting/dhk-member',
             component: DHKLevelMember,
         }, {
             name: 'DHK Level Client',
             key: 'dhkclient',
-            linkTo: '/reporting/dhkclient',
+            linkTo: '/reporting/dhk-client',
             component: DHKLevelClient,
         }, {
             name: 'OAR (Obligation Accomplishment Report)',
             key: 'obligationaccomplishment',
-            linkTo: '/reporting/obligationaccomplishment',
+            linkTo: '/reporting/obligation-accomplishment',
             component: ObligationAccomplishment,
         }, {
             name: 'Regulator Report',
             key: 'regulatorreport',
-            linkTo: '/reporting/regulatorreport',
+            linkTo: '/reporting/regulator-report',
             component: RegulatorReport,
         }, {
             name: 'Novation Report',
             key: 'novationreport',
-            linkTo: '/reporting/novationreport',
+            linkTo: '/reporting/novation-report',
             component: NovationReport,
         }, {
             name: 'Movement Balance Report',
             key: 'movementbalance',
-            linkTo: '/reporting/movementbalance',
+            linkTo: '/reporting/movement-balance',
             component: MovementBalance,
         }, {
             name: 'Default Fund Report',
             key: 'fundreport',
-            linkTo: '/reporting/fundreport',
+            linkTo: '/reporting/fund-report',
             component: DefaultFundReport,
         },
         {
             name: 'Fee Report',
             key: 'feereport',
-            linkTo: '/reporting/feereport',
+            linkTo: '/reporting/fee-report',
             component: FeeReport,
         },
         // {
@@ -405,27 +405,27 @@ const Menu = [
         {
             name: 'Margin Report',
             key: 'marginreport',
-            linkTo: '/reporting/marginreport',
+            linkTo: '/reporting/margin-report',
             component: MarginReport,
         }, {
             name: 'Default Report',
             key: 'defaultreport',
-            linkTo: '/reporting/defaultreport',
+            linkTo: '/reporting/default-report',
             component: DefaultReport,
         }, {
             name: 'Client Accomplishment Report',
             key: 'clientaccomplishment',
-            linkTo: '/reporting/clientaccomplishment',
+            linkTo: '/reporting/client-accomplishment',
             component: ClientAccomplishment,
         }, {
             name: 'Daily Transaction Report',
             key: 'dailytransaction',
-            linkTo: '/reporting/dailytransaction',
+            linkTo: '/reporting/daily-transaction',
             component: DailyTransactionReport,
         }, {
             name: 'Clearing Summary',
             key: 'clearingsummary',
-            linkTo: '/reporting/clearingsummary',
+            linkTo: '/reporting/clearing-summary',
             component: ClearingSummary,
         }]
     },
