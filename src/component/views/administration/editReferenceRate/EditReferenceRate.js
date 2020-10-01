@@ -341,9 +341,9 @@ class EditReferenceRate extends React.Component {
 		return (
 			<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
 				<div className="head-content">
-                	<Title level={4}>Edit Reference Rate</Title>
-            	</div>
-				<Tabs onChange={(e) => { this.handleChange(e) }
+					<Title level={4}>Edit Reference Rate</Title>
+				</div>
+				<Tabs onChange={async (e) => { await this.handleChange(e) }
 				}
 					type="card" activeKey={this.state.activeKeyTab} >
 					{this.state.tab.map(

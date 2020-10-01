@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import ListMenu from '../config/ListMenu';
+import OtherLink from '../config/OtherLink';
 
 function RoutePage() {
     let rootWithNavLink = "/otc-derivatif";
@@ -25,18 +26,12 @@ function RoutePage() {
                     component={menuItem.component} key={menuItem.key}>
                 </Route>
     )
-    const routeOther = ListMenu.map(
-        menuItem =>
-            menuItem.other !== undefined ?
-                menuItem.other.map(other =>
-                    <Route
-                        exact
-                        path={rootWithNavLink + other.linkTo}
-                        component={other.component} key={other.key}>
-                    </Route>
-                )
-                :
-                null
+    const routeOther = OtherLink.map(other =>
+        <Route
+            exact
+            path={other.linkTo}
+            component={other.component} key={other.key}>
+        </Route>
     )
     return (
         <div>
