@@ -197,6 +197,14 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/instruction-management/cancel-cash',
         component: DetailCancelCM,
     },
+    {
+        useFor: 'instruction',
+        name: 'Approval Instruction',
+        key: 'approvalInstruction',
+        useIn: 'approvalinstruction',
+        linkTo: rootWithNavLink + '/instruction-management/approval-instruction',
+        component: ApprovalInstructionDetail,
+    },
     //end
     {
         name: 'ViewEditMember',
