@@ -11,7 +11,6 @@ import {
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 

@@ -71,7 +71,7 @@ import AccDetailView from '../views/account/AccDetailView';
 import ClearingDetailIRS from '../views/clearing/ClearingDetailIRS';
 import ClearingDetailOIS from '../views/clearing/ClearingDetailOIS';
 import ClearingDetailDNDF from '../views/clearing/ClearingDetailDNDF';
-import ApprovalDetail from '../views/account/ApprovalDetail';
+import ApprovalAccountDetail from '../views/account/ApprovalDetail';
 import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
 import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDetail';
 import ReportBI from '../views/reporting/ReportBI';
@@ -154,8 +154,16 @@ const OtherLink = [
         name: 'Detail Account Information',
         key: 'detailAccountInformation',
         useIn: 'detailaccount',
-        linkTo: rootWithNavLink + '/account-management/detail-cash-flow-irs',
+        linkTo: rootWithNavLink + '/account-management/detail-account-information',
         component: AccDetailView,
+    },
+    {
+        useFor: 'account',
+        name: 'Detail Approval Account',
+        key: 'detailApprovalAccount',
+        useIn: 'detailapproval',
+        linkTo: rootWithNavLink + '/account-management/detail-approval',
+        component: ApprovalAccountDetail,
     },
     {
         name: 'ViewEditMember',
@@ -591,12 +599,6 @@ const OtherLink = [
         key: 'ClearingDetailDNDF',
         linkTo: '/ClearingDetailDNDF',
         component: ClearingDetailDNDF,
-    },
-    {
-        name: 'ApprovalDetail',
-        key: 'ApprovalDetail',
-        linkTo: '/ApprovalDetail',
-        component: ApprovalDetail,
     },
     {
         name: 'ApprovalInstructionDetail',

@@ -13,8 +13,13 @@ import {
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { DownloadOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const dateFormat = 'YYYY/MM/DD';
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "account"
+});
 
 function ApprovalAccount() {
     const [componentSize] = useMemo(() => 'middle');
@@ -75,7 +80,9 @@ function ApprovalAccount() {
             width: 100,
             fixed: 'right',
             render: (text, record) => (<Link to={{
-                pathname: `/accountManagement/approvalDetail`,
+                pathname: ListLink.find((pathLink) => {
+                    return pathLink.useIn === 'detailapproval'
+                }).linkTo,
                 state: {
                     id: "1",
                     action: "Approval",
