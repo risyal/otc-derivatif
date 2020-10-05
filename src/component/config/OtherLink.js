@@ -205,6 +205,38 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/instruction-management/approval-instruction',
         component: ApprovalInstructionDetail,
     },
+    {
+        useFor: 'collateral',
+        name: 'View Instruction COLDP',
+        key: 'viewInstructionCOLDP',
+        useIn: 'viewinstructioncoldp',
+        linkTo: rootWithNavLink + '/collateral-management/view-instruction-coldp',
+        component: DetailCancelCOLDP,
+    },
+    {
+        useFor: 'collateral',
+        name: 'Cancel Instruction COLDP',
+        key: 'cancelInstructionCOLDP',
+        useIn: 'cancelinstructioncoldp',
+        linkTo: rootWithNavLink + '/collateral-management/cancel-instruction-coldp',
+        component: DetailCancelCOLDP,
+    },
+    {
+        useFor: 'collateral',
+        name: 'View Instruction COLW',
+        key: 'viewInstructionCOLW',
+        useIn: 'viewinstructioncolw',
+        linkTo: rootWithNavLink + '/collateral-management/view-instruction-colw',
+        component: DetailCancelCOLW,
+    },
+    {
+        useFor: 'collateral',
+        name: 'Cancel Instruction COLW',
+        key: 'cancelInstructionCOLW',
+        useIn: 'cancelinstructioncolw',
+        linkTo: rootWithNavLink + '/collateral-management/cancel-instruction-colw',
+        component: DetailCancelCOLW,
+    },
     //end
     {
         name: 'ViewEditMember',

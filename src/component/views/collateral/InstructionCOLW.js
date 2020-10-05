@@ -12,7 +12,12 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "collateral"
+});
 
 function InstructionCOLW() {
     const [expand, setExpand] = useState(true);
@@ -82,7 +87,9 @@ function InstructionCOLW() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/collateralManagement/detailCancelCOLW`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'viewinstructioncolw'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "View",
@@ -94,7 +101,9 @@ function InstructionCOLW() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/collateralManagement/detailCancelCOLW`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'cancelinstructioncolw'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "Cancel",
@@ -149,24 +158,24 @@ function InstructionCOLW() {
                 </Form.Item>
             </div>
             ) : (
-                <div>
-                    <Form.Item label="Participant Code" >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Source Acc" >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Dest Account" >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Instrument Code" >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                        <Button type="primary" htmlType="submit">
-                            Search
+                    <div>
+                        <Form.Item label="Participant Code" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Source Acc" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Dest Account" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Instrument Code" >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                            <Button type="primary" htmlType="submit">
+                                Search
                         </Button>
-                    </Form.Item>
+                        </Form.Item>
                     </div>
                 )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
