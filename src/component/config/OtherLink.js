@@ -146,8 +146,16 @@ const OtherLink = [
         name: 'Detail Clearing Cash Flow',
         key: 'detailClearingCashFlow',
         useIn: 'detailcashflow',
-        linkTo: rootWithNavLink + '/clearing-management/detail-clearing-cash-flow',
+        linkTo: rootWithNavLink + '/clearing-management/detail-cash-flow-irs',
         component: ClearingDetailView,
+    },
+    {
+        useFor: 'account',
+        name: 'Detail Account Information',
+        key: 'detailAccountInformation',
+        useIn: 'detailaccount',
+        linkTo: rootWithNavLink + '/account-management/detail-cash-flow-irs',
+        component: AccDetailView,
     },
     {
         name: 'ViewEditMember',

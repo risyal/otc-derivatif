@@ -13,9 +13,16 @@ import {
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
+
 const { Title } = Typography;
 
 const AccDetailView = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -153,9 +160,7 @@ const AccDetailView = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to={linkBack}>
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} Account Information</Title>
             </div>
@@ -181,17 +186,15 @@ const AccDetailView = (props) => {
                     size="middle"
                     pagination={false}
                 />
-                
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Link to={linkBack}>
-                        <Button style={{ marginTop: '15px' }}>
-                            {!disable ? action === "Approval" ? "Reject" : (
+                    <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                        {!disable ? action === "Approval" ? "Reject" : (
+                            <div>Back</div>
+                        ) : (
                                 <div>Back</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
-                        </Button>
-                    </Link>
+                            )}
+                    </Button>
                 </Form.Item>
             </Form>
         </div>

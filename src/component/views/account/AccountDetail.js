@@ -13,13 +13,17 @@ import {
     Typography
 } from 'antd';
 import { Link } from "react-router-dom";
-import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
 
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "account"
+});
 function AccountDetail() {
     const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState ({
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -96,7 +100,9 @@ function AccountDetail() {
             render: () =>
                 <div>
                     <Link to={{
-                        pathname: `/accountManagement/accDetailView`,
+                        pathname: ListLink.find((pathLink) => {
+                            return pathLink.useIn === 'detailaccount'
+                        }).linkTo,
                         state: {
                             id: "1",
                             action: "Detail",
@@ -160,7 +166,7 @@ function AccountDetail() {
     };
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    
+
     const [exportButtton] = useState(<Button
         type="primary"
         style={{
@@ -191,11 +197,11 @@ function AccountDetail() {
                 ) : (
                         <div>
                             <Form.Item label="Account Type" >
-                                <Select placeholder="Select a Type" 
-                                        onChange={typeClick}>
-                                                {accountType.map(product => (
+                                <Select placeholder="Select a Type"
+                                    onChange={typeClick}>
+                                    {accountType.map(product => (
                                         <Select.Option key={product}>{product}</Select.Option>
-                                        ))}
+                                    ))}
                                 </Select>
                             </Form.Item>
                             <Form.Item label="Account Number" >
@@ -211,11 +217,11 @@ function AccountDetail() {
                                 <Input />
                             </Form.Item>
                             <Form.Item label="Instrument Code">
-                                <Select placeholder="Select an Instrument Code" 
-                                        onChange={codeClick}>
-                                                {instrumentCode.map(product => (
+                                <Select placeholder="Select an Instrument Code"
+                                    onChange={codeClick}>
+                                    {instrumentCode.map(product => (
                                         <Select.Option key={product}>{product}</Select.Option>
-                                        ))}
+                                    ))}
                                 </Select>
                             </Form.Item>
                         </div>
@@ -244,7 +250,7 @@ function AccountDetail() {
                     </Button>
                 </Form.Item>
             </Form>
-                        
+
             <Row justify="end">
                 <Col span={4}>
                     {exportButtton}
