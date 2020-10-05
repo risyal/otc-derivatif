@@ -142,6 +142,14 @@ const OtherLink = [
         component: ClearingDetailDNDF,
     },
     {
+        useFor: 'clearing',
+        name: 'Detail Clearing Cash Flow',
+        key: 'detailClearingCashFlow',
+        useIn: 'detailcashflow',
+        linkTo: rootWithNavLink + '/clearing-management/detail-clearing-cash-flow',
+        component: ClearingDetailView,
+    },
+    {
         name: 'ViewEditMember',
         key: 'ViewEditMember',
         linkTo: '/ViewEditMember',

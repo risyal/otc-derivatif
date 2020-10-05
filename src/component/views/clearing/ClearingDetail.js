@@ -13,14 +13,19 @@ import {
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
 const ClearingDetail = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     // const [text] = useState('Are you sure to Cancel this ?');
     const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState ({
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -221,9 +226,7 @@ const ClearingDetail = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to={linkBack}>
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} Trade</Title>
             </div>
@@ -292,15 +295,14 @@ const ClearingDetail = (props) => {
                         </Popconfirm>
                     </Link>
                     ) : null} */}
-                    <Link to={linkBack}>
-                        <Button style={{ marginTop: '15px' }}>
-                            {!disable ? action === "Approval" ? "Reject" : (
+                    <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                        {!disable ? action === "Approval" ? "Reject" : (
+                            <div>Back</div>
+                        ) : (
                                 <div>Back</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
-                        </Button>
-                    </Link>
+                            )}
+
+                    </Button>
                 </Form.Item>
             </Form>
         </div>

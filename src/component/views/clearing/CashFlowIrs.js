@@ -10,8 +10,13 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
 
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "clearing"
+});
 function CashFlowIrs() {
     const [columns] = useState([
         {
@@ -110,7 +115,9 @@ function CashFlowIrs() {
             render: () =>
                 <div>
                     <Link to={{
-                        pathname: `/clearingManagement/clearingDetail`,
+                        pathname: ListLink.find((pathLink) => {
+                            return pathLink.useIn === 'detailcashflow'
+                        }).linkTo,
                         state: {
                             id: "1",
                             action: "Detail",
@@ -177,7 +184,7 @@ function CashFlowIrs() {
     ]);
 
     const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState ({
+    const [formItemLayout] = useState({
         labelCol: {
             xs: { span: 24 },
             sm: { span: 6 },
@@ -189,7 +196,7 @@ function CashFlowIrs() {
     });
     const [expand, setExpand] = useState(true);
     const [form] = Form.useForm();
-    
+
     const [exportButtton] = useState(<Button
         type="primary"
         style={{
