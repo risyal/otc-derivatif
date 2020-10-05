@@ -12,7 +12,13 @@ import {
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "collateral"
+});
+
 
 function InstructionCOLDP() {
     const [expand, setExpand] = useState(true);
@@ -83,7 +89,9 @@ function InstructionCOLDP() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/collateralManagement/detailCancel`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'viewinstructioncoldp'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "View",
@@ -95,7 +103,9 @@ function InstructionCOLDP() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/collateralManagement/detailCancel`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'cancelinstructioncoldp'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "Cancel",
