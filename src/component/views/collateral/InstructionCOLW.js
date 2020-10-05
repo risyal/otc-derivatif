@@ -207,7 +207,9 @@ function InstructionCOLW() {
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                            pathname: `/collateralManagement/ViewAddColw`,
+                            pathname: ListLink.find((pathLink) => {
+                                return pathLink.useIn === 'addinstructioncolw'
+                            }).linkTo,
                         }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
                                 Add New Instruction
                         </Button>
