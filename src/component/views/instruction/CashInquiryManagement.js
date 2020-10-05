@@ -198,7 +198,9 @@ function CashInquiryManagement() {
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                            pathname: `/instructionManagement/ViewAddCM`,
+                            pathname: ListLink.find((pathLink) => {
+                                return pathLink.useIn === 'addcash'
+                            }).linkTo,
                         }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
                                 Add New Instruction
                         </Button>

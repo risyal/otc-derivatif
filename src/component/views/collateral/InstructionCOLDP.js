@@ -204,7 +204,9 @@ function InstructionCOLDP() {
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                            pathname: `/collateralManagement/ViewAdd`,
+                            pathname: ListLink.find((pathLink) => {
+                                return pathLink.useIn === 'addinstructioncoldp'
+                            }).linkTo,
                         }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
                                 Add New Instruction
                         </Button>

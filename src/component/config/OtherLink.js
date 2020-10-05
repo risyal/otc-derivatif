@@ -21,7 +21,7 @@ import ViewDeleteCalendar from '../views/administration/calendar/ViewDeleteCalen
 import DetailViewTrade from '../views/trade/DetailView';
 import ViewEditRegAts from '../views/administration/registerAts/ViewEditRegAts';
 import ViewDeleteRegAts from '../views/administration/registerAts/ViewDeleteRegAts';
-import ViewAdd from '../views/collateral/ViewAdd';
+import ViewAddColdp from '../views/collateral/ViewAdd';
 import ViewAddColw from '../views/collateral/ViewAddColw';
 import DetailCancelCOLDP from '../views/collateral/DetailCancelCOLDP';
 import DetailCancelCOLW from '../views/collateral/DetailCancelCOLW';
@@ -167,7 +167,7 @@ const OtherLink = [
     },
     {
         useFor: 'instruction',
-        name: 'add Security',
+        name: 'Add Security',
         key: 'addSecurity',
         useIn: 'addsecurity',
         linkTo: rootWithNavLink + '/instruction-management/add-security',
@@ -188,6 +188,14 @@ const OtherLink = [
         useIn: 'cancelsecurity',
         linkTo: rootWithNavLink + '/instruction-management/cancel-security',
         component: DetailCancelSM,
+    },
+    {
+        useFor: 'instruction',
+        name: 'Add Cash',
+        key: 'addCash',
+        useIn: 'addcash',
+        linkTo: rootWithNavLink + '/instruction-management/add-cash',
+        component: ViewAddCM,
     },
     {
         useFor: 'instruction',
@@ -215,6 +223,14 @@ const OtherLink = [
     },
     {
         useFor: 'collateral',
+        name: 'Add Instruction COLDP',
+        key: 'addInstructionCOLDP',
+        useIn: 'addinstructioncoldp',
+        linkTo: rootWithNavLink + '/collateral-management/add-instruction-coldp',
+        component: ViewAddColdp,
+    },
+    {
+        useFor: 'collateral',
         name: 'View Instruction COLDP',
         key: 'viewInstructionCOLDP',
         useIn: 'viewinstructioncoldp',
@@ -228,6 +244,14 @@ const OtherLink = [
         useIn: 'cancelinstructioncoldp',
         linkTo: rootWithNavLink + '/collateral-management/cancel-instruction-coldp',
         component: DetailCancelCOLDP,
+    },
+    {
+        useFor: 'collateral',
+        name: 'Add Instruction COLW',
+        key: 'addInstructionCOLW',
+        useIn: 'addinstructioncolw',
+        linkTo: rootWithNavLink + '/collateral-management/add-instruction-colw',
+        component: ViewAddColw,
     },
     {
         useFor: 'collateral',
@@ -388,12 +412,6 @@ const OtherLink = [
         key: 'ViewDeleteRegAts',
         linkTo: '/ViewDeleteRegAts',
         component: ViewDeleteRegAts,
-    },
-    {
-        name: 'ViewAdd',
-        key: 'ViewAdd',
-        linkTo: '/ViewAdd',
-        component: ViewAdd,
     },
     {
         name: 'ViewAddColw',

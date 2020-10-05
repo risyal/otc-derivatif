@@ -6,9 +6,14 @@ import {
     Radio,
     DatePicker
 } from 'antd';
-import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-function ViewAdd(){
+function ViewAdd() {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const componentSize = 'middle';
     const formItemLayout = {
         labelCol: {
@@ -48,7 +53,7 @@ function ViewAdd(){
                 <Form.Item label="Settlement Date" >
                     <DatePicker style={{ width: '100%' }} />
                 </Form.Item>
-                
+
                 <Form.Item label="Role">
                     <Radio.Group>
                         <Radio value={1}>Maker</Radio>
@@ -58,16 +63,13 @@ function ViewAdd(){
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Link to={{
-                    pathname: `/collateralManagement/instructionColdp`}}>
-                        <Button type="primary" htmlType="submit">
-                            Submit
+                    <Button onClick={goBack} type="primary" htmlType="submit">
+                        Submit
                         </Button>
-                    </Link>
                 </Form.Item>
             </Form>
         </div>
-        
+
     )
 
 }
