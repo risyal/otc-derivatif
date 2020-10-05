@@ -271,17 +271,17 @@ const Menu = [
         subMenus: [{
             name: 'Register Member',
             key: 'registermember',
-            linkTo: '/member-and-client-management/register-member',
+            linkTo: '/member-client/register-member',
             component: RegisterMember,
         }, {
             name: 'Register Client',
             key: 'registerclient',
-            linkTo: '/member-and-client-management/register-client',
+            linkTo: '/member-client/register-client',
             component: RegisterClient,
         }, {
             name: 'Approval',
             key: 'memberclientapproval',
-            linkTo: '/member-and-client-management/approval',
+            linkTo: '/member-client/approval',
             component: ApprovalMemberClient,
         }]
     },

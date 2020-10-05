@@ -14,11 +14,16 @@ import {
     DownloadOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 
 const ViewDeleteMember = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const [componentSize] = useMemo(() => 'middle');
     const [text] = useState('Are you sure to delete this task?');
 
@@ -256,9 +261,7 @@ const ViewDeleteMember = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/memberandclientmanagement/registermember">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} Data Member</Title>
             </div>
@@ -286,7 +289,7 @@ const ViewDeleteMember = (props) => {
                     pagination={false}
                 />
 
-                {/* {!disable ? (<Form.Item label="Role">
+                {!disable ? (<Form.Item label="Role">
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -295,7 +298,7 @@ const ViewDeleteMember = (props) => {
                 </Form.Item>
                 ) : (
                         <div></div>
-                    )} */}
+                    )}
 
                 {action === 'Detail' ? (
                     <div>
@@ -328,35 +331,29 @@ const ViewDeleteMember = (props) => {
 
                         <br />
                         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                            <Link to="/memberandclientmanagement/approval">
-                                <Button type="primary" style={{ marginRight: '15px' }}>Approve
+                            <Button onClick={goBack} type="primary" style={{ marginRight: '15px' }}>Approve
                                 </Button>
-                                <Button style={{ marginRight: '15px' }}>Reject
+                            <Button onClick={goBack} style={{ marginRight: '15px' }}>Reject
                                 </Button>
-                                <Button >Cancel
+                            <Button onClick={goBack}>Cancel
                                 </Button>
-                            </Link>
                         </Form.Item>
                     </div>
                 ) : (
                         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                            {!disable ? (<Link to="/memberandclientmanagement/registermember">
-                                <Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
-                                    <Button type="primary" style={{ marginRight: '15px' }}>Delete</Button>
-                                </Popconfirm>
-                            </Link>
+                            {!disable ? (<Popconfirm placement="leftTop" title={text} okText="Yes" cancelText="No">
+                                <Button onClick={goBack} type="primary" style={{ marginRight: '15px' }}>Delete</Button>
+                            </Popconfirm>
                             ) : (
                                     <div></div>
                                 )}
-                            <Link to="/memberandclientmanagement/registermember">
-                                <Button style={{ marginTop: '15px' }}>
-                                    {!disable ? (
-                                        <div>Cancel</div>
-                                    ) : (
-                                            <div>Back</div>
-                                        )}
-                                </Button>
-                            </Link>
+                            <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                                {!disable ? (
+                                    <div>Cancel</div>
+                                ) : (
+                                        <div>Back</div>
+                                    )}
+                            </Button>
                         </Form.Item>
                     )}
 

@@ -12,10 +12,13 @@ import {
     Typography
 } from 'antd';
 import { Link } from "react-router-dom";
-
-import axios from 'axios';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "memberclient"
+});
 
 const RegisterMember = () => {
     const [expand, setExpand] = useState(true);
@@ -138,7 +141,9 @@ const RegisterMember = () => {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/ViewDeleteMember`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'viewmember'
+                                    }).linkTo,
                                     state: {
                                         id: record.key,
                                         action: "View",
@@ -149,7 +154,9 @@ const RegisterMember = () => {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/viewMember`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'editmember'
+                                    }).linkTo,
                                     state: {
                                         id: record.key,
                                         action: "Edit",
@@ -160,7 +167,9 @@ const RegisterMember = () => {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/ViewDeleteMember`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'deletemember'
+                                    }).linkTo,
                                     state: {
                                         id: record.key,
                                         action: "Delete",
@@ -345,7 +354,9 @@ const RegisterMember = () => {
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                            pathname: `/registerClient/viewMember`,
+                            pathname: ListLink.find((pathLink) => {
+                                return pathLink.useIn === 'addmember'
+                            }).linkTo,
                             state: {
                                 id: '0',
                                 action: "Add New",
