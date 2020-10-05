@@ -167,6 +167,14 @@ const OtherLink = [
     },
     {
         useFor: 'instruction',
+        name: 'add Security',
+        key: 'addSecurity',
+        useIn: 'addsecurity',
+        linkTo: rootWithNavLink + '/instruction-management/add-security',
+        component: ViewAddSM,
+    },
+    {
+        useFor: 'instruction',
         name: 'View Security',
         key: 'viewSecurity',
         useIn: 'viewsecurity',

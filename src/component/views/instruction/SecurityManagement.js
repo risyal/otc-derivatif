@@ -204,7 +204,9 @@ function SecurityManagement() {
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                            pathname: `/instructionManagement/ViewAddSM`,
+                            pathname: ListLink.find((pathLink) => {
+                                return pathLink.useIn === 'addsecurity'
+                            }).linkTo,
                         }}>
                             <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
                                 Add New Instruction
