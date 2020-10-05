@@ -166,6 +166,23 @@ const OtherLink = [
         component: ApprovalAccountDetail,
     },
     {
+        useFor: 'instruction',
+        name: 'View Security',
+        key: 'viewSecurity',
+        useIn: 'viewsecurity',
+        linkTo: rootWithNavLink + '/instruction-management/view-security',
+        component: DetailCancelSM,
+    },
+    {
+        useFor: 'instruction',
+        name: 'Cancel Security',
+        key: 'cancelSecurity',
+        useIn: 'cancelsecurity',
+        linkTo: rootWithNavLink + '/instruction-management/cancel-security',
+        component: DetailCancelSM,
+    },
+    //end
+    {
         name: 'ViewEditMember',
         key: 'ViewEditMember',
         linkTo: '/ViewEditMember',

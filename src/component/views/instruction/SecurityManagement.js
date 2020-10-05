@@ -14,7 +14,13 @@ import {
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import moment from 'moment';
+import OtherLink from '../../config/OtherLink';
+
+
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "instruction"
+});
 
 function SecurityManagement() {
     const [expand, setExpand] = useState(true);
@@ -78,7 +84,9 @@ function SecurityManagement() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/instructionManagement/detailCancelSM`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'viewsecurity'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "View",
@@ -90,7 +98,9 @@ function SecurityManagement() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/instructionManagement/detailCancelSM`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'cancelsecurity'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "Cancel",
@@ -197,7 +207,7 @@ function SecurityManagement() {
                             pathname: `/instructionManagement/ViewAddSM`,
                         }}>
                             <Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                                    Add New Instruction
+                                Add New Instruction
                             </Button>
                         </Link>
                     </Col>
