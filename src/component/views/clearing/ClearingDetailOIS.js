@@ -10,11 +10,16 @@ import {
     Table
 } from 'antd';
 import { ArrowLeftOutlined, DownloadOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 
-function ClearingDetailOIS(){
+function ClearingDetailOIS() {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const [componentSize] = useMemo(() => 'middle');
     const [formItemLayout] = useState({
         labelCol: {
@@ -115,9 +120,7 @@ function ClearingDetailOIS(){
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/clearingManagement/clearingPosition">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                    Detail Trade </Title>
             </div>
@@ -148,11 +151,9 @@ function ClearingDetailOIS(){
                 />
 
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Link to="/clearingManagement/clearingPosition">
-                        <Button style={{ marginTop: '15px' }}>
-                            <div>Back</div>
-                        </Button>
-                    </Link>
+                    <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                        <div>Back</div>
+                    </Button>
                 </Form.Item>
             </Form>
         </div>

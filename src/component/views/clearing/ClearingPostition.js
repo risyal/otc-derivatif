@@ -12,8 +12,14 @@ import {
 } from 'antd';
 import moment from 'moment';
 import { Link } from "react-router-dom";
-import {  DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "clearing"
+});
+
 
 function ClearingPostition() {
 
@@ -134,7 +140,18 @@ function ClearingPostition() {
             dataIndex: 'action',
             width: 100,
             fixed: 'right',
-            render: text => <a>{text}</a>,
+            render: (text, record) => <Link to={{
+                pathname: ListLink.find((pathLink) => {
+                    //console.log(('detail' + record.product).replace(/\s+/g, '-').toLowerCase());
+                    return pathLink.useIn === (('detail' + record.product).replace(/\s+/g, '-').toLowerCase())
+                }).linkTo,
+                state: {
+                    id: "1",
+                    action: "Detail",
+                    disable: true,
+                    linkBack: "/monitoringtrade",
+                }
+            }} style={{ marginRight: '20px' }}>Detail</Link>,
             // width: 100,
             // render: () =>
             //     <div>
@@ -171,7 +188,7 @@ function ClearingPostition() {
             maturityDate: '23-01-2020',
             nextFixingDate: '23-01-2020',
             currency: 'Currency1',
-            action: 
+            action:
                 <Link to={{ pathname: `/clearingManagement/clearingDetailIrs` }}>
                     Detail
                 </Link>
@@ -195,7 +212,7 @@ function ClearingPostition() {
             maturityDate: '23-01-2020',
             nextFixingDate: '23-01-2020',
             currency: 'Currency2',
-            action: 
+            action:
                 <Link to={{ pathname: `/clearingManagement/clearingDetailOis` }}>
                     Detail
                 </Link>
@@ -219,7 +236,7 @@ function ClearingPostition() {
             maturityDate: '23-01-2020',
             nextFixingDate: '23-01-2020',
             currency: 'Currency3',
-            action: 
+            action:
                 <Link to={{ pathname: `/clearingManagement/clearingDetailDndf` }}>
                     Detail
                 </Link>
@@ -329,7 +346,7 @@ function ClearingPostition() {
                     {exportButtton}
                 </Col>
             </Row>
-            
+
             <Table
                 columns={columns}
                 dataSource={data}
