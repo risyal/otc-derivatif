@@ -14,7 +14,12 @@ import {
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import moment from 'moment';
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "instruction"
+});
 
 function CashInquiryManagement() {
     const [expand, setExpand] = useState(true);
@@ -73,7 +78,9 @@ function CashInquiryManagement() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/instructionManagement/detailCancelCM`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'viewcash'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "View",
@@ -85,7 +92,9 @@ function CashInquiryManagement() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/instructionManagement/detailCancelCM`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'cancelcash'
+                                    }).linkTo,
                                     state: {
                                         id: "1",
                                         action: "Cancel",
@@ -158,9 +167,9 @@ function CashInquiryManagement() {
                             <DatePicker style={{ width: '100%' }}
                                 defaultValue={moment('2020/01/23', dateFormat)} />
                         </Form.Item>
-                </div>
-            )}
-            <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                    </div>
+                )}
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
                     <Button
                         type="primary"
                         htmlType="submit"

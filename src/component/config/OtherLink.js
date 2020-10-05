@@ -181,6 +181,22 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/instruction-management/cancel-security',
         component: DetailCancelSM,
     },
+    {
+        useFor: 'instruction',
+        name: 'View Cash',
+        key: 'viewCash',
+        useIn: 'viewcash',
+        linkTo: rootWithNavLink + '/instruction-management/view-cash',
+        component: DetailCancelCM,
+    },
+    {
+        useFor: 'instruction',
+        name: 'Cancel cash',
+        key: 'cancelcash',
+        useIn: 'cancelcash',
+        linkTo: rootWithNavLink + '/instruction-management/cancel-cash',
+        component: DetailCancelCM,
+    },
     //end
     {
         name: 'ViewEditMember',

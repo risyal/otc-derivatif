@@ -13,11 +13,16 @@ import {
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
-const DetailCancelCM= (props) => {
+const DetailCancelCM = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const [text] = useState('Are you sure to Cancel this ?');
     const componentSize = 'middle';
     const formItemLayout = {
@@ -120,9 +125,7 @@ const DetailCancelCM= (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to={linkBack}>
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} Instruction Cash Management</Title>
             </div>
@@ -175,22 +178,19 @@ const DetailCancelCM= (props) => {
                 </Form.Item>
                 ) : null}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to={linkBack}>
+                    {!disable ? (
                         <Popconfirm placement="leftTop" title={action === "Cancel" ? text : null} okText="Yes" cancelText="No">
-                            <Button type="primary" style={{ marginRight: '15px' }}>{action === "Cancel" ? action + " Instruction" :
+                            <Button onClick={goBack} type="primary" style={{ marginRight: '15px' }}>{action === "Cancel" ? action + " Instruction" :
                                 (action === "Confirmation" ? "Confirm" : action === "Approval" ? "Approve" : "Delete")}</Button>
                         </Popconfirm>
-                    </Link>
                     ) : null}
-                    <Link to={linkBack}>
-                        <Button style={{ marginTop: '15px' }}>
-                            {!disable ? action === "Approval" ? "Reject" : (
+                    <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                        {!disable ? action === "Approval" ? "Reject" : (
+                            <div>Back</div>
+                        ) : (
                                 <div>Back</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
-                        </Button>
-                    </Link>
+                            )}
+                    </Button>
                 </Form.Item>
             </Form>
         </div>
