@@ -13,7 +13,12 @@ import {
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import OtherLink from '../../config/OtherLink';
+
 const { Title } = Typography;
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "memberclient"
+});
 
 function RegisterClient() {
     const [expand, setExpand] = useState(true);
@@ -104,7 +109,9 @@ function RegisterClient() {
                         <Menu>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/ViewDeleteClient`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'viewclient'
+                                    }).linkTo,
                                     state: {
                                         id: record.key,
                                         action: "View",
@@ -115,7 +122,9 @@ function RegisterClient() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/viewClient`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'editclient'
+                                    }).linkTo,
                                     state: {
                                         id: record.key,
                                         action: "Edit",
@@ -126,7 +135,9 @@ function RegisterClient() {
                             </Menu.Item>
                             <Menu.Item>
                                 <Link to={{
-                                    pathname: `/registerClient/ViewDeleteClient`,
+                                    pathname: ListLink.find((pathLink) => {
+                                        return pathLink.useIn === 'deleteclient'
+                                    }).linkTo,
                                     state: {
                                         id: record.key,
                                         action: "Delete",
@@ -219,7 +230,9 @@ function RegisterClient() {
                 <Row justify="end">
                     <Col span={8}>
                         <Link to={{
-                            pathname: `/registerClient/viewClient`,
+                            pathname: ListLink.find((pathLink) => {
+                                return pathLink.useIn === 'addclient'
+                            }).linkTo,
                             state: {
                                 id: '0',
                                 action: "Add New",

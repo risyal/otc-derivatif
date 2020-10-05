@@ -10,13 +10,18 @@ import {
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 const { Option } = Select;
 
 
 const ViewEditClient = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const [componentSize] = useMemo(() => 'middle');
     const [formItemLayout] = useState({
         labelCol: {
@@ -93,9 +98,7 @@ const ViewEditClient = (props) => {
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/memberandclientmanagement/registerclient">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} Data Client</Title>
             </div>
@@ -107,7 +110,7 @@ const ViewEditClient = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                
+
                 <Form.Item label="Member ID">
                     <Input disabled={disable} defaultValue={dataMemberById.memberID} />
                 </Form.Item>
@@ -144,25 +147,22 @@ const ViewEditClient = (props) => {
                 ) : (
                         <div></div>
                     )}
-                    
+
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    {!disable ? (<Link to="/memberandclientmanagement/registerclient">
-                        <Button type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
+                    {!disable ? (
+                        <Button onClick={goBack} type="primary" htmlType="submit" style={{ marginRight: '15px' }}>
                             Submit
                         </Button>
-                    </Link>
                     ) : (
                             <div></div>
                         )}
-                    <Link to="/memberandclientmanagement/registerclient">
-                        <Button >
-                            {!disable ? (
-                                <div>Cancel</div>
-                            ) : (
-                                    <div>Back</div>
-                                )}
-                        </Button>
-                    </Link>
+                    <Button onClick={goBack}>
+                        {!disable ? (
+                            <div>Cancel</div>
+                        ) : (
+                                <div>Back</div>
+                            )}
+                    </Button>
                 </Form.Item>
             </Form>
 
