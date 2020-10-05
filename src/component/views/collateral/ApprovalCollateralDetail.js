@@ -14,11 +14,16 @@ import {
     DownloadOutlined,
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 
 const ApprovalCollateralDetail = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const [componentSize] = useMemo(() => 'middle');
     const text = 'Are you sure to delete this task?';
 
@@ -152,9 +157,7 @@ const ApprovalCollateralDetail = (props) => {
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/collateralManagement/approval">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     Approval</Title>
             </div>
@@ -217,14 +220,12 @@ const ApprovalCollateralDetail = (props) => {
 
                     <br />
                     <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                        <Link to="/collateralManagement/approval">
-                            <Button type="primary" style={{ marginRight: '15px' }}>Approve
+                        <Button onClick={goBack} type="primary" style={{ marginRight: '15px' }}>Approve
                                 </Button>
-                            <Button style={{ marginRight: '15px' }}>Reject
+                        <Button onClick={goBack} style={{ marginRight: '15px' }}>Reject
                                 </Button>
-                            <Button >Cancel
+                        <Button onClick={goBack}>Cancel
                                 </Button>
-                        </Link>
                     </Form.Item>
                 </div>
 

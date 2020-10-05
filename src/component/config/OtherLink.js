@@ -237,6 +237,14 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/collateral-management/cancel-instruction-colw',
         component: DetailCancelCOLW,
     },
+    {
+        useFor: 'collateral',
+        name: 'Detail Approval Collateral',
+        key: 'detailApprovalCollateral',
+        useIn: 'detailapprovalcollateral',
+        linkTo: rootWithNavLink + '/collateral-management/detail-approval-collateral',
+        component: ApprovalCollateralDetail,
+    },
     //end
     {
         name: 'ViewEditMember',
