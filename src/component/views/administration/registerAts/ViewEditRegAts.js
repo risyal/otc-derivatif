@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     Form,
     Input,
@@ -11,27 +11,35 @@ import {
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import API from "../../../config/Api";
 
 const { Title } = Typography;
+const formLayout = 'horizontal';
+const formItemLayout =
+    formLayout === 'horizontal'
+        ? {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 6 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 16 },
+            },
+        }
+        : null;
 
+const tailLayout = {
+    wrapperCol: { offset: 6, span: 12 },
+};
 const ViewEditRegAts = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const [form] = Form.useForm();
-    const [formLayout] = useState('horizontal');
-    const formItemLayout =
-        formLayout === 'horizontal'
-            ? {
-                labelCol: {
-                    xs: { span: 24 },
-                    sm: { span: 6 },
-                },
-                wrapperCol: {
-                    xs: { span: 24 },
-                    sm: { span: 16 },
-                },
-            }
-            : null;
     const onFinish = async values => {
         const bodyPost = ({
             companyName: form.getFieldValue("companyName"),
@@ -60,23 +68,21 @@ const ViewEditRegAts = (props) => {
                     console.log(res.data.content);
                 })
         }
+        history.goBack();
 
     };
     const [action] = useState(props.location.state.action);
     const [idx] = useState(props.location.state.id);
     const [loading, setLoading] = useState(false);
-    const tailLayout = {
-        wrapperCol: { offset: 6, span: 12 },
-    };
     const onReset = () => {
         form.resetFields();
     };
-    const setRegAts = async (idEdit) => {
+    const setRegAts = useCallback(async (idEdit) => {
         if (idEdit > 0) {
             console.log("edit" + idEdit)
             setLoading(true);
             const resJSON = await (await API("GET", "administration", "registeratss/" + idEdit)).data;
-            form.setFieldsValue({
+            await form.setFieldsValue({
                 companyName: resJSON.companyName,
                 applicationName: resJSON.applicationName,
                 address: resJSON.companyInfo.address,
@@ -87,13 +93,10 @@ const ViewEditRegAts = (props) => {
             setLoading(false);
         }
 
-    };
+    }, [form]);
     useEffect(() => {
-        if (props.location.state.id > 0) {
-            setRegAts(props.location.state.id);
-        }
-    }, [props.location.state.id]);
-    const disable = props.location.state.disable
+        setRegAts(idx);
+    }, [idx, setRegAts]);
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
@@ -103,9 +106,7 @@ const ViewEditRegAts = (props) => {
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/registerats">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} ATS</Title>
             </div>
@@ -157,17 +158,13 @@ const ViewEditRegAts = (props) => {
                             <Input />
                         </Form.Item>
 
-                        {!disable ? (<Form.Item label="Role">
+                        <Form.Item label="Role">
                             <Radio.Group onChange={radioOnChange} value={sixEyes}>
                                 <Radio value={1}>Maker</Radio>
                                 <Radio value={2}>Direct Checker</Radio>
                                 <Radio value={3}>Direct Approver</Radio>
                             </Radio.Group>
                         </Form.Item>
-
-                        ) : (
-                                <div></div>
-                            )}
                         <Form.Item {...tailLayout}>
                             <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
                                 Submit
@@ -175,11 +172,9 @@ const ViewEditRegAts = (props) => {
                             <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
                                 Reset
                     </Button>
-                            <Link to="/registerats">
-                                <Button >
-                                    <div>Back</div>
-                                </Button>
-                            </Link>
+                            <Button onClick={goBack} >
+                                <div>Back</div>
+                            </Button>
                         </Form.Item>
                     </Form>)}
 
