@@ -4,9 +4,15 @@ import {
     Input,
     Button,
     Radio,
-    DatePicker
+    DatePicker,
+    Typography
 } from 'antd';
 import { useHistory } from "react-router-dom";
+import {
+    ArrowLeftOutlined
+} from '@ant-design/icons';
+
+const { Title } = Typography;
 
 function ViewAddCM() {
     let history = useHistory()
@@ -27,7 +33,14 @@ function ViewAddCM() {
     };
 
     return (
-        <div style={{ margin: '15px 20px' }}>
+        <div>
+            <div className="head-content viewDelete">
+                <Title level={4}>
+                    <span className="icon-back">
+                        <ArrowLeftOutlined onClick={goBack} />
+                    </span>
+                    Add New Instruction </Title>
+            </div>
             <Form
                 {...formItemLayout}
                 size={componentSize}

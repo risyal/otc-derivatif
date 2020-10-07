@@ -1,57 +1,117 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Form,
     Input,
     Button,
     Radio,
-    DatePicker
+    DatePicker,
+    Typography
 } from 'antd';
 import { useHistory } from 'react-router-dom';
+import {
+    ArrowLeftOutlined
+} from '@ant-design/icons';
+import axios from 'axios';
 
-function ViewAddColw() {
+const { Title } = Typography;
+
+const ViewAddColw = (props) => {
+    const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('horizontal');
+
     let history = useHistory()
 
     function goBack() {
         history.goBack()
     }
+
+    const onFormLayoutChange = ({ layout }) => {
+        setFormLayout(layout);
+    };
+
     const componentSize = 'middle';
-    const formItemLayout = {
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
+    const formItemLayout =
+        formLayout === 'horizontal'
+            ? {
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 6 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 16 },
+                },
+            }
+            : null;
+    const onFinish = values => {
+        axios.post(`http://localhost:8080/collateraltransactions`, {
+            transactionType: "COLW",
+            memberId: form.getFieldValue("memberId"),
+            sourceAccount: form.getFieldValue("sourceAccount"),
+            sourceTarget: form.getFieldValue("sourceTarget"),
+            instrumentCode: form.getFieldValue("instrumentCode"),
+            value: form.getFieldValue("value"),
+            settlementDate: form.getFieldValue("settlementDate"),
+            remark: form.getFieldValue("remark"),
+            status: "active",
+            lastUpdate: null
+        })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                form.resetFields();
+            })
+    };
+
+    const tailLayout = {
+        wrapperCol: { offset: 6, span: 12 },
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
     };
 
     return (
-        <div style={{ margin: '15px 20px' }}>
+        <div>
+            <div className="head-content viewDelete">
+                <Title level={4}>
+                    <span className="icon-back">
+                        <ArrowLeftOutlined onClick={goBack} />
+                    </span>
+                    Add New Instruction </Title>
+            </div>
             <Form
                 {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
+                layout={formLayout}
+                form={form}
                 labelAlign="left"
+                initialValues={{ layout: formLayout }}
+                onFinish={onFinish}
             >
-                <Form.Item label="Participant Code" >
+                <Form.Item label="Participant Code" name="memberId">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Source Acc" >
+                <Form.Item label="Source Account" name="sourceAccount">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Dest Account" >
+                <Form.Item label="Dest Account" name="sourceTarget">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Instrument Code" >
+                <Form.Item label="Instrument Code" name="instrumentCode">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Value" >
+                <Form.Item label="Value" name="value">
                     <Input />
                 </Form.Item>
-                <Form.Item label="Settlement Date" >
+                <Form.Item label="Settlement Date" name="settlementDate">
                     <DatePicker style={{ width: '100%' }} />
+                </Form.Item>
+                <Form.Item label="Remark" name="remark">
+                    <Input />
                 </Form.Item>
 
                 <Form.Item label="Role">
