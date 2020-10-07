@@ -5,19 +5,20 @@ import {
     Button,
     Radio,
     Typography,
+    Spin,
+    Space,
 } from 'antd';
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-
-import axios from 'axios';
+import API from "../../../config/Api";
 
 const { Title } = Typography;
 
 const ViewEditRegAts = (props) => {
     const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
+    const [formLayout] = useState('horizontal');
     const formItemLayout =
         formLayout === 'horizontal'
             ? {
@@ -31,46 +32,32 @@ const ViewEditRegAts = (props) => {
                 },
             }
             : null;
-    const onFinish = values => {
-
-        console.log('Received values of form: ', values);
-        console.log('idnya: ', idx);
-        console.log('Received eli of form: ', values.eligibility);
-        var egl = "true";
-        console.log("eg" + egl);
-        console.log('asd', form.getFieldValue("eligibility"));
+    const onFinish = async values => {
+        const bodyPost = ({
+            companyName: form.getFieldValue("companyName"),
+            applicationName: form.getFieldValue("applicationName"),
+            companyInfo:
+            {
+                address: form.getFieldValue("address"),
+                picName: form.getFieldValue("picName"),
+                phoneNumber: form.getFieldValue("phoneNumber"),
+                email: form.getFieldValue("email"),
+            },
+            status: "active",
+        });
         if (idx > 0) {
-            axios.put(`http://localhost:8080/registeratss/${idx}`, {
-                companyName: form.getFieldValue("companyName"),
-                applicationName: form.getFieldValue("applicationName"),
-                companyInfo:
-                {
-                    address: form.getFieldValue("address"),
-                    picName: form.getFieldValue("picName"),
-                    phoneNumber: form.getFieldValue("phoneNumber"),
-                    email: form.getFieldValue("email"),
-                },
-                status: "active",
-            })
+            await API("PUT", "administration", "registeratss/" + idx, null, bodyPost)
                 .then(res => {
                     form.resetFields();
+                    console.log(res.data.content);
                 })
 
+
         } else {
-            axios.post(`http://localhost:8080/registeratss`, {
-                companyName: form.getFieldValue("companyName"),
-                applicationName: form.getFieldValue("applicationName"),
-                companyInfo:
-                {
-                    address: form.getFieldValue("address"),
-                    picName: form.getFieldValue("picName"),
-                    phoneNumber: form.getFieldValue("phoneNumber"),
-                    email: form.getFieldValue("email"),
-                },
-                status: "active",
-            })
+            await API("POST", "administration", "registeratss", null, bodyPost)
                 .then(res => {
                     form.resetFields();
+                    console.log(res.data.content);
                 })
         }
 
@@ -84,15 +71,11 @@ const ViewEditRegAts = (props) => {
     const onReset = () => {
         form.resetFields();
     };
-    const setRegAts = async (q) => {
-        if (q > 0) {
-            console.log("edit" + q)
+    const setRegAts = async (idEdit) => {
+        if (idEdit > 0) {
+            console.log("edit" + idEdit)
             setLoading(true);
-            const apiRes = await fetch(
-                `http://localhost:8080/registeratss/${q}`
-            );
-            const resJSON = await apiRes.json();
-            console.log("asdasd", resJSON.companyInfo.address);
+            const resJSON = await (await API("GET", "administration", "registeratss/" + idEdit)).data;
             form.setFieldsValue({
                 companyName: resJSON.companyName,
                 applicationName: resJSON.applicationName,
@@ -109,7 +92,7 @@ const ViewEditRegAts = (props) => {
         if (props.location.state.id > 0) {
             setRegAts(props.location.state.id);
         }
-    }, []);
+    }, [props.location.state.id]);
     const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
@@ -126,75 +109,82 @@ const ViewEditRegAts = (props) => {
                     </span>
                     {action} ATS</Title>
             </div>
-            <Form
 
-                {...formItemLayout}
-                layout={formLayout}
-                form={form}
-                labelAlign="left"
-                initialValues={{ layout: formLayout }}
-                onFinish={onFinish}
-                style={{ marginBottom: '80px' }}
-            >
+            {loading ? (
+                <div style={{ "text-align": "center" }}> <Space size="large" >
+                    <Spin size="large" tip="Loading..." />
+                </Space>
+                </div>
+            ) : (
+                    <Form
+                        {...formItemLayout}
+                        layout={formLayout}
+                        form={form}
+                        labelAlign="left"
+                        initialValues={{ layout: formLayout }}
+                        onFinish={onFinish}
+                        style={{ marginBottom: '80px' }}
+                    >
 
-                <Form.Item label="Company name"
-                    name="companyName"
-                    rules={[{ required: true, message: 'Currency Code is required' }]}>
-                    <Input placeholder="Insert Company name" />
-                </Form.Item>
-                <Form.Item label="Application Name"
-                    name="applicationName"
-                    rules={[{ required: true, message: 'Application Name Code is required' }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Address"
-                    name="address"
-                    rules={[{ required: true, message: 'Address Code is required' }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="PIC Name"
-                    name="picName"
-                    rules={[{ required: true, message: 'PIC Name Code is required' }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Telephone Number"
-                    name="phoneNumber"
-                    rules={[{ required: true, message: 'Telephone Number Code is required' }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Email"
-                    name="email"
-                    rules={[{ required: true, message: 'Email Code is required' }]}>
-                    <Input />
-                </Form.Item>
+                        <Form.Item label="Company name"
+                            name="companyName"
+                            rules={[{ required: true, message: 'Currency Code is required' }]}>
+                            <Input placeholder="Insert Company name" />
+                        </Form.Item>
+                        <Form.Item label="Application Name"
+                            name="applicationName"
+                            rules={[{ required: true, message: 'Application Name Code is required' }]}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Address"
+                            name="address"
+                            rules={[{ required: true, message: 'Address Code is required' }]}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="PIC Name"
+                            name="picName"
+                            rules={[{ required: true, message: 'PIC Name Code is required' }]}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Telephone Number"
+                            name="phoneNumber"
+                            rules={[{ required: true, message: 'Telephone Number Code is required' }]}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Email"
+                            name="email"
+                            rules={[{ required: true, message: 'Email Code is required' }]}>
+                            <Input />
+                        </Form.Item>
 
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
+                        {!disable ? (<Form.Item label="Role">
+                            <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                <Radio value={1}>Maker</Radio>
+                                <Radio value={2}>Direct Checker</Radio>
+                                <Radio value={3}>Direct Approver</Radio>
+                            </Radio.Group>
+                        </Form.Item>
 
-                ) : (
-                        <div></div>
-                    )}
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
-                        Submit
+                        ) : (
+                                <div></div>
+                            )}
+                        <Form.Item {...tailLayout}>
+                            <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                                Submit
                             </Button>
-                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
-                        Reset
+                            <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                                Reset
                     </Button>
-                    <Link to="/registerats">
-                        <Button >
-                            <div>Back</div>
-                        </Button>
-                    </Link>
-                </Form.Item>
-            </Form>
+                            <Link to="/registerats">
+                                <Button >
+                                    <div>Back</div>
+                                </Button>
+                            </Link>
+                        </Form.Item>
+                    </Form>)}
 
-        </div>
+
+        </div >
     )
 
 }

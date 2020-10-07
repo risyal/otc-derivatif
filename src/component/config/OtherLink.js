@@ -75,7 +75,8 @@ import ApprovalAccountDetail from '../views/account/ApprovalDetail';
 import ApprovalInstructionDetail from '../views/instruction/ApprovalInstructionDetail';
 import ApprovalCollateralDetail from '../views/collateral/ApprovalCollateralDetail';
 import ReportBI from '../views/reporting/ReportBI';
-const rootWithNavLink = "/otc-derivatif";
+import { baseUrl } from './Environtment';
+const rootWithNavLink = baseUrl;
 const OtherLink = [
     {
         useFor: 'trade',
@@ -340,6 +341,38 @@ const OtherLink = [
         useIn: 'deleteclient',
         linkTo: rootWithNavLink + '/member-client/delete-client',
         component: ViewDeleteClient,
+    },
+    {
+        useFor: 'administration',
+        name: 'Add Register ATS ',
+        key: 'addRegisterAts',
+        useIn: 'addregisterats',
+        linkTo: rootWithNavLink + '/administration/add-register-ats',
+        component: ViewEditRegAts,
+    },
+    {
+        useFor: 'administration',
+        name: 'Edit Register ATS ',
+        key: 'editRegisterAts',
+        useIn: 'editregisterats',
+        linkTo: rootWithNavLink + '/administration/edit-register-ats',
+        component: ViewEditRegAts,
+    },
+    {
+        useFor: 'administration',
+        name: 'View Register ATS ',
+        key: 'viewRegisterAts',
+        useIn: 'viewregisterats',
+        linkTo: rootWithNavLink + '/administration/view-register-ats',
+        component: ViewDeleteRegAts,
+    },
+    {
+        useFor: 'administration',
+        name: 'Delete Register ATS ',
+        key: 'deleteRegisterAts',
+        useIn: 'deleteregisterats',
+        linkTo: rootWithNavLink + '/administration/delete-register-ats',
+        component: ViewDeleteRegAts,
     },
     //end
     {

@@ -12,9 +12,14 @@ import {
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import API from "../../../config/Api";
+import OtherLink from "../../../config/OtherLink";
+
 const { Title } = Typography;
 
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "administration"
+});
 const columns = [
     {
         title: 'Company Name',
@@ -58,7 +63,9 @@ const columns = [
                     <Menu>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewDeleteRegAts`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'viewregisterats'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "View",
@@ -69,7 +76,9 @@ const columns = [
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewEditRegAts`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editregisterats'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Edit",
@@ -80,7 +89,9 @@ const columns = [
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewDeleteRegAts`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deleteregisterats'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Delete",
@@ -120,13 +131,6 @@ const exportButtton = <Button
     }}
     icon={<DownloadOutlined />}>Export File</Button>;
 
-const tailLayout = {
-    wrapperCol: {
-        offset: 6,
-        span: 12,
-    },
-};
-
 class RegisterAts extends React.Component {
     formRef = React.createRef();
     state = {
@@ -146,36 +150,20 @@ class RegisterAts extends React.Component {
     componentDidMount() {
         const { pagination } = this.state;
         this.fetch({ pagination });
-        /*  axios.get(`http://localhost:8080/`)
-             .then(res => {
-                 const data = res.data;
-                 this.setState({
-                     loading: false,
-                     data,
- 
-                 });
-                 console.log(data)
-             }) */
     }
     handleTableChange = (pagination, filters, sorter, extra) => {
         this.fetch({
             pagination,
         });
-    }; fetch = (params = {}) => {
-        const paramSearch = new URLSearchParams([['param', 'ical']]);
-        /*  {
-             param: this.formRef.current.getFieldValue("keyword"),
-             value: this.formRef.current.getFieldValue("keyword"),
-             valueType: this.formRef.current.getFieldValue("keyword"),
-             note: this.formRef.current.getFieldValue("keyword")
-         }; */
-        this.setState({ loading: true });
-        axios.get(`http://localhost:8080/registeratss`, {
-            params: {
-                code: this.formRef.current.getFieldValue("keyword"),
-                name: this.formRef.current.getFieldValue("keyword"),
-            }
+    };
+    fetch = async (params = {}) => {
+        const paramsSearch = ({
+            code: this.formRef.current.getFieldValue("keyword"),
+            name: this.formRef.current.getFieldValue("keyword"),
         })
+
+        this.setState({ loading: true });
+        await API("GET", "administration", "registeratss", paramsSearch)
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -270,7 +258,9 @@ class RegisterAts extends React.Component {
                     <Row justify="end">
                         <Col span={8}>
                             <Link to={{
-                                pathname: `/administration/ViewEditRegAts`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'addregisterats'
+                                }).linkTo,
                                 state: {
                                     id: '0',
                                     action: "Add New",
@@ -284,7 +274,9 @@ class RegisterAts extends React.Component {
 
                         <Col span={8} offset={8}>
                             {/* <Link to={{
-                            pathname: `#`,
+                            pathname: ListLink.find((pathLink) => {
+                            return pathLink.useIn === 'detail'
+                        }).linkTo,
                             state: {
                                 id: '1',
                                 action: "Edit",
