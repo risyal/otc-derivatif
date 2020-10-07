@@ -315,7 +315,7 @@ const Menu = [
             linkTo: '/administration/edit-reference-rate',
             component: EditReferenceRate,
         }, {
-            name: 'Edit Time Parameter',
+            name: 'Time Parameter',
             key: 'editParameter',
             linkTo: '/administration/edit-parameter',
             component: EditParameter,
