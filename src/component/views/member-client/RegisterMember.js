@@ -65,8 +65,8 @@ const columns = [
     {
         title: 'PIC',
         width: 100,
-        render: (data) => {
-            return data?.pic;
+        render: (_, record) => {
+            return record.memberInfo?.pic;
         }
     },
     {
@@ -131,7 +131,7 @@ const columns = [
                                     return pathLink.useIn === 'viewmember'
                                 }).linkTo,
                                 state: {
-                                    id: record.key,
+                                    id: record.id,
                                     action: "View",
                                     disable: true,
                                 }
@@ -144,7 +144,7 @@ const columns = [
                                     return pathLink.useIn === 'editmember'
                                 }).linkTo,
                                 state: {
-                                    id: record.key,
+                                    id: record.id,
                                     action: "Edit",
                                     disable: false,
                                 }
@@ -265,7 +265,7 @@ class RegisterMember extends React.Component {
     };
 
     render = () => {
-        const { data, expand, selectedStatus } = this.state;
+        const { data, expand, loading, selectedStatus } = this.state;
         return (
             <div style={{ margin: '15px 20px' }}>
                 <div className="head-content">
@@ -375,6 +375,7 @@ class RegisterMember extends React.Component {
                         dataSource={data}
                         bordered
                         size="middle"
+                        loading={loading}
                         scroll={{ x: 'calc(700px + 50%)' }}
                     />
                 </div>}
