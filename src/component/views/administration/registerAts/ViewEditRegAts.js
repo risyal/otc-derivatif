@@ -33,6 +33,10 @@ const formItemLayout =
 const tailLayout = {
     wrapperCol: { offset: 6, span: 12 },
 };
+const simulateSlowNetworkRequest = () =>
+    new Promise(resolve => setTimeout(resolve, 1));
+
+
 const ViewEditRegAts = (props) => {
     let history = useHistory()
 
@@ -74,28 +78,41 @@ const ViewEditRegAts = (props) => {
     const [action] = useState(props.location.state.action);
     const [idx] = useState(props.location.state.id);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState({});
     const onReset = () => {
         form.resetFields();
     };
     const setRegAts = useCallback(async (idEdit) => {
-        if (idEdit > 0) {
-            console.log("edit" + idEdit)
-            setLoading(true);
-            const resJSON = await (await API("GET", "administration", "registeratss/" + idEdit)).data;
-            await form.setFieldsValue({
+        try {
+            const req = await API("GET", "administration", "registeratss/" + idEdit);
+            const resJSON = await req.data
+            form.setFieldsValue({
                 companyName: resJSON.companyName,
                 applicationName: resJSON.applicationName,
                 address: resJSON.companyInfo.address,
                 picName: resJSON.companyInfo.picName,
                 phoneNumber: resJSON.companyInfo.phoneNumber,
                 email: resJSON.companyInfo.email,
-            });
+            })
+        } catch (err) {
+            setError(err);
+        } finally {
             setLoading(false);
         }
 
     }, [form]);
     useEffect(() => {
-        setRegAts(idx);
+        let ignore = false;
+        if (idx > 0) {
+            setLoading(true);
+            setError({});
+            simulateSlowNetworkRequest().then(() => {
+                if (!ignore) {
+                    setRegAts(idx);
+                }
+            });
+        }
+        return (() => { ignore = true; });
     }, [idx, setRegAts]);
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
@@ -112,7 +129,7 @@ const ViewEditRegAts = (props) => {
             </div>
 
             {loading ? (
-                <div style={{ "text-align": "center" }}> <Space size="large" >
+                <div style={{ textAlign: "center" }}> <Space size="large" >
                     <Spin size="large" tip="Loading..." />
                 </Space>
                 </div>
@@ -176,7 +193,8 @@ const ViewEditRegAts = (props) => {
                                 <div>Back</div>
                             </Button>
                         </Form.Item>
-                    </Form>)}
+                    </Form>)
+            }
 
 
         </div >
