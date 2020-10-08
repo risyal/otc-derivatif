@@ -374,6 +374,38 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/administration/delete-register-ats',
         component: ViewDeleteRegAts,
     },
+    {
+        useFor: 'systemparameter',
+        name: 'Add System Parameter',
+        key: 'addSystemParameter',
+        useIn: 'addsystemparameter',
+        linkTo: rootWithNavLink + '/systemparameter/add-system-parameter',
+        component: ViewEditSysParam,
+    },
+    {
+        useFor: 'systemparameter',
+        name: 'Edit System Parameter',
+        key: 'editSystemParameter',
+        useIn: 'editsystemparameter',
+        linkTo: rootWithNavLink + '/systemparameter/edit-system-parameter',
+        component: ViewEditSysParam,
+    },
+    {
+        useFor: 'systemparameter',
+        name: 'View System Parameter',
+        key: 'viewSystemParameter',
+        useIn: 'viewsystemparameter',
+        linkTo: rootWithNavLink + '/systemparameter/view-system-parameter',
+        component: ViewDeleteSysParam,
+    },
+    {
+        useFor: 'systemparameter',
+        name: 'Delete System Parameter',
+        key: 'deleteSystemParameter',
+        useIn: 'deletesystemparameter',
+        linkTo: rootWithNavLink + '/systemparameter/delete-system-parameter',
+        component: ViewDeleteSysParam,
+    },
     //end
     {
         name: 'ViewEditMember',

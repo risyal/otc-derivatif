@@ -15,7 +15,6 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 import API from "../../../config/Api";
-import axios from 'axios';
 
 const { Title } = Typography;
 const componentSize = 'middle';
