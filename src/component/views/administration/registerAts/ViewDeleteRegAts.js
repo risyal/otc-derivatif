@@ -5,8 +5,8 @@ import {
     Button,
     Radio,
     Typography,
-    Row,
-    Col,
+    Spin,
+    Space,
     Descriptions
 } from 'antd';
 import {
@@ -69,11 +69,11 @@ const ViewDeleteRegAts = (props) => {
     };
 
     const submitDelete = () => {
-        axios.delete(`http://localhost:8080/registeratss/${idx}`, {
-        })
+        API("DELETE", "administration", "registeratss/" + idx)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                history.goBack()
             })
     };
     useEffect(() => {
@@ -91,52 +91,59 @@ const ViewDeleteRegAts = (props) => {
                     </span>
                     {action} ATS</Title>
             </div>
-            <Descriptions column={1} bordered
-                extra={<Button type="primary"><DownloadOutlined /> Export File</Button>}>
-                <Descriptions.Item label="Company Name">{fieldsValue.companyName}</Descriptions.Item>
-                <Descriptions.Item label="Application Name">{fieldsValue.applicationName}</Descriptions.Item>
-                <Descriptions.Item label="Address">{fieldsValue.address}</Descriptions.Item>
-                <Descriptions.Item label="PicName">{fieldsValue.picName}</Descriptions.Item>
-                <Descriptions.Item label="PhoneNumber">{fieldsValue.phoneNumber}</Descriptions.Item>
-                <Descriptions.Item label="Email">{fieldsValue.email}</Descriptions.Item>
-            </Descriptions>
+            {loading ? (
+                <div style={{ textAlign: "center" }}> <Space size="large" >
+                    <Spin size="large" tip="Loading..." />
+                </Space>
+                </div>
+            ) : (
+                    <div><Descriptions column={1} bordered
+                        extra={<Button type="primary"><DownloadOutlined /> Export File</Button>}>
+                        <Descriptions.Item label="Company Name">{fieldsValue.companyName}</Descriptions.Item>
+                        <Descriptions.Item label="Application Name">{fieldsValue.applicationName}</Descriptions.Item>
+                        <Descriptions.Item label="Address">{fieldsValue.address}</Descriptions.Item>
+                        <Descriptions.Item label="PicName">{fieldsValue.picName}</Descriptions.Item>
+                        <Descriptions.Item label="PhoneNumber">{fieldsValue.phoneNumber}</Descriptions.Item>
+                        <Descriptions.Item label="Email">{fieldsValue.email}</Descriptions.Item>
+                    </Descriptions>
 
-            <Form
-                {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-                labelAlign="left"
-                style={{ marginBottom: '80px' }}
-            >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px' }}>
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : null}
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}
-                    style={{ marginLeft: '20px' }}>
-                    {!disable ? (
-                        <Popconfirm placement="leftTop"
-                            title={text}
-                            okText="Yes"
-                            cancelText="No">
-                            <Button type="primary"
-                                onClick={submitDelete}
-                                style={{ marginRight: '15px' }}>Delete</Button>
-                        </Popconfirm>
-                    ) : (
-                            null
-                        )}
-                    <Button onClick={goBack} style={{ marginTop: '15px' }}>
-                        <div>Back</div>
-                    </Button>
-                </Form.Item>
-            </Form>
-
+                        <Form
+                            {...formItemLayout}
+                            size={componentSize}
+                            layout="horizontal"
+                            initialValues={{ size: componentSize }}
+                            labelAlign="left"
+                            style={{ marginBottom: '80px' }}
+                        >
+                            {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px' }}>
+                                <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                    <Radio value={1}>Maker</Radio>
+                                    <Radio value={2}>Direct Checker</Radio>
+                                    <Radio value={3}>Direct Approver</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            ) : null}
+                            <Form.Item wrapperCol={{ span: 12, offset: 6 }}
+                                style={{ marginLeft: '20px' }}>
+                                {!disable ? (
+                                    <Popconfirm placement="leftTop"
+                                        title={text}
+                                        okText="Yes"
+                                        cancelText="No"
+                                        onConfirm={submitDelete}>
+                                        <Button type="primary"
+                                            style={{ marginRight: '15px' }}>Delete</Button>
+                                    </Popconfirm>
+                                ) : (
+                                        null
+                                    )}
+                                <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                                    <div>Back</div>
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
+                )}
         </div>
     )
 }
