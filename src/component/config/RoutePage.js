@@ -1,14 +1,15 @@
 import React from 'react'
-import { Typography } from 'antd';
 import {
     Route
 } from "react-router-dom";
 
 import ListMenu from '../config/ListMenu';
 import OtherLink from '../config/OtherLink';
+import { baseUrl } from './Environtment';
+
+const rootWithNavLink = baseUrl;
 
 function RoutePage() {
-    let rootWithNavLink = "/otc-derivatif";
     const routeComp = ListMenu.map(
         menuItem =>
             menuItem.subMenus !== undefined ?

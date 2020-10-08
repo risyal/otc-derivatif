@@ -13,233 +13,307 @@ import {
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import OtherLink from '../../config/OtherLink';
+import axios from 'axios';
 
 const { Title } = Typography;
 const ListLink = OtherLink.filter((otherMenu) => {
     return otherMenu.useFor === "collateral"
 });
 
-function InstructionCOLW() {
-    const [expand, setExpand] = useState(true);
-    const [form] = Form.useForm();
-    const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
+const columns = [
+    {
+        title: 'Participant Code',
+        dataIndex: 'memberId',
+        width: 100,
+    }, {
+        title: 'Source Acc',
+        dataIndex: 'sourceAccount',
+        width: 100,
+    }, {
+        title: 'Dest Account',
+        dataIndex: 'sourceTarget',
+        width: 100,
+    }, {
+        title: 'Instrument Code',
+        dataIndex: 'instrumentCode',
+        width: 100,
+    }, {
+        title: 'Value',
+        dataIndex: 'value',
+        width: 100,
+    }, {
+        title: 'Settlement Date',
+        dataIndex: 'settlementDate',
+        width: 100,
+    }, {
+        title: 'Action',
+        key: 'operation',
+        fixed: 'right',
+        width: 100,
+        render: (text, record) => (
+            <Dropdown
+                overlay={
+                    <Menu>
+                        <Menu.Item>
+                            <Link to={{
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'viewinstructioncolw'
+                                }).linkTo,
+                                state: {
+                                    id: record.id,
+                                    action: "View",
+                                    disable: true,
+                                    linkBack: "/collateralManagement/instructionColw",
+                                }
+                            }} style={{ marginRight: '20px' }}>View
+                </Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Link to={{
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'cancelinstructioncolw'
+                                }).linkTo,
+                                state: {
+                                    id: record.id,
+                                    action: "Cancel",
+                                    disable: false,
+                                    linkBack: "/collateralManagement/instructionColw",
+                                }
+                            }} style={{ marginRight: '20px' }}>Cancel
+                </Link>
+                        </Menu.Item>
+                    </Menu>
+                }
+                placement="bottomLeft"
+                trigger={['click']}>
+                <Button>Action</Button>
+            </Dropdown>
+        ),
+    },
+];
 
-    const [columns] = useState([
-        {
-            title: 'Participant Code',
-            dataIndex: 'participantCode',
-            key: 'participantCode',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.participantCode - b.participantCode,
-            sortDirections: ['ascend'],
-        }, {
-            title: 'Source Acc',
-            dataIndex: 'sourceAcc',
-            key: 'sourceAcc',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.sourceAcc - b.sourceAcc,
-        }, {
-            title: 'Dest Account',
-            dataIndex: 'destAccount',
-            key: 'destAccount',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.destAccount - b.destAccount,
-        }, {
-            title: 'Instrument Code',
-            dataIndex: 'instrumentCode',
-            key: 'instrumentCode',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.instrumentCode - b.instrumentCode,
-        }, {
-            title: 'Value',
-            dataIndex: 'value',
-            key: 'value',
-            width: 100,
-        }, {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
-            width: 100,
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.settlementDate - b.settlementDate,
-        }, {
-            title: 'Action',
-            key: 'operation',
-            fixed: 'right',
-            width: 100,
-            render: (text, record) => (
-                <Dropdown
-                    overlay={
-                        <Menu>
-                            <Menu.Item>
-                                <Link to={{
-                                    pathname: ListLink.find((pathLink) => {
-                                        return pathLink.useIn === 'viewinstructioncolw'
-                                    }).linkTo,
-                                    state: {
-                                        id: "1",
-                                        action: "View",
-                                        disable: true,
-                                        linkBack: "/collateralManagement/instructionColw",
-                                    }
-                                }} style={{ marginRight: '20px' }}>View
-                    </Link>
-                            </Menu.Item>
-                            <Menu.Item>
-                                <Link to={{
-                                    pathname: ListLink.find((pathLink) => {
-                                        return pathLink.useIn === 'cancelinstructioncolw'
-                                    }).linkTo,
-                                    state: {
-                                        id: "1",
-                                        action: "Cancel",
-                                        disable: false,
-                                        linkBack: "/collateralManagement/instructionColw",
-                                    }
-                                }} style={{ marginRight: '20px' }}>Cancel
-                    </Link>
-                            </Menu.Item>
-                        </Menu>
-                    }
-                    placement="bottomLeft"
-                    trigger={['click']}>
-                    <Button>Action</Button>
-                </Dropdown>
-            ),
-        },
-    ]);
-    const [data] = useState([
-        {
-        },
-        {
-        },
-        {
-        },
-    ]);
+const getRandomuserParams = params => {
+    return {
+        results: params.pagination.pageSize,
+        page: params.pagination.current,
+        ...params,
+    };
+};
 
-    const [exportButtton] = useState(<Button
-        type="primary"
-        style={{
-            marginBottom: '15px',
-            paddingBottom: '15px',
-            float: 'right',
-            height: '35px'
-        }}
-        icon={<DownloadOutlined />}>Export File</Button>);
+const componentSize = () => 'middle';
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+    },
+};
 
-    return (
-        <div style={{ margin: '15px 20px' }}>
-            <div className="head-content">
-                <Title level={4}>Instruction - COLW</Title>
-            </div>
-            <Form
-                {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-                labelAlign="left"
-            > {expand ? (<div>
-                <Form.Item label="Keyword">
-                    <Input />
-                </Form.Item>
-            </div>
-            ) : (
-                    <div>
-                        <Form.Item label="Participant Code" >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item label="Source Acc" >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item label="Dest Account" >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item label="Instrument Code" >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                            <Button type="primary" htmlType="submit">
+const exportButtton = <Button
+    type="primary"
+    style={{
+        marginBottom: '15px',
+        paddingBottom: '15px',
+        float: 'right',
+        height: '35px'
+    }}
+    icon={<DownloadOutlined />}>Export File</Button>;
+
+const tailLayout = {
+    wrapperCol: {
+        offset: 6,
+        span: 12,
+    },
+};
+
+class InstructionCOLW extends React.Component {
+    formRef = React.createRef();
+    state = {
+        data: [],
+        pagination: {
+            current: 1,
+            pageSize: 5,
+        },
+        search: {
+            param: null,
+            value: null,
+            valueType: null,
+            note: null,
+        },
+        loading: true,
+        cobadata: "test",
+        expand: true,
+    }
+    componentDidMount() {
+        const { pagination } = this.state;
+        this.fetch({ pagination });
+        /*  axios.get(`http://localhost:8080/sysparams`)
+             .then(res => {
+                 const data = res.data;
+                 this.setState({
+                     loading: false,
+                     data,
+ 
+                 });
+                 console.log(data)
+             }) */
+    }
+    handleTableChange = (pagination, filters, sorter, extra) => {
+        console.log('paramasdasds', pagination, filters, sorter, extra);
+        this.fetch({
+            pagination,
+        });
+    };
+
+    fetch = (params = {}) => {
+        const paramSearch = new URLSearchParams([['param', 'ical']]);
+        /*  {
+            param: this.formRef.current.getFieldValue("keyword"),
+            value: this.formRef.current.getFieldValue("keyword"),
+            valueType: this.formRef.current.getFieldValue("keyword"),
+            note: this.formRef.current.getFieldValue("keyword")
+        }; */
+        this.setState({ loading: true });
+        axios.get(`http://localhost:8080/collateraltransactions`, {
+            params: {
+                transactionType:'COLW'
+                //code: this.formRef.current.getFieldValue("keyword"),
+                //name: this.formRef.current.getFieldValue("keyword"),
+            }
+        })
+            .then(res => {
+                const data = res.data.content;
+                this.setState({
+                    loading: false,
+                    data,
+                    pagination: {
+                        ...params.pagination,
+                    },
+                })
+            })
+    };
+    onReset = () => {
+        this.formRef.current.resetFields();
+    };
+    handleSearch = (e) => {
+        e.preventDefault();
+        this.setState({
+            search: {
+                //code: this.formRef.current.getFieldValue("keyword"),
+                //name: this.formRef.current.getFieldValue("keyword"),
+            }
+        });
+        const { pagination } = this.state;
+        this.setState({ cobadata: "asdasdas test" });
+        this.fetch({ pagination });
+    };
+
+    render() {
+        const { data, pagination, loading } = this.state;
+        return (
+            <div style={{ margin: '15px 20px' }}>
+                <div className="head-content">
+                    <Title level={4}>Instruction - COLW</Title>
+                </div>
+            
+                <Form
+                    {...formItemLayout}
+                    size={componentSize}
+                    layout="horizontal"
+                    ref={this.formRef} name="control-ref"
+                    initialValues={{ size: componentSize }}
+                    labelAlign="left"
+                >
+                    {this.state.expand ? (<div>
+                            <Form.Item label="Keyword">
+                                <Input />
+                            </Form.Item>
+                        </div>
+                        ) : (
+                            <div>
+                                <Form.Item label="Participant Code" >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Source Account" >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Dest Account" >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Instrument Code" >
+                                    <Input />
+                                </Form.Item>
+                            </div>
+                        )}
+
+                        <Form.Item {...tailLayout}>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                tyle={{ marginRight: '15px' }}>
                                 Search
-                        </Button>
+                            </Button>
+                            <Button
+                                style={{ margin: '0 8px' }}
+                                onClick={this.onReset}>
+                                Clear
+                            </Button>
+                            <Button
+                                htmlType="submit"
+                                onClick={() => {
+                                    this.setState({
+                                        expand: !this.state.expand
+                                    });
+                                }}>
+                                {this.state.expand ? (<div><DownOutlined /> Advance Search</div>) :
+                                    (<div><UpOutlined /> Simple Search</div>)}
+                            </Button>
                         </Form.Item>
-                    </div>
-                )}
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        tyle={{ marginRight: '15px' }}>
-                        Search
-                                </Button>
-                    <Button
-                        style={{ margin: '0 8px' }}
-                        onClick={() => {
-                            form.resetFields();
-                        }}>
-                        Clear
-                        </Button>
-                    <Button
-                        htmlType="submit"
-                        onClick={() => {
-                            setExpand(!expand);
-                        }}>
-                        {expand ? (<div><DownOutlined />Advance Search</div>) :
-                            (<div><UpOutlined />Simple Search</div>)}
-                    </Button>
-                </Form.Item>
-            </Form>
+                </Form>
 
-            <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Row justify="end">
-                    <Col span={8}>
-                        <Link to={{
-                            pathname: ListLink.find((pathLink) => {
-                                return pathLink.useIn === 'addinstructioncolw'
-                            }).linkTo,
-                        }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                                Add New Instruction
-                        </Button>
-                        </Link>
-                    </Col>
+                <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+                    <Row justify="end">
+                        <Col span={8}>
+                            <Link to={{
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'addinstructioncolw'
+                                }).linkTo,
+                            }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                    Add New Instruction
+                            </Button>
+                            </Link>
+                        </Col>
 
-                    <Col span={8} offset={8}>
-                        {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                        {exportButtton}
-                        {/* </Link> */}
-                    </Col>
-                </Row>
+                        <Col span={8} offset={8}>
+                            {/* <Link to={{
+                                pathname: `#`,
+                                state: {
+                                    id: '1',
+                                    action: "Edit",
+                                    disable: false,
+                                }
+                            }} > */}
+                            {exportButtton}
+                            {/* </Link> */}
+                        </Col>
+                    </Row>
 
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    bordered
-                    size="middle"
-                />
+                    <Table
+                        columns={columns}
+                        dataSource={data}
+                        pagination={pagination}
+                        loading={loading}
+                        onChange={this.handleTableChange}
+                        bordered
+                        size="middle"
+                    />
+                </div>
             </div>
-        </div>
-
-    )
+        )
+    }
 
 }
 

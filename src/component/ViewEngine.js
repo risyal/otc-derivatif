@@ -9,21 +9,21 @@ import {
 } from "react-router-dom";
 
 const { Footer, Content } = Layout;
+const style = {
+    height: 40,
+    width: 40,
+    lineHeight: '40px',
+    borderRadius: 4,
+    backgroundColor: '#1088e9',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 14,
+};
 
 function ViewEngine() {
     const [collapsed, SetCollapsed] = useState(false);
     const siderClick = () => {
         SetCollapsed(!collapsed);
-    };
-    const style = {
-        height: 40,
-        width: 40,
-        lineHeight: '40px',
-        borderRadius: 4,
-        backgroundColor: '#1088e9',
-        color: '#fff',
-        textAlign: 'center',
-        fontSize: 14,
     };
     return (
 
