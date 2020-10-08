@@ -14,377 +14,377 @@ import {
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import OtherLink from '../../config/OtherLink';
+import axios from 'axios';
 
 const { Title } = Typography;
+
 const ListLink = OtherLink.filter((otherMenu) => {
     return otherMenu.useFor === "memberclient"
 });
 
-const RegisterMember = () => {
-    const [expand, setExpand] = useState(true);
-    const [form] = Form.useForm();
-    const [statusSelect] = useState(['Active', 'Suspend', 'Closed']);
-    const [selectedStatus, setSelectedStatus] = useState(statusSelect[0]);
-    const statusClick = (e) => {
-        setSelectedStatus(e);
-    };
-    const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
+const componentSize = () => 'middle';
 
-    const { Option } = Select;
-
-    const [columns] = useState([
-        {
-            title: 'No',
-            dataIndex: 'no',
-            key: 'no',
-            width: 50,
-        },
-        {
-            title: 'Member ID',
-            dataIndex: 'memberID',
-            key: 'memberID',
-            width: 100,
-        },
-        {
-            title: 'SID',
-            dataIndex: 'sid',
-            key: 'sid',
-            width: 100,
-        },
-        {
-            title: 'LEI',
-            dataIndex: 'lei',
-            key: 'lei',
-            width: 100,
-        },
-        {
-            title: 'Company Name',
-            dataIndex: 'namaPerusahaan',
-            key: 'namaPerusahaan',
-            width: 200,
-        },
-        {
-            title: 'Address',
-            dataIndex: 'alamat',
-            key: 'alamat',
-            width: 200,
-        },
-        {
-            title: 'PIC',
-            dataIndex: 'pic',
-            key: 'pic',
-            width: 100,
-        },
-        {
-            title: 'Telephone Number',
-            dataIndex: 'noTelp',
-            key: 'noTelp',
-            width: 150,
-        },
-        {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-            width: 200,
-        },
-        {
-            title: 'RTGS Account',
-            children: [
-                {
-                    title: 'Collateral',
-                    width: 100,
-                    dataIndex: 'collateral',
-                    key: 'collateral',
-                }, {
-                    title: 'Settlement',
-                    width: 100,
-                    dataIndex: 'settlement',
-                    key: 'settlement',
-                }, {
-                    title: 'Default Fund',
-                    width: 100,
-                    dataIndex: 'dFund',
-                    key: 'dFund',
-                }
-            ]
-        },
-        {
-            title: 'SSSS Account (Collateral)',
-            dataIndex: 'ssss',
-            key: 'ssss',
-            width: 100,
-        },
-        {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-            width: 100,
-        },
-        {
-            title: 'Actions',
-            key: 'actions',
-            dataIndex: 'actions',
-            width: 150,
-            render: (text, record) => (
-                <Dropdown
-                    overlay={
-                        <Menu>
-                            <Menu.Item>
-                                <Link to={{
-                                    pathname: ListLink.find((pathLink) => {
-                                        return pathLink.useIn === 'viewmember'
-                                    }).linkTo,
-                                    state: {
-                                        id: record.key,
-                                        action: "View",
-                                        disable: true,
-                                    }
-                                }} style={{ marginRight: '20px' }}>View
-                    </Link>
-                            </Menu.Item>
-                            <Menu.Item>
-                                <Link to={{
-                                    pathname: ListLink.find((pathLink) => {
-                                        return pathLink.useIn === 'editmember'
-                                    }).linkTo,
-                                    state: {
-                                        id: record.key,
-                                        action: "Edit",
-                                        disable: false,
-                                    }
-                                }} style={{ marginRight: '20px' }}>Edit
-                    </Link>
-                            </Menu.Item>
-                            <Menu.Item>
-                                <Link to={{
-                                    pathname: ListLink.find((pathLink) => {
-                                        return pathLink.useIn === 'deletemember'
-                                    }).linkTo,
-                                    state: {
-                                        id: record.key,
-                                        action: "Delete",
-                                        disable: false,
-                                    }
-                                }} style={{ marginRight: '20px' }}>Delete
-                                </Link>
-                            </Menu.Item>
-                        </Menu>
-                    }
-                    placement="bottomLeft"
-                    trigger={['click']}>
-                    <Button>Action</Button>
-                </Dropdown>
-            )
+const columns = [
+    {
+        title: 'No',
+        dataIndex: 'no',
+        key: 'no',
+        width: 50,
+    },
+    {
+        title: 'Member ID',
+        dataIndex: 'memberCode',
+        key: 'memberCode',
+        width: 100,
+    },
+    {
+        title: 'SID',
+        dataIndex: 'sid',
+        key: 'sid',
+        width: 100,
+    },
+    {
+        title: 'LEI',
+        dataIndex: 'lei',
+        key: 'lei',
+        width: 100,
+    },
+    {
+        title: 'Company Name',
+        dataIndex: 'companyName',
+        key: 'companyName',
+        width: 200,
+    },
+    {
+        title: 'Address',
+        width: 200,
+        render: (_, record) => {
+            return record.memberInfo?.address;
         }
-    ]);
-    let [member, setMember] = useState('');
+    },
+    {
+        title: 'PIC',
+        width: 100,
+        render: (_, record) => {
+            return record.memberInfo?.pic;
+        }
+    },
+    {
+        title: 'Telephone Number',
+        width: 150,
+        render: (_, record) => {
+            return record.memberInfo?.address;
+        }
+    },
+    {
+        title: 'Email',
+        width: 200,
+        render: (_, record) => {
+            return record.memberInfo?.address;
+        }
+    },
+    {
+        title: 'RTGS Account',
+        children: [
+            {
+                title: 'Collateral',
+                width: 100,
+                dataIndex: 'collateral',
+                key: 'collateral',
+            }, {
+                title: 'Settlement',
+                width: 100,
+                dataIndex: 'settlement',
+                key: 'settlement',
+            }, {
+                title: 'Default Fund',
+                width: 100,
+                dataIndex: 'dFund',
+                key: 'dFund',
+            }
+        ]
+    },
+    {
+        title: 'SSSS Account (Collateral)',
+        dataIndex: 'ssss',
+        key: 'ssss',
+        width: 100,
+    },
+    {
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
+        width: 100,
+    },
+    {
+        title: 'Actions',
+        key: 'actions',
+        dataIndex: 'actions',
+        width: 150,
+        render: (text, record) => (
+            <Dropdown
+                overlay={
+                    <Menu>
+                        <Menu.Item>
+                            <Link to={{
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'viewmember'
+                                }).linkTo,
+                                state: {
+                                    id: record.id,
+                                    action: "View",
+                                    disable: true,
+                                }
+                            }} style={{ marginRight: '20px' }}>View
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Link to={{
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editmember'
+                                }).linkTo,
+                                state: {
+                                    id: record.id,
+                                    action: "Edit",
+                                    disable: false,
+                                }
+                            }} style={{ marginRight: '20px' }}>Edit
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Link to={{
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deletemember'
+                                }).linkTo,
+                                state: {
+                                    id: record.key,
+                                    action: "Delete",
+                                    disable: false,
+                                }
+                            }} style={{ marginRight: '20px' }}>Delete
+                            </Link>
+                        </Menu.Item>
+                    </Menu>
+                }
+                placement="bottomLeft"
+                trigger={['click']}>
+                <Button>Action</Button>
+            </Dropdown>
+        )
+    }
+];
 
-    let getSchemaFromApiAsync = () => {
-        console.log("teststs");
-        return new Promise((resolve, reject) => {
-            fetch('http://localhost:8080/sysparams')
-                .then(response => resolve(response.json()))
-                .catch(error => {
-                    console.error(error);
-                    reject(error);
-                });
-        })
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+    },
+};
+
+const exportButtton = <Button
+    type="primary"
+    style={{
+        marginBottom: '15px',
+        paddingBottom: '15px',
+        float: 'right',
+        height: '35px'
+    }}
+    icon={<DownloadOutlined />}>
+    Export File
+    </Button>;
+
+const statusSelect = ['Active', 'Suspend', 'Closed'];
+
+const { Option } = Select;
+
+class RegisterMember extends React.Component {
+    formRef = React.createRef();
+    state = {
+        data: [],
+        pagination: {
+            current: 1,
+            pageSize: 5,
+        },
+        search: {
+            memberId: null,
+            sid: null,
+            lei: null,
+            rtgsAccount: null,
+            ssssAccount: null,
+            status: null,
+        },
+        loading: true,
+        cobadata: "test",
+        expand: true,
+        selectedStatus: statusSelect[0],
     }
 
-    let main = async () => {
-        let res = await getSchemaFromApiAsync();
-        console.log("res", res);
+    statusClick = (e) => {
+        this.setState({
+            selectedStatus: e
+        });
     };
-    main();
-    const [data] = useState([
-        {
-            key: '1',
-            no: '1',
-            memberID: 'Member123',
-            sid: 'ID12',
-            lei: 'lei1',
-            namaPerusahaan: 'PT Jaya Abadi',
-            alamat: 'New York No. 1 Lake Park',
-            pic: 'John Brown',
-            noTelp: '085112345227',
-            email: 'john@gmail.com',
-            bic: 'BIC01',
-            collateral: 'Collateral1',
-            settlement: 'Settlement1',
-            dFund: 'Def-Fund1',
-            ssss: 'SSSS1',
-            status: 'Active',
-        },
-        {
-            key: '2',
-            no: '2',
-            memberID: 'Member345',
-            sid: 'ID23',
-            lei: 'lei2',
-            namaPerusahaan: 'PT Citra Utama',
-            alamat: 'New York No. 1 Lake Park',
-            pic: 'Jim Green',
-            noTelp: '085112345227',
-            email: 'jim@gmail.com',
-            bic: 'BIC02',
-            collateral: 'Collateral2',
-            settlement: 'Settlement2',
-            dFund: 'Def-Fund2',
-            ssss: 'SSSS2',
-            status: 'Active',
-        },
-        {
-            key: '3',
-            no: '3',
-            memberID: 'Member567',
-            sid: 'ID34',
-            lei: 'lei3',
-            namaPerusahaan: 'PT Abadi Makmur',
-            alamat: 'New York No. 1 Lake Park',
-            pic: 'John Black',
-            noTelp: '085112345227',
-            email: 'black@gmail.com',
-            bic: 'BIC03',
-            collateral: 'Collateral3',
-            settlement: 'Settlement3',
-            dFund: 'Def-Fund3',
-            ssss: 'SSSS3',
-            status: 'Active',
-        },
-    ]);
-    const [exportButtton] = useState(<Button
-        type="primary"
-        style={{
-            marginBottom: '15px',
-            paddingBottom: '15px',
-            float: 'right',
-            height: '35px'
-        }}
-        icon={<DownloadOutlined />}>Export File</Button>);
 
-    return (
-        <div style={{ margin: '15px 20px' }}>
-            <div className="head-content">
-                <Title level={4}>Register Member</Title>
-            </div>
-            <Form
-                {...formItemLayout}
-                form={form}
-                size={componentSize}
-                name="advanced_search"
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-                labelAlign="left"
-            >
+    componentDidMount = () => {
+        this.fetch();
+    };
 
-                {expand ? (<div>
-                    <Form.Item label="Keyword">
-                        <Input />
-                    </Form.Item>
+    handleTableChange = () => {
+
+    };
+
+    fetch = () => {
+
+        this.setState({ loading: true });
+
+        axios.get(`http://localhost:8080/members`, {
+            params: {
+                // param: this.formRef.current.getFieldValue("keyword"),
+                // value: this.formRef.current.getFieldValue("keyword"),
+            }
+        })
+            .then(res => {
+                const data = res.data.content;
+                this.setState({
+                    loading: false,
+                    data,
+                });
+            });
+    };
+
+    onReset = () => {
+
+    };
+
+    handleSearch = () => {
+
+    };
+
+    render = () => {
+        const { data, expand, loading, selectedStatus } = this.state;
+        return (
+            <div style={{ margin: '15px 20px' }}>
+                <div className="head-content">
+                    <Title level={4}>Register Member</Title>
                 </div>
-                ) : (
+                <Form
+                    {...formItemLayout}
+                    size={componentSize}
+                    name="advanced_search"
+                    layout="horizontal"
+                    initialValues={{ size: componentSize }}
+                    labelAlign="left"
+                >
+
+                    {expand ? (
                         <div>
-                            <Form.Item label="Member ID">
+                            <Form.Item label="Keyword">
                                 <Input />
-                            </Form.Item>
-                            <Form.Item label="SID">
-                                <Input />
-                            </Form.Item>
-                            <Form.Item label="LEI">
-                                <Input />
-                            </Form.Item>
-                            <Form.Item label="Company Name">
-                                <Input />
-                            </Form.Item>
-                            <Form.Item label="RTGS Account">
-                                <Input placeholder="Collateral" style={{ marginBottom: '15px' }} />
-                                <Input placeholder="Settlement" style={{ marginBottom: '15px' }} />
-                                <Input placeholder="Default Fund" />
-                            </Form.Item>
-                            <Form.Item label="SSSS Account">
-                                <Input />
-                            </Form.Item>
-                            <Form.Item label="Status">
-                                <Select
-                                    value={selectedStatus}
-                                    onChange={statusClick}>
-                                    {statusSelect.map(status => (
-                                        <Option value={status}>{status}</Option>
-                                    ))}
-                                </Select>
                             </Form.Item>
                         </div>
-                    )}
-                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        tyle={{ marginRight: '15px' }}>
-                        Search
-                                </Button>
-                    <Button
-                        style={{ margin: '0 8px' }}
-                        onClick={() => {
-                            form.resetFields();
-                        }}>
-                        Clear
+                    ) : (
+                            <div>
+                                <Form.Item label="Member ID">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="SID">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="LEI">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Company Name">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="RTGS Account">
+                                    <Input placeholder="Collateral" style={{ marginBottom: '15px' }} />
+                                    <Input placeholder="Settlement" style={{ marginBottom: '15px' }} />
+                                    <Input placeholder="Default Fund" />
+                                </Form.Item>
+                                <Form.Item label="SSSS Account">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Status">
+                                    <Select
+                                        value={selectedStatus}
+                                        onChange={this.statusClick}>
+                                        {statusSelect.map(status => (
+                                            <Option value={status}>{status}</Option>
+                                        ))}
+                                    </Select>
+                                </Form.Item>
+                            </div>
+                        )}
+
+                    <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            tyle={{ marginRight: '15px' }}>
+                            Search
+                                    </Button>
+                        <Button
+                            style={{ margin: '0 8px' }}
+                            onClick={() => {
+                                this.formRef.resetFields();
+                            }}>
+                            Clear
+                            </Button>
+                        <Button
+                            htmlType="submit"
+                            onClick={() => {
+                                this.setState({
+                                    expand: !this.state.expand
+                                });
+                                // setExpand(!expand);
+                            }}>
+                            {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                                (<div><UpOutlined /> Simple Search</div>)}
                         </Button>
-                    <Button
-                        htmlType="submit"
-                        onClick={() => {
-                            setExpand(!expand);
-                        }}>
-                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
-                            (<div><UpOutlined /> Simple Search</div>)}
+                    </Form.Item>
+                </Form>
+
+                { <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
+                    <Row justify="end">
+                        <Col span={8}>
+                            <Link to={{
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'addmember'
+                                }).linkTo,
+                                state: {
+                                    id: '0',
+                                    action: "Add New",
+                                    disable: false,
+                                }
+                            }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
+                                    Add New Member
                     </Button>
-                </Form.Item>
-            </Form>
+                            </Link>
+                        </Col>
+                        <Col span={8} offset={8}>
+                            {exportButtton}
+                        </Col>
+                    </Row>
 
-            <div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
-                <Row justify="end">
-                    <Col span={8}>
-                        <Link to={{
-                            pathname: ListLink.find((pathLink) => {
-                                return pathLink.useIn === 'addmember'
-                            }).linkTo,
-                            state: {
-                                id: '0',
-                                action: "Add New",
-                                disable: false,
-                            }
-                        }}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-                                Add New Member
-                </Button>
-                        </Link>
-                    </Col>
-                    <Col span={8} offset={8}>
-                        {exportButtton}
-                    </Col>
-                </Row>
-
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    bordered
-                    size="middle"
-                    scroll={{ x: 'calc(700px + 50%)' }}
-                />
+                    <Table
+                        columns={columns}
+                        dataSource={data}
+                        bordered
+                        size="middle"
+                        loading={loading}
+                        scroll={{ x: 'calc(700px + 50%)' }}
+                    />
+                </div>}
             </div>
-        </div>
 
-    )
-
+        )
+    }
 }
+
 
 
 export default RegisterMember
