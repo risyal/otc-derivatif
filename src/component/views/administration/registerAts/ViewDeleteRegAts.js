@@ -1,11 +1,10 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Form,
     Popconfirm,
     Button,
     Radio,
     Typography,
-    Table,
     Row,
     Col,
     Descriptions
@@ -14,25 +13,29 @@ import {
     ArrowLeftOutlined,
     DownloadOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
+import API from "../../../config/Api";
 import axios from 'axios';
 
 const { Title } = Typography;
+const componentSize = 'middle';
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+    },
+};
 const ViewDeleteRegAts = (props) => {
-    const [text] = useState('Are you sure to delete this task?');
-    const [componentSize] = useMemo(() => 'middle');
-    const [formItemLayout] = useState({
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    });
+    let history = useHistory()
 
+    function goBack() {
+        history.goBack()
+    }
+    const [text] = useState('Are you sure to delete this task?');
     const [loading, setLoading] = useState(false);
     const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
@@ -41,16 +44,6 @@ const ViewDeleteRegAts = (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
-    const [exportButtton] = useState(<Button
-        type="primary"
-        style={{
-            marginBottom: '15px',
-            paddingBottom: '15px',
-            float: 'right',
-            height: '35px'
-        }}
-        icon={<DownloadOutlined />}>Export File</Button>);
-
     const [fieldsValue, setFieldsValue] = useState({
         companyName: null,
         applicationName: null,
@@ -60,24 +53,18 @@ const ViewDeleteRegAts = (props) => {
         email: null,
     });
     const setRegAts = async (q) => {
-        if (q > 0) {
-            console.log("edit" + q)
-            setLoading(true);
-            const apiRes = await fetch(
-                `http://localhost:8080/registeratss/${q}`
-            );
-            const resJSON = await apiRes.json();
-            console.log(resJSON);
-            setFieldsValue({
-                companyName: resJSON.companyName,
-                applicationName: resJSON.applicationName,
-                address: resJSON.companyInfo.address,
-                picName: resJSON.companyInfo.picName,
-                phoneNumber: resJSON.companyInfo.phoneNumber,
-                email: resJSON.companyInfo.email,
-            })
-            setLoading(false);
-        }
+        setLoading(true);
+        const req = await API("GET", "administration", "registeratss/" + q);
+        const resJSON = await req.data
+        setFieldsValue({
+            companyName: resJSON.companyName,
+            applicationName: resJSON.applicationName,
+            address: resJSON.companyInfo.address,
+            picName: resJSON.companyInfo.picName,
+            phoneNumber: resJSON.companyInfo.phoneNumber,
+            email: resJSON.companyInfo.email,
+        })
+        setLoading(false);
 
     };
 
@@ -90,36 +77,22 @@ const ViewDeleteRegAts = (props) => {
             })
     };
     useEffect(() => {
-        setRegAts(props.location.state.id);
-    }, []);
+
+        if (idx > 0) {
+            setRegAts(idx);
+        }
+    }, [idx]);
     return (
         <div>
             <div className="head-content viewDelete">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/registerats">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack} />
                     </span>
                     {action} ATS</Title>
             </div>
-
-            <Row justify="end">
-                <Col span={4}>
-                    {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                    {exportButtton}
-                    {/* </Link> */}
-                </Col>
-            </Row>
             <Descriptions column={1} bordered
-                extra={<Button type="primary"><DownloadOutlined /> Edit</Button>}>
+                extra={<Button type="primary"><DownloadOutlined /> Export File</Button>}>
                 <Descriptions.Item label="Company Name">{fieldsValue.companyName}</Descriptions.Item>
                 <Descriptions.Item label="Application Name">{fieldsValue.applicationName}</Descriptions.Item>
                 <Descriptions.Item label="Address">{fieldsValue.address}</Descriptions.Item>
@@ -136,7 +109,7 @@ const ViewDeleteRegAts = (props) => {
                 labelAlign="left"
                 style={{ marginBottom: '80px' }}
             >
-                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px'}}>
+                {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px' }}>
                     <Radio.Group onChange={radioOnChange} value={sixEyes}>
                         <Radio value={1}>Maker</Radio>
                         <Radio value={2}>Direct Checker</Radio>
@@ -145,8 +118,8 @@ const ViewDeleteRegAts = (props) => {
                 </Form.Item>
                 ) : null}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}
-                            style={{ marginLeft: '20px' }}>
-                    {!disable ? (<Link to="/registerats">
+                    style={{ marginLeft: '20px' }}>
+                    {!disable ? (
                         <Popconfirm placement="leftTop"
                             title={text}
                             okText="Yes"
@@ -155,15 +128,12 @@ const ViewDeleteRegAts = (props) => {
                                 onClick={submitDelete}
                                 style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
-                    </Link>
                     ) : (
-                            <div></div>
+                            null
                         )}
-                    <Link to="/registerats">
-                        <Button style={{ marginTop: '15px' }}>
-                            <div>Back</div>
-                        </Button>
-                    </Link>
+                    <Button onClick={goBack} style={{ marginTop: '15px' }}>
+                        <div>Back</div>
+                    </Button>
                 </Form.Item>
             </Form>
 

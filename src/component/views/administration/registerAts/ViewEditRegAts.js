@@ -44,7 +44,7 @@ const ViewEditRegAts = (props) => {
         history.goBack()
     }
     const [form] = Form.useForm();
-    const onFinish = async values => {
+    const onFinish = async () => {
         const bodyPost = ({
             companyName: form.getFieldValue("companyName"),
             applicationName: form.getFieldValue("applicationName"),
@@ -59,20 +59,66 @@ const ViewEditRegAts = (props) => {
         });
         if (idx > 0) {
             await API("PUT", "administration", "registeratss/" + idx, null, bodyPost)
-                .then(res => {
-                    form.resetFields();
-                    console.log(res.data.content);
-                })
-
+                .then(
+                    res => {
+                        form.resetFields();
+                        console.log(res.data.content);
+                    }
+                ).catch(
+                    error => {
+                        // Error
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            // console.log(error.response.data);
+                            // console.log(error.response.status);
+                            // console.log(error.response.headers);
+                            console.log(error.response);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the 
+                            // browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    }
+                )
 
         } else {
             await API("POST", "administration", "registeratss", null, bodyPost)
-                .then(res => {
-                    form.resetFields();
-                    console.log(res.data.content);
-                })
+                .then(
+                    res => {
+                        form.resetFields();
+                        console.log(res.data.content);
+                    }
+                ).catch(
+                    error => {
+                        // Error
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            // console.log(error.response.data);
+                            // console.log(error.response.status);
+                            // console.log(error.response.headers);
+                            console.log(error.response);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the 
+                            // browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    }
+                )
         }
-        history.goBack();
 
     };
     const [action] = useState(props.location.state.action);
@@ -82,6 +128,11 @@ const ViewEditRegAts = (props) => {
     const onReset = () => {
         form.resetFields();
     };
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
+
     const setRegAts = useCallback(async (idEdit) => {
         try {
             const req = await API("GET", "administration", "registeratss/" + idEdit);
@@ -101,6 +152,7 @@ const ViewEditRegAts = (props) => {
         }
 
     }, [form]);
+
     useEffect(() => {
         let ignore = false;
         if (idx > 0) {
@@ -114,10 +166,6 @@ const ViewEditRegAts = (props) => {
         }
         return (() => { ignore = true; });
     }, [idx, setRegAts]);
-    const [sixEyes, setSixEyes] = useState(1);
-    const radioOnChange = e => {
-        setSixEyes(e.target.value);
-    };
     return (
         <div>
             <div className="head-content viewEdit">
