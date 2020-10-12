@@ -117,9 +117,7 @@ const ViewDeleteSysParam = (props) => {
                                     <Radio value={3}>Direct Approver</Radio>
                                 </Radio.Group>
                             </Form.Item>
-                            ) : (
-                                    <div></div>
-                                )}
+                            ) : null}
 
                             <Form.Item wrapperCol={{ span: 12, offset: 6 }}
                                 style={{ marginLeft: '20px' }}>
@@ -136,8 +134,7 @@ const ViewDeleteSysParam = (props) => {
                                         null
                                     )}
                                 <Button onClick={goBack} style={{ marginTop: '15px' }}>
-
-                                    <div>Back</div>
+                                    Back
                                 </Button>
                             </Form.Item>
                         </Form>

@@ -103,14 +103,6 @@ const formItemLayout = {
     },
 };
 
-const getRandomuserParams = params => {
-    return {
-        results: params.pagination.pageSize,
-        page: params.pagination.current,
-        ...params,
-    };
-};
-
 const exportButtton = <Button
     type="primary"
     style={{
