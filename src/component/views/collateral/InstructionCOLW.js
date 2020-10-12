@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Form,
     Input,
@@ -13,7 +13,7 @@ import {
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import OtherLink from '../../config/OtherLink';
-import axios from 'axios';
+import API from "../../config/Api";
 
 const { Title } = Typography;
 const ListLink = OtherLink.filter((otherMenu) => {
@@ -66,7 +66,7 @@ const columns = [
                                     linkBack: "/collateralManagement/instructionColw",
                                 }
                             }} style={{ marginRight: '20px' }}>View
-                </Link>
+                            </Link>
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
@@ -80,7 +80,7 @@ const columns = [
                                     linkBack: "/collateralManagement/instructionColw",
                                 }
                             }} style={{ marginRight: '20px' }}>Cancel
-                </Link>
+                            </Link>
                         </Menu.Item>
                     </Menu>
                 }
@@ -92,15 +92,7 @@ const columns = [
     },
 ];
 
-const getRandomuserParams = params => {
-    return {
-        results: params.pagination.pageSize,
-        page: params.pagination.current,
-        ...params,
-    };
-};
-
-const componentSize = () => 'middle';
+const componentSize = 'middle';
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -138,10 +130,10 @@ class InstructionCOLW extends React.Component {
             pageSize: 5,
         },
         search: {
-            param: null,
-            value: null,
-            valueType: null,
-            note: null,
+            participantCode: null,
+            sourceAccount: null,
+            destinationAccount: null,
+            instrumentCode: null,
         },
         loading: true,
         cobadata: "test",
@@ -150,16 +142,6 @@ class InstructionCOLW extends React.Component {
     componentDidMount() {
         const { pagination } = this.state;
         this.fetch({ pagination });
-        /*  axios.get(`http://localhost:8080/sysparams`)
-             .then(res => {
-                 const data = res.data;
-                 this.setState({
-                     loading: false,
-                     data,
- 
-                 });
-                 console.log(data)
-             }) */
     }
     handleTableChange = (pagination, filters, sorter, extra) => {
         console.log('paramasdasds', pagination, filters, sorter, extra);
@@ -168,22 +150,18 @@ class InstructionCOLW extends React.Component {
         });
     };
 
-    fetch = (params = {}) => {
-        const paramSearch = new URLSearchParams([['param', 'ical']]);
-        /*  {
-            param: this.formRef.current.getFieldValue("keyword"),
-            value: this.formRef.current.getFieldValue("keyword"),
-            valueType: this.formRef.current.getFieldValue("keyword"),
-            note: this.formRef.current.getFieldValue("keyword")
-        }; */
-        this.setState({ loading: true });
-        axios.get(`http://localhost:8080/collateraltransactions`, {
-            params: {
-                transactionType:'COLW'
-                //code: this.formRef.current.getFieldValue("keyword"),
-                //name: this.formRef.current.getFieldValue("keyword"),
-            }
+    fetch = async (params = {}) => {
+        const paramsSearch = ({
+            participantCode: this.formRef.current.getFieldValue("keyword"),
+            sourceAccount: this.formRef.current.getFieldValue("keyword"),
+            destinationAccount: this.formRef.current.getFieldValue("keyword"),
+            instrumentCode: this.formRef.current.getFieldValue("keyword"),
+            settlementPeriod: this.formRef.current.getFieldValue("keyword"),
+            transactionType:'COLW'
         })
+
+        this.setState({ loading: true });
+        await API("GET", "administration", "collateraltransactions", paramsSearch)
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -202,8 +180,11 @@ class InstructionCOLW extends React.Component {
         e.preventDefault();
         this.setState({
             search: {
-                //code: this.formRef.current.getFieldValue("keyword"),
-                //name: this.formRef.current.getFieldValue("keyword"),
+                participantCode: this.formRef.current.getFieldValue("keyword"),
+                sourceAccount: this.formRef.current.getFieldValue("keyword"),
+                destinationAccount: this.formRef.current.getFieldValue("keyword"),
+                instrumentCode: this.formRef.current.getFieldValue("keyword"),
+                settlementPeriod: this.formRef.current.getFieldValue("keyword"),
             }
         });
         const { pagination } = this.state;
@@ -240,7 +221,7 @@ class InstructionCOLW extends React.Component {
                                 <Form.Item label="Source Account" >
                                     <Input />
                                 </Form.Item>
-                                <Form.Item label="Dest Account" >
+                                <Form.Item label="Destination Account" >
                                     <Input />
                                 </Form.Item>
                                 <Form.Item label="Instrument Code" >

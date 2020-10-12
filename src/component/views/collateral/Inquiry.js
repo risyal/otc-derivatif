@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Form,
     Input,
@@ -9,9 +9,8 @@ import {
     Col,
     Typography
 } from 'antd';
-import moment from 'moment';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import API from "../../config/Api";
 
 const { RangePicker } = DatePicker;
 const { Title } = Typography;
@@ -30,7 +29,7 @@ const columns = [
         dataIndex: 'sourceAccount',
         width: 100,
     }, {
-        title: 'Dest Account',
+        title: 'Destination Account',
         dataIndex: 'sourceTarget',
         width: 100,
     }, {
@@ -56,14 +55,6 @@ const columns = [
     },
 ];
 
-const getRandomuserParams = params => {
-    return {
-        results: params.pagination.pageSize,
-        page: params.pagination.current,
-        ...params,
-    };
-};
-
 const componentSize = 'middle';
 const formItemLayout = {
 	labelCol: {
@@ -86,13 +77,6 @@ const exportButtton = <Button
 	}}
 	icon={<DownloadOutlined />}>Export File</Button>;
 
-const tailLayout = {
-	wrapperCol: {
-		offset: 6,
-		span: 12,
-	},
-};
-
 class Inquiry extends React.Component {
     formRef = React.createRef();
 	state = {
@@ -102,8 +86,11 @@ class Inquiry extends React.Component {
 			pageSize: 5,
 		},
 		search: {
-			code: null,
-			name: null,
+			participantCode: null,
+            sourceAccount: null,
+            destinationAccount: null,
+            instrumentCode: null,
+            settlementPeriod: null,
 		},
 		loading: true,
 		cobadata: "test",
@@ -113,16 +100,6 @@ class Inquiry extends React.Component {
     componentDidMount() {
         const { pagination } = this.state;
         this.fetch({ pagination });
-        /*  axios.get(`http://localhost:8080/`)
-            .then(res => {
-                const data = res.data;
-                this.setState({
-                    loading: false,
-                    data,
-
-                });
-                console.log(data)
-            }) */
     }
     handleTableChange = (pagination, filters, sorter, extra) => {
         this.fetch({
@@ -130,21 +107,17 @@ class Inquiry extends React.Component {
         });
     }; 
     
-    fetch = (params = {}) => {
-        const paramSearch = new URLSearchParams([['param', 'ical']]);
-        /*  {
-            param: this.formRef.current.getFieldValue("keyword"),
-            value: this.formRef.current.getFieldValue("keyword"),
-            valueType: this.formRef.current.getFieldValue("keyword"),
-            note: this.formRef.current.getFieldValue("keyword")
-        }; */
-        this.setState({ loading: true });
-        axios.get(`http://localhost:8080/collateraltransactions`, {
-            params: {
-                //code: this.formRef.current.getFieldValue("keyword"),
-                //name: this.formRef.current.getFieldValue("keyword"),
-            }
+    fetch = async (params = {}) => {
+        const paramsSearch = ({
+            participantCode: this.formRef.current.getFieldValue("keyword"),
+            sourceAccount: this.formRef.current.getFieldValue("keyword"),
+            destinationAccount: this.formRef.current.getFieldValue("keyword"),
+            instrumentCode: this.formRef.current.getFieldValue("keyword"),
+            settlementPeriod: this.formRef.current.getFieldValue("keyword"),
         })
+
+        this.setState({ loading: true });
+        await API("GET", "administration", "collateraltransactions", paramsSearch)
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -163,8 +136,11 @@ class Inquiry extends React.Component {
         e.preventDefault();
         this.setState({
             search: {
-                //code: this.formRef.current.getFieldValue("keyword"),
-                //name: this.formRef.current.getFieldValue("keyword"),
+                participantCode: this.formRef.current.getFieldValue("keyword"),
+                sourceAccount: this.formRef.current.getFieldValue("keyword"),
+                destinationAccount: this.formRef.current.getFieldValue("keyword"),
+                instrumentCode: this.formRef.current.getFieldValue("keyword"),
+                settlementPeriod: this.formRef.current.getFieldValue("keyword"),
             }
         });
         const { pagination } = this.state;
@@ -177,7 +153,7 @@ class Inquiry extends React.Component {
         return (
             <div style={{ margin: '15px 20px' }}>
                 <div className="head-content">
-                <Title level={4}>Inquiry</Title>
+                    <Title level={4}>Inquiry</Title>
                 </div>
                 <Form
                     {...formItemLayout}
@@ -196,10 +172,10 @@ class Inquiry extends React.Component {
                             <Form.Item label="Participant Code" >
                                 <Input />
                             </Form.Item>
-                            <Form.Item label="Source Acc" >
+                            <Form.Item label="Source Account" >
                                 <Input />
                             </Form.Item>
-                            <Form.Item label="Dest Account" >
+                            <Form.Item label="Destination Account" >
                                 <Input />
                             </Form.Item>
                             <Form.Item label="Instrument Code" >
@@ -233,7 +209,7 @@ class Inquiry extends React.Component {
                             {this.state.expand ? (<div><DownOutlined /> Advance Search</div>) :
                                 (<div><UpOutlined /> Simple Search</div>)}
                         </Button>
-                        </Form.Item>
+                    </Form.Item>
                 </Form>
                             
                 <Row justify="end">

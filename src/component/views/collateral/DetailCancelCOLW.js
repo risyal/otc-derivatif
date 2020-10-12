@@ -5,19 +5,30 @@ import {
     Button,
     Radio,
     Typography,
-    Table,
-    Input,
     Row,
     Col,
-    Descriptions
+    Descriptions,
+    Spin,
+    Space,
 } from 'antd';
 import {
     ArrowLeftOutlined, DownloadOutlined
 } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
+import API from "../../config/Api";
 
 const { Title } = Typography;
+const componentSize = 'middle';
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+    },
+};
 
 const DetailCancelCOLW = (props) => {
     let history = useHistory()
@@ -26,43 +37,7 @@ const DetailCancelCOLW = (props) => {
         history.goBack()
     }
     const [text] = useState('Are you sure to Cancel this ?');
-    const componentSize = 'middle';
-    const formItemLayout = {
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 6 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        },
-    };
-    const [columns] = useState([
-        {
-            title: '',
-            dataIndex: 'title',
-            key: 'title',
-            width: 280,
-        },
-        {
-            title: '',
-            dataIndex: 'paramData',
-            key: 'paramData',
-        },
-    ]);
-    const [data] = useState([
-        {
-            title: "Telephone Number :",
-            paramData: "asd"
-        },
-        {
-            title: "Email :",
-            paramData: "asdas"
-        },
-    ]);
-
     const [loading, setLoading] = useState(false);
-
     const [idx] = useState(props.location.state.id);
     const action = props.location.state.action
     const disable = props.location.state.disable
@@ -71,16 +46,16 @@ const DetailCancelCOLW = (props) => {
         setSixEyes(e.target.value);
     };
 
-    const [exportButtton] = useState(<Button
-        type="primary"
-        style={{
-            marginBottom: '15px',
-            paddingBottom: '15px',
-            float: 'right',
-            height: '35px'
-        }}
-        icon={<DownloadOutlined />}>Export File</Button>);
-    const [colw, setColw] = useState({
+    // const [exportButtton] = useState(<Button
+    //     type="primary"
+    //     style={{
+    //         marginBottom: '15px',
+    //         paddingBottom: '15px',
+    //         float: 'right',
+    //         height: '35px'
+    //     }}
+    //     icon={<DownloadOutlined />}>Export File</Button>);
+    const [fieldsValue, setFieldsValue] = useState({
         memberId: null,
         sourceAccount: null,
         sourceTarget: null,
@@ -89,55 +64,73 @@ const DetailCancelCOLW = (props) => {
         settlementDate: null,
         remark: null,
     });
-    const dataForView = [];
+    // const dataForView = [];
 
-    const setParams = async (q) => {
-        if (q > 0) {
-            console.log("edit" + q)
-            setLoading(true);
-            const apiRes = await fetch(
-                `http://localhost:8080/collateraltransactions/${q}`
-            );
-            const resJSON = await apiRes.json();
-            console.log(resJSON);
-            /* form.setFieldsValue({
-                param: resJSON.param,
-                value: resJSON.value,
-                valueType: resJSON.valueType,
-                note: resJSON.note,
-            }); */
-            setColw({
-                memberId: resJSON.memberId,
-                sourceAccount: resJSON.sourceAccount,
-                sourceTarget: resJSON.sourceTarget,
-                instrumentCode: resJSON.instrumentCode,
-                value: resJSON.value,
-                settlementDate: resJSON.settlementDate,
-                remark: resJSON.remark,
-            })
-            dataForView.push({
+    // const setParams = async (q) => {
+    //     if (q > 0) {
+    //         console.log("edit" + q)
+    //         setLoading(true);
+    //         const apiRes = await fetch(
+    //             `http://localhost:8080/collateraltransactions/${q}`
+    //         );
+    //         const resJSON = await apiRes.json();
+    //         console.log(resJSON);
+    //         /* form.setFieldsValue({
+    //             param: resJSON.param,
+    //             value: resJSON.value,
+    //             valueType: resJSON.valueType,
+    //             note: resJSON.note,
+    //         }); */
+    //         setColw({
+    //             memberId: resJSON.memberId,
+    //             sourceAccount: resJSON.sourceAccount,
+    //             sourceTarget: resJSON.sourceTarget,
+    //             instrumentCode: resJSON.instrumentCode,
+    //             value: resJSON.value,
+    //             settlementDate: resJSON.settlementDate,
+    //             remark: resJSON.remark,
+    //         })
+    //         dataForView.push({
 
-                title: "Email :",
-                paramData: "asdas"
-            })
-            console.log(data);
-            console.log(dataForView);
-            setLoading(false);
-        }
+    //             title: "Email :",
+    //             paramData: "asdas"
+    //         })
+    //         console.log(data);
+    //         console.log(dataForView);
+    //         setLoading(false);
+    //     }
+
+    // };
+    const setColw = async (q) => {
+        setLoading(true);
+        const req = await API("GET", "administration", "collateraltransactions/" + q);
+        const resJSON = await req.data
+        setFieldsValue({
+            memberId: resJSON.memberId,
+            sourceAccount: resJSON.sourceAccount,
+            sourceTarget: resJSON.sourceTarget,
+            instrumentCode: resJSON.instrumentCode,
+            value: resJSON.value,
+            settlementDate: resJSON.settlementDate,
+            remark: resJSON.remark,
+        })
+        setLoading(false);
 
     };
 
     const submitDelete = () => {
-        axios.delete(`http://localhost:8080/collateraltransactions/${idx}`, {
+        API("DELETE", "administration", "collateraltransactions/" + idx)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            history.goBack()
         })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
     };
     useEffect(() => {
-        setParams(props.location.state.id);
-    }, []);
+        if (idx > 0) {
+            setColw(idx);
+        }
+    }, [idx]);
     
     return (
         <div>
@@ -149,73 +142,60 @@ const DetailCancelCOLW = (props) => {
                     {action} Instruction COLW</Title>
             </div>
 
-            <Row justify="end">
-                <Col span={4}>
-                    {/* <Link to={{
-                            pathname: `#`,
-                            state: {
-                                id: '1',
-                                action: "Edit",
-                                disable: false,
-                            }
-                        }} > */}
-                    {exportButtton}
-                    {/* </Link> */}
-                </Col>
-            </Row>
+            {loading ? (
+                <div style={{ textAlign: "center" }}> <Space size="large" >
+                    <Spin size="large" tip="Loading..." />
+                </Space>
+                </div>
+            ) : (
+                <div>
+                    <Descriptions column={1} bordered
+                        extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
+                        <Descriptions.Item label="Participant Code">{fieldsValue.memberId}</Descriptions.Item>
+                        <Descriptions.Item label="Source Account">{fieldsValue.sourceAccount}</Descriptions.Item>
+                        <Descriptions.Item label="Dest Account">{fieldsValue.sourceTarget}</Descriptions.Item>
+                        <Descriptions.Item label="Instrument Code">{fieldsValue.instrumentCode}</Descriptions.Item>
+                        <Descriptions.Item label="Value">{fieldsValue.value}</Descriptions.Item>
+                        <Descriptions.Item label="Settlement Date">{fieldsValue.settlementDate}</Descriptions.Item>
+                        <Descriptions.Item label="Remark">{fieldsValue.remark}</Descriptions.Item>
+                    </Descriptions>
 
-            <Descriptions column={1} bordered
-                extra={<Button type="primary"> <DownloadOutlined /> Edit</Button>}>
-                <Descriptions.Item label="Participant Code">{colw.memberId}</Descriptions.Item>
-                <Descriptions.Item label="Source Account">{colw.sourceAccount}</Descriptions.Item>
-                <Descriptions.Item label="Dest Account">{colw.sourceTarget}</Descriptions.Item>
-                <Descriptions.Item label="Instrument Code">{colw.instrumentCode}</Descriptions.Item>
-                <Descriptions.Item label="Value">{colw.value}</Descriptions.Item>
-                <Descriptions.Item label="Settlement Date">{colw.settlementDate}</Descriptions.Item>
-                <Descriptions.Item label="Remark">{colw.remark}</Descriptions.Item>
-            </Descriptions>
-
-            <Form
-                {...formItemLayout}
-                size={componentSize}
-                layout="horizontal"
-                initialValues={{ size: componentSize }}
-                labelAlign="left"
-                style={{ marginBottom: '80px' }}
-            >
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                    <Form
+                        {...formItemLayout}
+                        size={componentSize}
+                        layout="horizontal"
+                        initialValues={{ size: componentSize }}
+                        labelAlign="left"
+                        style={{ marginBottom: '80px' }}
+                    >
+                        {!disable ? (<Form.Item label="Role" className="roleViewDel" style={{ paddingLeft: '25px' }}>
+                            <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                <Radio value={1}>Maker</Radio>
+                                <Radio value={2}>Direct Checker</Radio>
+                                <Radio value={3}>Direct Approver</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        ) : null}
 
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}
                         style={{ marginLeft: '20px' }}>    
                 {!disable ? (
                         <Popconfirm placement="leftTop" 
-                                    title={action === "Cancel" ? text : null} 
+                                    title={text}
                                     okText="Yes" 
-                                    cancelText="No">
-                            <Button onClick={submitDelete} 
-                                    type="primary" 
-                                    style={{ marginRight: '15px' }}>{action === "Cancel" ? action + " Instruction" :
-                                (action === "Confirmation" ? "Confirm" : action === "Approval" ? "Approve" : "Delete")}</Button>
+                                    cancelText="No"
+                                    onConfirm={submitDelete}>
+                            <Button type="primary" 
+                                    style={{ marginRight: '15px' }}>Delete</Button>
                         </Popconfirm>
-                    ) : null}
+                    ) : (null)}
                     <Button onClick={goBack} style={{ marginTop: '15px' }}>
-                        {!disable ? action === "Approval" ? "Reject" : (
-                            <div>Back</div>
-                        ) : (
-                                <div>Back</div>
-                            )}
+                        <div>Back</div> 
                     </Button>
                 </Form.Item>
             </Form>
+            </div>
+            )}
         </div>
     )
 }
