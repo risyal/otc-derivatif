@@ -212,7 +212,7 @@ const ViewEditSysParam = (props) => {
                                 Reset
                         </Button>
                             <Button onClick={goBack}>
-                                <div>Back</div>
+                                back
                             </Button>
                         </Form.Item>
                     </Form>)
