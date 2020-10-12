@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Button,
     Table,
@@ -11,10 +11,14 @@ import {
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownloadOutlined } from '@ant-design/icons';
+import API from "../../../config/Api";
+import OtherLink from "../../../config/OtherLink";
 
-import axios from 'axios';
 const { Title } = Typography;
 
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "calendar"
+});
 const { Option } = Select;
 const columns = [
     {
@@ -34,18 +38,22 @@ const columns = [
                     <Menu>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewEditCalendar`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editcalendar'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Edit",
-                                    disable: false,
+                                    disable: true,
                                 }
                             }} style={{ marginRight: '20px' }}>Edit
                             </Link>
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewDeleteCalendar`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deletecalendar'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Delete",
@@ -68,26 +76,6 @@ const columns = [
     },
 ];
 
-const getRandomuserParams = params => {
-    return {
-        results: params.pagination.pageSize,
-        page: params.pagination.current,
-        ...params,
-    };
-};
-
-const componentSize = () => 'middle';
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-    },
-};
-
 const exportButtton = <Button
     type="primary"
     style={{
@@ -98,13 +86,6 @@ const exportButtton = <Button
     }}
     icon={<DownloadOutlined />}>Export File</Button>;
 
-const tailLayout = {
-    wrapperCol: {
-        offset: 8,
-        span: 16,
-    },
-};
-
 class Calendar extends React.Component {
     formRef = React.createRef();
     state = {
@@ -114,10 +95,7 @@ class Calendar extends React.Component {
             pageSize: 5,
         },
         search: {
-            date: null,
-            information: null,
-            lastUpdate: null,
-            note: null,
+    
         },
         loading: true,
         cobadata: "test",
@@ -125,35 +103,15 @@ class Calendar extends React.Component {
     componentDidMount() {
         const { pagination } = this.state;
         this.fetch({ pagination });
-        /*  axios.get(`http://localhost:8080/`)
-             .then(res => {
-                 const data = res.data;
-                 this.setState({
-                     loading: false,
-                     data,
- 
-                 });
-                 console.log(data)
-             }) */
     }
     handleTableChange = (pagination, filters, sorter, extra) => {
-        console.log('paramasdasds', pagination, filters, sorter, extra);
         this.fetch({
             pagination,
         });
     };
-
-    fetch = (params = {}) => {
-        const paramSearch = new URLSearchParams([['param', 'ical']]);
-        /*  {
-             param: this.formRef.current.getFieldValue("keyword"),
-             value: this.formRef.current.getFieldValue("keyword"),
-             valueType: this.formRef.current.getFieldValue("keyword"),
-             note: this.formRef.current.getFieldValue("keyword")
-         }; */
-        console.log("params " + paramSearch.get);
+    fetch = async (params = {}) => {
         this.setState({ loading: true });
-        axios.get(`http://localhost:8080/calendarmarketholidays`)
+        await API("GET", "administration", "calendarmarketholidays")
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -163,7 +121,6 @@ class Calendar extends React.Component {
                         ...params.pagination,
                     },
                 })
-                console.log(data)
             })
     };
     onReset = () => {
@@ -176,18 +133,19 @@ class Calendar extends React.Component {
         });
         const { pagination } = this.state;
         this.setState({ cobadata: "asdasdas test" });
-        console.log("valuecoba " + this.state.cobadata);
         this.fetch({ pagination });
     };
     render() {
         const { data, pagination, loading } = this.state;
         return (
-            <div>
+            <div style={{ margin: '15px 20px' }}>
                 <div className="head-content">
                     <Title level={4}>Calendar</Title>
                 </div>
                 <Link to={{
-                    pathname: `/administration/ViewEditCalendar`,
+                    pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'addcalendar'
+                                }).linkTo,
                     state: {
                         id: '0',
                         action: "Add New",

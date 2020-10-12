@@ -406,6 +406,30 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/systemparameter/delete-system-parameter',
         component: ViewDeleteSysParam,
     },
+    {
+        useFor: 'calendar',
+        name: 'Add Calendar',
+        key: 'addCalendar',
+        useIn: 'addcalendar',
+        linkTo: rootWithNavLink + '/calendar/add-calendar',
+        component: ViewEditCalendar,
+    },
+    {
+        useFor: 'calendar',
+        name: 'Edit Calendar',
+        key: 'editCalendar',
+        useIn: 'editcalendar',
+        linkTo: rootWithNavLink + '/calendar/edit-calendar',
+        component: ViewEditCalendar,
+    },
+    {
+        useFor: 'calendar',
+        name: 'Delete Calendar',
+        key: 'deleteCalendar',
+        useIn: 'deletecalendar',
+        linkTo: rootWithNavLink + '/calendar/delete-calendar',
+        component: ViewDeleteCalendar,
+    },
     //end
     {
         name: 'ViewEditMember',
@@ -517,18 +541,6 @@ const OtherLink = [
         key: 'AddUser',
         linkTo: '/AddUser',
         component: AddUser,
-    },
-    {
-        name: 'ViewEditCalendar',
-        key: 'ViewEditCalendar',
-        linkTo: '/ViewEditCalendar',
-        component: ViewEditCalendar,
-    },
-    {
-        name: 'ViewDeleteCalendar',
-        key: 'ViewDeleteCalendar',
-        linkTo: '/ViewDeleteCalendar',
-        component: ViewDeleteCalendar,
     },
     {
         name: 'ViewEditRegAts',
