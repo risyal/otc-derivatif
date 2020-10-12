@@ -62,6 +62,10 @@ const DetailCancelCOLDP = (props) => {
         },
     ]);
 
+    // const dataParamById = data.find((param) => {
+    //     return param.key === props.location.state.id
+    // })
+
     const [loading, setLoading] = useState(false);
 
     const [idx] = useState(props.location.state.id);
@@ -138,7 +142,8 @@ const DetailCancelCOLDP = (props) => {
     };
     useEffect(() => {
         setParams(props.location.state.id);
-    }, []);
+        console.log("asd");
+    });
     
     return (
         <div>

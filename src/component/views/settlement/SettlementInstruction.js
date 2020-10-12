@@ -51,6 +51,10 @@ function SettlementInstruction() {
                 }
             ]
         }, {
+            title: 'Participant Code',
+            dataIndex: 'participantCode',
+            width: 100,
+        },{
             title: 'Instruction Type',
             dataIndex: 'instructionType',
             key: 'instructionType',
