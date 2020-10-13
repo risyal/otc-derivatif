@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Form,
     Input,
@@ -12,9 +12,14 @@ import {
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import API from "../../../config/Api";
+import OtherLink from "../../../config/OtherLink";
 
-import axios from 'axios';
 const { Title } = Typography;
+
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "cashcollmgt"
+});
 
 const columns = [
     {
@@ -42,7 +47,9 @@ const columns = [
                     <Menu>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewDeleteCCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'viewcashscollmgt'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "View",
@@ -53,7 +60,9 @@ const columns = [
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewEditCCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editcashscollmgt'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Edit",
@@ -64,7 +73,9 @@ const columns = [
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewDeleteCCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deletecashscollmgt'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Delete",
@@ -83,15 +94,7 @@ const columns = [
     },
 ];
 
-const getRandomuserParams = params => {
-    return {
-        results: params.pagination.pageSize,
-        page: params.pagination.current,
-        ...params,
-    };
-};
-
-const componentSize = () => 'middle';
+const componentSize = 'middle';
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -136,19 +139,10 @@ class CashCollMgt extends React.Component {
         cobadata: "test",
         expand: true,
     }
+
     componentDidMount() {
         const { pagination } = this.state;
         this.fetch({ pagination });
-        /*  axios.get(`http://localhost:8080/`)
-             .then(res => {
-                 const data = res.data;
-                 this.setState({
-                     loading: false,
-                     data,
- 
-                 });
-                 console.log(data)
-             }) */
     }
     handleTableChange = (pagination, filters, sorter, extra) => {
         console.log('paramasdasds', pagination, filters, sorter, extra);
@@ -157,22 +151,14 @@ class CashCollMgt extends React.Component {
         });
     };
 
-    fetch = (params = {}) => {
-        const paramSearch = new URLSearchParams([['param', 'ical']]);
-        /*  {
-             param: this.formRef.current.getFieldValue("keyword"),
-             value: this.formRef.current.getFieldValue("keyword"),
-             valueType: this.formRef.current.getFieldValue("keyword"),
-             note: this.formRef.current.getFieldValue("keyword")
-         }; */
-        console.log("params " + paramSearch.get);
-        this.setState({ loading: true });
-        axios.get(`http://localhost:8080/cashcollateralmanagements`, {
-            params: {
-                code: this.formRef.current.getFieldValue("keyword"),
-                name: this.formRef.current.getFieldValue("keyword"),
-            }
+    fetch = async (params = {}) => {
+        const paramsSearch = ({
+            code: this.formRef.current.getFieldValue("keyword"),
+            name: this.formRef.current.getFieldValue("keyword"),
         })
+
+        this.setState({ loading: true });
+        await API("GET", "administration", "cashcollateralmanagements", paramsSearch)
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -182,7 +168,6 @@ class CashCollMgt extends React.Component {
                         ...params.pagination,
                     },
                 })
-                console.log(data)
             })
     };
     onReset = () => {
@@ -263,7 +248,10 @@ class CashCollMgt extends React.Component {
                     <Row justify="end">
                         <Col span={8}>
                             <Link to={{
-                                pathname: `/administration/ViewEditCCMgt`,
+                                // pathname: `/administration/ViewEditCCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'addcashscollmgt'
+                                }).linkTo,
                                 state: {
                                     id: '0',
                                     action: "Add New",
@@ -289,6 +277,7 @@ class CashCollMgt extends React.Component {
                             {/* </Link> */}
                         </Col>
                     </Row>
+
                     <Table
                         columns={columns}
                         dataSource={data}

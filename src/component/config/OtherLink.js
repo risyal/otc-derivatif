@@ -462,6 +462,38 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/securitiescollmgt/delete-securities-coll-mgt',
         component: ViewDeleteSCMgt,
     },
+    {
+        useFor: 'cashcollmgt',
+        name: 'Add Cash Collateral Management',
+        key: 'addCashCollMgt',
+        useIn: 'addcashscollmgt',
+        linkTo: rootWithNavLink + '/cashcollmgt/add-cash-coll-mgt',
+        component: ViewEditCCMgt,
+    },
+    {
+        useFor: 'cashcollmgt',
+        name: 'Edit Cash Collateral Management',
+        key: 'editCashCollMgt',
+        useIn: 'editcashscollmgt',
+        linkTo: rootWithNavLink + '/cashcollmgt/edit-cash-coll-mgt',
+        component: ViewEditCCMgt,
+    },
+    {
+        useFor: 'cashcollmgt',
+        name: 'View Cash Collateral Management',
+        key: 'viewCashCollMgt',
+        useIn: 'viewcashscollmgt',
+        linkTo: rootWithNavLink + '/cashcollmgt/view-cash-coll-mgt',
+        component: ViewDeleteCCMgt,
+    },
+    {
+        useFor: 'cashcollmgt',
+        name: 'Delete Cash Collateral Management',
+        key: 'deleteCashCollMgt',
+        useIn: 'deletecashscollmgt',
+        linkTo: rootWithNavLink + '/cashcollmgt/delete-cash-coll-mgt',
+        component: ViewDeleteCCMgt,
+    },
     //end
     {
         name: 'ViewEditMember',
@@ -507,18 +539,6 @@ const OtherLink = [
         key: 'ViewEditAccount',
         linkTo: '/ViewEditAccount',
         component: ViewEditAccount,
-    },
-    {
-        name: 'ViewEditCCMgt',
-        key: 'ViewEditCCMgt',
-        linkTo: '/ViewEditCCMgt',
-        component: ViewEditCCMgt,
-    },
-    {
-        name: 'ViewDeleteCCMgt',
-        key: 'ViewDeleteCCMgt',
-        linkTo: '/ViewDeleteCCMgt',
-        component: ViewDeleteCCMgt,
     },
     {
         name: 'ViewDeleteJibor',
