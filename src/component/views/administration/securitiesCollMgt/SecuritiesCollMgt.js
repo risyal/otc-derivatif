@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
     Form,
     Input,
@@ -12,10 +12,14 @@ import {
 } from 'antd';
 import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
+import API from "../../../config/Api";
+import OtherLink from "../../../config/OtherLink";
 
-import axios from 'axios';
 const { Title } = Typography;
 
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "securitiescollmgt"
+});
 const columns = [
     {
         title: 'Instrument Code',
@@ -50,7 +54,9 @@ const columns = [
                     <Menu>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewDeleteSCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'viewsecuritiescollmgt'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "View",
@@ -61,7 +67,9 @@ const columns = [
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewEditSCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editsecuritiescollmgt'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Edit",
@@ -72,7 +80,9 @@ const columns = [
                         </Menu.Item>
                         <Menu.Item>
                             <Link to={{
-                                pathname: `/administration/ViewDeleteSCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deletesecuritiescollmgt'
+                                }).linkTo,
                                 state: {
                                     id: record.id,
                                     action: "Delete",
@@ -91,15 +101,7 @@ const columns = [
     },
 ];
 
-const getRandomuserParams = params => {
-    return {
-        results: params.pagination.pageSize,
-        page: params.pagination.current,
-        ...params,
-    };
-};
-
-const componentSize = () => 'middle';
+const componentSize = 'middle';
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -138,7 +140,6 @@ class SecuritiesCollMgt extends React.Component {
         },
         search: {
             code: null,
-            name: null,
             type: null,
         },
         loading: true,
@@ -149,16 +150,6 @@ class SecuritiesCollMgt extends React.Component {
     componentDidMount() {
         const { pagination } = this.state;
         this.fetch({ pagination });
-        /*  axios.get(`http://localhost:8080/`)
-             .then(res => {
-                 const data = res.data;
-                 this.setState({
-                     loading: false,
-                     data,
- 
-                 });
-                 console.log(data)
-             }) */
     }
     handleTableChange = (pagination, filters, sorter, extra) => {
         console.log('paramasdasds', pagination, filters, sorter, extra);
@@ -167,23 +158,14 @@ class SecuritiesCollMgt extends React.Component {
         });
     };
 
-    fetch = (params = {}) => {
-        const paramSearch = new URLSearchParams([['param', 'ical']]);
-        /*  {
-             param: this.formRef.current.getFieldValue("keyword"),
-             value: this.formRef.current.getFieldValue("keyword"),
-             valueType: this.formRef.current.getFieldValue("keyword"),
-             note: this.formRef.current.getFieldValue("keyword")
-         }; */
-        console.log("params " + paramSearch.get);
-        this.setState({ loading: true });
-        axios.get(`http://localhost:8080/securitiescollateralmanagements`, {
-            params: {
-                code: this.formRef.current.getFieldValue("keyword"),
-                name: this.formRef.current.getFieldValue("keyword"),
-                type: this.formRef.current.getFieldValue("keyword"),
-            }
+    fetch = async (params = {}) => {
+        const paramsSearch = ({
+            code: this.formRef.current.getFieldValue("keyword"),
+            type: this.formRef.current.getFieldValue("keyword"),
         })
+
+        this.setState({ loading: true });
+        await API("GET", "administration", "securitiescollateralmanagements", paramsSearch)
             .then(res => {
                 const data = res.data.content;
                 this.setState({
@@ -193,7 +175,6 @@ class SecuritiesCollMgt extends React.Component {
                         ...params.pagination,
                     },
                 })
-                console.log(data)
             })
     };
     onReset = () => {
@@ -204,7 +185,6 @@ class SecuritiesCollMgt extends React.Component {
         this.setState({
             search: {
                 code: this.formRef.current.getFieldValue("keyword"),
-                name: this.formRef.current.getFieldValue("keyword"),
                 type: this.formRef.current.getFieldValue("keyword"),
             }
         });
@@ -275,7 +255,10 @@ class SecuritiesCollMgt extends React.Component {
                     <Row justify="end">
                         <Col span={8}>
                             <Link to={{
-                                pathname: `/administration/ViewEditSCMgt`,
+                                // pathname: `/administration/ViewEditSCMgt`,
+                                pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'addsecuritiescollmgt'
+                                }).linkTo,
                                 state: {
                                     id: '0',
                                     action: "Add New",

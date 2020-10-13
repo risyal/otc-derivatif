@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
     Form,
     Input,
@@ -6,64 +6,98 @@ import {
     Radio,
     Typography,
     DatePicker,
+    Spin,
+    Space,
     Select
 } from 'antd';
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import API from "../../../config/Api";
 import moment from 'moment';
-
-import axios from 'axios';
 
 const { Title } = Typography;    
 const { Option } = Select;
+const formLayout = 'horizontal';
+const formItemLayout =
+    formLayout === 'horizontal'
+        ? {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 6 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 16 },
+            },
+        }
+        : null;
+const tailLayout = {
+    wrapperCol: { offset: 6, span: 12 },
+};
+const simulateSlowNetworkRequest = () =>
+    new Promise(resolve => setTimeout(resolve, 1));
 
 const ViewEditSCMgt = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
     const dateFormat = 'YYYY/MM/DD';
     const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
-    const [elig, setElig] = useState('true');
+
     const [todayDate] = useState(moment(new Date(), dateFormat));
     const [fieldDate, setFieldDate] = useState(todayDate);
 
-    const onFormLayoutChange = ({ layout }) => {
-        setFormLayout(layout);
-    };
-
-    const formItemLayout =
-        formLayout === 'horizontal'
-            ? {
-                labelCol: {
-                    xs: { span: 24 },
-                    sm: { span: 6 },
-                },
-                wrapperCol: {
-                    xs: { span: 24 },
-                    sm: { span: 16 },
-                },
-            }
-            : null;
-
-    const onFinish = values => {
+    const onFinish = async () => {
         var eg1 = "true";
         if (idx > 0) {
-            axios.put(`http://localhost:8080/securitiescollateralmanagements/${idx}`, {
+            setFieldDate(moment(form.getFieldValue("date"), dateFormat));
+            const bodyPut = ({
                 instrumentCode: form.getFieldValue("instrumentCode"),
                 instrumentName: form.getFieldValue("instrumentName"),
                 instrumentType: form.getFieldValue("instrumentType"),
                 eligibility: form.getFieldValue("eligibility"),
                 haircut: form.getFieldValue("haircut"),
-                maturityDate: form.getFieldValue("maturityDate"),
+                maturityDate:  fieldDate,
                 status: "active",
                 lastUpdate: null
-            })
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                })
+            });
+            await API("PUT", "administration", "securitiescollateralmanagements/" + idx, null, bodyPut)
+                .then(
+                    res => {
+                        form.resetFields();
+                        console.log(res.data.content);
+                    }
+                ).catch(
+                    error => {
+                        // Error
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            // console.log(error.response.data);
+                            // console.log(error.response.status);
+                            // console.log(error.response.headers);
+                            console.log(error.response);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the 
+                            // browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    }
+                )
+
         } else {
-            axios.post(`http://localhost:8080/securitiescollateralmanagements`, {
+            setFieldDate(moment(new Date(), dateFormat));
+            const bodyPost = ({
                 instrumentCode: form.getFieldValue("instrumentCode"),
                 instrumentName: form.getFieldValue("instrumentName"),
                 instrumentType: form.getFieldValue("instrumentType"),
@@ -72,35 +106,56 @@ const ViewEditSCMgt = (props) => {
                 maturityDate: fieldDate,
                 status: "active",
                 lastUpdate: null
-            })
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                })
-            }
+            });
+            await API("POST", "administration", "securitiescollateralmanagements", null, bodyPost)
+                .then(
+                    res => {
+                        form.resetFields();
+                        console.log(res.data.content);
+                    }
+                ).catch(
+                    error => {
+                        // Error
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            // console.log(error.response.data);
+                            // console.log(error.response.status);
+                            // console.log(error.response.headers);
+                            console.log(error.response);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the 
+                            // browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    }
+                )
+        }
 
-    }
+    };
 
     const [action] = useState(props.location.state.action);
     const [idx] = useState(props.location.state.id);
     const [loading, setLoading] = useState(false);
-    const tailLayout = {
-        wrapperCol: { offset: 6, span: 12 },
-    };
-
+    const [error, setError] = useState({});
     const onReset = () => {
         form.resetFields();
     };
+    const [sixEyes, setSixEyes] = useState(1);
+    const radioOnChange = e => {
+        setSixEyes(e.target.value);
+    };
 
-    const setParams = async (q) => {
-        if (q > 0) {
-            console.log("edit" + q)
-            setLoading(true);
-            const apiRes = await fetch(
-                `http://localhost:8080/securitiescollateralmanagements/${q}`
-            );
-            const resJSON = await apiRes.json();
-            console.log("asdasd" + resJSON.maturityDate);
+    const setSecCollMgt = useCallback(async (idEdit) => {
+        try {
+            const req = await API("GET", "administration", "securitiescollateralmanagements/" + idEdit);
+            const resJSON = await req.data
             setFieldDate(moment(resJSON.maturityDate, dateFormat));
             form.setFieldsValue({
                 instrumentCode: resJSON.instrumentCode,
@@ -108,107 +163,112 @@ const ViewEditSCMgt = (props) => {
                 instrumentType: resJSON.instrumentType,
                 eligibility: resJSON.eligibility,
                 haircut: resJSON.haircut,
-                // maturityDate: fieldDate,
-            });
+            })
+        } catch (err) {
+            setError(err);
+        } finally {
             setLoading(false);
-        } else {
-            setFieldDate(moment(new Date(), dateFormat));
         }
+    }, [form]);
 
-    };
     useEffect(() => {
-        setParams(props.location.state.id);
-    }, []);
-
-    const disable = props.location.state.disable
-    const [sixEyes, setSixEyes] = useState(1);
-    const radioOnChange = e => {
-        setSixEyes(e.target.value);
-    };
+        let ignore = false;
+        if (idx > 0) {
+            setLoading(true);
+            setError({});
+            simulateSlowNetworkRequest().then(() => {
+                if (!ignore) {
+                    setSecCollMgt(idx);
+                }
+            });
+        }
+        return (() => { ignore = true; });
+    }, [idx, setSecCollMgt]);
+   
 
     return(
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/securitiescollmgt">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined onClick={goBack}/>
                     </span>
                 {action} Instrument</Title>
             </div>
-            <Form
-                {...formItemLayout}
-                layout={formLayout}
-                form={form}
-                labelAlign="left"
-                initialValues={{ layout: formLayout }}
-                onFinish={onFinish}
-            >
-                
-                <Form.Item label="Instrument Code" name="instrumentCode"
-                            rules={[{ required: true, message: 'Instrument Code is required' }]}>
-                    <Input placeholder="Insert Code" />
-                </Form.Item>
-                <Form.Item label="Instrument Name" name="instrumentName"
-                            rules={[{ required: true, message: 'Instrument Name is required' }]}>
-                    <Input placeholder="Insert Name" />
-                </Form.Item>
-                <Form.Item label="Instrument Type" name="instrumentType"
-                            rules={[{ required: true, message: 'Instrument Type is required' }]}>
-                    <Input placeholder="Insert Type" />
-                </Form.Item>
-                <Form.Item label="Eligibity">
-                    <Input.Group compact>
-                        <Form.Item
-                            name={['eligibility']}
-                            noStyle
-                            rules={[{ required: true, message: 'Eligibility is required' }]}
-                        >
-                            <Select placeholder="Select Eligibility" style={{ width: '100%' }}
-                            >
-                                <Option value="true">Yes</Option>
-                                <Option value="false">No</Option>
-                            </Select>
+
+            {loading ? (
+                <div style={{ textAlign: "center" }}> <Space size="large" >
+                    <Spin size="large" tip="Loading..." />
+                </Space>
+                </div>
+            ) : (
+                    <Form
+                        {...formItemLayout}
+                        layout={formLayout}
+                        form={form}
+                        labelAlign="left"
+                        initialValues={{ layout: formLayout }}
+                        onFinish={onFinish}
+                        style={{ marginBottom: '80px' }}
+                    >
+                        <Form.Item label="Instrument Code" name="instrumentCode"
+                                    rules={[{ required: true, message: 'Instrument Code is required' }]}>
+                            <Input placeholder="Insert Code" />
                         </Form.Item>
-                    </Input.Group>
-                </Form.Item>
-                <Form.Item label="Haircut" name="haircut"
-                            rules={[{ required: true, message: 'Haircut is required' }]}>
-                    <Input placeholder="Insert Haircut" />
-                </Form.Item>
-                <Form.Item label="Maturity Date" name="maturityDate">
-                    <DatePicker onChange={(date, dateString) => setFieldDate(dateString)} 
-                        style={{ width: '100%' }}
-                        defaultValue={fieldDate}/>
-                </Form.Item>
+                        <Form.Item label="Instrument Name" name="instrumentName"
+                                    rules={[{ required: true, message: 'Instrument Name is required' }]}>
+                            <Input placeholder="Insert Name" />
+                        </Form.Item>
+                        <Form.Item label="Instrument Type" name="instrumentType"
+                                    rules={[{ required: true, message: 'Instrument Type is required' }]}>
+                            <Input placeholder="Insert Type" />
+                        </Form.Item>
+                        <Form.Item label="Eligibity">
+                            <Input.Group compact>
+                                <Form.Item
+                                    name={['eligibility']}
+                                    noStyle
+                                    rules={[{ required: true, message: 'Eligibility is required' }]}
+                                >
+                                    <Select placeholder="Select Eligibility" style={{ width: '100%' }}
+                                    >
+                                        <Option value="true">Yes</Option>
+                                        <Option value="false">No</Option>
+                                    </Select>
+                                </Form.Item>
+                            </Input.Group>
+                        </Form.Item>
+                        <Form.Item label="Haircut" name="haircut"
+                                    rules={[{ required: true, message: 'Haircut is required' }]}>
+                            <Input placeholder="Insert Haircut" />
+                        </Form.Item>
+                        <Form.Item label="Maturity Date" name="maturityDate">
+                            <DatePicker onChange={(date, dateString) => setFieldDate(dateString)} 
+                                style={{ width: '100%' }}
+                                defaultValue={fieldDate}/>
+                        </Form.Item>
 
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                        <Form.Item label="Role">
+                            <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                <Radio value={1}>Maker</Radio>
+                                <Radio value={2}>Direct Checker</Radio>
+                                <Radio value={3}>Direct Approver</Radio>
+                            </Radio.Group>
+                        </Form.Item>
 
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                        <Form.Item {...tailLayout}>
+                            <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
                                 Submit
                             </Button>
-                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
-                        Reset
-                    </Button>
-                    <Link to="/securitiescollmgt">
-                        <Button >
-                            <div>Back</div>
-                        </Button>
-                    </Link>
-            
-                </Form.Item>
-            </Form>
+                            <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                                Reset
+                            </Button>
+                            <Button onClick={goBack}>
+                                <div>Back</div>
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                )}
 
         </div>
     )

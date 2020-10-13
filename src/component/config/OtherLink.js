@@ -430,6 +430,38 @@ const OtherLink = [
         linkTo: rootWithNavLink + '/calendar/delete-calendar',
         component: ViewDeleteCalendar,
     },
+    {
+        useFor: 'securitiescollmgt',
+        name: 'Add Securities Collateral Management',
+        key: 'addSecuritiesCollMgt',
+        useIn: 'addsecuritiescollmgt',
+        linkTo: rootWithNavLink + '/securitiescollmgt/add-securities-coll-mgt',
+        component: ViewEditSCMgt,
+    },
+    {
+        useFor: 'securitiescollmgt',
+        name: 'Edit Securities Collateral Management',
+        key: 'editSecuritiesCollMgt',
+        useIn: 'editsecuritiescollmgt',
+        linkTo: rootWithNavLink + '/securitiescollmgt/edit-securities-coll-mgt',
+        component: ViewEditSCMgt,
+    },
+    {
+        useFor: 'securitiescollmgt',
+        name: 'View Securities Collateral Management',
+        key: 'viewSecuritiesCollMgt',
+        useIn: 'viewsecuritiescollmgt',
+        linkTo: rootWithNavLink + '/securitiescollmgt/view-securities-coll-mgt',
+        component: ViewDeleteSCMgt,
+    },
+    {
+        useFor: 'securitiescollmgt',
+        name: 'Delete Securities Collateral Management',
+        key: 'deleteSecuritiesCollMgt',
+        useIn: 'deletesecuritiescollmgt',
+        linkTo: rootWithNavLink + '/securitiescollmgt/delete-securities-coll-mgt',
+        component: ViewDeleteSCMgt,
+    },
     //end
     {
         name: 'ViewEditMember',
@@ -475,18 +507,6 @@ const OtherLink = [
         key: 'ViewEditAccount',
         linkTo: '/ViewEditAccount',
         component: ViewEditAccount,
-    },
-    {
-        name: 'ViewEditSCMgt',
-        key: 'ViewEditSCMgt',
-        linkTo: '/ViewEditSCMgt',
-        component: ViewEditSCMgt,
-    },
-    {
-        name: 'ViewDeleteSCMgt',
-        key: 'ViewDeleteSCMgt',
-        linkTo: '/ViewDeleteSCMgt',
-        component: ViewDeleteSCMgt,
     },
     {
         name: 'ViewEditCCMgt',
