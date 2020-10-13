@@ -43,15 +43,7 @@ const ViewDeleteCalendar= (props) => {
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
-    const [exportButtton] = useState(<Button
-        type="primary"
-        style={{
-            marginBottom: '15px',
-            paddingBottom: '15px',
-            float: 'right',
-            height: '35px'
-        }}
-        icon={<DownloadOutlined />}>Export File</Button>);
+    
     const [fieldsValue, setFieldsValue] = useState({
         date: "test",
         information: null,
