@@ -1,39 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	Form,
 	Input,
 	Button,
 	Table,
-	Dropdown,
-	Menu,
 	TimePicker,
 	Row,
 	Col,
 	Typography
 } from 'antd';
-import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import API from "../../../config/Api";
+
 const { Title } = Typography;
 
 const columns = [
 	{
 		title: 'Parameter',
 		dataIndex: 'parameter',
-		key: 'parameter',
 	},
 	{
 		title: 'Start Time',
 		dataIndex: 'startTime',
-		key: 'startTime',
 	},
 	{
 		title: 'End Time',
 		dataIndex: 'endTime',
-		key: 'endTime',
 	},
 ];
-
 
 const componentSize = 'middle';
 const formItemLayout = {
@@ -57,14 +51,6 @@ const exportButtton = <Button
 	}}
 	icon={<DownloadOutlined />}>Export File</Button>;
 
-const tailLayout = {
-	wrapperCol: {
-		offset: 6,
-		span: 12,
-	},
-};
-
-
 class EditParameter extends React.Component {
 	formRef = React.createRef();
 	state = {
@@ -74,8 +60,9 @@ class EditParameter extends React.Component {
 			pageSize: 5,
 		},
 		search: {
-			code: null,
-			name: null,
+			parameter: null,
+			start: null,
+			end: null,
 		},
 		loading: true,
 		cobadata: "test",
@@ -85,47 +72,33 @@ class EditParameter extends React.Component {
 	componentDidMount() {
 		const { pagination } = this.state;
 		this.fetch({ pagination });
-		/*  axios.get(`http://localhost:8080/`)
-			 .then(res => {
-				 const data = res.data;
-				 this.setState({
-					 loading: false,
-					 data,
- 
-				 });
-				 console.log(data)
-			 }) */
 	}
 	handleTableChange = (pagination, filters, sorter, extra) => {
 		this.fetch({
 			pagination,
 		});
-	}; fetch = (params = {}) => {
-		const paramSearch = new URLSearchParams([['param', 'ical']]);
-		/*  {
-			 param: this.formRef.current.getFieldValue("keyword"),
-			 value: this.formRef.current.getFieldValue("keyword"),
-			 valueType: this.formRef.current.getFieldValue("keyword"),
-			 note: this.formRef.current.getFieldValue("keyword")
-		 }; */
-		this.setState({ loading: true });
-		axios.get(`http://localhost:8080/timeparameters`, {
-			params: {
-				//code: this.formRef.current.getFieldValue("keyword"),
-				//name: this.formRef.current.getFieldValue("keyword"),
-			}
-		})
-			.then(res => {
-				const data = res.data.content;
-				this.setState({
-					loading: false,
-					data,
-					pagination: {
-						...params.pagination,
-					},
-				})
-			})
-	};
+	}; 
+
+	fetch = async (params = {}) => {
+        const paramsSearch = ({
+            parameter: this.formRef.current.getFieldValue("keyword"),
+			start: this.formRef.current.getFieldValue("keyword"),
+			end: this.formRef.current.getFieldValue("keyword")
+        })
+
+        this.setState({ loading: true });
+        await API("GET", "administration", "timeparameters", paramsSearch)
+            .then(res => {
+                const data = res.data.content;
+                this.setState({
+                    loading: false,
+                    data,
+                    pagination: {
+                        ...params.pagination,
+                    },
+                })
+            })
+    };
 	onReset = () => {
 		this.formRef.current.resetFields();
 	};
@@ -133,8 +106,9 @@ class EditParameter extends React.Component {
 		e.preventDefault();
 		this.setState({
 			search: {
-				//code: this.formRef.current.getFieldValue("keyword"),
-				//name: this.formRef.current.getFieldValue("keyword"),
+				parameter: this.formRef.current.getFieldValue("keyword"),
+				start: this.formRef.current.getFieldValue("keyword"),
+				end: this.formRef.current.getFieldValue("keyword"),
 			}
 		});
 		const { pagination } = this.state;
@@ -201,19 +175,6 @@ class EditParameter extends React.Component {
 
 				<div style={{ margin: '15px 20px' }} scroll={{ x: 1300 }}>
 					<Row justify="end">
-						{/* <Col span={8}>
-							<Link to={{
-								pathname: `/administration/ViewEditParam`,
-								state: {
-									id: '0',
-									action: "Add New",
-									disable: false,
-								}
-							}}><Button type="primary" htmlType="submit" style={{ marginBottom: '15px' }}>
-									Add New Data
-                            </Button>
-							</Link>
-						</Col> */}
 						<Col span={4}>
 							{/* <Link to={{
                             pathname: `#`,
