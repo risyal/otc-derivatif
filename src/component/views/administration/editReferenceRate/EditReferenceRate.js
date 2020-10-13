@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
 	Form,
 	Button,
@@ -15,9 +15,14 @@ import {
 	DownloadOutlined
 } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import API from "../../../config/Api";
+import OtherLink from "../../../config/OtherLink";
 
-import axios from 'axios';
 const { Title } = Typography;
+
+const ListLink = OtherLink.filter((otherMenu) => {
+    return otherMenu.useFor === "editreferencerate"
+});
 
 const componentSize = 'middle';
 const formItemLayout = {
@@ -67,7 +72,9 @@ const columnsJibor = [
 					<Menu>
 						<Menu.Item>
 							<Link to={{
-								pathname: `/administration/ViewEditJibor`,
+								pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editdatajibor'
+                                }).linkTo,
 								state: {
 									id: record.id,
 									action: "Edit",
@@ -78,7 +85,9 @@ const columnsJibor = [
 						</Menu.Item>
 						<Menu.Item>
 							<Link to={{
-								pathname: `/administration/ViewDeleteJibor`,
+								pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deletedatajibor'
+                                }).linkTo,
 								state: {
 									id: record.id,
 									action: "Delete",
@@ -115,7 +124,9 @@ const columnsJisdor = [
 					<Menu>
 						<Menu.Item>
 							<Link to={{
-								pathname: `/administration/ViewEditJisdor`,
+								pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editdatajisdor'
+                                }).linkTo,
 								state: {
 									id: record.id,
 									action: "Edit",
@@ -127,7 +138,9 @@ const columnsJisdor = [
 						</Menu.Item>
 						<Menu.Item>
 							<Link to={{
-								pathname: `/administration/ViewDeleteJisdor`,
+								pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deletedatajisdor'
+                                }).linkTo,
 								state: {
 									id: record.id,
 									action: "Delete",
@@ -164,7 +177,9 @@ const columnsIndonia = [
 					<Menu>
 						<Menu.Item>
 							<Link to={{
-								pathname: `/administration/ViewEditIndonia`,
+								pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'editdataindonia'
+                                }).linkTo,
 								state: {
 									id: record.id,
 									action: "Edit",
@@ -175,7 +190,9 @@ const columnsIndonia = [
 						</Menu.Item>
 						<Menu.Item>
 							<Link to={{
-								pathname: `/administration/ViewDeleteIndonia`,
+								pathname: ListLink.find((pathLink) => {
+                                    return pathLink.useIn === 'deletedataindonia'
+                                }).linkTo,
 								state: {
 									id: record.id,
 									action: "Delete",
@@ -193,14 +210,6 @@ const columnsIndonia = [
 		)
 	},
 ];
-
-const getRandomuserParams = params => {
-	return {
-		results: params.pagination.pageSize,
-		page: params.pagination.current,
-		...params,
-	};
-};
 
 const exportButtton = <Button
 	type="primary"
@@ -227,17 +236,23 @@ class EditReferenceRate extends React.Component {
 				key: "1",
 				nameTab: "JIBOR",
 				tableColumn: columnsJibor,
-				pathAddNew: "/administration/ViewEditJibor",
+				pathAddNew: ListLink.find((pathLink) => {
+					return pathLink.useIn === 'adddatajibor'
+				}).linkTo,
 			}, {
 				key: "2",
 				nameTab: "JISDOR",
 				tableColumn: columnsJisdor,
-				pathAddNew: "/administration/ViewEditJisdor",
+				pathAddNew: ListLink.find((pathLink) => {
+					return pathLink.useIn === 'adddatajisdor'
+				}).linkTo,
 			}, {
 				key: "3",
 				nameTab: "INDONIA",
 				tableColumn: columnsIndonia,
-				pathAddNew: "/administration/ViewEditIndonia",
+				pathAddNew: ListLink.find((pathLink) => {
+					return pathLink.useIn === 'adddataindonia'
+				}).linkTo,
 			},
 		],
 		pagination: {
@@ -282,45 +297,49 @@ class EditReferenceRate extends React.Component {
 	fetch = async (params = {}) => {
 		this.setState({ loading: true });
 		if (params.valueTab == "1") {
-			await axios.get(`http://localhost:8080/referencejibors`)
-				.then(res => {
-					const dataReference = res.data.content;
+			await API("GET", "administration", "referencejibors")
+            .then(res => {
+                const data = res.data.content;
 					if (this._isMounted) {
 						this.setState({
 							loading: false,
-							dataReference,
+							data,
 							pagination: {
 								...params.pagination,
 							},
 						})
 					}
-				})
+            })
 		}
 		if (params.valueTab == "2") {
-			await axios.get(`http://localhost:8080/referencejisdors`)
-				.then(res => {
-					const dataReference = res.data.content;
+			await API("GET", "administration", "referencejisdors")
+            .then(res => {
+                const data = res.data.content;
+                if (this._isMounted) {
 					this.setState({
 						loading: false,
-						dataReference,
+						data,
 						pagination: {
 							...params.pagination,
 						},
 					})
-				})
+				}
+            })
 		}
 		if (params.valueTab == "3") {
-			await axios.get(`http://localhost:8080/referenceindonias`)
-				.then(res => {
-					const dataReference = res.data.content;
+			await API("GET", "administration", "referenceindonias")
+            .then(res => {
+                const data = res.data.content;
+                if (this._isMounted) {
 					this.setState({
 						loading: false,
-						dataReference,
+						data,
 						pagination: {
 							...params.pagination,
 						},
 					})
-				})
+				}
+            })
 		}
 	};
 
@@ -390,7 +409,7 @@ class EditReferenceRate extends React.Component {
 								<Table
 									pagination={pagination}
 									columns={item.tableColumn}
-									dataSource={this.state.dataReference}
+									dataSource={this.state.data}
 									loading={loading}
 									onChange={this.handleTableChange}
 									bordered
@@ -400,7 +419,7 @@ class EditReferenceRate extends React.Component {
 					)
 					}
 				</Tabs>
-			</div >
+			</div>
 		)
 	}
 

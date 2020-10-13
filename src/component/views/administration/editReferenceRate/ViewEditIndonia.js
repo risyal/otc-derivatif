@@ -1,31 +1,24 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import {
     Form,
     Input,
     Button,
     Radio,
     Typography,
-    DatePicker
+    DatePicker,
+    Spin,
+    Space,
 } from 'antd';
 import {
     ArrowLeftOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import API from "../../../config/Api";
 import moment from 'moment';
 
-import axios from 'axios';
-
 const { Title } = Typography;
-
-const ViewEditIndonia = (props) => {
-    const [componentSize] = useMemo(() => 'middle');
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
-    const onFormLayoutChange = ({ layout }) => {
-        setFormLayout(layout);
-    };
-
-    const formItemLayout =
+const formLayout = 'horizontal';
+const formItemLayout =
     formLayout === 'horizontal'
         ? {
             labelCol: {
@@ -39,147 +32,202 @@ const ViewEditIndonia = (props) => {
         }
         : null;
 
-    const onFinish = values => {
-        console.log('test==',form.getFieldValue("date"))
-        console.log('date==',fieldDate)
+const tailLayout = {
+    wrapperCol: { offset: 6, span: 12 },
+};
+const simulateSlowNetworkRequest = () =>
+    new Promise(resolve => setTimeout(resolve, 1));
+
+const ViewEditIndonia = (props) => {
+    let history = useHistory()
+
+    function goBack() {
+        history.goBack()
+    }
+
+    const dateFormat = 'YYYY/MM/DD';
+    const [form] = Form.useForm();
+    const [todayDate] = useState(moment(new Date(), dateFormat));
+    const [fieldDate, setFieldDate] = useState(todayDate);
+
+    const onFinish = async () => {
         if (idx > 0) {
-            axios.put(`http://localhost:8080/referenceindonias/${idx}`, {
-            date: form.getFieldValue("date"),
-            value: form.getFieldValue("value"),
-            status: "active",
-            lastUpdate: null
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                // form.resetFields();
-            })
-        } else {
-            axios.post(`http://localhost:8080/referenceindonias`, {
+            setFieldDate(moment(form.getFieldValue("date"), dateFormat));  
+            const bodyPut = ({
                 date: fieldDate,
                 value: form.getFieldValue("value"),
                 status: "active",
                 lastUpdate: null
-            })
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    // form.resetFields();
-                })
+            }); 
+            await API("PUT", "administration", "referenceindonias/" + idx, null, bodyPut)
+            .then(
+                res => {
+                    form.resetFields();
+                    console.log(res.data.content);
+                }
+            ).catch(
+                error => {
+                    // Error
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        // console.log(error.response.data);
+                        // console.log(error.response.status);
+                        // console.log(error.response.headers);
+                        console.log(error.response);
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the 
+                        // browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        console.log('Error', error.message);
+                    }
+                    console.log(error.config);
+                }
+            )
+            } else {
+                setFieldDate(moment(new Date(), dateFormat)); 
+                const bodyPost = ({
+                    date: fieldDate,
+                    value: form.getFieldValue("value"),
+                    status: "active",
+                    lastUpdate: null
+                });
+                await API("POST", "administration", "referenceindonias", null, bodyPost)
+                .then(
+                    res => {
+                        form.resetFields();
+                        console.log(res.data.content);
+                    }
+                ).catch(
+                    error => {
+                        // Error
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            // console.log(error.response.data);
+                            // console.log(error.response.status);
+                            // console.log(error.response.headers);
+                            console.log(error.response);
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the 
+                            // browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            console.log('Error', error.message);
+                        }
+                        console.log(error.config);
+                    }
+                )
             }
     };
 
     const [action] = useState(props.location.state.action);
     const [idx] = useState(props.location.state.id);
+    const [error, setError] = useState({});
     const [loading, setLoading] = useState(false);
-    const tailLayout = {
-        wrapperCol: { offset: 6, span: 12 },
-    };
-    const dateFormat = 'YYYY/MM/DD';
-    const [todayDate] = useState(moment(new Date(), dateFormat));
-    const [fieldDate, setFieldDate] = useState(todayDate);
-
-    const submitEdit = () => {
-        axios.put(`http://localhost:8080/referenceindonias/${idx}`, {
-            date: form.getFieldValue("date"),
-            value: form.getFieldValue("value"),
-            status: "active",
-            lastUpdate: null
-        })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                form.resetFields();
-            })
-    };
     const onReset = () => {
         form.resetFields();
     };
-    const setParams = async (q) => {
-        if (q > 0) {
-            console.log("edit" + q)
-            setLoading(true);
-            const apiRes = await fetch(
-                `http://localhost:8080/referenceindonias/${q}`
-            );
-            const resJSON = await apiRes.json();
-            console.log(resJSON);
-            setFieldDate(resJSON.date);
-            form.setFieldsValue({
-                value: resJSON.value,
-                lastUpdate: resJSON.lastUpdate,
-            });
-            setLoading(false);
-        }else{
-            setFieldDate(moment(new Date(), dateFormat));
-        }
-    };
-    useEffect(() => {
-        setParams(props.location.state.id);
-    }, []);
-
-    const disable = props.location.state.disable
     const [sixEyes, setSixEyes] = useState(1);
     const radioOnChange = e => {
         setSixEyes(e.target.value);
     };
+
+    const setIndonia = useCallback(async (idEdit) => {
+        try {
+            const req = await API("GET", "administration", "referenceindonias/" + idEdit);
+            const resJSON = await req.data
+            setFieldDate(moment(resJSON.date, dateFormat));
+            form.setFieldsValue({
+                value: resJSON.value,
+                lastUpdate: resJSON.lastUpdate,
+            })
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    }, [form]);
+
+    useEffect(() => {
+        let ignore = false;
+        if (idx > 0) {
+            setLoading(true);
+            setError({});
+            simulateSlowNetworkRequest().then(() => {
+                if (!ignore) {
+                    setIndonia(idx);
+                }
+            });
+        }
+        return (() => { ignore = true; });
+    }, [idx, setIndonia]);
 
     return (
         <div>
             <div className="head-content viewEdit">
                 <Title level={4}>
                     <span className="icon-back">
-                        <Link to="/editreferencerate">
-                            <ArrowLeftOutlined />
-                        </Link>
+                        <ArrowLeftOutlined />
                     </span>
                 {action} Reference Rate - Indonia </Title>
             </div>
-            <Form
-                {...formItemLayout}
-                layout={formLayout}
-                form={form}
-                labelAlign="left"
-                initialValues={{ layout: formLayout }}
-                onFinish={onFinish}
-            >
-                <Form.Item label="Date" name="date"
-                            rules={[{ required: true, message: 'Date is required' }]}>
-                    <DatePicker 
-                        onChange={(date, dateString) => setFieldDate(dateString)} 
-                        style={{ width: '100%' }}
-                        defaultValue={fieldDate}/>   
-                </Form.Item>
-                <Form.Item label="IndONIA (%)" name="value"
-                            rules={[{ required: true, message: 'Value is required' }]}>
-                    <Input placeholder="Insert Value" />
-                </Form.Item>
+
+            {loading ? (
+                <div style={{ textAlign: "center" }}> <Space size="large" >
+                    <Spin size="large" tip="Loading..." />
+                </Space>
+                </div>
+            ) : (
+                    <Form
+                        {...formItemLayout}
+                        layout={formLayout}
+                        form={form}
+                        labelAlign="left"
+                        initialValues={{ layout: formLayout }}
+                        onFinish={onFinish}
+                    >
+                        <Form.Item label="Date" name="date"
+                                    rules={[{ required: true, message: 'Date is required' }]}>
+                            <DatePicker 
+                                onChange={(date, dateString) => setFieldDate(dateString)} 
+                                style={{ width: '100%' }}
+                                defaultValue={fieldDate}/>   
+                        </Form.Item>
+                        <Form.Item label="IndONIA (%)" name="value"
+                                    rules={[{ required: true, message: 'Value is required' }]}>
+                            <Input placeholder="Insert Value" />
+                        </Form.Item>
                 
-                {!disable ? (<Form.Item label="Role">
-                    <Radio.Group onChange={radioOnChange} value={sixEyes}>
-                        <Radio value={1}>Maker</Radio>
-                        <Radio value={2}>Direct Checker</Radio>
-                        <Radio value={3}>Direct Approver</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                ) : (
-                        <div></div>
-                    )}
+                        <Form.Item label="Role">
+                            <Radio.Group onChange={radioOnChange} value={sixEyes}>
+                                <Radio value={1}>Maker</Radio>
+                                <Radio value={2}>Direct Checker</Radio>
+                                <Radio value={3}>Direct Approver</Radio>
+                            </Radio.Group>
+                        </Form.Item>
                     
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
+                        <Form.Item {...tailLayout}>
+                            <Button type="primary" htmlType="submit" style={{ marginRight: '10px' }}>
                                 Submit
                             </Button>
-                    <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
-                        Reset
-                    </Button>
-                    <Link to="/editreferencerate">
-                        <Button >
-                            <div>Back</div>
-                        </Button>
-                    </Link>
-                </Form.Item>
-            </Form>
+                            <Button htmlType="button" onClick={onReset} style={{ marginRight: '10px' }}>
+                                Reset
+                            </Button>
+                            <Button onClick={goBack}>
+                                <div>Back</div>
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                )
+            }
 
         </div>
     )
