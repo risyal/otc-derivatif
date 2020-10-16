@@ -59,7 +59,7 @@ const ViewAddColw = (props) => {
             status: "active",
             lastUpdate: null
         });
-        await API("POST", "administration", "collateraltransactions", null, bodyPost)
+        await API("POST", "collateral", "collateraltransactions", null, bodyPost)
             .then(
                 res => {
                     form.resetFields();

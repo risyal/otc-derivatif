@@ -117,7 +117,7 @@ class Inquiry extends React.Component {
         })
 
         this.setState({ loading: true });
-        await API("GET", "administration", "collateraltransactions", paramsSearch)
+        await API("GET", "collateral", "collateraltransactions", paramsSearch)
             .then(res => {
                 const data = res.data.content;
                 this.setState({

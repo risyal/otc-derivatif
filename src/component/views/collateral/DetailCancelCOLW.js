@@ -103,7 +103,7 @@ const DetailCancelCOLW = (props) => {
     // };
     const setColw = async (q) => {
         setLoading(true);
-        const req = await API("GET", "administration", "collateraltransactions/" + q);
+        const req = await API("GET", "collateral", "collateraltransactions/" + q);
         const resJSON = await req.data
         setFieldsValue({
             memberId: resJSON.memberId,
@@ -119,7 +119,7 @@ const DetailCancelCOLW = (props) => {
     };
 
     const submitDelete = () => {
-        API("DELETE", "administration", "collateraltransactions/" + idx)
+        API("DELETE", "collateral", "collateraltransactions/" + idx)
         .then(res => {
             console.log(res);
             console.log(res.data);
