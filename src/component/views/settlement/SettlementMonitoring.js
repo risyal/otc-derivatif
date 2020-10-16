@@ -6,10 +6,12 @@ import {
     Table,
     Row,
     Col,
-    Typography
+    Typography,
+    Select
 } from 'antd';
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
+const { Option } = Select;
 
 function SettlementMonitoring() {
     const [componentSize] = useMemo(() => 'middle');
@@ -24,7 +26,7 @@ function SettlementMonitoring() {
         },
     });
 
-
+    const [form] = Form.useForm();
     const [columns] = useState([
         {
             title: 'Member ID',
@@ -38,14 +40,20 @@ function SettlementMonitoring() {
             key: 'netSettlement',
             width: 100,
         }, {
-            title: 'Balance Acc Settlement',
+            title: 'Balance Account Settlement',
             dataIndex: 'balanceSettlement',
             key: 'balanceSettlement',
             width: 100,
         }, {
-            title: 'Remaining Balance',
-            dataIndex: 'remainingBalance',
-            key: 'remainingBalance',
+            title: 'Shortage',
+            dataIndex: 'shortage',
+            key: 'shortage',
+            width: 100,
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
             width: 100,
         },
     ]);
@@ -58,6 +66,7 @@ function SettlementMonitoring() {
         },
     ]);
 
+    const [expand, setExpand] = useState(true);
     const [exportButtton] = useState(<Button
         type="primary"
         style={{
@@ -71,7 +80,7 @@ function SettlementMonitoring() {
     return (
         <div style={{ margin: '15px 20px' }}>
             <div className="head-content">
-                <Title level={4}>Monitoring Clearing Pos vs Balance</Title>
+                <Title level={4}>Monitoring Clearing Position vs Balance</Title>
             </div>
             <Form
                 {...formItemLayout}
@@ -79,17 +88,51 @@ function SettlementMonitoring() {
                 layout="horizontal"
                 initialValues={{ size: componentSize }}
                 labelAlign="left"
-            >
-                <Form.Item label="Member ID" >
-                    <Input.Group compact >
-                        <Input />
-                    </Input.Group>
+            > {expand ? (<div>
+                <Form.Item label="Keyword">
+                    <Input />
                 </Form.Item>
+            </div>
+            ) : (
+                    <div>
+                        <Form.Item label="Member ID" >
+                            <Input.Group compact >
+                                <Input />
+                            </Input.Group>
+                        </Form.Item>
+                        <Form.Item label="Status" >
+                            <Select placeholder="Select Status">
+                                <Option value="status1">Status1</Option>
+                                <Option value="status2">Status2</Option>
+                                <Option value="status3">Status3</Option>
+                            </Select>
+                        </Form.Item>
+                    </div>
+                )}
                 <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        tyle={{ marginRight: '15px' }}>
                         Search
+                                </Button>
+                    <Button
+                        style={{ margin: '0 8px' }}
+                        onClick={() => {
+                            form.resetFields();
+                        }}>
+                        Clear
+                        </Button>
+                    <Button
+                        htmlType="submit"
+                        onClick={() => {
+                            setExpand(!expand);
+                        }}>
+                        {expand ? (<div><DownOutlined /> Advance Search</div>) :
+                            (<div><UpOutlined /> Simple Search</div>)}
                     </Button>
                 </Form.Item>
+                
             </Form>
 
             <Row justify="end">

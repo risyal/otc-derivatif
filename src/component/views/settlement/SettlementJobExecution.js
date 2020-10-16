@@ -8,9 +8,10 @@ import {
     Progress,
     Row,
     Col,
-    Typography
+    Typography,
 } from 'antd';
 import moment from 'moment';
+import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
@@ -29,15 +30,19 @@ function SettlementJobExecution() {
 
     const [columns] = useState([
         {
-            title: 'Settlement Date',
-            dataIndex: 'settlementDate',
-            key: 'settlementDate',
+            title: 'Settlement Instruction Type',
+            dataIndex: 'instructionType',
+            key: 'instructionType',
             width: 70,
         }, {
-            title: 'Run',
-            dataIndex: 'run',
+            title: 'Action',
+            dataIndex: 'action',
             key: 'run',
             width: 70,
+            render: () => <Link 
+                style={{ marginRight: '20px' }}>
+                <Button>Run</Button>
+            </Link>
         }, {
             title: 'Status',
             dataIndex: 'status ',
@@ -97,7 +102,7 @@ function SettlementJobExecution() {
                             <DatePicker style={{ width: '100%' }}
                                 defaultValue={moment('2020/01/23', dateFormat)} />
                         </Form.Item>
-                        <Form.Item label="Run" >
+                        <Form.Item label="Settlement Instruction Type" >
                             <Input.Group compact >
                                 <Input />
                             </Input.Group>
