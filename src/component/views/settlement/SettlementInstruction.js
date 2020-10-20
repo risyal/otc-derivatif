@@ -11,7 +11,6 @@ import {
     Select
 } from 'antd';
 import moment from 'moment';
-import { Link } from "react-router-dom";
 import { DownOutlined, UpOutlined, DownloadOutlined } from '@ant-design/icons';
 import API from "../../config/Api";
 const { Title } = Typography;
@@ -154,7 +153,7 @@ class SettlementInstruction extends React.Component {
         })
 
         this.setState({ loading: true });
-        await API("GET", "administration", "inquirysettlementinstructions", paramsSearch)
+        await API("GET", "settlement", "inquirysettlementinstructions", paramsSearch)
             .then(res => {
                 const data = res.data.content;
                 this.setState({
