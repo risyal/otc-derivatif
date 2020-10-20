@@ -51,7 +51,6 @@ const DetailCancelSM = (props) => {
         securityCode: null,
         instructionType: null,
         instructionDate: null,
-        instrumentType: null,
         sourceAccount: null,
         targetAccount: null,
         volume: null,
@@ -72,7 +71,6 @@ const DetailCancelSM = (props) => {
             securityCode: resJSON.securityCode,
             instructionType: resJSON.instructionType,
             instructionDate: resJSON.instructionDate,
-            instrumentType: resJSON.instrumentType,
             sourceAccount: resJSON.sourceAccount,
             targetAccount: resJSON.targetAccount,
             volume: resJSON.volume,
@@ -118,12 +116,11 @@ const DetailCancelSM = (props) => {
                     <Descriptions column={1} bordered
                         extra={<Button type="primary"> <DownloadOutlined /> test</Button>}>
                         <Descriptions.Item label="Member Code">{fieldsValue.memberCode}</Descriptions.Item>
-                        <Descriptions.Item label="Participant Codet">{fieldsValue.clientId}</Descriptions.Item>
+                        <Descriptions.Item label="Participant Code">{fieldsValue.clientId}</Descriptions.Item>
                         <Descriptions.Item label="Securities Account Id">{fieldsValue.securitiesAccountId}</Descriptions.Item>
                         <Descriptions.Item label="Security Code">{fieldsValue.securityCode}</Descriptions.Item>
                         <Descriptions.Item label="Instruction Type">{fieldsValue.instructionType}</Descriptions.Item>
                         <Descriptions.Item label="Instruction Date">{fieldsValue.instructionDate}</Descriptions.Item>
-                        <Descriptions.Item label="Instrument Type">{fieldsValue.instrumentType}</Descriptions.Item>
                         <Descriptions.Item label="Source Account">{fieldsValue.sourceAccount}</Descriptions.Item>
                         <Descriptions.Item label="Destination Account">{fieldsValue.targetAccount}</Descriptions.Item>
                         <Descriptions.Item label="Volume">{fieldsValue.volume}</Descriptions.Item>

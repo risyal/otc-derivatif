@@ -55,7 +55,6 @@ const ViewAddSM = (props) => {
             securityCode: form.getFieldValue("securityCode"),
             instructionType: form.getFieldValue("instructionType"),
             instructionDate: form.getFieldValue("instructionDate"),
-            instrumentType: form.getFieldValue("instrumentType"),
             sourceAccount: form.getFieldValue("sourceAccount"),
             targetAccount: form.getFieldValue("targetAccount"),
             volume: form.getFieldValue("volume"),
@@ -155,10 +154,6 @@ const ViewAddSM = (props) => {
                 <Form.Item label="Instruction Date" name="instructionDate"
                         rules={[{ required: true, message: 'Instruction Date is required' }]}>
                     <DatePicker style={{ width: '100%' }} />
-                </Form.Item>
-                <Form.Item label="Instrument Type" name="instrumentType"
-                        rules={[{ required: true, message: 'Instrument Type is required' }]}>
-                    <Input />
                 </Form.Item>
                 <Form.Item label="Source Account" name="sourceAccount"
                         rules={[{ required: true, message: 'Source Account is required' }]}>
